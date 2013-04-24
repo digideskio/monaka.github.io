@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>動くのこれ? - もなもなもなかのページ</title>
+  <title>Lokka に引越しました - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://monaka.github.io/monaka/blog/2013/05/22/work_p/">
+  <link rel="canonical" href="http://monaka.github.io/monaka/blog/2012/04/01/moved/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">動くのこれ?</h1>
+      <h1 class="entry-title">Lokka に引越しました</h1>
     
     
       <p class="meta">
@@ -87,43 +87,14 @@
   
 
 
-<time datetime="2013-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
-
-<p>で，startup.s を見てみた．</p>
-
-<pre><code>.text
-
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
-
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
-
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
-
-<p>&#8230;(ﾟдﾟlll) ベクタどこよ…</p>
-
-<h2>あ，動くのか．</h2>
-
-<p>これ Cortex-M3系だものね…．</p>
+<div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
 
 
@@ -146,7 +117,7 @@
   
 
 
-<time datetime="2013-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
       
 
 
@@ -154,7 +125,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://monaka.github.io/monaka/blog/2013/05/22/work_p/" data-via="monamour555" data-counturl="http://monaka.github.io/monaka/blog/2013/05/22/work_p/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://monaka.github.io/monaka/blog/2012/04/01/moved/" data-via="monamour555" data-counturl="http://monaka.github.io/monaka/blog/2012/04/01/moved/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -167,8 +138,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/25/l-06c/" title="Previous Post: L-06C rooted">&laquo; L-06C rooted</a>
       
+        <a class="basic-alignment right" href="/blog/2012/04/02/bye/" title="Next Post: bye">bye &raquo;</a>
       
     </p>
   </footer>
@@ -183,23 +154,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/05/22/work_p/">動くのこれ?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/25/l-06c/">L-06C rooted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/moved/">Lokka に引越しました</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/02/26/reboot/">Nexus Oneがブート時再起動を繰り返す…．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/30/did-it/">やっちまった</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/22/work_p/">動くのこれ?</a>
       </li>
     
   </ul>

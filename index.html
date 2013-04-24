@@ -9,8 +9,59 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,240 +119,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/22/work_p/">動くのこれ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
-
-<p>で，startup.s を見てみた．</p>
-
-<pre><code>.text
-
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
-
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
-
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
-
-<p>&#8230;(ﾟдﾟlll) ベクタどこよ…</p>
-
-<h2>あ，動くのか．</h2>
-
-<p>これ Cortex-M3系だものね…．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/25/l-06c/">L-06C Rooted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
-
-<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
-
-<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
-
-<p>~~~~</p>
-
-<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
-Nvflash started
-rcm version 0X4
-Command send failed (usb write failed)
-</code></pre>
-
-<p>~~~~</p>
-
-<p>あと，fastboot は root で実行しないとダメ…なの?</p>
-
-<p>~~~~</p>
-
-<pre><code>$ ./fastboot oem unlock
-&lt; waiting for device &gt;
-</code></pre>
-
-<p>~~~~</p>
-
-<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-03T11:00:00+09:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
-
-
-<p>せっかく画面がでかいので，ちょっとした文書書きとかsshでのメンテとかで使えると面白いかなと思って Bluetooth キーボードを探したものの，なかなかバランスがよいものがない．7インチと 10.1インチに比べて，中途半端なのよね…．</p>
-
-
-<p>それと，電車の移動中でちょっと文章を打ちたい．そうすると，スタンドと兼用になるものが欲しいのだけれど…．</p>
-
-
-<p>で，見つけたのがこれ．</p>
-
-
-<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.26.jpg" title="" alt="" style="width: 640px; height: 400px; "></p>
-
-
-<p>あきばおーで，4千円弱で買った．しかし今Amazonで見たら1700円を切っていたという…．しくしく．<iframe align="right" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=monamisoftwar-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B005KP4L14" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-</p>
-
-
-<h2>実際に付けてみた．</h2>
-
-
-<p>割と見栄えが悪くない(と，思う)．</p>
-
-
-<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.54.jpg" title="" alt="" style="width: 640px; height: 400px;">iPad と L-06C は，L-06C のほうが数ミリ大きくて適合しないように思えるのだけれど，角がまるいので，うまいこと収まる．<br></p>
-
-
-<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.02.jpg" title="" alt="" style="width: 320px; height: 200px;"><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.09.jpg" title="" alt="" style="width: 320px; height: 200px; "><br></p>
-
-
-<p>でも，蓋にはならない．サイズが違うのだから当然．</p>
-
-
-<p>キーボードとタブレットは，爪でひっかけてあるだけなのだけれども，割と安定している．電車の中でちょちょいとメールの返信をする程度なら結構使えている．</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/01/moved/">Lokka に引越しました</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -659,6 +476,204 @@ set-default-coding-system だけで済むような気がするのだけれど，
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/05/22/work_p/">動くのこれ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
+んー? んー?</p>
+
+<p>で，startup.s を見てみた．</p>
+
+<pre><code>.text
+
+    .extern     main
+    .extern     _sdata_loadaddr
+    .extern     _sp_base
+
+    #  Top of Stack
+    .long _sp_base 
+    # Reset Handler
+    .long _startup+1
+    .org 0x0C
+
+ .org 0xEC
+    .global _startup
+ _startup:
+        LDR     r1, =_sdata_loadaddr
+        LDR     r2, =_sdata
+        LDR     r3, =_edata
+</code></pre>
+
+<p>&#8230;(ﾟдﾟlll) ベクタどこよ…</p>
+
+<h2>あ，動くのか．</h2>
+
+<p>これ Cortex-M3系だものね…．</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/25/l-06c/">L-06C Rooted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
+
+<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
+
+<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
+
+<p>~~~~</p>
+
+<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
+Nvflash started
+rcm version 0X4
+Command send failed (usb write failed)
+</code></pre>
+
+<p>~~~~</p>
+
+<p>あと，fastboot は root で実行しないとダメ…なの?</p>
+
+<p>~~~~</p>
+
+<pre><code>$ ./fastboot oem unlock
+&lt; waiting for device &gt;
+</code></pre>
+
+<p>~~~~</p>
+
+<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-03T11:00:00+09:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
+
+
+<p>せっかく画面がでかいので，ちょっとした文書書きとかsshでのメンテとかで使えると面白いかなと思って Bluetooth キーボードを探したものの，なかなかバランスがよいものがない．7インチと 10.1インチに比べて，中途半端なのよね…．</p>
+
+
+<p>それと，電車の移動中でちょっと文章を打ちたい．そうすると，スタンドと兼用になるものが欲しいのだけれど…．</p>
+
+
+<p>で，見つけたのがこれ．</p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.26.jpg" title="" alt="" style="width: 640px; height: 400px; "></p>
+
+
+<p>あきばおーで，4千円弱で買った．しかし今Amazonで見たら1700円を切っていたという…．しくしく．<iframe align="right" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=monamisoftwar-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B005KP4L14" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</p>
+
+
+<h2>実際に付けてみた．</h2>
+
+
+<p>割と見栄えが悪くない(と，思う)．</p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.54.jpg" title="" alt="" style="width: 640px; height: 400px;">iPad と L-06C は，L-06C のほうが数ミリ大きくて適合しないように思えるのだけれど，角がまるいので，うまいこと収まる．<br></p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.02.jpg" title="" alt="" style="width: 320px; height: 200px;"><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.09.jpg" title="" alt="" style="width: 320px; height: 200px; "><br></p>
+
+
+<p>でも，蓋にはならない．サイズが違うのだから当然．</p>
+
+
+<p>キーボードとタブレットは，爪でひっかけてあるだけなのだけれども，割と安定している．電車の中でちょちょいとメールの返信をする程度なら結構使えている．</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/04/02/bye/">Bye</a></h1>
     
     
@@ -702,6 +717,42 @@ set-default-coding-system だけで済むような気がするのだけれど，
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -715,23 +766,23 @@ set-default-coding-system だけで済むような気がするのだけれど，
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/05/22/work_p/">動くのこれ?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/25/l-06c/">L-06C rooted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/moved/">Lokka に引越しました</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/02/26/reboot/">Nexus Oneがブート時再起動を繰り返す…．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/30/did-it/">やっちまった</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/22/work_p/">動くのこれ?</a>
       </li>
     
   </ul>
