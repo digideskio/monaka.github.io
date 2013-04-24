@@ -127,21 +127,24 @@
 <p>続いて，Emacs 側の設定．
 ~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
 
-<p><del>
-(set-keyboard-coding-system &#8216;utf-8)
-(set-terminal-coding-system &#8216;utf-8)
-</del></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(set-keyboard-coding-system 'utf-8)
+</span><span class='line'>(set-terminal-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
+
 
 <p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
 これで，入力はできる．</p>
 
 <p>加えて</p>
 
-<p><del>
-(set-language-environment &#8216;utf-8)
-(set-default-coding-system &#8216;utf-8)
-(prefer-coding-system &#8216;utf-8)
-</del></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(set-language-environment 'utf-8)
+</span><span class='line'>(set-default-coding-system 'utf-8)
+</span><span class='line'>(prefer-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
+
 
 <p>辺りも設定したほうがよいかも．
 set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
