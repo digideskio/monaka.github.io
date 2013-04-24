@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - もなもなもなかのページ</title>
+  <title>L-06C rooted - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Blog Archive 2013 動くのこれ?
-May 22 2013 L-06C rooted
-Apr 25 2013 L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，
-Apr 03 2013 Lokka に引越しました
-Apr 01 2013 Nexus &hellip;">
+  <meta name="description" content="公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして． カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました． 3.1になっているせいなのか，nvflash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@ Apr 01 2013 Nexus &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://monaka.github.io/monaka/blog/archives/">
+  <link rel="canonical" href="http://monaka.github.io/monaka/blog/2013/04/25/l-06c/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,114 +66,110 @@ Apr 01 2013 Nexus &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">L-06C Rooted</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
 
-  
-  <h2>2013</h2>
+<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
 
-<article>
-  
-<h1><a href="/blog/2013/05/22/work_p/">動くのこれ?</a></h1>
-<time datetime="2013-05-22T22:08:00+09:00" pubdate><span class='month'>May</span> <span class='day'>22</span> <span class='year'>2013</span></time>
+<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
 
+<p>~~~~</p>
 
-</article>
+<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
+Nvflash started
+rcm version 0X4
+Command send failed (usb write failed)
+</code></pre>
 
+<p>~~~~</p>
 
+<p>あと，fastboot は root で実行しないとダメ…なの?</p>
 
-<article>
-  
-<h1><a href="/blog/2013/04/25/l-06c/">L-06C rooted</a></h1>
-<time datetime="2013-04-25T02:50:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>25</span> <span class='year'>2013</span></time>
+<p>~~~~</p>
 
+<pre><code>$ ./fastboot oem unlock
+&lt; waiting for device &gt;
+</code></pre>
 
-</article>
+<p>~~~~</p>
 
-
-
-<article>
-  
-<h1><a href="/blog/2013/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
-<time datetime="2013-04-03T11:00:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>03</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/04/01/moved/">Lokka に引越しました</a></h1>
-<time datetime="2013-04-01T01:42:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>01</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/02/26/reboot/">Nexus Oneがブート時再起動を繰り返す…．</a></h1>
-<time datetime="2013-02-26T11:29:00+09:00" pubdate><span class='month'>Feb</span> <span class='day'>26</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a></h1>
-<time datetime="2012-12-24T10:20:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>24</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/30/did-it/">やっちまった</a></h1>
-<time datetime="2012-10-30T10:28:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a></h1>
-<time datetime="2012-06-19T21:18:00+09:00" pubdate><span class='month'>Jun</span> <span class='day'>19</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/04/02/bye/">bye</a></h1>
-<time datetime="2012-04-02T14:35:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>02</span> <span class='year'>2012</span></time>
-
-
-</article>
-
+<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://monaka.github.io/monaka/blog/2013/04/25/l-06c/" data-via="monamour555" data-counturl="http://monaka.github.io/monaka/blog/2013/04/25/l-06c/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/03/l-06c/" title="Previous Post: L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，">&laquo; L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/22/work_p/" title="Next Post: 動くのこれ?">動くのこれ? &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://monaka.github.io/monaka/atom.xml" rel="self"/>
   <link href="http://monaka.github.io/monaka/"/>
-  <updated>2013-04-25T02:25:12+09:00</updated>
+  <updated>2013-04-25T03:06:46+09:00</updated>
   <id>http://monaka.github.io/monaka/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,5 +12,395 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[動くのこれ?]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/05/22/work_p/"/>
+    <updated>2013-05-22T22:08:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/05/22/work_p</id>
+    <content type="html"><![CDATA[<p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
+んー? んー?</p>
+
+<p>で，startup.s を見てみた．</p>
+
+<pre><code>.text
+
+    .extern     main
+    .extern     _sdata_loadaddr
+    .extern     _sp_base
+
+    #  Top of Stack
+    .long _sp_base 
+    # Reset Handler
+    .long _startup+1
+    .org 0x0C
+
+ .org 0xEC
+    .global _startup
+ _startup:
+        LDR     r1, =_sdata_loadaddr
+        LDR     r2, =_sdata
+        LDR     r3, =_edata
+</code></pre>
+
+<p>&#8230;(ﾟдﾟlll) ベクタどこよ…</p>
+
+<h2>あ，動くのか．</h2>
+
+<p>これ Cortex-M3系だものね…．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[L-06C rooted]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/04/25/l-06c/"/>
+    <updated>2013-04-25T02:50:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/04/25/l-06c</id>
+    <content type="html"><![CDATA[<p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
+
+<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
+
+<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
+
+<p>~~~~</p>
+
+<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
+Nvflash started
+rcm version 0X4
+Command send failed (usb write failed)
+</code></pre>
+
+<p>~~~~</p>
+
+<p>あと，fastboot は root で実行しないとダメ…なの?</p>
+
+<p>~~~~</p>
+
+<pre><code>$ ./fastboot oem unlock
+&lt; waiting for device &gt;
+</code></pre>
+
+<p>~~~~</p>
+
+<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/04/03/l-06c/"/>
+    <updated>2013-04-03T11:00:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/04/03/l-06c</id>
+    <content type="html"><![CDATA[<p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
+
+
+<p>せっかく画面がでかいので，ちょっとした文書書きとかsshでのメンテとかで使えると面白いかなと思って Bluetooth キーボードを探したものの，なかなかバランスがよいものがない．7インチと 10.1インチに比べて，中途半端なのよね…．</p>
+
+
+<p>それと，電車の移動中でちょっと文章を打ちたい．そうすると，スタンドと兼用になるものが欲しいのだけれど…．</p>
+
+
+<p>で，見つけたのがこれ．</p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.26.jpg" title="" alt="" style="width: 640px; height: 400px; "></p>
+
+
+<p>あきばおーで，4千円弱で買った．しかし今Amazonで見たら1700円を切っていたという…．しくしく．<iframe align="right" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=monamisoftwar-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=B005KP4L14" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+</p>
+
+
+<h2>実際に付けてみた．</h2>
+
+
+<p>割と見栄えが悪くない(と，思う)．</p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.54.jpg" title="" alt="" style="width: 640px; height: 400px;">iPad と L-06C は，L-06C のほうが数ミリ大きくて適合しないように思えるのだけれど，角がまるいので，うまいこと収まる．<br></p>
+
+
+<p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.02.jpg" title="" alt="" style="width: 320px; height: 200px;"><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2021.24.09.jpg" title="" alt="" style="width: 320px; height: 200px; "><br></p>
+
+
+<p>でも，蓋にはならない．サイズが違うのだから当然．</p>
+
+
+<p>キーボードとタブレットは，爪でひっかけてあるだけなのだけれども，割と安定している．電車の中でちょちょいとメールの返信をする程度なら結構使えている．</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lokka に引越しました]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/04/01/moved/"/>
+    <updated>2013-04-01T01:42:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/04/01/moved</id>
+    <content type="html"><![CDATA[<p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nexus Oneがブート時再起動を繰り返す…．]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/02/26/reboot/"/>
+    <updated>2013-02-26T11:29:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/02/26/reboot</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>E/dalvikvm-heap(  391): Out of memory on a 64-byte allocation.
+</span><span class='line'>I/dalvikvm(  391): "ActivityManager" prio=5 tid=9 RUNNABLE
+</span><span class='line'>I/dalvikvm(  391):   | group="main" sCount=0 dsCount=0 obj=0x405186a8 self=0x2d5f50
+</span><span class='line'>I/dalvikvm(  391):   | sysTid=410 nice=-2 sched=0/0 cgrp=default handle=2979456
+</span><span class='line'>I/dalvikvm(  391):   | schedstat=( 5564208967 1987365742 7625 )
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.nativeFillInStackTrace(Native Method)
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.fillInStackTrace(Throwable.java:135)
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.&lt;init&gt;(Throwable.java:74)
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.Error.&lt;init&gt;(Error.java:38)
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.VirtualMachineError.&lt;init&gt;(VirtualMachineError.java:36)
+</span><span class='line'>I/dalvikvm(  391):   at java.lang.OutOfMemoryError.&lt;init&gt;(OutOfMemoryError.java:34)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readHistory(BatteryStatsImpl.java:-1)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readSummaryFromParcel(BatteryStatsImpl.java:4746)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readLocked(BatteryStatsImpl.java:4693)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:1413)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:142)
+</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService$AThread.run(ActivityManagerService.java:1320)
+</span><span class='line'>I/dalvikvm(  391): 
+</span><span class='line'>W/dalvikvm(  391): Exception thrown (Ljava/lang/OutOfMemoryError;) while throwing internal exception (Ljava/lang/OutOfMemoryError;)
+</span><span class='line'>W/dalvikvm(  391): threadid=9: thread exiting with uncaught exception (group=0x40015560)
+</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.030MB to 32.000MB
+</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 0K, 8% free 28720K/31175K, external 1625K/2137K, paused 1ms+4ms
+</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
+</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 8K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
+</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
+</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 8-byte allocation
+</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
+</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 0K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
+</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
+</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 20-byte allocation
+</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 25997K, 92% free 2714K/31175K, external 1625K/2137K, paused 2ms+5ms
+</span><span class='line'>I/Process (  391): Sending signal. PID: 391 SIG: 9
+</span><span class='line'>E/AndroidRuntime(  391): *** FATAL EXCEPTION IN SYSTEM PROCESS: ActivityManager
+</span><span class='line'>E/AndroidRuntime(  391): java.lang.OutOfMemoryError: [memory exhausted]
+</span><span class='line'>E/AndroidRuntime(  391):  at dalvik.system.NativeStart.main(Native Method)
+</span><span class='line'>E/AndroidRuntime(  391): Error reporting crash
+</span><span class='line'>E/AndroidRuntime(  391): java.lang.NullPointerException
+</span><span class='line'>E/AndroidRuntime(  391):  at com.android.internal.os.RuntimeInit$UncaughtHandler.uncaughtException(RuntimeInit.java:76)
+</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:854)
+</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:851)
+</span><span class='line'>D/BootAnimation(  404): SurfaceFlinger died, exiting...
+</span><span class='line'>I/ServiceManager(   61): service 'SurfaceFlinger' died
+</span><span class='line'>I/ServiceManager(   61): service 'sensorservice' died
+</span><span class='line'>I/ServiceManager(   61): service 'entropy' died
+</span><span class='line'>I/ServiceManager(   61): service 'power' died
+</span><span class='line'>I/Zygote  (  384): Exit zygote because system server (391) has terminated
+</span><span class='line'>I/ServiceManager(   61): service 'media.audio_flinger' died
+</span><span class='line'>I/ServiceManager(   61): service 'media.player' died
+</span><span class='line'>I/ServiceManager(   61): service 'media.camera' died
+</span><span class='line'>I/ServiceManager(   61): service 'media.audio_policy' died
+</span><span class='line'>I/Netd    (  412): Netd 1.0 starting
+</span><span class='line'>D/AndroidRuntime(  413): 
+</span><span class='line'>D/AndroidRuntime(  413): &gt;&gt;&gt;&gt;&gt;&gt; AndroidRuntime START com.android.internal.os.ZygoteInit &lt;&lt;&lt;&lt;&lt;&lt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>似た症例は，ググったら，<a href="http://forum.xda-developers.com/showthread.php?t=1304323">すぐに見つかった</a>．けれど答えなし．うむー．</p>
+
+<p>adb uninstall しようにも，PackageManager が立ち上がっていないときた．うむー．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Emacs で日本語を入力する]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2012/12/24/android-emacs/"/>
+    <updated>2012-12-24T10:20:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2012/12/24/android-emacs</id>
+    <content type="html"><![CDATA[<p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
+
+<p>Android Emacs で，日本語の入出力をする tips．</p>
+
+<h1>背景</h1>
+
+<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
+
+<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
+入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
+
+<h1>注意</h1>
+
+<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
+
+<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
+よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
+
+<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
+
+<ul>
+<li>https://github.com/monaka/emacs-android</li>
+<li>https://github.com/monaka/emacs-android-app</li>
+</ul>
+
+
+<h1>手段</h1>
+
+<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
+メニューから[設定] - [Default to UTF-8] のチェックボックスをonにする．</p>
+
+<p>続いて，Emacs 側の設定．
+~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
+
+<p><del>
+(set-keyboard-coding-system &#8216;utf-8)
+(set-terminal-coding-system &#8216;utf-8)
+</del></p>
+
+<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
+これで，入力はできる．</p>
+
+<p>加えて</p>
+
+<p><del>
+(set-language-environment &#8216;utf-8)
+(set-default-coding-system &#8216;utf-8)
+(prefer-coding-system &#8216;utf-8)
+</del></p>
+
+<p>辺りも設定したほうがよいかも．
+set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
+
+<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
+
+<h1>(ワタクシ的には)要検討課題</h1>
+
+<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
+だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
+
+<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
+
+<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[やっちまった]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2012/10/30/did-it/"/>
+    <updated>2012-10-30T10:28:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2012/10/30/did-it</id>
+    <content type="html"><![CDATA[<p>某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
+ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
+両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる．</p>
+
+<p>素晴らしいセーフティネットなのだが，その全ての網をくぐり抜けて落下してしまった．
+バカすぎる．</p>
+
+<p>で，お手紙書いた．</p>
+
+<blockquote><p>Webログインパスワードとweb取引パスワードの両方を忘れてしまいました．
+その状態で，先日転居を行いました．</p>
+
+<p>仮パスワードを郵送して頂けることは解っているのですが，転居しているので転送不要郵便を受け取れません．
+住所変更は，webログインパスワードが必要と認識しています．
+この場合，どのように手続きすればよいでしょうか．</p></blockquote>
+
+<p>本人の名誉のために言い訳しておくと，別に忘れたわけではなくて，Keypass で自動生成したパスワードを，セーブするのを忘れただけ．言い訳になっていない．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacBookPro のバッテリー交換]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2012/06/19/mbp-batt/"/>
+    <updated>2012-06-19T21:18:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2012/06/19/mbp-batt</id>
+    <content type="html"><![CDATA[<p>2年ほど使っているMacBookPro (M986A/J)が，数カ月前からバッテリー交換修理の警告を出すようになっていた．のに面倒なので放置していた．…そしたらマルチタッチなトラックパッドの効きがおかしくなってきた．
+裏蓋とバッテリーを外して調整してみたけれど，以前は治ったことがあるのに，今回はダメ．</p>
+
+<p>当該MacBookProは，保証が切れる数週間前にトラックパッドが逝って無償修理になったことがある．
+もしかしたら，ハズレなのかもしれない．
+けれども，そういえばトラックパッドの下にあるバッテリーが膨れて，効きがおかしくなる例があるという話を，twitter辺りで見かけた気がする．
+ならば…一か八か，バッテリー交換してみるか，という流れに．</p>
+
+<p>純正のバッテリーは，安心感の値段も含むとはいえ，正直安くはない．
+そろそろ本体のロジックボードやら液晶やらに問題が出て買い替えになることもあり得る．
+ならばもし寿命が短かかったりしてもサードパーティ製でもいいじゃない?
+ということで，Amazon で価格比較．</p>
+
+<p>安いのはホントに安い．中身はきっと一緒なのだろうけれど，発火しかねないものなので，<a href="http://www.amazon.co.jp/o/ASIN/B005R4NS9Y/monamisoftwar-22">PSEだの保険だのの表記があるものを選んだ．それと，トラックパッドの件もあって急いでいたので，プライムで配送してくれるところ</a>．</p>
+
+<p>翌日(つまり今日)届いて，交換．HDDの交換も，自前でのトラックパッド調整もしたことがあるので，精密ドライバーを使ってつつがなく．</p>
+
+<p>取り出したバッテリーを横から眺めてみたのだけれど，別段膨らんでいるようには見えない．でも，組み上げてみたら，トラックパッドは軽快に戻っていた．ほんの1mmくらいでも影響があるものなのかもしれない．</p>
+
+<p>とりあえず，9000円弱で治る程度で，よかった…．</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[bye]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2012/04/02/bye/"/>
+    <updated>2012-04-02T14:35:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2012/04/02/bye</id>
+    <content type="html"><![CDATA[<p>別に嫌いになったわけではないのですけれども．</p>
+
+<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
+
+<p>村に住むメリットを感じなくなっちゃったのでした．</p>
+
+<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
+
+<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
+
+<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
+
+<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
+]]></content>
+  </entry>
   
 </feed>

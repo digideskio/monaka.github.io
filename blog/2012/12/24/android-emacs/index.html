@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android Emacs で日本語を入力する - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="Android Emacs で，日本語の入出力をする tips． 背景 本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっているこのアプリケーション(Zeim版)を使う方法である． しかし，単に導入しただけでは， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://monaka.github.io/monaka/blog/2012/12/24/android-emacs/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:monaka.github.io/monaka" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             Monaka's Diary
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Emacs で日本語を入力する</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
+
+<p>Android Emacs で，日本語の入出力をする tips．</p>
+
+<h1>背景</h1>
+
+<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
+
+<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
+入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
+
+<h1>注意</h1>
+
+<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
+
+<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
+よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
+
+<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
+
+<ul>
+<li>https://github.com/monaka/emacs-android</li>
+<li>https://github.com/monaka/emacs-android-app</li>
+</ul>
+
+
+<h1>手段</h1>
+
+<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
+メニューから[設定] - [Default to UTF-8] のチェックボックスをonにする．</p>
+
+<p>続いて，Emacs 側の設定．
+~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
+
+<p><del>
+(set-keyboard-coding-system &#8216;utf-8)
+(set-terminal-coding-system &#8216;utf-8)
+</del></p>
+
+<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
+これで，入力はできる．</p>
+
+<p>加えて</p>
+
+<p><del>
+(set-language-environment &#8216;utf-8)
+(set-default-coding-system &#8216;utf-8)
+(prefer-coding-system &#8216;utf-8)
+</del></p>
+
+<p>辺りも設定したほうがよいかも．
+set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
+
+<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
+
+<h1>(ワタクシ的には)要検討課題</h1>
+
+<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
+だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
+
+<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
+
+<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://monaka.github.io/monaka/blog/2012/12/24/android-emacs/" data-via="monamour555" data-counturl="http://monaka.github.io/monaka/blog/2012/12/24/android-emacs/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/30/did-it/" title="Previous Post: やっちまった">&laquo; やっちまった</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/02/26/reboot/" title="Next Post: Nexus Oneがブート時再起動を繰り返す…．">Nexus Oneがブート時再起動を繰り返す…． &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/22/work_p/">動くのこれ?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/l-06c/">L-06C rooted</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/moved/">Lokka に引越しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/26/reboot/">Nexus Oneがブート時再起動を繰り返す…．</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
