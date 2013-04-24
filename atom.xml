@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://monaka.github.io/monaka/atom.xml" rel="self"/>
   <link href="http://monaka.github.io/monaka/"/>
-  <updated>2013-04-25T03:24:36+09:00</updated>
+  <updated>2013-04-25T03:29:57+09:00</updated>
   <id>http://monaka.github.io/monaka/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress に乗り換えた]]></title>
+    <link href="http://monaka.github.io/monaka/blog/2013/04/25/octopress/"/>
+    <updated>2013-04-25T03:26:00+09:00</updated>
+    <id>http://monaka.github.io/monaka/blog/2013/04/25/octopress</id>
+    <content type="html"><![CDATA[<p>いつでもどこでもPCを持ち歩くので，ブラウザインタフェースは要らないし．
+静的なブログのほうが，何かと管理が楽だなぁということで．
+Octopress に乗り換え．
+Lokkaも，大満足というわけでもないものの，悪くはない．
+ので，会社の代表ページなどでは引き続き使う予定．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nexus Oneがブート時再起動を繰り返す…．]]></title>
