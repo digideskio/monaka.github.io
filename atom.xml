@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://monaka.github.io/monaka/atom.xml" rel="self"/>
   <link href="http://monaka.github.io/monaka/"/>
-  <updated>2013-04-25T03:09:58+09:00</updated>
+  <updated>2013-04-25T03:11:41+09:00</updated>
   <id>http://monaka.github.io/monaka/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -374,7 +374,7 @@ Command send failed (usb write failed)
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[bye]]></title>
+    <title type="html"><![CDATA[さよなら，はてな．]]></title>
     <link href="http://monaka.github.io/monaka/blog/2012/04/02/bye/"/>
     <updated>2012-04-02T14:35:00+09:00</updated>
     <id>http://monaka.github.io/monaka/blog/2012/04/02/bye</id>
