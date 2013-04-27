@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[もなもなもなかのページ]]></title>
-  <link href="http://monaka.github.io/monaka/atom.xml" rel="self"/>
-  <link href="http://monaka.github.io/monaka/"/>
-  <updated>2013-04-25T03:45:27+09:00</updated>
-  <id>http://monaka.github.io/monaka/</id>
+  <link href="http://www.monaka.org//atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2013-04-27T11:19:24+09:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress に乗り換えた]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2013/04/25/octopress/"/>
+    <link href="http://www.monaka.org//blog/2013/04/25/octopress/"/>
     <updated>2013-04-25T03:26:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2013/04/25/octopress</id>
+    <id>http://www.monaka.org//blog/2013/04/25/octopress</id>
     <content type="html"><![CDATA[<p>いつでもどこでもPCを持ち歩くので，ブラウザインタフェースは要らないし．
 静的なブログのほうが，何かと管理が楽だなぁということで．
 Octopress に乗り換え．
@@ -28,9 +28,9 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
   
   <entry>
     <title type="html"><![CDATA[Nexus Oneがブート時再起動を繰り返す…．]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2013/02/26/reboot/"/>
+    <link href="http://www.monaka.org//blog/2013/02/26/reboot/"/>
     <updated>2013-02-26T11:29:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2013/02/26/reboot</id>
+    <id>http://www.monaka.org//blog/2013/02/26/reboot</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -147,9 +147,9 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
   
   <entry>
     <title type="html"><![CDATA[Android Emacs で日本語を入力する]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/12/24/android-emacs/"/>
+    <link href="http://www.monaka.org//blog/2012/12/24/android-emacs/"/>
     <updated>2012-12-24T10:20:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/12/24/android-emacs</id>
+    <id>http://www.monaka.org//blog/2012/12/24/android-emacs</id>
     <content type="html"><![CDATA[<p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
 
 <p>Android Emacs で，日本語の入出力をする tips．</p>
@@ -221,9 +221,9 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
   <entry>
     <title type="html"><![CDATA[やっちまった]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/10/30/did-it/"/>
+    <link href="http://www.monaka.org//blog/2012/10/30/did-it/"/>
     <updated>2012-10-30T10:28:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/10/30/did-it</id>
+    <id>http://www.monaka.org//blog/2012/10/30/did-it</id>
     <content type="html"><![CDATA[<p>某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
 ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
 両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる．</p>
@@ -246,9 +246,9 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
   <entry>
     <title type="html"><![CDATA[MacBookPro のバッテリー交換]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/06/19/mbp-batt/"/>
+    <link href="http://www.monaka.org//blog/2012/06/19/mbp-batt/"/>
     <updated>2012-06-19T21:18:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/06/19/mbp-batt</id>
+    <id>http://www.monaka.org//blog/2012/06/19/mbp-batt</id>
     <content type="html"><![CDATA[<p>2年ほど使っているMacBookPro (M986A/J)が，数カ月前からバッテリー交換修理の警告を出すようになっていた．のに面倒なので放置していた．…そしたらマルチタッチなトラックパッドの効きがおかしくなってきた．
 裏蓋とバッテリーを外して調整してみたけれど，以前は治ったことがあるのに，今回はダメ．</p>
 
@@ -274,9 +274,9 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
   <entry>
     <title type="html"><![CDATA[動くのこれ?]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/05/22/work_p/"/>
+    <link href="http://www.monaka.org//blog/2012/05/22/work_p/"/>
     <updated>2012-05-22T22:08:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/05/22/work_p</id>
+    <id>http://www.monaka.org//blog/2012/05/22/work_p</id>
     <content type="html"><![CDATA[<p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
 んー? んー?</p>
 
@@ -312,9 +312,9 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
   <entry>
     <title type="html"><![CDATA[L-06C rooted]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/04/25/l-06c/"/>
+    <link href="http://www.monaka.org//blog/2012/04/25/l-06c/"/>
     <updated>2012-04-25T02:50:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/04/25/l-06c</id>
+    <id>http://www.monaka.org//blog/2012/04/25/l-06c</id>
     <content type="html"><![CDATA[<p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
 
 <p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
@@ -347,9 +347,9 @@ Command send failed (usb write failed)
   
   <entry>
     <title type="html"><![CDATA[L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/04/03/l-06c/"/>
+    <link href="http://www.monaka.org//blog/2012/04/03/l-06c/"/>
     <updated>2012-04-03T11:00:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/04/03/l-06c</id>
+    <id>http://www.monaka.org//blog/2012/04/03/l-06c</id>
     <content type="html"><![CDATA[<p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
 
 
@@ -391,9 +391,9 @@ Command send failed (usb write failed)
   
   <entry>
     <title type="html"><![CDATA[さよなら，はてな．]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/04/02/bye/"/>
+    <link href="http://www.monaka.org//blog/2012/04/02/bye/"/>
     <updated>2012-04-02T14:35:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/04/02/bye</id>
+    <id>http://www.monaka.org//blog/2012/04/02/bye</id>
     <content type="html"><![CDATA[<p>別に嫌いになったわけではないのですけれども．</p>
 
 <p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
@@ -412,9 +412,9 @@ Command send failed (usb write failed)
   
   <entry>
     <title type="html"><![CDATA[Lokka に引越しました]]></title>
-    <link href="http://monaka.github.io/monaka/blog/2012/04/01/moved/"/>
+    <link href="http://www.monaka.org//blog/2012/04/01/moved/"/>
     <updated>2012-04-01T01:42:00+09:00</updated>
-    <id>http://monaka.github.io/monaka/blog/2012/04/01/moved</id>
+    <id>http://www.monaka.org//blog/2012/04/01/moved</id>
     <content type="html"><![CDATA[<p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 ]]></content>
   </entry>
