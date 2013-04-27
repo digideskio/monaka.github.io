@@ -141,119 +141,12 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
   </header>
 
 
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>E/dalvikvm-heap(  391): Out of memory on a 64-byte allocation.
-</span><span class='line'>I/dalvikvm(  391): "ActivityManager" prio=5 tid=9 RUNNABLE
-</span><span class='line'>I/dalvikvm(  391):   | group="main" sCount=0 dsCount=0 obj=0x405186a8 self=0x2d5f50
-</span><span class='line'>I/dalvikvm(  391):   | sysTid=410 nice=-2 sched=0/0 cgrp=default handle=2979456
-</span><span class='line'>I/dalvikvm(  391):   | schedstat=( 5564208967 1987365742 7625 )
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.nativeFillInStackTrace(Native Method)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.fillInStackTrace(Throwable.java:135)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.&lt;init&gt;(Throwable.java:74)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Error.&lt;init&gt;(Error.java:38)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.VirtualMachineError.&lt;init&gt;(VirtualMachineError.java:36)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.OutOfMemoryError.&lt;init&gt;(OutOfMemoryError.java:34)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readHistory(BatteryStatsImpl.java:-1)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readSummaryFromParcel(BatteryStatsImpl.java:4746)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readLocked(BatteryStatsImpl.java:4693)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:1413)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:142)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService$AThread.run(ActivityManagerService.java:1320)
-</span><span class='line'>I/dalvikvm(  391): 
-</span><span class='line'>W/dalvikvm(  391): Exception thrown (Ljava/lang/OutOfMemoryError;) while throwing internal exception (Ljava/lang/OutOfMemoryError;)
-</span><span class='line'>W/dalvikvm(  391): threadid=9: thread exiting with uncaught exception (group=0x40015560)
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.030MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 0K, 8% free 28720K/31175K, external 1625K/2137K, paused 1ms+4ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 8K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
-</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 8-byte allocation
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 0K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
-</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 20-byte allocation
-</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 25997K, 92% free 2714K/31175K, external 1625K/2137K, paused 2ms+5ms
-</span><span class='line'>I/Process (  391): Sending signal. PID: 391 SIG: 9
-</span><span class='line'>E/AndroidRuntime(  391): *** FATAL EXCEPTION IN SYSTEM PROCESS: ActivityManager
-</span><span class='line'>E/AndroidRuntime(  391): java.lang.OutOfMemoryError: [memory exhausted]
-</span><span class='line'>E/AndroidRuntime(  391):  at dalvik.system.NativeStart.main(Native Method)
-</span><span class='line'>E/AndroidRuntime(  391): Error reporting crash
-</span><span class='line'>E/AndroidRuntime(  391): java.lang.NullPointerException
-</span><span class='line'>E/AndroidRuntime(  391):  at com.android.internal.os.RuntimeInit$UncaughtHandler.uncaughtException(RuntimeInit.java:76)
-</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:854)
-</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:851)
-</span><span class='line'>D/BootAnimation(  404): SurfaceFlinger died, exiting...
-</span><span class='line'>I/ServiceManager(   61): service 'SurfaceFlinger' died
-</span><span class='line'>I/ServiceManager(   61): service 'sensorservice' died
-</span><span class='line'>I/ServiceManager(   61): service 'entropy' died
-</span><span class='line'>I/ServiceManager(   61): service 'power' died
-</span><span class='line'>I/Zygote  (  384): Exit zygote because system server (391) has terminated
-</span><span class='line'>I/ServiceManager(   61): service 'media.audio_flinger' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.player' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.camera' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.audio_policy' died
-</span><span class='line'>I/Netd    (  412): Netd 1.0 starting
-</span><span class='line'>D/AndroidRuntime(  413): 
-</span><span class='line'>D/AndroidRuntime(  413): &gt;&gt;&gt;&gt;&gt;&gt; AndroidRuntime START com.android.internal.os.ZygoteInit &lt;&lt;&lt;&lt;&lt;&lt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>似た症例は，ググったら，<a href="http://forum.xda-developers.com/showthread.php?t=1304323">すぐに見つかった</a>．けれど答えなし．うむー．</p>
-
-<p>adb uninstall しようにも，PackageManager が立ち上がっていないときた．うむー．</p>
-</div>
+  <div class="entry-content"></div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/02/26/reboot/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -291,70 +184,12 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
 
 <p>Android Emacs で，日本語の入出力をする tips．</p>
 
-<h1>背景</h1>
-
-<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
-
-<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
-入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
-
-<h1>注意</h1>
-
-<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
-
-<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
-よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
-
-<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
-
-<ul>
-<li>https://github.com/monaka/emacs-android</li>
-<li>https://github.com/monaka/emacs-android-app</li>
-</ul>
-
-
-<h1>手段</h1>
-
-<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
-メニューから[設定] - [Default to UTF-8] のチェックボックスをonにする．</p>
-
-<p>続いて，Emacs 側の設定．
-~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-keyboard-coding-system 'utf-8)
-</span><span class='line'>(set-terminal-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
-これで，入力はできる．</p>
-
-<p>加えて</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-language-environment 'utf-8)
-</span><span class='line'>(set-default-coding-system 'utf-8)
-</span><span class='line'>(prefer-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>辺りも設定したほうがよいかも．
-set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
-
-<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
-
-<h1>(ワタクシ的には)要検討課題</h1>
-
-<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
-だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
-
-<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
-
-<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/12/24/android-emacs/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -448,20 +283,12 @@ set-default-coding-system だけで済むような気がするのだけれど，
 けれども，そういえばトラックパッドの下にあるバッテリーが膨れて，効きがおかしくなる例があるという話を，twitter辺りで見かけた気がする．
 ならば…一か八か，バッテリー交換してみるか，という流れに．</p>
 
-<p>純正のバッテリーは，安心感の値段も含むとはいえ，正直安くはない．
-そろそろ本体のロジックボードやら液晶やらに問題が出て買い替えになることもあり得る．
-ならばもし寿命が短かかったりしてもサードパーティ製でもいいじゃない?
-ということで，Amazon で価格比較．</p>
-
-<p>安いのはホントに安い．中身はきっと一緒なのだろうけれど，発火しかねないものなので，<a href="http://www.amazon.co.jp/o/ASIN/B005R4NS9Y/monamisoftwar-22">PSEだの保険だのの表記があるものを選んだ．それと，トラックパッドの件もあって急いでいたので，プライムで配送してくれるところ</a>．</p>
-
-<p>翌日(つまり今日)届いて，交換．HDDの交換も，自前でのトラックパッド調整もしたことがあるので，精密ドライバーを使ってつつがなく．</p>
-
-<p>取り出したバッテリーを横から眺めてみたのだけれど，別段膨らんでいるようには見えない．でも，組み上げてみたら，トラックパッドは軽快に戻っていた．ほんの1mmくらいでも影響があるものなのかもしれない．</p>
-
-<p>とりあえず，9000円弱で治る程度で，よかった…．</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/19/mbp-batt/">Read on &rarr;</a>
+    </footer>
   
 
 

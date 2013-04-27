@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-04-27T11:28:58+09:00</updated>
+  <updated>2013-04-27T11:34:48+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -31,7 +31,10 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
     <link href="http://www.monaka.org//blog/2013/02/26/reboot/"/>
     <updated>2013-02-26T11:29:00+09:00</updated>
     <id>http://www.monaka.org//blog/2013/02/26/reboot</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -154,6 +157,9 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
 
 <p>Android Emacs で，日本語の入出力をする tips．</p>
 
+<!-- more -->
+
+
 <h1>背景</h1>
 
 <p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
@@ -256,6 +262,9 @@ set-default-coding-system だけで済むような気がするのだけれど，
 もしかしたら，ハズレなのかもしれない．
 けれども，そういえばトラックパッドの下にあるバッテリーが膨れて，効きがおかしくなる例があるという話を，twitter辺りで見かけた気がする．
 ならば…一か八か，バッテリー交換してみるか，という流れに．</p>
+
+<!-- more -->
+
 
 <p>純正のバッテリーは，安心感の値段も含むとはいえ，正直安くはない．
 そろそろ本体のロジックボードやら液晶やらに問題が出て買い替えになることもあり得る．
@@ -360,6 +369,9 @@ Command send failed (usb write failed)
 
 
 <p>で，見つけたのがこれ．</p>
+
+
+<!-- more -->
 
 
 <p><img src="http://dl.dropbox.com/u/33717384/20120403-L06C-keyboard/2012-03-22%2017.06.26.jpg" title="" alt="" style="width: 640px; height: 400px; "></p>
