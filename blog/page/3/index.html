@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - もなもなもなかのページ</title>
+  <title>もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Blog Archive 2013 Octopress に乗り換えた
-Apr 25 2013 Nexus Oneがブート時再起動を繰り返す…．
-Feb 26 2013 2012 Android Emacs で日本語を入力する
-Dec 24 2012 やっちまった
-Oct 30 2012 &hellip;">
+  <meta name="description" content="公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして． カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました． 3.1になっているせいなのか，nvflash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@ Oct 30 2012 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/archives/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,129 +65,180 @@ Oct 30 2012 &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/25/l-06c/">L-06C Rooted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
+
+
+  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
+
+<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
+
+<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
+
+<p>~~~~</p>
+
+<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
+Nvflash started
+rcm version 0X4
+Command send failed (usb write failed)
+</code></pre>
+
+<p>~~~~</p>
+
+<p>あと，fastboot は root で実行しないとダメ…なの?</p>
+
+<p>~~~~</p>
+
+<pre><code>$ ./fastboot oem unlock
+&lt; waiting for device &gt;
+</code></pre>
+
+<p>~~~~</p>
+
+<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
+</div>
   
-  <div id="blog-archives">
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
 
 
 
   
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/04/25/octopress/">Octopress に乗り換えた</a></h1>
-<time datetime="2013-04-25T03:26:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>25</span> <span class='year'>2013</span></time>
 
 
-</article>
+<time datetime="2012-04-03T11:00:00+09:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
 
 
-
-<article>
-  
-<h1><a href="/blog/2013/02/26/reboot/">Nexus Oneがブート時再起動を繰り返す…．</a></h1>
-<time datetime="2013-02-26T11:29:00+09:00" pubdate><span class='month'>Feb</span> <span class='day'>26</span> <span class='year'>2013</span></time>
+  <div class="entry-content"><p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
 
 
-</article>
+<p>せっかく画面がでかいので，ちょっとした文書書きとかsshでのメンテとかで使えると面白いかなと思って Bluetooth キーボードを探したものの，なかなかバランスがよいものがない．7インチと 10.1インチに比べて，中途半端なのよね…．</p>
 
 
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a></h1>
-<time datetime="2012-12-24T10:20:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>24</span> <span class='year'>2012</span></time>
+<p>それと，電車の移動中でちょっと文章を打ちたい．そうすると，スタンドと兼用になるものが欲しいのだけれど…．</p>
 
 
-</article>
+<p>で，見つけたのがこれ．</p>
 
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/30/did-it/">やっちまった</a></h1>
-<time datetime="2012-10-30T10:28:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a></h1>
-<time datetime="2012-06-19T21:18:00+09:00" pubdate><span class='month'>Jun</span> <span class='day'>19</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/05/22/work_p/">動くのこれ?</a></h1>
-<time datetime="2012-05-22T22:08:00+09:00" pubdate><span class='month'>May</span> <span class='day'>22</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/04/25/l-06c/">L-06C rooted</a></h1>
-<time datetime="2012-04-25T02:50:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>25</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
-<time datetime="2012-04-03T11:00:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>03</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/04/02/bye/">さよなら，はてな．</a></h1>
-<time datetime="2012-04-02T14:35:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>02</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
-<time datetime="2012-04-01T01:42:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>01</span> <span class='year'>2012</span></time>
-
-
-</article>
 
 </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/04/03/l-06c/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/02/bye/">さよなら，はてな．</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-</article>
 
+
+<time datetime="2012-04-02T14:35:00+09:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>別に嫌いになったわけではないのですけれども．</p>
+
+<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
+
+<p>村に住むメリットを感じなくなっちゃったのでした．</p>
+
+<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
+
+<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
+
+<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
+
+<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
 </div>
+  
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
 <aside class="sidebar">
   
     
@@ -204,7 +251,7 @@ Oct 30 2012 &hellip;">
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -255,7 +302,7 @@ Oct 30 2012 &hellip;">
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -284,7 +331,6 @@ Oct 30 2012 &hellip;">
 
   
 </aside>
-
 
     </div>
   </div>

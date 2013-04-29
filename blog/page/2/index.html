@@ -9,8 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
+  <meta name="description" content="某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
+ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
+両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる． 素晴らしいセーフティネットなのだが， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,105 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/30/did-it/">やっちまった</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-30T10:28:00+09:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
+ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
+両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる．</p>
+
+<p>素晴らしいセーフティネットなのだが，その全ての網をくぐり抜けて落下してしまった．
+バカすぎる．</p>
+
+<p>で，お手紙書いた．</p>
+
+<blockquote><p>Webログインパスワードとweb取引パスワードの両方を忘れてしまいました．
+その状態で，先日転居を行いました．</p>
+
+<p>仮パスワードを郵送して頂けることは解っているのですが，転居しているので転送不要郵便を受け取れません．
+住所変更は，webログインパスワードが必要と認識しています．
+この場合，どのように手続きすればよいでしょうか．</p></blockquote>
+
+<p>本人の名誉のために言い訳しておくと，別に忘れたわけではなくて，Keypass で自動生成したパスワードを，セーブするのを忘れただけ．言い訳になっていない．</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-19T21:18:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2年ほど使っているMacBookPro (M986A/J)が，数カ月前からバッテリー交換修理の警告を出すようになっていた．のに面倒なので放置していた．…そしたらマルチタッチなトラックパッドの効きがおかしくなってきた．
+裏蓋とバッテリーを外して調整してみたけれど，以前は治ったことがあるのに，今回はダメ．</p>
+
+<p>当該MacBookProは，保証が切れる数週間前にトラックパッドが逝って無償修理になったことがある．
+もしかしたら，ハズレなのかもしれない．
+けれども，そういえばトラックパッドの下にあるバッテリーが膨れて，効きがおかしくなる例があるという話を，twitter辺りで見かけた気がする．
+ならば…一か八か，バッテリー交換してみるか，という流れに．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/06/19/mbp-batt/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -134,204 +234,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/25/l-06c/">L-06C Rooted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
-
-<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
-
-<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
-
-<p>~~~~</p>
-
-<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
-Nvflash started
-rcm version 0X4
-Command send failed (usb write failed)
-</code></pre>
-
-<p>~~~~</p>
-
-<p>あと，fastboot は root で実行しないとダメ…なの?</p>
-
-<p>~~~~</p>
-
-<pre><code>$ ./fastboot oem unlock
-&lt; waiting for device &gt;
-</code></pre>
-
-<p>~~~~</p>
-
-<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-03T11:00:00+09:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…．</p>
-
-
-<p>せっかく画面がでかいので，ちょっとした文書書きとかsshでのメンテとかで使えると面白いかなと思って Bluetooth キーボードを探したものの，なかなかバランスがよいものがない．7インチと 10.1インチに比べて，中途半端なのよね…．</p>
-
-
-<p>それと，電車の移動中でちょっと文章を打ちたい．そうすると，スタンドと兼用になるものが欲しいのだけれど…．</p>
-
-
-<p>で，見つけたのがこれ．</p>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/03/l-06c/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/02/bye/">さよなら，はてな．</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-02T14:35:00+09:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>別に嫌いになったわけではないのですけれども．</p>
-
-<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
-
-<p>村に住むメリットを感じなくなっちゃったのでした．</p>
-
-<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
-
-<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
-
-<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
-
-<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -355,7 +260,7 @@ Command send failed (usb write failed)
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
-      getTwitterFeed("monamour555", 5, false);
+      getTwitterFeed("monamour555", 3, false);
     });
   </script>
   <script src="/javascripts/twitter.js" type="text/javascript"> </script>
@@ -394,18 +299,6 @@ Command send failed (usb write failed)
     
       <li class="post">
         <a href="/blog/2012/04/25/l-06c/">L-06C rooted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/03/l-06c/">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/02/bye/">さよなら，はてな．</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/01/moved/">Lokka に引越しました</a>
       </li>
     
   </ul>
