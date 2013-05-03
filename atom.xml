@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-03T11:11:54+09:00</updated>
+  <updated>2013-05-03T11:14:11+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -78,7 +78,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>余談ですが，「Math.random()が重いんじゃないの?」と思って，定数にしたり変数にしたりいろいろやりました．
+<p>Math.random()が重いんじゃないの?」と思って，定数にしたり変数にしたりいろいろやりました．
 手元環境では，思いつく全ての例において有意な差は出せませんでした．</p>
 
 <p>まあ，FPU の性能など効いてきますので，どの環境でも有意な差が出ないとは申しません．
