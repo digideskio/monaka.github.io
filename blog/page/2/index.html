@@ -9,9 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
-ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
-両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる． 素晴らしいセーフティネットなのだが， &hellip;">
+  <meta name="description" content=" Android Emacs で，日本語の入出力をする tips． ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
+
+<p>Android Emacs で，日本語の入出力をする tips．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/12/24/android-emacs/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -169,71 +210,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/22/work_p/">動くのこれ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
-
-<p>で，startup.s を見てみた．</p>
-
-<pre><code>.text
-
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
-
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
-
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
-
-<p>&#8230;(ﾟдﾟlll) ベクタどこよ…</p>
-
-<h2>あ，動くのか．</h2>
-
-<p>これ Cortex-M3系だものね…．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -274,6 +250,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/03/optimizer-in-c/">よくわからない最適化</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/25/octopress/">Octopress に乗り換えた</a>
       </li>
     
@@ -295,10 +275,6 @@
     
       <li class="post">
         <a href="/blog/2012/05/22/work_p/">動くのこれ?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/25/l-06c/">L-06C rooted</a>
       </li>
     
   </ul>

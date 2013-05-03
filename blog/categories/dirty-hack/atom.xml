@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dirty-hack | もなもなもなかのページ]]></title>
+  <link href="http://www.monaka.org//blog/categories/dirty-hack/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2013-05-03T11:10:27+09:00</updated>
+  <id>http://www.monaka.org//</id>
+  <author>
+    <name><![CDATA[Masaki "monaka" Muranaka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[よくわからない最適化]]></title>
+    <link href="http://www.monaka.org//blog/2013/05/03/optimizer-in-c/"/>
+    <updated>2013-05-03T10:05:00+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/05/03/optimizer-in-c</id>
+    <content type="html"><![CDATA[<h2>話のマクラ</h2>
+
+<p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
+
+<blockquote><p>ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。</p>
+
+<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 - UEI shi3zの日記</a></p></blockquote>
+
+<p>をを!</p>
+
+<blockquote><p>この関数は、一見すると無駄がないように見えますが、実は無駄の塊です。
+たとえばコンピュータは割り算が苦手です。なのに二回も割り算をやっています。
+割り算よりは掛け算(乗算)の方が圧倒的に速い(下手すると10～100倍くらい?)ので、まず割り算をしている部分を2.0の逆数の乗算に変更します。</p>
+
+<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 - UEI shi3zの日記</a></p></blockquote>
+
+<p>最近，トシのせいかすぐに感涙してしまう私は，感化されて，つい除算を積算に変えてみてベンチマークを取ってみました．
+ですが，手元のOSXではJITをoffにしても除算と積算で有意な差は出ませんでした．</p>
+
+<p>```
+class A {</p>
+
+<pre><code>float div(float b) {
+    return b / 12345678902.0f;
+}
+
+float mul(float b) {
+    return b * 12345678902.0f;
+}
+
+public static void main(String[] s) {
+    A a = new A();
+</code></pre>
+
+<p>//      for (long i = 0; i &lt; 100; i++) {</p>
+
+<pre><code>    for (long j = 0; j &lt; 100000000; j++) {
+        a.div((float)Math.random());
+</code></pre>
+
+<p>}//}</p>
+
+<pre><code>}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>余談ですが，「Math.random()が重いんじゃないの?」と思って，定数にしたり変数にしたりいろいろやりました．
+手元環境では，思いつく全ての例において有意な差は出せませんでした．</p>
+
+<p>まあ，FPU の性能など効いてきますので，どの環境でも有意な差が出ないとは申しません．
+しかし，このレベルまで最適化したければ，JNI 介してC/C++ でやったほうがよいのではないの?
+という気がそこはかとなくするわけです．
+「JNI のオーバヘッドがー」という残念な結果に終わる可能性も無きにしもあらずなわけではありますが．</p>
+
+<h2>徐々に本題</h2>
+
+<blockquote><p>こういう数式展開レベルの最適化は、どれだけコンパイラが賢くなってもまだまだやってもらえません。</p>
+
+<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 - UEI shi3zの日記</a></p></blockquote>
+
+<p>ホントでしょうか．
+まあ，数式の変形を縦横無尽に行うというのは，Metematica など極めて限られた，それこそ数式処理のみを対象とするような人のツールでないと無理です．
+でも，除算を積算に置き換えたり，定数が絡んで結果があからさまなものを省くなんていうのは，どのようなコンパイラでも考える局所最適化の基礎的テクニックです．</p>
+
+<p>確かに Oracle の javac では，float 型の定数除算から，そのまま除算命令(バイトコード)に落としています．
+他言語では，mruby の mrbc も同様でした．
+それは，コンパイラが馬鹿だからでしょうか．
+…まあ，たまにそういう時もあります．</p>
+
+<p>しかし，置き換えても意味が無いので置き換えてない可能性もあります．
+実際，上記のベンチマークだけで判断するのであれば，除算から積算への変換は無駄な努力なわけです．
+コンパイラが馬鹿なのか，プログラマが馬鹿なのかは，常にベンチマークにより客観的に判断される必要がありますね，と．</p>
+
+<p>高速度カメラまで持ち込んでおられる shi3z 氏は，当然そのことについて意識しておられるわけですが．
+「プログラマに成りたいんです!」と目をキラキラしている未来ある読者さんがたは，勘違いするよなぁコレ…と．</p>
+
+<h2>本題，またはボツ原稿の公表</h2>
+
+<p>ワタクシゴトですが，先日，ちょいとした経緯で，最適化に関する原稿が結果的にボツになりまして．
+主にC言語周りなのですが，このへんはコンパイラ一般で言えることなので，紹介しておきます．</p>
+
+<p>「一所懸命にループ内の関数呼び出しを手で最適化しても無駄ですよ，コンパイラが善きに計らいますよ」というネタです．
+ここには書いていませんが，ループ中の冗長な部分は外に出す最適化もかかります．
+…なんてことを考えると，「JNIの呼び出しオーバヘッドがー」みたいな話も帳消しになるかもしれなかったりします．</p>
+
+<p>=== インライン最適化による変数の蒸発</p>
+
+<p>(前略)
+もう一つの例も，蒸発に関するものです．
+ただし，この蒸発は，volatile の例とは異なり，バグの元にはなりません．
+しかし，ときどき，デバッグを困難にします．</p>
+
+<p>次のコードはは，別段バグが無さそうですし，実際に期待通りに動きます．</p>
+
+<p>```</p>
+
+<h1>include &lt;stdint.h></h1>
+
+<p>void
+busy_loop(int end)
+{</p>
+
+<pre><code>volatile int i;
+
+for (i = 0; i &lt; end; i++) { }
+</code></pre>
+
+<p>}</p>
+
+<p>int
+main(void)
+{</p>
+
+<pre><code>int a = 10;
+
+busy_loop(a);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>これをgccで最適化を有効にしてコンパイルし，GDBデバッガで追跡することにします．</p>
+
+<p>まず，main 文にブレイクポイントを貼り，実行します．</p>
+
+<p><code>
+(gdb) b main
+Breakpoint 1 at 0x100000ed4: file test.c, line 17.
+(gdb) run
+</code></p>
+
+<p>実行開始後，すぐに停止します．</p>
+
+<p>```
+Starting program: a.out
+Reading symbols for shared libraries +. done</p>
+
+<p>Breakpoint 1, main () at test.c:17
+17        busy_loop(a);
+```</p>
+
+<p>ここで，変数 a の値を表示してみます．</p>
+
+<p><code>
+(gdb) print a
+Unable to access variable "a"
+$1 = &lt;variable optimized away by compiler&gt;
+(gdb)
+</code></p>
+
+<p>「変数 a にアクセスできない」と言われてしまいました．
+でも変数 a は，確かに存在するはずです．
+さらに見ると「変数は最適化により消えた」とあります．</p>
+
+<p>この不思議を追跡するべく，コンパイル結果のアセンブリ言語出力を見てみましょう．</p>
+
+<p>```
+busy_loop:</p>
+
+<pre><code>sub sp, sp, #8
+mov r3, #0
+str r3, [sp, #4]
+ldr r3, [sp, #4]
+cmp r0, r3
+ble .L1
+</code></pre>
+
+<p>.L4:</p>
+
+<pre><code>ldr r3, [sp, #4]
+add r3, r3, #1
+str r3, [sp, #4]
+ldr r3, [sp, #4]
+cmp r3, r0
+blt .L4
+</code></pre>
+
+<p>.L1:</p>
+
+<pre><code>add sp, sp, #8
+bx  lr
+</code></pre>
+
+<p>main:</p>
+
+<pre><code>sub sp, sp, #8
+mov r3, #0
+str r3, [sp, #4]
+ldr r3, [sp, #4]
+cmp r3, #9
+bgt .L10
+</code></pre>
+
+<p>.L11:</p>
+
+<pre><code>ldr r3, [sp, #4]
+add r3, r3, #1
+str r3, [sp, #4]
+ldr r3, [sp, #4]
+cmp r3, #9
+ble .L11
+</code></pre>
+
+<p>.L10:</p>
+
+<pre><code>add sp, sp, #8
+bx  lr
+</code></pre>
+
+<p>```</p>
+
+<p>じっくり眺めてみてください．busy_loop からの数行と main からの数行が極めて似通っています．</p>
+
+<p>コンパイラの中では，巧妙なことが起こっていました．
+コンパイラは， main 関数から busyloop 関数を呼び出すよりも，main 関数の中に busyloop 関数の中身を展開してしまったほうが，処理が速いコードになると判断したようです．
+つまり 次に示すリストと勝手に書き換えています．
+このように書き換えても，動作は変わりません．
+関数呼び出しのオーバヘッドが減る分だけ，処理速度も向上するはずです．
+しかし，変数 a は何処かに消えてしまいました．
+コンパイラは，変数 a が存在していた事実をデバッグシンボルに仕込みます．
+そのため，デバッガは，変数 a がソースコード上に存在したことは認識できます．
+しかし，値を示せと言われても，デバッガは示しようがありません．
+アセンブリコードには，変数 a に相当するコードが存在しないからです．</p>
+
+<p>```</p>
+
+<h1>include &lt;stdint.h></h1>
+
+<p>void
+busy_loop(int end)
+{</p>
+
+<pre><code>volatile int i;
+
+for (i = 0; i &lt; end; i++) { }
+</code></pre>
+
+<p>}</p>
+
+<p>int
+main(void)
+{</p>
+
+<pre><code>volatile int i = 10;
+
+for (i = 0; i &lt; end; i++) { }
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>まとめ</h2>
+
+<p>天才って，枠のなかで頑張ろうとするのですよね．
+その姿に，量産型凡人エンジニアの私はシビレてしまいます．</p>
+
+<p>しかし，私だったら，スプライン関数の局所最適化ではなく，コンパイラへのhackを先にやるでしょうなぁ．
+JIT含めて．
+自分以外もアプリ作る製品開発では，コンパイラに手をつけたほうが効率的ですから．
+自分以外が自分の能力よりも下ならば，とくに．</p>
+
+<p>「コンパイラって手がでないよ」という未来の天才プログラマの皆様にあられましては，mruby という，格好の教材があります．
+ご興味のおありのかたはどうぞ．</p>
+
+<p>=== 蛇足</p>
+
+<p>上記で紹介した最適化にまつわる記事って，電子書籍とかで出して，需要あるかしら?
+3万文字以上の解説記事が，行き先無く浮いちゃっているのですよね…．(汗</p>
+]]></content>
+  </entry>
+  
+</feed>
