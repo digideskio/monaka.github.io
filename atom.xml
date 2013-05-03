@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-03T11:16:01+09:00</updated>
+  <updated>2013-05-03T11:17:33+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -279,7 +279,7 @@
 <p>じっくり眺めてみてください．busy_loop からの数行と main からの数行が極めて似通っています．</p>
 
 <p>コンパイラの中では，巧妙なことが起こっていました．
-コンパイラは， main 関数から busyloop 関数を呼び出すよりも，main 関数の中に busyloop 関数の中身を展開してしまったほうが，処理が速いコードになると判断したようです．
+コンパイラは， main 関数から busy_loop 関数を呼び出すよりも，main 関数の中に busy_loop 関数の中身を展開してしまったほうが，処理が速いコードになると判断したようです．
 つまり 次に示すリストと勝手に書き換えています．
 このように書き換えても，動作は変わりません．
 関数呼び出しのオーバヘッドが減る分だけ，処理速度も向上するはずです．
