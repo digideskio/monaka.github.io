@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="話のマクラ 新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる． ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。 よくわかる最適化 - UEI shi3zの日記 &hellip;">
+  <meta name="description" content="(2013-05-03 21:57 JST : ソースコードの誤記修正) 話のマクラ 新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる． ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,7 +93,9 @@
   </header>
 
 
-<div class="entry-content"><h2>話のマクラ</h2>
+<div class="entry-content"><p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
+
+<h2>話のマクラ</h2>
 
 <p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
 
@@ -396,9 +398,9 @@
 </span><span class='line'>int
 </span><span class='line'>main(void)
 </span><span class='line'>{
-</span><span class='line'>  volatile int i = 10;
+</span><span class='line'>  volatile int i;
 </span><span class='line'>
-</span><span class='line'>  for (i = 0; i &lt; end; i++) { }
+</span><span class='line'>  for (i = 0; i &lt; 10; i++) { }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-03T14:29:37+09:00</updated>
+  <updated>2013-05-03T22:00:13+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -18,7 +18,9 @@
     <link href="http://www.monaka.org//blog/2013/05/03/optimizer-in-c/"/>
     <updated>2013-05-03T10:05:00+09:00</updated>
     <id>http://www.monaka.org//blog/2013/05/03/optimizer-in-c</id>
-    <content type="html"><![CDATA[<h2>話のマクラ</h2>
+    <content type="html"><![CDATA[<p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
+
+<h2>話のマクラ</h2>
 
 <p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
 
@@ -321,9 +323,9 @@
 </span><span class='line'>int
 </span><span class='line'>main(void)
 </span><span class='line'>{
-</span><span class='line'>  volatile int i = 10;
+</span><span class='line'>  volatile int i;
 </span><span class='line'>
-</span><span class='line'>  for (i = 0; i &lt; end; i++) { }
+</span><span class='line'>  for (i = 0; i &lt; 10; i++) { }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
