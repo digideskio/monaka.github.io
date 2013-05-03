@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dirty-hack | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/dirty-hack/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-03T11:17:33+09:00</updated>
+  <updated>2013-05-03T11:22:22+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -274,18 +274,22 @@ for (i = 0; i &lt; end; i++) { }
 <p>}
 ```</p>
 
+<p>(後略)
+てな感じの記事だったのでした．</p>
+
 <h2>まとめ</h2>
 
 <p>天才って，枠のなかで頑張ろうとするのですよね．
 その姿に，量産型凡人エンジニアの私はシビレてしまいます．</p>
 
 <p>しかし，私だったら，スプライン関数の局所最適化ではなく，コンパイラへのhackを先にやるでしょうなぁ．
-JIT含めて．
-自分以外もアプリ作る製品開発では，コンパイラに手をつけたほうが効率的ですから．
+JIT含めて．</p>
+
+<p>自分以外もアプリ作る製品開発では，コンパイラに手をつけたほうが効率的ですから．
 自分以外が自分の能力よりも下ならば，とくに．</p>
 
-<p>「コンパイラって手がでないよ」という未来の天才プログラマの皆様にあられましては，mruby という，格好の教材があります．
-ご興味のおありのかたはどうぞ．</p>
+<p>「コンパイラって難しくて手がでないよ」という未来の天才プログラマの皆様にあられましては，mruby という，格好の教材があります．
+ご興味のおありのかたはどうぞ． http://github.com/mruby/mruby/</p>
 
 <h3>蛇足</h3>
 
