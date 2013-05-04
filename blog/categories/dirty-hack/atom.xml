@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dirty-hack | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/dirty-hack/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-03T22:00:13+09:00</updated>
+  <updated>2013-05-04T09:45:41+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[よくわらかない最適化，つづき]]></title>
+    <link href="http://www.monaka.org//blog/2013/05/04/dirty-optimize/"/>
+    <updated>2013-05-04T09:10:00+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/05/04/dirty-optimize</id>
+    <content type="html"><![CDATA[<p><em>当ブログの読者層には居なさそうな，ソフトウェアエンジニアを志している方々に向けて．</em></p>
+
+<p>昨日のエントリに関連して，ネタ元のshi3z氏と若干のやりとりがあったので，<a href="http://togetter.com/li/497402">togetter に纏めておきました</a>．</p>
+
+<!-- more -->
+
+
+<p><blockquote class="twitter-tweet" lang="ja"><p>「奇をてらわずに真っ当に書いて，処理系に判ってもらいやすくする」と「処理系にゴマ擦るコードでその場しのぎの速さを得る」とは根本的に違うんだよね…．プロは後者もこなすけれど，後ろめたさを忘れたら，それは危ないサイン．手動最適化で，デグレードが起きはじめたら破綻のサイン．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330200605069037568">2013年5月3日</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>踏まえておくべき大事なことは，限られたハードウェア資源や時間の中で，処理系にゴマする最適化が必要な時もあるということ．
+さらに踏み込むと，必要に応じて処理系に対してゴマを擦るための十分な知識を蓄えている必要がプロには求められるということです．
+彼はプロですし，製品出荷前の限られた時間の中で成果を出さなければいけない，という状況下にあります．
+私も一応プロですので，大変さは共有できます．
+私も，綺麗に書くのが最善だと言いつつ，現場では，JavaやCを捨てて，アセンブラで解決することもあります．</p>
+
+<p>それでも，これらのノウハウは，最終手段と断言します．
+建前ではなく，本音で．
+コンパイラや演算器の能力が上がった現代では，不要になったノウハウもあります．</p>
+
+<p>手動最適化は，どこか魔術的です．
+憧れるのは解ります．
+でも，魔術は，ここ一番の場面で使うからこそ映えるのです．</p>
+
+<p>…プロは，とくに天才は，魔術を縦横無尽に使えるので，忘れるんですよね…．
+手動最適化に関する記事をみかけて，ときどき「うわぁ」と思うわけです．
+量産型エンジニアの私は．</p>
+
+<h2>ジレンマ</h2>
+
+<p>どこかの時点で手動最適化を行ったことがなければ，非常時にも用いることができない，というジレンマもあります．
+「おまえはドコで，その手動最適化の手法を覚えたのだ? 現場だろ?」と言われると，言葉に詰まったりはします．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[よくわからない最適化]]></title>
