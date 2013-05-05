@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-04T13:29:03+09:00</updated>
+  <updated>2013-05-05T13:28:21+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Launchpad PPA 登録の罠]]></title>
+    <link href="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/"/>
+    <updated>2013-05-05T13:08:00+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/05/05/launchpad-ppa</id>
+    <content type="html"><![CDATA[<p>Ubuntu にオレオレパッケージを追加する PPA．
+発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
+断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
+
+<blockquote class="twitter-tweet" lang="ja"><p>Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．…私もたぶんブログに残さない．(汗</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">2013年5月4日</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
+
+<!-- more -->
+
+
+<h2>CoC で署名した鍵でchangesを署名したか，しつこく確認</h2>
+
+<p>当たり前?
+そう，当たり前です．
+CoC で署名したものと違う鍵で署名した changes が通用するのなら，なんのためにCoCで署名したのか解りません．</p>
+
+<p>私は，個人の鍵でCoCに署名し，会社の鍵でchangesに署名していました．
+これは，私のミス．</p>
+
+<p>ここで，Launchpad の恐ろしいところに，私は直面しました．
+このような，鍵の不一致を伴うアップロードに対して，Launchpad は，ダンマリ無視を決め込むようなのです．
+個人の鍵にあるメールアドレスにも，会社の鍵にあるメールアドレスにも，メールを返しません．
+(少なくとも私の場合は，何度試しても，帰ってきませんでした)
+dput時にも，それらしいことを言って来ません．
+Webインタフェースにも反応はありません．</p>
+
+<p>Accepted になった場合でも，ビルドは数時間から，混み合っているときは2日かかるという情報もweb上にはあります．
+何かがおかしいということに気づくまで，2日待つ必要があります．
+慣れている人は，途中で勘が働くでしょう．
+しかし，右も左も判らない状態でのダンマリは，非常に辛いものです．</p>
+
+<p>github + Travis にみんな流れるわけだよ…と，痛感しました．</p>
+
+<h2>視界が開けたあと</h2>
+
+<p>一度，Accept なり Reject なりのメールが返ってくるようになると，一気に視界が開けます．
+残念ながら，解説文書の多くが英文です．
+しかし，技術者ならかろうじて理解できる程度の記述量と表記です．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[よくわからない最適化，つづき]]></title>
