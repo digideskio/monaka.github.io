@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-05-05T13:28:21+09:00</updated>
+  <updated>2013-05-11T20:04:29+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ソフトウェア作家とは何か．]]></title>
+    <link href="http://www.monaka.org//blog/2013/05/09/what-is-software-creator/"/>
+    <updated>2013-05-09T10:47:00+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/05/09/what-is-software-creator</id>
+    <content type="html"><![CDATA[<h2>オレオレ定義</h2>
+
+<blockquote class="twitter-tweet" lang="ja"><p>専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/331615204184055808">2013年5月7日</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>こんなオレオレ定義に何の意味があるのかと問われると，実は，私もよく判りません．
+まあ，誰かと意見すれ違ったときに，「ああ，あいつはこんなふうに定義しているのか」みたいな，ある種のアリバイかもしれませんね．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Launchpad PPA 登録の罠]]></title>
