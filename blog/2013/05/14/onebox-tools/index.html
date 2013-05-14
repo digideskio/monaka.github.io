@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ソフトウェア作家とは何か． - もなもなもなかのページ</title>
+  <title>OneBox リリースしました． - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="オレオレ定義 専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．&mdash; もなかさん (@monamour555) &hellip;">
+  <meta name="description" content="ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です． Androidを使っていると，せっかくLinuxなのだからコマンドラインツールを使わせろ，という気分にしばしばなります．
+そういう人は，大抵 rooted &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2013/05/09/what-is-software-creator/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2013/05/14/onebox-tools/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">ソフトウェア作家とは何か．</h1>
+      <h1 class="entry-title">OneBox リリースしました．</h1>
     
     
       <p class="meta">
@@ -85,23 +86,59 @@
   
 
 
-<time datetime="2013-05-09T10:47:00+09:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>オレオレ定義</h2>
+<div class="entry-content"><p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
 
-<blockquote class="twitter-tweet" lang="ja"><p>専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/331615204184055808">2013年5月7日</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!-- more -->
 
 
-<p>こんなオレオレ定義に何の意味があるのかと問われると，実は，私もよく判りません．
-まあ，誰かと意見すれ違ったときに，「ああ，あいつはこんなふうに定義しているのか」みたいな，ある種のアリバイかもしれませんね．</p>
+<p>Androidを使っていると，せっかくLinuxなのだからコマンドラインツールを使わせろ，という気分にしばしばなります．
+そういう人は，大抵 rooted な端末にして使ったりします．</p>
+
+<p>しかし，Playストアからダウンロードしたものでもマルウェアに当たるような状況で，rooted にするのは，リスクが低いかというと，腕組みしてしまいます．
+いやいやリスク管理できてるから，というは，それはそれでよいわけですけれども．</p>
+
+<p>BYOD なんていうキーワードも踊る昨今，そうでなくてもスマホなんて個人情報の束なわけです．
+rooted な端末と非 rooted な端末の2台持ちで解決するのですが，何のために端末が小型になったのか，本末転倒な雰囲気がそこはかとなく，します．え? しません???</p>
+
+<p>同様のことを考えている人はどうやら少なくないようで，busybox を追加で入れている人もいるようです．
+でも，パス環境変数の問題とか，いろいろ苦労も多いです．
+かつての私がそうでした．</p>
+
+<p>広く世界を見渡すと，<a href="http://kevinboone.net/kbox2.html">kbox2</a> というツールプロジェクトがあります．
+ファイルパス周りに関して，Cygwin や MSYS のようなトリックを加えて，種々の問題を解決しようとしています．
+このアプローチには副作用も無くもないのですが，まあ，あらゆるモノゴトはトレードオフの問題ですから．</p>
+
+<p>kbox2 は，なかなか良くできているのですが，インストールに一手間かかります．
+Android端末エミュレータ (jackpal.androidterm) に依存しているので，環境の保守維持も手間です．</p>
+
+<p>こういう手の煩雑さは，ツールで解決するのがスジです．
+…というわけで，GUIツールをいくつか作りました．</p>
+
+<p>細かいことは，<a href="http://www.monami-ya.jp/onebox-tools">会社のWebサイトに製品紹介があります</a>ので，そちらをご参照ください．
+無償のものだけで環境構築は楽になりますが，315円支払うともっと楽になりますよ，という感じです．
+苦労してでも無償で済ませたいという気持ちは良く解りますので．
+私がそうですから．</p>
+
+<p>今回リリースしたパッケージマネージャでは，kbox2 のベースシステムがインストールできる程度の機能しかありません．
+あとは手動で整備して頂くことになります．
+当然，これが完成のはずはありません．
+「パッケージマネージャ」と名付けたからには，各種のdebパッケージを管理できるようにします．
+そうしないと，困るからです，私が．</p>
+
+<p>会社の製品にしているのに，こう言うのは宜しくないのですが，この製品は，儲ける目的で作っていません．
+315円は，今後パッケージが増えてきたときのS3ストレージ代に消えるはずです．
+完全に，&#8221;俺得&#8221;なソフトウェアです．
+なので，たぶん同じ悩みをお持ちの方には，ジャストフィットするかなと思ったりしています．</p>
+
+<p>ジャストフィットしないときは，是非 <a href="https://bitbucket.org/onebox/oneboxpackagemanager/pull-requests">pull request を投げ</a>てください．
+検討します．</p>
 </div>
 
 
@@ -124,16 +161,22 @@
   
 
 
-<time datetime="2013-05-09T10:47:00+09:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/hack/'>hack</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/05/09/what-is-software-creator/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/05/14/onebox-tools/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/05/09/what-is-software-creator/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/05/09/what-is-software-creator/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/05/14/onebox-tools/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/05/14/onebox-tools/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -146,10 +189,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/05/launchpad-ppa/" title="Previous Post: Launchpad PPA 登録の罠">&laquo; Launchpad PPA 登録の罠</a>
+        <a class="basic-alignment left" href="/blog/2013/05/09/what-is-software-creator/" title="Previous Post: ソフトウェア作家とは何か．">&laquo; ソフトウェア作家とは何か．</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/05/14/onebox-tools/" title="Next Post: OneBox リリースしました．">OneBox リリースしました． &raquo;</a>
       
     </p>
   </footer>
