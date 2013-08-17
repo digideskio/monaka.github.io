@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>ハッシュ関数をなんちゃってで理解する - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org//blog/2013/08/17/what-is-hash/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,15 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/17/what-is-hash/">ハッシュ関数をなんちゃってで理解する</a></h1>
+      <h1 class="entry-title">ハッシュ関数をなんちゃってで理解する</h1>
     
     
       <p class="meta">
@@ -95,7 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p>某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました．</p>
+<div class="entry-content"><p>某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました．</p>
 
 <p>担当編集の方々や読者からの反応は悪くは無かったと自負はしているのですが，もっと大枠のところで色々と思うところありまして．主に私の側の問題です．</p>
 
@@ -180,90 +177,16 @@
 
 <p>Perl, Ruby, JavaScript など，一部の言語では，連想配列に相当する機能をハッシュと呼ぶことがあります．これらの言語の内部で，連想記憶の管理にハッシュ関数を使っていることに起因します．全く無関係でもないのですが，概念としては別物として考えておくほうが良いでしょう．</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/01/calibrate-touchscreen-android-jb/">Android (X86-jb) でのタッチスクリーンキャリブレーション</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2013-06-01T07:17:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Android でのタッチスクリーンのキャリブレーション法について．情報が溢れていそうで，案外無い，
-あっても，古くて使えない．
-ので，記録しておきます．</p>
-
-<p>(少なくとも AOSP での)タッチスクリーンサポートは，tslib を用いています．
-tslib には，ts_calibrate というコマンドがついています．
-ts_calibrate は，LinuxのフレームバッファとタッチパネルデバイスをLinuxのinputデバイスとを直接アクセスします．
-Android は，当然ながら，画面を押さえていますので，衝突します．
-そこで，下記のような手順で実行を行います．</p>
-
-<p>以下，Android-x86.org が提供している x86-jb での手順です．</p>
-
-<p>たぶん ICS 以降の Android の多くで使えるはずですが，中には，tslib を使っていないディストロもあります．(例えば AndroVM)
-あと，rootが必要です．
-スマホやパネルコンピュータなど，きちんと製品に作りこまれた状態でも，この方法は使えないかもしれません．
-(その場合，キャリブレーションツールが必要なら，きちんとしたのがついてくるだろうと思います．)</p>
-
-<ol>
-<li>普通にAndroidを起動します．</li>
-<li>adb shell など用いて，コマンドラインアクセス可能にします．</li>
-<li><code>stop zygote</code> <code>stop bootanim</code> <code>stop surfaceflinger</code> として，zygote サービスを停止します．</li>
-<li>多くの場合，キャリブレーションデータを保存するディレクトリが存在しません．<code>mkdir /data/system/tslib</code>を実行して作ります．</li>
-<li><code>ts_calibrate</code> を実行します．</li>
-<li>言われるままにタッチします．</li>
-<li>念のため，<code>ls /data/system/tslib/pointercal</code> などしてキャリブレーションデータが作成されていることを確認します．</li>
-<li>止めた順番と逆順で，<code>start surfaceflinger</code> <code>start bootanim</code> <code>start zygote</code> として，zygote サービスを再開します．</li>
-</ol>
-
-
-<h2>補足</h2>
-
-<p>仮想コンソールがサポートされている場合，上記2の手順で，Alt+F1 などで移動し，作業することもできます．
-その場合，ts_calibrate を実行する際に必要なのは zygote サービスの停止だけです．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/14/onebox-tools/">OneBox リリースしました．</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -275,34 +198,43 @@ Android は，当然ながら，画面を押さえていますので，衝突し
   
 
 
-<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-08-17T15:11:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/botuyuan-gao/'>ボツ原稿</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/08/17/what-is-hash/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/08/17/what-is-hash/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/08/17/what-is-hash/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/01/calibrate-touchscreen-android-jb/" title="Previous Post: Android (x86-jb) でのタッチスクリーンキャリブレーション">&laquo; Android (x86-jb) でのタッチスクリーンキャリブレーション</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/14/onebox-tools/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -315,7 +247,7 @@ Android は，当然ながら，画面を押さえていますので，衝突し
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -366,7 +298,7 @@ Android は，当然ながら，画面を押さえていますので，衝突し
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -395,6 +327,7 @@ Android は，当然ながら，画面を押さえていますので，衝突し
 
   
 </aside>
+
 
     </div>
   </div>
