@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-08-17T16:01:27+09:00</updated>
+  <updated>2013-09-19T14:30:31+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Restricted Words]]></title>
+    <link href="http://www.monaka.org//blog/2013/09/19/restricted-words/"/>
+    <updated>2013-09-19T13:57:00+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/09/19/restricted-words</id>
+    <content type="html"><![CDATA[<p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
+
+<h1>お題</h1>
+
+<p>引用する．</p>
+
+<blockquote><p>標準出力に
+Hello World
+と出力するプログラムを作成して下さい。</p>
+
+<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
+Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
+言語仕様をフル活用して下さい！</p></blockquote>
+
+<h1>解法の定石</h1>
+
+<p>定石は，数値を得て，その文字コードに変換する．
+ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
+
+<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
+出題者の意図は，この定石通りだった．
+回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
+
+<blockquote><p>・C/C++
+初期化式を持たないグローバル変数はbssセクションに置かれます。main()が実行されるより前に0で初期化されるので、その変数をインクリメントすれば1になります。
+また、xorにより0を作り出し、それをインクリメントしても1になります。
+もしくは、少なくともx86/x64のgcc/clang上では、sizeof(char)は1です。</p></blockquote>
+
+<h1>もなもな的解法</h1>
+
+<p>定石通りに解くのは面白く無い．
+他の言語でなく GCC を選ぶからには，GCC なりの解き方で行かねば．
+なので，このように解いた．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'> * Environment: gcc version 4.2.1 (Apple Inc. build 5666) (dot 3)
+</span><span class='line'> */
+</span><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>Hello(void)
+</span><span class='line'>{
+</span><span class='line'>  fputs(__func__, stdout);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>konokansuu_wa_space_wo_hyouji__(void)
+</span><span class='line'>{
+</span><span class='line'>  printf("%c", (int)sizeof(__func__));
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>World(void)
+</span><span class='line'>{
+</span><span class='line'>  puts(__func__);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int
+</span><span class='line'>main(void)
+</span><span class='line'>{
+</span><span class='line'>  Hello();
+</span><span class='line'>  konokansuu_wa_space_wo_hyouji__();
+</span><span class='line'>  World();    
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>__func__</code> は GCC拡張のビルトインマクロ．
+最終的には関数名の文字列リテラルに展開される．
+しかし，cpp を通した時点ではC言語仕様の数値，文字には展開されない．セーフ．</p>
+
+<p>スペース文字を関数名に含めることは(当然)できないので，一工夫．
+関数名を31文字にして，<code>__func__</code> の sizeof を取った．ナル文字含めて32．
+これを文字として表示すればスペース文字になる．</p>
+
+<blockquote><p>言語仕様をフル活用して下さい！</p></blockquote>
+
+<p>とのことで，GCC の言語仕様を活用．
+LL系言語だと，シンボルを文字列に変換する機能をよく見かけるけれど，C言語でこの技法を選ぶ奴は少ない…よね．たぶん．</p>
+
+<h1>馬脚，もしくは，見直しは大事だよ</h1>
+
+<p>なお，出題者からのコメント．</p>
+
+<blockquote><p>なお、putchar()を使えば&#8221;%c&#8221;は回避可能です。</p></blockquote>
+
+<p>確かに．</p>
+
+<p>そういや，学生だった頃も，最後の見直しをしないで提出して，必ず何点か引かれていたよなぁ…．
+こういうの，何歳になっても，治らんね．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ハッシュ関数をなんちゃってで理解する]]></title>

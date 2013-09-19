@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Restricted Words - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな，ということで解いてみた． お題 引用する． 標準出力に
+Hello World
+と出力するプログラムを作成して下さい。 ただし、数値、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org//blog/2013/09/19/restricted-words/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Restricted Words</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-19T13:57:00+09:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
+
+<h1>お題</h1>
+
+<p>引用する．</p>
+
+<blockquote><p>標準出力に
+Hello World
+と出力するプログラムを作成して下さい。</p>
+
+<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
+Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
+言語仕様をフル活用して下さい！</p></blockquote>
+
+<h1>解法の定石</h1>
+
+<p>定石は，数値を得て，その文字コードに変換する．
+ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
+
+<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
+出題者の意図は，この定石通りだった．
+回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
+
+<blockquote><p>・C/C++
+初期化式を持たないグローバル変数はbssセクションに置かれます。main()が実行されるより前に0で初期化されるので、その変数をインクリメントすれば1になります。
+また、xorにより0を作り出し、それをインクリメントしても1になります。
+もしくは、少なくともx86/x64のgcc/clang上では、sizeof(char)は1です。</p></blockquote>
+
+<h1>もなもな的解法</h1>
+
+<p>定石通りに解くのは面白く無い．
+他の言語でなく GCC を選ぶからには，GCC なりの解き方で行かねば．
+なので，このように解いた．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'> * Environment: gcc version 4.2.1 (Apple Inc. build 5666) (dot 3)
+</span><span class='line'> */
+</span><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>Hello(void)
+</span><span class='line'>{
+</span><span class='line'>  fputs(__func__, stdout);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>konokansuu_wa_space_wo_hyouji__(void)
+</span><span class='line'>{
+</span><span class='line'>  printf("%c", (int)sizeof(__func__));
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>World(void)
+</span><span class='line'>{
+</span><span class='line'>  puts(__func__);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int
+</span><span class='line'>main(void)
+</span><span class='line'>{
+</span><span class='line'>  Hello();
+</span><span class='line'>  konokansuu_wa_space_wo_hyouji__();
+</span><span class='line'>  World();    
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>__func__</code> は GCC拡張のビルトインマクロ．
+最終的には関数名の文字列リテラルに展開される．
+しかし，cpp を通した時点ではC言語仕様の数値，文字には展開されない．セーフ．</p>
+
+<p>スペース文字を関数名に含めることは(当然)できないので，一工夫．
+関数名を31文字にして，<code>__func__</code> の sizeof を取った．ナル文字含めて32．
+これを文字として表示すればスペース文字になる．</p>
+
+<blockquote><p>言語仕様をフル活用して下さい！</p></blockquote>
+
+<p>とのことで，GCC の言語仕様を活用．
+LL系言語だと，シンボルを文字列に変換する機能をよく見かけるけれど，C言語でこの技法を選ぶ奴は少ない…よね．たぶん．</p>
+
+<h1>馬脚，もしくは，見直しは大事だよ</h1>
+
+<p>なお，出題者からのコメント．</p>
+
+<blockquote><p>なお、putchar()を使えば&#8221;%c&#8221;は回避可能です。</p></blockquote>
+
+<p>確かに．</p>
+
+<p>そういや，学生だった頃も，最後の見直しをしないで提出して，必ず何点か引かれていたよなぁ…．
+こういうの，何歳になっても，治らんね．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-19T13:57:00+09:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/09/19/restricted-words/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/09/19/restricted-words/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/09/19/restricted-words/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/17/what-is-hash/" title="Previous Post: ハッシュ関数をなんちゃってで理解する">&laquo; ハッシュ関数をなんちゃってで理解する</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/ff9a15154ad7a95b52667b7336b83d0f" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/19/restricted-words/">Restricted Words</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/17/what-is-hash/">ハッシュ関数をなんちゃってで理解する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/01/calibrate-touchscreen-android-jb/">Android (x86-jb) でのタッチスクリーンキャリブレーション</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/14/onebox-tools/">OneBox リリースしました．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/09/what-is-software-creator/">ソフトウェア作家とは何か．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/05/launchpad-ppa/">Launchpad PPA 登録の罠</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/04/dirty-optimize/">よくわからない最適化，つづき</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
