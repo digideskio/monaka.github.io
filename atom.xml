@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-09-19T14:30:31+09:00</updated>
+  <updated>2013-09-22T16:02:50+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -40,6 +40,9 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
 <p>この方針だと，1 をどのようにして得るかというのが鍵になる．
 出題者の意図は，この定石通りだった．
 回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
+
+<!-- more -->
+
 
 <blockquote><p>・C/C++
 初期化式を持たないグローバル変数はbssセクションに置かれます。main()が実行されるより前に0で初期化されるので、その変数をインクリメントすれば1になります。
