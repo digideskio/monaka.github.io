@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>repo sync でストレージを節約するための group 機能の使い方 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました． &ldquo;トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細&rdquo; 2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」 &hellip;">
+  <meta name="description" content="背景 最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています． しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org//blog/2013/11/04/group-in-repo/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,67 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/11/16/safety-stands-on/">安全の礎たるもの</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-16T16:26:00+09:00" pubdate data-updated="true">Nov 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました．</p>
-
-<ul>
-<li>&ldquo;<a href="http://eetimes.jp/ee/articles/1311/11/news072.html]">トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細</a>&rdquo;</li>
-</ul>
-
-
-<blockquote><p>2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」が急加速したことによる死亡事故が発生した。事故をめぐる訴訟において、原告側証人として事故原因の調査を行った組み込みソフトウェアの専門家は、裁判で「カムリのエンジン制御モジュール（ECM）のファームウェアに重大な欠陥が見つかった」と報告した。</p></blockquote>
-
-<p>だそうです．
-通常，組込み業界系メディアが一般の…プログラマ界隈でさえ…取り上げられることは滅多にないのですが，Twitter の TL を軸にして眺めていたところ，割と広く拡散したように見えます．
-トヨタという知名度，クルマという日常生活に深く関わるものに関すること，加えて，コード品質からの切り口は，組込み業界以外のプログラマでも話題にしやすかったということがあったのだろうと思います．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/16/safety-stands-on/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/04/group-in-repo/">Repo Sync でストレージを節約するための Group 機能の使い方</a></h1>
+      <h1 class="entry-title">Repo Sync でストレージを節約するための Group 機能の使い方</h1>
     
     
       <p class="meta">
@@ -147,7 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>背景</h2>
+<div class="entry-content"><h2>背景</h2>
 
 <p>最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています．</p>
 
@@ -247,22 +192,16 @@ Android 系以外のプロジェクトでも repo を使っているプロジェ
 
 <p>どなたか，repo の詳細を纏めて頂けないでしょうか．有償だとしても読みたいです． <em>知らない言語のコード読むの，疲れるのよ…</em></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/01/what-is-next/">狂ったように作るもの</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
 
 
 
@@ -274,44 +213,39 @@ Android 系以外のプロジェクトでも repo を使っているプロジェ
   
 
 
-<time datetime="2013-10-01T13:49:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-11-04T09:28:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/11/04/group-in-repo/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/11/04/group-in-repo/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/11/04/group-in-repo/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p>社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
-( <a href="http://weekly.ascii.jp/elem/000/000/175/175062/">「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない</a> )</p>
-
-<p>私自身は，ベーマガ→Oh!MZ と進んで，月刊ASCIIはたまに立ち読みしたり図書館で読んだりという程度の記憶しかない．</p>
-
-<p>けれど，MinixへのパッチキットでOSS的活動への名乗りを上げ，初台へ遊びにいったこともあったりするし，256倍やらマーフィーの法則やらハッカーズ大辞典やら，今もネタ元にしている書籍がたくさんある．
-PostScriptやUnixの知識も，ASCII無しには得られなかっただろう．
-TeXで日本語が使えるようになったのもASCII(だけではないけれど)のおかげだ．
-残念というか，寂しいというか，時代の流れを感じるというか，そういう類の何かはある．</p>
-
-<p>とはいえ，関係者ではない薄情な私の興味は，消えゆくものよりも，&#8221;この先生きのこるには&#8221;ということ．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/01/what-is-next/" title="Previous Post: 狂ったように作るもの">&laquo; 狂ったように作るもの</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/11/16/safety-stands-on/" title="Next Post: 安全の礎たるもの">安全の礎たるもの &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/01/what-is-next/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -371,7 +305,7 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -400,6 +334,7 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
 
   
 </aside>
+
 
     </div>
   </div>
