@@ -1047,7 +1047,7 @@ article h2 {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC) top left repeat-x;
 }
 
-p .entry-content {
+.entry-content p {
   text-indent: 1em;
 }
 
