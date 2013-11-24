@@ -159,95 +159,12 @@
 <p>このような状況を解消するために，repo には group という機能があります．
 日本語のみならず，英語圏でも纏まって解説されている例は，ざっとググった限りでは無いようです．</p>
 
-<h2>manifest.xml</h2>
-
-<p>manifest.xml は，repo が引っ張ってくるプロジェクトの内容が記述されています．
-init の時に指定して，実体は {repo_root}/.repo/manifest.xml にあります．
-(細かいことを言うと，このファイルはシンボリックリンクですが，割愛します)</p>
-
-<p>manifest.xml のプロジェクトには，こんな感じで groups という属性を付けられます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;project groups="pdk,darwin,mips" name="platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8" path="prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8"/&gt;
-</span><span class='line'>  &lt;project groups="pdk,darwin,x86" name="platform/prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.6" path="prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.6"/&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この例は AOSP の manifest.xml から引用してきました．以降でも，この manifest.xml のコード片を引用します．</p>
-
-<h2>repo init の -g オプション</h2>
-
-<p>repo init には，あまり知られていないようですが，-g というオプションがあります．
-これは隠しオプションではありません． repo help init すると，解説がでてきます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-g GROUP, --groups=GROUP
-</span><span class='line'>                    restrict manifest projects to ones with specified
-</span><span class='line'>                    group(s) [default|all|G1,G2,G3|G4,-G5,-G6]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このオプションの使い方が，本稿の核心です．</p>
-
-<p>使い方は，判ってしまえば簡単です．-g には，引っ張ってきたいグループをカンマ区切りで指定します．
-ただし， <strong>引っ張ってきたくないグループには &ndash; を接頭します</strong>．</p>
-
-<p>たとえば，私が Android-x86 の開発者であり，mips ターゲットの開発をする可能性が限りなく 0 だったとしましょう．
-その場合には，repo init を実行する際のグループ指定時に，mipsターゲットを無視する -mips を付加します．具体的には，<code>-g 'default,-mips'</code> とします．これだけです．
-このようなオプションで初期化された repo リポジトリでは，無効にされたプロジェクトは sync を行っても無視されるようになります．
-プロジェクト名を明示した sync を行おうとすると，下記のように例外が発生します．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ repo sync platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8
-</span><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 418, in &lt;module&gt;
-</span><span class='line'>    _Main(sys.argv[1:])
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 394, in _Main
-</span><span class='line'>    result = repo._Run(argv) or 0
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 142, in _Run
-</span><span class='line'>    result = cmd.Execute(copts, cargs)
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/subcmds/sync.py", line 606, in Execute
-</span><span class='line'>    submodules_ok=opt.fetch_submodules)
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/command.py", line 180, in GetProjects
-</span><span class='line'>    raise InvalidProjectGroupsError(arg)
-</span><span class='line'>error.InvalidProjectGroupsError</span></code></pre></td></tr></table></div></figure>
-
-
-<p>AOSP のリポジトリは，いくつかの特殊な状況を除き，ビルドホストもターゲットも単一アーキテクチャでしょう．そんなときは，init 時のグループ指定をさらに厳密にできます．
-例えば，Ubuntu Linux上で Android-x86 系のビルドをする際に，私が使っているグループ指定は， <code>default,-arm,-mips,-darwin</code> です．</p>
-
-<h2>応用</h2>
-
-<p>group 指定には，特殊なグループ all, default, notdefault などあります．
-これらを詳説すると，紙幅がいくらあっても足りませんので，本稿では割愛します．
-repo の実体は Python スクリプトなのでご自身で調べられるでしょうし，私自身も完全に理解できているわけではありませんので．</p>
-
-<p>特殊なグループを除き，group には，お互いに衝突しない自由な名前を付けられます．
-Android 系以外のプロジェクトでも repo を使っているプロジェクトはあるようですが，そのようなプロジェクトでも group を活用することで，柔軟なプロジェクト運営が可能になるかもしれません．</p>
-
-<h2>注意事項</h2>
-
-<p>既に存在しているリポジトリに対して repo init を行う場合に -g オプションを指定すると，そのあとの sync から group 指定が有効になります．
-ただし，あとから無効にした場合，sync で pull はされてこなくなり，作業スペースからは削除されますが，ストレージ上には git リポジトリのクローンが残骸として残ります．.repo/ 内のリポジトリを削除することでストレージの節約になりますが，バッドノウハウすぎるので，本稿では割愛します．変なことをしないで rm -fr .repo してから init し直すほうが無難です．</p>
-
-<h2>追伸</h2>
-
-<p>どなたか，repo の詳細を纏めて頂けないでしょうか．有償だとしても読みたいです． <em>知らない言語のコード読むの，疲れるのよ…</em></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/04/group-in-repo/">Read on &rarr;</a>
+    </footer>
   
 
 
