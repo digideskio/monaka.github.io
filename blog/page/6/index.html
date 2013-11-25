@@ -9,8 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="2年ほど使っているMacBookPro (M986A/J)が，数カ月前からバッテリー交換修理の警告を出すようになっていた．のに面倒なので放置していた．…そしたらマルチタッチなトラックパッドの効きがおかしくなってきた．
-裏蓋とバッテリーを外して調整してみたけれど，以前は治ったことがあるのに， &hellip;">
+  <meta name="description" content="某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
+ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
+両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる． 素晴らしいセーフティネットなのだが， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/30/did-it/">やっちまった</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-30T10:28:00+09:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
+ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
+両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる．</p>
+
+<p>素晴らしいセーフティネットなのだが，その全ての網をくぐり抜けて落下してしまった．
+バカすぎる．</p>
+
+<p>で，お手紙書いた．</p>
+
+<blockquote><p>Webログインパスワードとweb取引パスワードの両方を忘れてしまいました．
+その状態で，先日転居を行いました．</p>
+
+<p>仮パスワードを郵送して頂けることは解っているのですが，転居しているので転送不要郵便を受け取れません．
+住所変更は，webログインパスワードが必要と認識しています．
+この場合，どのように手続きすればよいでしょうか．</p></blockquote>
+
+<p>本人の名誉のために言い訳しておくと，別に忘れたわけではなくて，Keypass で自動生成したパスワードを，セーブするのを忘れただけ．言い訳になっていない．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -180,68 +233,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/25/l-06c/">L-06C Rooted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
-
-<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
-
-<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
-
-<p>~~~~</p>
-
-<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
-Nvflash started
-rcm version 0X4
-Command send failed (usb write failed)
-</code></pre>
-
-<p>~~~~</p>
-
-<p>あと，fastboot は root で実行しないとダメ…なの?</p>
-
-<p>~~~~</p>
-
-<pre><code>$ ./fastboot oem unlock
-&lt; waiting for device &gt;
-</code></pre>
-
-<p>~~~~</p>
-
-<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -278,6 +269,10 @@ Command send failed (usb write failed)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/26/extracts-itune-artwork/">iTunes のアルバムアートワークを抽出する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/16/safety-stands-on/">安全の礎たるもの</a>
       </li>
     
@@ -299,10 +294,6 @@ Command send failed (usb write failed)
     
       <li class="post">
         <a href="/blog/2013/06/01/calibrate-touchscreen-android-jb/">Android (x86-jb) でのタッチスクリーンキャリブレーション</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/14/onebox-tools/">OneBox リリースしました．</a>
       </li>
     
   </ul>

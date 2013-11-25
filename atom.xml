@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-11-24T13:53:16+09:00</updated>
+  <updated>2013-11-26T08:09:44+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iTunes のアルバムアートワークを抽出する]]></title>
+    <link href="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/"/>
+    <updated>2013-11-26T07:43:19+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
+たとえば，ざっとサムネイルとして眺めてみたいとか．</p>
+
+<p>抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
+細かいことをいうと，個人利用の範囲でも厳密には，マズいような気もします．
+本エントリは，技術的にはできますよね，的なお話．
+…ということで，ひとつよしなに．</p>
+
+<!-- more -->
+
+
+<p>iTunesのアルバムアートワークは，iTunesフォルダを <code>{itune_folder}</code>とすると<code>{itnue_folder}/Album Artwork/</code>配下の拡張子itcファイルに収められています．
+特に手を加えていなければ，<code>~/Music/iTuness/Album Artwork/</code>にあるはずです．
+ただし，itc ファイルには，様々なメタデータが画像の前についています．
+画像として扱うには，このメタデータを外す必要があります．</p>
+
+<h2>スクリプト</h2>
+
+<p>サクッと答えだけ書きます．
+OSX を使っている前提に立っています．Windowsの方はCygwinなり何なりを入れてください．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!env bash
+</span><span class='line'>for i in $(find ~/Music/iTuness/Album\ Artwork/ -name '*.itc'); do
+</span><span class='line'>  dd if=$i of=$(basename $i .itc).png bs=1 skip=492
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>注意事項</h3>
+
+<p>dd でアタマを落とすだけ．492 バイトは，環境(iTunesのバージョンなど?)によって違う可能性がありそうです．
+<a href="https://www.google.co.jp/search?q=itune+itc+500%E3%83%90%E3%82%A4%E3%83%88">ググると，この数値は500バイトであると主張している人が少なからず居る</a>ようですので．</p>
+
+<p>お手元環境で何バイトを削ればよいかは，目視でお判りになるでしょう．
+上記のスクリプトを理解できる人の手元には，愛用のバイナリエディタもおありでしょうから，</p>
+
+<p>あと，上記のスクリプトでは，拡張子を png に決め打っていますが，実際には，画像は，PNG と JPEG の2種類があります．
+言うまでもありませんが，これは file コマンドを使って容易に識別できます．
+こんなふうに．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ file *.png
+</span><span class='line'>4931EBE6BCC87C34-07FBFB2CA12DDA5D.png:   JPEG image data, JFIF standard 1.01, comment: "AppleMark"
+</span><span class='line'>4931EBE6BCC87C34-08F02BE333CFBBAA.png:   PNG image, 128 x 128, 8-bit/color RGBA, non-interlaced
+</span><span class='line'>4931EBE6BCC87C34-0A2AC7440B8F25B6.png:   JPEG image data, JFIF standard 1.01</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとは，上手いことやってください．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[安全の礎たるもの]]></title>
@@ -1391,27 +1455,6 @@ Command send failed (usb write failed)
 
 <p>キーボードとタブレットは，爪でひっかけてあるだけなのだけれども，割と安定している．電車の中でちょちょいとメールの返信をする程度なら結構使えている．</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[さよなら，はてな．]]></title>
-    <link href="http://www.monaka.org//blog/2012/04/02/bye/"/>
-    <updated>2012-04-02T14:35:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2012/04/02/bye</id>
-    <content type="html"><![CDATA[<p>別に嫌いになったわけではないのですけれども．</p>
-
-<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
-
-<p>村に住むメリットを感じなくなっちゃったのでした．</p>
-
-<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
-
-<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
-
-<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
-
-<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
 ]]></content>
   </entry>
   

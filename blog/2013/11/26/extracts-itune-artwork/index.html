@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>L-06C rooted - もなもなもなかのページ</title>
+  <title>iTunes のアルバムアートワークを抽出する - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして． カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました． 3.1になっているせいなのか，nvflash &hellip;">
+  <meta name="description" content="背景 さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
+たとえば，ざっとサムネイルとして眺めてみたいとか． 抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
+細かいことをいうと，個人利用の範囲でも厳密には， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2012/04/25/l-06c/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">L-06C Rooted</h1>
+      <h1 class="entry-title">iTunes のアルバムアートワークを抽出する</h1>
     
     
       <p class="meta">
@@ -85,40 +87,69 @@
   
 
 
-<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+<time datetime="2013-11-26T07:43:19+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
+<div class="entry-content"><h2>背景</h2>
 
-<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
+<p>さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
+たとえば，ざっとサムネイルとして眺めてみたいとか．</p>
 
-<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
+<p>抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
+細かいことをいうと，個人利用の範囲でも厳密には，マズいような気もします．
+本エントリは，技術的にはできますよね，的なお話．
+…ということで，ひとつよしなに．</p>
 
-<p>~~~~</p>
+<!-- more -->
 
-<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
-Nvflash started
-rcm version 0X4
-Command send failed (usb write failed)
-</code></pre>
 
-<p>~~~~</p>
+<p>iTunesのアルバムアートワークは，iTunesフォルダを <code>{itune_folder}</code>とすると<code>{itnue_folder}/Album Artwork/</code>配下の拡張子itcファイルに収められています．
+特に手を加えていなければ，<code>~/Music/iTuness/Album Artwork/</code>にあるはずです．
+ただし，itc ファイルには，様々なメタデータが画像の前についています．
+画像として扱うには，このメタデータを外す必要があります．</p>
 
-<p>あと，fastboot は root で実行しないとダメ…なの?</p>
+<h2>スクリプト</h2>
 
-<p>~~~~</p>
+<p>サクッと答えだけ書きます．
+OSX を使っている前提に立っています．Windowsの方はCygwinなり何なりを入れてください．</p>
 
-<pre><code>$ ./fastboot oem unlock
-&lt; waiting for device &gt;
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!env bash
+</span><span class='line'>for i in $(find ~/Music/iTuness/Album\ Artwork/ -name '*.itc'); do
+</span><span class='line'>  dd if=$i of=$(basename $i .itc).png bs=1 skip=492
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
 
-<p>~~~~</p>
 
-<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
+<h3>注意事項</h3>
+
+<p>dd でアタマを落とすだけ．492 バイトは，環境(iTunesのバージョンなど?)によって違う可能性がありそうです．
+<a href="https://www.google.co.jp/search?q=itune+itc+500%E3%83%90%E3%82%A4%E3%83%88">ググると，この数値は500バイトであると主張している人が少なからず居る</a>ようですので．</p>
+
+<p>お手元環境で何バイトを削ればよいかは，目視でお判りになるでしょう．
+上記のスクリプトを理解できる人の手元には，愛用のバイナリエディタもおありでしょうから，</p>
+
+<p>あと，上記のスクリプトでは，拡張子を png に決め打っていますが，実際には，画像は，PNG と JPEG の2種類があります．
+言うまでもありませんが，これは file コマンドを使って容易に識別できます．
+こんなふうに．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ file *.png
+</span><span class='line'>4931EBE6BCC87C34-07FBFB2CA12DDA5D.png:   JPEG image data, JFIF standard 1.01, comment: "AppleMark"
+</span><span class='line'>4931EBE6BCC87C34-08F02BE333CFBBAA.png:   PNG image, 128 x 128, 8-bit/color RGBA, non-interlaced
+</span><span class='line'>4931EBE6BCC87C34-0A2AC7440B8F25B6.png:   JPEG image data, JFIF standard 1.01</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとは，上手いことやってください．</p>
 </div>
 
 
@@ -141,16 +172,16 @@ Command send failed (usb write failed)
   
 
 
-<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+<time datetime="2013-11-26T07:43:19+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
       
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2012/04/25/l-06c/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2012/04/25/l-06c/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2012/04/25/l-06c/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -163,10 +194,8 @@ Command send failed (usb write failed)
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/03/l-06c/" title="Previous Post: L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，">&laquo; L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，</a>
+        <a class="basic-alignment left" href="/blog/2013/11/16/safety-stands-on/" title="Previous Post: 安全の礎たるもの">&laquo; 安全の礎たるもの</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/05/22/work_p/" title="Next Post: 動くのこれ?">動くのこれ? &raquo;</a>
       
     </p>
   </footer>
