@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>OneBox リリースしました． - もなもなもなかのページ</title>
+  <title>もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です． Androidを使っていると，せっかくLinuxなのだからコマンドラインツールを使わせろ，という気分にしばしばなります．
-そういう人は，大抵 rooted &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2013/05/14/onebox-tools/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/9/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,12 +77,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">OneBox リリースしました．</h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
     
     
       <p class="meta">
@@ -98,120 +101,29 @@
   
 
 
-<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
-
-<!-- more -->
-
-
-<p>Androidを使っていると，せっかくLinuxなのだからコマンドラインツールを使わせろ，という気分にしばしばなります．
-そういう人は，大抵 rooted な端末にして使ったりします．</p>
-
-<p>しかし，Playストアからダウンロードしたものでもマルウェアに当たるような状況で，rooted にするのは，リスクが低いかというと，腕組みしてしまいます．
-いやいやリスク管理できてるから，というは，それはそれでよいわけですけれども．</p>
-
-<p>BYOD なんていうキーワードも踊る昨今，そうでなくてもスマホなんて個人情報の束なわけです．
-rooted な端末と非 rooted な端末の2台持ちで解決するのですが，何のために端末が小型になったのか，本末転倒な雰囲気がそこはかとなく，します．え? しません???</p>
-
-<p>同様のことを考えている人はどうやら少なくないようで，busybox を追加で入れている人もいるようです．
-でも，パス環境変数の問題とか，いろいろ苦労も多いです．
-かつての私がそうでした．</p>
-
-<p>広く世界を見渡すと，<a href="http://kevinboone.net/kbox2.html">kbox2</a> というツールプロジェクトがあります．
-ファイルパス周りに関して，Cygwin や MSYS のようなトリックを加えて，種々の問題を解決しようとしています．
-このアプローチには副作用も無くもないのですが，まあ，あらゆるモノゴトはトレードオフの問題ですから．</p>
-
-<p>kbox2 は，なかなか良くできているのですが，インストールに一手間かかります．
-Android端末エミュレータ (jackpal.androidterm) に依存しているので，環境の保守維持も手間です．</p>
-
-<p>こういう手の煩雑さは，ツールで解決するのがスジです．
-…というわけで，GUIツールをいくつか作りました．</p>
-
-<p>細かいことは，<a href="http://www.monami-ya.jp/onebox-tools">会社のWebサイトに製品紹介があります</a>ので，そちらをご参照ください．
-無償のものだけで環境構築は楽になりますが，315円支払うともっと楽になりますよ，という感じです．
-苦労してでも無償で済ませたいという気持ちは良く解りますので．
-私がそうですから．</p>
-
-<p>今回リリースしたパッケージマネージャでは，kbox2 のベースシステムがインストールできる程度の機能しかありません．
-あとは手動で整備して頂くことになります．
-当然，これが完成のはずはありません．
-「パッケージマネージャ」と名付けたからには，各種のdebパッケージを管理できるようにします．
-そうしないと，困るからです，私が．</p>
-
-<p>会社の製品にしているのに，こう言うのは宜しくないのですが，この製品は，儲ける目的で作っていません．
-315円は，今後パッケージが増えてきたときのS3ストレージ代に消えるはずです．
-完全に，&#8221;俺得&#8221;なソフトウェアです．
-なので，たぶん同じ悩みをお持ちの方には，ジャストフィットするかなと思ったりしています．</p>
-
-<p>ジャストフィットしないときは，無償/オープンソースで公開されている部分について，是非 <a href="https://bitbucket.org/onebox/oneboxpackagemanager/pull-requests">pull request を投げ</a>てください．
-検討します．</p>
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/hack/'>hack</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/05/14/onebox-tools/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/05/14/onebox-tools/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/05/14/onebox-tools/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/05/09/what-is-software-creator/" title="Previous Post: ソフトウェア作家とは何か．">&laquo; ソフトウェア作家とは何か．</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/06/01/calibrate-touchscreen-android-jb/" title="Next Post: Android (x86-jb) でのタッチスクリーンキャリブレーション">Android (x86-jb) でのタッチスクリーンキャリブレーション &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/blog/page/8/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     
@@ -242,7 +154,7 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
       </li>
     
       <li class="post">
-        <a href="/blog/2013/12/15/happiness-for-embedded-engineers/">組込み技術者と'幸せ'</a>
+        <a href="/blog/2013/12/15/happiness-for-embedded-engineers/">組込み技術者と&#8217;幸せ&#8217;</a>
       </li>
     
       <li class="post">
@@ -271,7 +183,7 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -300,7 +212,6 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
 
   
 </aside>
-
 
     </div>
   </div>

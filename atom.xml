@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2013-12-16T06:47:06+09:00</updated>
+  <updated>2013-12-26T10:49:03+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OSSはタダ乗りでもいいけどマズい]]></title>
+    <link href="http://www.monaka.org//blog/2013/12/26/oss-community-and-others/"/>
+    <updated>2013-12-26T10:17:50+09:00</updated>
+    <id>http://www.monaka.org//blog/2013/12/26/oss-community-and-others</id>
+    <content type="html"><![CDATA[<p>Togetter で纏めるかどうか思案しつつ．
+まあ，コメントが付く話でもなかろうということで，当日記へ．</p>
+
+<blockquote class="twitter-tweet"><p><a href="http://t.co/w1u1XPzH9S">http://t.co/w1u1XPzH9S</a>&#10;こういう人には、モラトリアムを使ってオープンソース活動をして欲しいなぁ&#10;みんなスタートアップ行って死ぬほど働いちゃうから、OSS系の若者が減ってきている印象。</p>&mdash; Yuichiro MASUI (@masuidrive) <a href="https://twitter.com/masuidrive/statuses/415363396410699776">December 24, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>OSSに敬意を払わないスタートアップ系が増えているのだとしたら，深刻だぬ．&#10;OSSは手段であって目的ではない，っていう好意をジャイアニズム的に解釈して，昔から今まで不毛なままの分野を，アテクシ知ってる． <a href="https://twitter.com/search?q=%23%E3%83%8B%E3%83%83%E3%83%9D%E3%83%B3%E7%9A%84%E7%B5%84%E8%BE%BC%E3%81%BF&amp;src=hash">#ニッポン的組込み</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415825872898117632">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<!-- more -->
+
+
+
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 敬意を払わない人がいくらいてもいいんですよ。タダ乗りもＯＫ。敬意を払ったり貢献したりする人がゼロになると困るけど。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/statuses/415837392822497280">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> 敬意を払わない人，タダ乗りする人にに嫌気して，貢献する人が減っていくというデススパイラルがあるのですよ．すべからくそこに行き着くとまでは言いませんが．&#10;最悪ケースで行き着く先は，水になったワインの寓話みたいな結果．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415838576832561152">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> えーと、FLOSS歴20数年の経験から言うと、気にしたほうが負けだと思います。「気にしない」というコミュニティ運営が長続きのコツ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/statuses/415839352766222336">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> えーと，わたくしもFLOSS歴は20数年あるわけですがw．&#10;世の中にはダメなFLOSSと上手くいくFLOSSがあるわけです．&#10;ほら，Linux界隈でも，組込み界隈の閉鎖性に，密かにブチ切れた声ありましたよね? 10余年くらいまえに．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415840330156490753">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>あたりがコトの起こり．
+このあと続くのだけれど，人様からのmention tweetを延々と個人日記に載せまくるのは，著作権法的にどうなの? って話はあります．
+アート作品に無断でtweet貼りまくって炎上した実例もありますし．</p>
+
+<p>なので，第一部は，これくらいにしておいて，翌朝からの独白第2部へ．</p>
+
+<p>以下，私見をざっくりまとめちゃうと，こんな感じでしょうか．</p>
+
+<ul>
+<li>Matz氏が言うことも道理ではある．実際成功もした方の方法論ですから，道理があって当然．</li>
+<li>OSS コミュニティはちょっぴり特殊で，外の経済経営概念とは違う面がある．</li>
+<li>(Web系)スタートアップが，OSS コミュニティの特殊性から解離しつつあるとしたら，OSSにとっては，ヤバイんじゃないかな．</li>
+</ul>
+
+
+<blockquote class="twitter-tweet"><p>昨晩のは，「敬意を払ったり貢献したりする人がゼロになると困る」というのは一致で．&#10;ゼロにしないための「タダ乗り」には，まあ価値はある．&#10;古典経済的にはタダ乗りに見えても，実際には，「タダ乗り」ではない，というケースはありうる．&#10;典型は，敬意とか評価とかを貢献者に提供してい場合．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415983476261679104">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>OSSコミュニティ(の前駆であるハッカーコミュニティ)は，評価経済と原始共産制っぽいナニカでまわっていることを(無自覚かもしれないが)知っていて，そのように振る舞う傾向がある．&#10;ただし，それは全経済世界から見れば，かなり恵まれた，先進的なコミュニティであるんすよ．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415984602151272448">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>OSSコミュと旧来型産業との経済観の乖離は，想像以上に大きくて．&#10;私の直接関与がない時効例を挙げると，CELFやらMOAPやらは，「あいつらタダ乗り」という陰口をよく聞いた．&#10;旧来の経営経済の申し子である組込みコミュは，OSSコミュとの摺り合わせが困難といえるほど難しい．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415988402501070848">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>「敬意を払ったり貢献したりする人がゼロになると困る」という最低レベルを割りこむほどのタダ乗り(評価経済的な貢献さえしない)が起こりえる．OSSコミュには信じがたいことかもしれないけれども．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415988813660315648">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>続) …Web系スタートアップのエコシステムが，(組込みコミュのような)旧来経営経済系に変質しかかっているという仮説が立てられる．実際はどうなのかは，フィールドワークでもしないと何とも言えんけれど．&#10;直感では，あーこりゃヤバくね? って思うず．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415990322779267074">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>OSSコミュの思想が尊重される分野の外に出なかった人と，この漠然とした危機感を共有するのは難しいだろうってことくらいは判るので，その辺は (´ー｀)ｿﾝﾅﾓﾝﾀﾞﾖﾅ と．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415994029419921408">December 25, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>まあ，「若者がコミュニティに参加しない」っていうのは，オープンソースって言葉が生まれる前から言われ続けていたことのような気もしなくもないです．
+私の杞憂なのかもしれませんけれどね．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[組込み技術者と'幸せ']]></title>
@@ -1594,44 +1719,6 @@ set-default-coding-system だけで済むような気がするのだけれど，
 <p>取り出したバッテリーを横から眺めてみたのだけれど，別段膨らんでいるようには見えない．でも，組み上げてみたら，トラックパッドは軽快に戻っていた．ほんの1mmくらいでも影響があるものなのかもしれない．</p>
 
 <p>とりあえず，9000円弱で治る程度で，よかった…．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[動くのこれ?]]></title>
-    <link href="http://www.monaka.org//blog/2012/05/22/work_p/"/>
-    <updated>2012-05-22T22:08:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2012/05/22/work_p</id>
-    <content type="html"><![CDATA[<p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
-
-<p>で，startup.s を見てみた．</p>
-
-<pre><code>.text
-
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
-
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
-
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
-
-<p>&hellip;(ﾟдﾟlll) ベクタどこよ…</p>
-
-<h2>あ，動くのか．</h2>
-
-<p>これ Cortex-M3系だものね…．</p>
 ]]></content>
   </entry>
   
