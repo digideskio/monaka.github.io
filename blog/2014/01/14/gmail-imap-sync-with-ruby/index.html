@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,15 +79,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a></h1>
+      <h1 class="entry-title">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</h1>
     
     
       <p class="meta">
@@ -110,7 +107,7 @@
   </header>
 
 
-  <div class="entry-content"><h1>まくら</h1>
+<div class="entry-content"><h1>まくら</h1>
 
 <p>明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
 数ヶ月もすれば暖かくもなりましょう．
@@ -143,85 +140,165 @@
 
 <p>…こういう哀しいできごとがおこるわけです．(この例はメールではありませんが)</p>
 
+<!-- more -->
+
+
+<h1>それ，Rubyでやってみよう．</h1>
+
+<p>いや別に Ruby でなくてもできますが…(汗．閑話休題．</p>
+
+<p>一般的に言うと，Gmail の保全には，imapsync などの汎用ツールを使うだろうと思います．
+しかし，ここでは，独自にスクリプトを書くという提案をします．</p>
+
+<p>Ruby には，強力なIMAPライブラリがあるので，あんまり難しくはありません．
+あと，Ruby 入門の日記ではありませんので，処理の詳細は説明しません．</p>
+
+<h2>注目は X-GM-RAW</h2>
+
+<p>注目していただきたいのは，「 <strong>#ここに注目</strong> 」の行です．
+Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
+これは，Gmail のweb画面にある検索窓に入力する書式を，そのまま指定できます．
+この例では，Googleグループのandroid-x86というグループから来ているメールを抽出してコピーしています．</p>
+
+<p>Gmail はディスク容量が大きく，検索のスピードも早いため，一般的なメールフォルダよりも多くのメールを溜め込みがちです(個人差はありますが)．
+これを，imapsync などの汎用ツールを使って全コピーしようとすると，涙目になります．</p>
+
+<h2>まとめ</h2>
+
+<p>スクリプトの中には，いろいろ細かいネタが仕込まれているのですが，それらもサックリと省略します．
+汎用ツールで開発時間を短縮するという考え方も間違いではありませんが，汎用ツールでは対応できない機能を見つけたときには，小さなスクリプトを作るのもアリですよね，と．
+まとめになっていませんが，今日はこんな感じで．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env ruby
+</span><span class='line'># -*- coding: utf-8 -*-
+</span><span class='line'># Copyright (C) 2014 Masaki "monaka" Muranaka.
+</span><span class='line'># License: MIT.
+</span><span class='line'>
+</span><span class='line'>require 'net/imap'
+</span><span class='line'>require 'time'
+</span><span class='line'>
+</span><span class='line'>src_imap = Net::IMAP.new('imap.gmail.com', 993, true)
+</span><span class='line'>dst_imap = Net::IMAP.new('imap.gmail.com', 993, true)
+</span><span class='line'>
+</span><span class='line'>def parseHeader(msg)
+</span><span class='line'>  msg =~/\A(.*?)\r\n\r\n(.*)\Z/m
+</span><span class='line'>  head,body=$1,$2
+</span><span class='line'>  head=head.split(/\r\n/).map{|i|i[0]+i}.join("\r\n")[1..-1].split(/\r\n[^\s]/).map{|i|i.split(/\r\n\s\s/).join("")}
+</span><span class='line'>  Hash[*head.map{|i|i=~/^(.*?):\s(.*)$/;[$1,$2]}.flatten]
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>###################################################################
+</span><span class='line'># ここは設定
+</span><span class='line'>searchParams = [
+</span><span class='line'>                ['FROM', 'tomono@example.com'],
+</span><span class='line'>                ['X-GM-RAW', 'list:(&lt;android-x86.googlegroups.com&gt;)'],      #ここに注目
+</span><span class='line'>                ['X-GM-RAW', 'list:(&lt;receipt.movsign.info&gt;)']
+</span><span class='line'>               ]
+</span><span class='line'>
+</span><span class='line'>src_imap.login('monaka@somewhere-using-gmail.co.jp', 'password')            #コピー元
+</span><span class='line'>dst_imap.login('another-monaka-or-something@gmail.com', 'another-password') #コピー先
+</span><span class='line'>
+</span><span class='line'>#この辺もお好みで．
+</span><span class='line'>src_imap.select('INBOX')
+</span><span class='line'>dst_imap.select('INBOX')
+</span><span class='line'>
+</span><span class='line'>###################################################################
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>searchParams.each do |searchArray|
+</span><span class='line'>  puts "Searching #{searchArray[1]}"
+</span><span class='line'>  searchIds = src_imap.search(searchArray).each do |id|
+</span><span class='line'>    msg = src_imap.fetch(id, 'RFC822')[0].attr['RFC822']
+</span><span class='line'>    head = parseHeader(msg)
+</span><span class='line'>
+</span><span class='line'>    searchIds = dst_imap.search(['X-GM-RAW', "rfc822msgid:#{head[%q{Message-ID}]}"])
+</span><span class='line'>    if (searchIds.length == 0) # このチェックを省くと遅くなる
+</span><span class='line'>      dst_imap.append('INBOX', msg, nil, Time.parse(head['Date']))
+</span><span class='line'>      putc 'w'
+</span><span class='line'>    else
+</span><span class='line'>      putc '.'
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>  puts
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>src_imap.logout()
+</span><span class='line'>dst_imap.logout()
+</span><span class='line'>
+</span><span class='line'>src_imap.disconnect()
+</span><span class='line'>dst_imap.disconnect()</span></code></pre></td></tr></table></div></figure>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/26/oss-community-and-others/">OSSはタダ乗りでもいいけどマズい</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2013-12-26T10:17:50+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Togetter で纏めるかどうか思案しつつ．
-まあ，コメントが付く話でもなかろうということで，当日記へ．</p>
-
-<blockquote class="twitter-tweet"><p><a href="http://t.co/w1u1XPzH9S">http://t.co/w1u1XPzH9S</a>&#10;こういう人には、モラトリアムを使ってオープンソース活動をして欲しいなぁ&#10;みんなスタートアップ行って死ぬほど働いちゃうから、OSS系の若者が減ってきている印象。</p>&mdash; Yuichiro MASUI (@masuidrive) <a href="https://twitter.com/masuidrive/statuses/415363396410699776">December 24, 2013</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<blockquote class="twitter-tweet"><p>OSSに敬意を払わないスタートアップ系が増えているのだとしたら，深刻だぬ．&#10;OSSは手段であって目的ではない，っていう好意をジャイアニズム的に解釈して，昔から今まで不毛なままの分野を，アテクシ知ってる． <a href="https://twitter.com/search?q=%23%E3%83%8B%E3%83%83%E3%83%9D%E3%83%B3%E7%9A%84%E7%B5%84%E8%BE%BC%E3%81%BF&amp;src=hash">#ニッポン的組込み</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415825872898117632">December 25, 2013</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/26/oss-community-and-others/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/15/happiness-for-embedded-engineers/">組込み技術者と&#8217;幸せ&#8217;</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -233,50 +310,43 @@
   
 
 
-<time datetime="2013-12-15T08:52:42+09:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2014-01-14T19:37:18+09:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/hack/'>hack</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><h2>まくら</h2>
-
-<p>とあるWebメディアから，新春インタビューの依頼を受けました．
-どこからかは，載るまで秘密です．載らないかもしれませんし．</p>
-
-<p>このエントリを書いている時点では取材前ですし，載ったとして，(当然)年越しです．</p>
-
-<p>来年の予測を，ざっくばらんに…とは言われたものの，そのとおりにすると，纏まらないわ人を無闇にdisるわで大変なことになります．
-我ながら目に見えるょぅ…．</p>
-
-<h2>組込みシステム業界は，誰の顔を見ている?</h2>
-
-<p>そんなわけで，ここ数日，寝しなに，来年とか今後数年後の組込みシステム業界を空想してみたりしていました．</p>
-
-<p>そのとき，ふと思ったのです．</p>
-
-<p><em>もしかして，日本の組込みシステム業界って，組込みシステム業界のことしか考えていないんじゃないの?</em></p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/26/oss-community-and-others/" title="Previous Post: OSSはタダ乗りでもいいけどマズい">&laquo; OSSはタダ乗りでもいいけどマズい</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/15/happiness-for-embedded-engineers/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -310,7 +380,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2013/12/15/happiness-for-embedded-engineers/">組込み技術者と&#8217;幸せ&#8217;</a>
+        <a href="/blog/2013/12/15/happiness-for-embedded-engineers/">組込み技術者と'幸せ'</a>
       </li>
     
       <li class="post">
@@ -335,7 +405,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -364,6 +434,7 @@
 
   
 </aside>
+
 
     </div>
   </div>

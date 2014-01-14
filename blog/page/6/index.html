@@ -2,19 +2,14 @@
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <title>もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="いつでもどこでもPCを持ち歩くので，ブラウザインタフェースは要らないし．
-静的なブログのほうが，何かと管理が楽だなぁということで．
-Octopress に乗り換え．
-Lokkaも，大満足というわけでもないものの，悪くはない．
-ので，会社の代表ページなどでは引き続き使う予定．
-">
+  <meta name="description" content="(2013-05-03 21:57 JST : ソースコードの誤記修正) 話のマクラ 新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる． ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +78,66 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/03/optimizer-in-c/">よくわからない最適化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-03T10:05:00+09:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
+
+<h2>話のマクラ</h2>
+
+<p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
+
+<blockquote><p>ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。</p>
+
+<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
+
+<p>をを! 社長自ら！ すごい！</p>
+
+<blockquote><p>この関数は、一見すると無駄がないように見えますが、実は無駄の塊です。
+たとえばコンピュータは割り算が苦手です。なのに二回も割り算をやっています。
+割り算よりは掛け算(乗算)の方が圧倒的に速い(下手すると10～100倍くらい?)ので、まず割り算をしている部分を2.0の逆数の乗算に変更します。</p>
+
+<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
+
+<p>最近，トシのせいかすぐに感涙してしまう私は，感化されて，つい除算を積算に変えてみてベンチマークを取ってみました．
+ですが，手元のOSXではJITをoffにしても除算と積算で有意な差は出ませんでした．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/03/optimizer-in-c/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -163,49 +218,6 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/24/android-emacs/">Android Emacs で日本語を入力する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
-
-<p>Android Emacs で，日本語の入出力をする tips．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/12/24/android-emacs/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -234,12 +246,15 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
   
     <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
   
-
 </section>
 
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/12/26/oss-community-and-others/">OSSはタダ乗りでもいいけどマズい</a>
@@ -263,10 +278,6 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
     
       <li class="post">
         <a href="/blog/2013/11/04/group-in-repo/">repo sync でストレージを節約するための group 機能の使い方</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/01/what-is-next/">狂ったように作るもの</a>
       </li>
     
   </ul>
@@ -308,7 +319,7 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Masaki "monaka" Muranaka -
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
