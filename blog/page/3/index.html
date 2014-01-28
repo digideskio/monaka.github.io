@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="背景 最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています． しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです &hellip;">
+  <meta name="description" content="もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました． &ldquo;トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細&rdquo; 2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/16/safety-stands-on/">安全の礎たるもの</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-16T16:26:00+09:00" pubdate data-updated="true">Nov 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました．</p>
+
+<ul>
+<li>&ldquo;<a href="http://eetimes.jp/ee/articles/1311/11/news072.html]">トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細</a>&rdquo;</li>
+</ul>
+
+
+<blockquote><p>2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」が急加速したことによる死亡事故が発生した。事故をめぐる訴訟において、原告側証人として事故原因の調査を行った組み込みソフトウェアの専門家は、裁判で「カムリのエンジン制御モジュール（ECM）のファームウェアに重大な欠陥が見つかった」と報告した。</p></blockquote>
+
+<p>だそうです．
+通常，組込み業界系メディアが一般の…プログラマ界隈でさえ…取り上げられることは滅多にないのですが，Twitter の TL を軸にして眺めていたところ，割と広く拡散したように見えます．
+トヨタという知名度，クルマという日常生活に深く関わるものに関すること，加えて，コード品質からの切り口は，組込み業界以外のプログラマでも話題にしやすかったということがあったのだろうと思います．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/16/safety-stands-on/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -181,68 +233,6 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/19/restricted-words/">Restricted Words</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-19T13:57:00+09:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
-
-<h1>お題</h1>
-
-<p>引用する．</p>
-
-<blockquote><p>標準出力に
-Hello World
-と出力するプログラムを作成して下さい。</p>
-
-<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
-Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
-言語仕様をフル活用して下さい！</p></blockquote>
-
-<h1>解法の定石</h1>
-
-<p>定石は，数値を得て，その文字コードに変換する．
-ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
-
-<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
-出題者の意図は，この定石通りだった．
-回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/19/restricted-words/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -278,6 +268,10 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/28/best-way-to-employ-on-startup-stage/">スタートアップで優秀な技術者を探す方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
       </li>
     
@@ -299,10 +293,6 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
     
       <li class="post">
         <a href="/blog/2013/11/16/safety-stands-on/">安全の礎たるもの</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/04/group-in-repo/">repo sync でストレージを節約するための group 機能の使い方</a>
       </li>
     
   </ul>

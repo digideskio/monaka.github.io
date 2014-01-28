@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Android Emacs で日本語を入力する - もなもなもなかのページ</title>
+  <title>スタートアップで優秀な技術者を探す方法 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Android Emacs で，日本語の入出力をする tips． 背景 本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっているこのアプリケーション(Zeim版)を使う方法である． しかし，単に導入しただけでは， &hellip;">
+  <meta name="description" content="雇用はいちばん難しい かつてお世話になった方が，起業計画中とのことで，相談を受けた．
+私は，起業家としては失格の部類なのだけれども，スタートアップの空気感は解る，みたいなレベルではあるので，返事を書いた． 送信後，読みなおしたら割と一般論っぽかったので，ちょちょいと書きなおして当日記にも載せておく &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2012/12/24/android-emacs/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Android Emacs で日本語を入力する</h1>
+      <h1 class="entry-title">スタートアップで優秀な技術者を探す方法</h1>
     
     
       <p class="meta">
@@ -97,82 +98,80 @@
   
 
 
-<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+<time datetime="2014-01-28T14:35:11+09:00" pubdate data-updated="true">Jan 28<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
+<div class="entry-content"><h1>雇用はいちばん難しい</h1>
 
-<p>Android Emacs で，日本語の入出力をする tips．</p>
+<p>かつてお世話になった方が，起業計画中とのことで，相談を受けた．
+私は，起業家としては失格の部類なのだけれども，スタートアップの空気感は解る，みたいなレベルではあるので，返事を書いた．</p>
+
+<p>送信後，読みなおしたら割と一般論っぽかったので，ちょちょいと書きなおして当日記にも載せておく．
+ついでにセルフツッコミも入れておく．</p>
+
+<p>のっけから自分の話の腰を折るが，スタートアップでは&#8221;一般論&#8221;は&#8221;役に立つ&#8221;を意味しない．
+毒にも薬にもならない，ってことだ．</p>
 
 <!-- more -->
 
 
-<h1>背景</h1>
+<blockquote><p>優秀な技術者の雇用ですか…これは一番難しい問題ですね．
+たぶん私自身もあと20年くらい悩み，挙句に答え出ないかも…．</p>
 
-<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
+<p>私自身の近況に限って言えば，もう新規の雇用は止めました．法定福利や源泉税務にかかる手間を考えると，どんなに優秀な技術者であっても割に合いません．
+(日本の雇用行政は，本当に不合理非効率だと思います)
+省いた手間は，費用に応じフリー技術者への委託をする際の，報酬の上積みに当てています．</p>
 
-<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
-入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
+<p>…というのは，人的規模の拡大は諦めてしまった悪めのケースです．</p>
 
-<h1>注意</h1>
+<p>一般論として，スタートアップの雇用は，紹介が最善かなと思います．
+優秀な方は優秀な方を知っていますから，優秀な方に心当たりを尋ねるのが確実です．</p></blockquote>
 
-<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
+<p>私は優秀ではないけれども，業界内ではそれなりに目立ってはいたので，人材を探しているという旨の紹介はときどき受ける．
+そんなときは，私よりも優秀な方に，お心当たりが無いかどうかを尋ねるといったようなことはする．</p>
 
-<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
-よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
+<p>私の職業は人材紹介業ではないので，報酬は頂かない．
+そのかわり，信用できる相談者でなければ，行動を起こさない．</p>
 
-<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
+<p>こういった信頼の鎖に入れるかどうかは，雇用を考えるスタートアップにとって，第一の壁だろうと思う．
+壁の高さは，その集団の能力の高さに比例する．たぶん．</p>
 
-<ul>
-<li><a href="https://github.com/monaka/emacs-android">https://github.com/monaka/emacs-android</a></li>
-<li><a href="https://github.com/monaka/emacs-android-app">https://github.com/monaka/emacs-android-app</a></li>
-</ul>
+<p>スタートアップを考えてからでは遅い．信頼は作るのに時間がかかるから．
+壊れるのは一瞬なのに．</p>
 
+<blockquote><p>他に多いのは，いわゆる&#8221;IT系勉強会&#8221;のようなところで，活きがいいのを一本釣りしてくるという方法です．
+同業で固まって酒のんで，チャラい感じはありますが…．
+発表で技術力は測れますし，人柄についての照会も容易ですので．
+これも身の回りのスタートアップではよくやっている手です．
+ナナロク世代の若手におだてられて，たまに手伝っています．</p></blockquote>
 
-<h1>手段</h1>
+<p>イベント．ミートアップみたいなやつ．
+地べたを這いつくばっている組込み系から見ると，正直Webチャラいよとか思わなくもないけれど．
+ハズレを引かないよう事前にお互いを知っておくというのは，至極当然だし．</p>
 
-<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
-メニューから[設定] &ndash; [Default to UTF-8] のチェックボックスをonにする．</p>
+<p>むしろ組込み系の雇用流動性の低さを，どげんかせんといかんかもね．
+こういうイベントが少ない，要らないってことについて．</p>
 
-<p>続いて，Emacs 側の設定．
-~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
+<blockquote><p>反対に，成功例を見たことがないのが，人材紹介会社や求人サイトを経由した採用です．
+人海戦術的なビジネスモデルを立てているところは別ですが，どんなに優秀なヘッドハンタを使っても，ダメなようです．</p></blockquote>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-keyboard-coding-system 'utf-8)
-</span><span class='line'>(set-terminal-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
+<p>これは，私周辺の狭い範囲の観測なので，ハズレていたら謝る．
+ただ，本当に成功例の記憶がないんだよねぇ…．
+たぶん，下記の理由なのだろうと推測している．</p>
 
+<blockquote><p>不思議なものですが，採用に際し，関わった知人が多いと，
+どんなにドライな人柄であったとしても，そうそう独善な行動は
+しないものである，ということなのかもしれません．</p></blockquote>
 
-<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
-これで，入力はできる．</p>
+<p>スタートアップって，どんなにお互いが誠意を尽くしてもなお，不条理に出くわしたり，金銭的に，工数的にしんどかったり，いろいろあるから．</p>
 
-<p>加えて</p>
+<blockquote><p>採用は，本当に，難しいです．</p></blockquote>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-language-environment 'utf-8)
-</span><span class='line'>(set-default-coding-system 'utf-8)
-</span><span class='line'>(prefer-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>辺りも設定したほうがよいかも．
-set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
-
-<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
-
-<h1>(ワタクシ的には)要検討課題</h1>
-
-<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
-だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
-
-<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
-
-<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
+<p>(しみじみと)</p>
 </div>
 
 
@@ -195,16 +194,16 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
 
 
-<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+<time datetime="2014-01-28T14:35:11+09:00" pubdate data-updated="true">Jan 28<span>th</span>, 2014</time>
       
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2012/12/24/android-emacs/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2012/12/24/android-emacs/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2012/12/24/android-emacs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -217,10 +216,8 @@ set-default-coding-system だけで済むような気がするのだけれど，
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/30/did-it/" title="Previous Post: やっちまった">&laquo; やっちまった</a>
+        <a class="basic-alignment left" href="/blog/2014/01/14/gmail-imap-sync-with-ruby/" title="Previous Post: Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法">&laquo; Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/02/26/reboot/" title="Next Post: Nexus Oneがブート時再起動を繰り返す…．">Nexus Oneがブート時再起動を繰り返す…． &raquo;</a>
       
     </p>
   </footer>
