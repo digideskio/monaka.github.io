@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-01-28T16:08:35+09:00</updated>
+  <updated>2014-01-29T12:14:50+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -273,6 +273,54 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
 </span><span class='line'>src_imap.disconnect()
 </span><span class='line'>dst_imap.disconnect()</span></code></pre></td></tr></table></div></figure>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[誰のための義務教育?]]></title>
+    <link href="http://www.monaka.org//blog/2014/01/06/the-education-of-everyday-things/"/>
+    <updated>2014-01-06T11:15:22+09:00</updated>
+    <id>http://www.monaka.org//blog/2014/01/06/the-education-of-everyday-things</id>
+    <content type="html"><![CDATA[<p>中1になった長女が，学校の宿題で，百人一首の暗記で苦しめられている．</p>
+
+<p>3年前に，こんなツイートで，850 近い RT を得たのだし，流行りに乗って，なんかアプリ作ればとか思う．
+…のだが，当人としては，理系能力の低さを自覚し，プログラミング方面に依存しない方向を目指しているらしい．</p>
+
+<blockquote class="twitter-tweet"><p>長女と次女に「カルタやるから読み上げやってくれ」と頼まれ「面倒なのでヤダ」って返した．&#10;Macに向かったので諦めたかと思っていたら，Scratch で読み上げるアプリを作り終え，嬉々としてカルタを始めた．&#10;最近の小学生ェ… http://twitpic.com/4tlzj3</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/66055289463513088">May 5, 2011</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>一緒に遊んでくれなくて寂しいが，プログラミングなんて，無理強いまでしてやるものではないし，仕方がない．</p>
+
+<p>ちなみに，長女が，百人一首の丸暗記のために選んだ教材は，これ．</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=monamour555-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4522429355" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>語呂で覚えさせるのではなく，句の背景が解説されていて，教養を身につけるには良い本だと思う．(でも，そんな正攻法で，冬休み中に覚えきれるのか?)</p>
+
+<p>そんな長女を遠巻きに眺めていて，ふと面白いなと思ったのが，(長女の母である)妻や，(同，祖母である)義母の反応だった．</p>
+
+<!-- more -->
+
+
+<p>両者とも，理系というよりは文系で，歴女というほどではないが，世間並みくらいには歴史や古典は嫌いではない．
+普段は，家事や隣近所の付き合いで，あんまりそういうものに触れることはないだけで．</p>
+
+<p>そんな彼女たちが，長女の詠む上の句で，次々に下の句を思い出していく．
+和気あいあいと長女と記憶合戦をしているのを見ると，女子学生だった頃に還ってもいるのかもしれないなという気もしたり．</p>
+
+<p>義務教育っていうのは，主に，子供のために授けるものと思いがちなのだけれども，大人を教育するための手っ取り早い方法なのかもしれない．</p>
+
+<p>聞くところによると，新興国では，大人よりも，子供，特に女子への教育に重点をおくという．それは，子供のほうが長生きするし吸収するから，というのが第一義だろうけれど．
+子供が家に帰って，大人，特に母親を始めとする女系に教えるというような，教師育成の観点もあるのだろう．子が親に教える．次世代が育つのではなく，現世代に対しても効くだろう．</p>
+
+<p>余談だけれど，少子化の問題点って，大人に教える(思い出させる)教師たる，子供の減少，って側面もあるような気もする．
+学習の機会が少なくなると，大人はどんどん馬鹿になっていく．</p>
+
+<p>よくわからないけれど，たぶん．</p>
 ]]></content>
   </entry>
   
@@ -1849,83 +1897,6 @@ Lokkaも，大満足というわけでもないものの，悪くはない．
 <p>似た症例は，ググったら，<a href="http://forum.xda-developers.com/showthread.php?t=1304323">すぐに見つかった</a>．けれど答えなし．うむー．</p>
 
 <p>adb uninstall しようにも，PackageManager が立ち上がっていないときた．うむー．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Emacs で日本語を入力する]]></title>
-    <link href="http://www.monaka.org//blog/2012/12/24/android-emacs/"/>
-    <updated>2012-12-24T10:20:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2012/12/24/android-emacs</id>
-    <content type="html"><![CDATA[<p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
-
-<p>Android Emacs で，日本語の入出力をする tips．</p>
-
-<!-- more -->
-
-
-<h1>背景</h1>
-
-<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
-
-<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
-入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
-
-<h1>注意</h1>
-
-<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
-
-<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
-よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
-
-<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
-
-<ul>
-<li><a href="https://github.com/monaka/emacs-android">https://github.com/monaka/emacs-android</a></li>
-<li><a href="https://github.com/monaka/emacs-android-app">https://github.com/monaka/emacs-android-app</a></li>
-</ul>
-
-
-<h1>手段</h1>
-
-<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
-メニューから[設定] &ndash; [Default to UTF-8] のチェックボックスをonにする．</p>
-
-<p>続いて，Emacs 側の設定．
-~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-keyboard-coding-system 'utf-8)
-</span><span class='line'>(set-terminal-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
-これで，入力はできる．</p>
-
-<p>加えて</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-language-environment 'utf-8)
-</span><span class='line'>(set-default-coding-system 'utf-8)
-</span><span class='line'>(prefer-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>辺りも設定したほうがよいかも．
-set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
-
-<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
-
-<h1>(ワタクシ的には)要検討課題</h1>
-
-<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
-だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
-
-<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
-
-<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
 ]]></content>
   </entry>
   
