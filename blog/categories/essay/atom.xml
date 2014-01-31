@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: essay | もなもなもなかのページ]]></title>
+  <link href="http://www.monaka.org//blog/categories/essay/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2014-01-31T11:41:24+09:00</updated>
+  <id>http://www.monaka.org//</id>
+  <author>
+    <name><![CDATA[Masaki "monaka" Muranaka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[今日現在のmrubyについて雑想]]></title>
+    <link href="http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby/"/>
+    <updated>2014-01-31T10:28:44+09:00</updated>
+    <id>http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby</id>
+    <content type="html"><![CDATA[<p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
+なんでこのタイミングなのかに，あまり深い意味はない．
+一つのきっかけとして，イベントはある．
+mruby を話題の中心に据えたイベントが，<a href="http://www.digitalfukuoka.jp/events/30?locale=ja">今日の午後開催される</a>．
+私も聴講者として参加する予定だ．
+参加した後だと，その感想と混じる．
+なんとなく私見の純度が下がるかな，とか．</p>
+
+<p>私は，何を書いても，誰かや何かをdisっているように受け取られがちだ．
+けれども，本稿もdisりの意図は全くない．
+徒然なるままに．</p>
+
+<!-- more -->
+
+
+<h2>小規模組込みも視野に入れている割に，Lチカに向かない言語</h2>
+
+<p>この tweet が象徴的だと思う．</p>
+
+<p><a href="https://twitter.com/fenrir_n/status/428290481617780738">https://twitter.com/fenrir_n/status/428290481617780738</a>">https://twitter.com/fenrir_n/status/428290481617780738">https://twitter.com/fenrir_n/status/428290481617780738</a></a></p>
+
+<p>IIJさんが pack/unpack を提供する mrbgem を提供しているのではあるけれども．
+小規模組込みでは，ペリフェラルレジスタの操作で，ビット演算を多用する．
+しかし mruby は，言語仕様からして，数値に対して態度が煮え切っていない．と，思う．</p>
+
+<p>オブジェクト指向脳でいうと，pack/unpack じゃなくて，GPIOクラスとかSPIクラスとかを作るのが正道だろう，製品開発の実務では，それらを作りこまないでいては生産性も上がらないとも思う．</p>
+
+<p>しかし，ボードが届いて最初にやるのは，Lチカなのだ．</p>
+
+<p>プロジェクトのスタートアップで手間がかかるというのは，製品採用にあたっては致命的に痛い．</p>
+
+<h2>不安定が活況を生み，それゆえ採用が難しい言語</h2>
+
+<p>これも他人様の tweet から．</p>
+
+<p><a href="https://twitter.com/kimu_shu/status/427641049054322688">https://twitter.com/kimu_shu/status/427641049054322688</a>">https://twitter.com/kimu_shu/status/427641049054322688">https://twitter.com/kimu_shu/status/427641049054322688</a></a></p>
+
+<p><a href="https://twitter.com/take_cheeze/status/428792261032177664">https://twitter.com/take_cheeze/status/428792261032177664</a>">https://twitter.com/take_cheeze/status/428792261032177664">https://twitter.com/take_cheeze/status/428792261032177664</a></a></p>
+
+<p>本家 mruby は走り続ける．
+おそらく永遠に不安定だ．
+それは，mruby の設計や実装がダメだからでは(もちろん)無い．
+原作者である Matz 氏の根本的な考え方が反映されているものだろう．
+本人が，こう tweet している．</p>
+
+<p><a href="https://twitter.com/yukihiro_matz/status/416389827181826048">https://twitter.com/yukihiro_matz/status/416389827181826048</a>">https://twitter.com/yukihiro_matz/status/416389827181826048">https://twitter.com/yukihiro_matz/status/416389827181826048</a></a></p>
+
+<blockquote><p>タダ乗りしただけでは置いて行かれてしまう進化の速さ</p></blockquote>
+
+<p>こういった性質は，ハッカーと呼ばれる人たちのマインドに火をつけやすい．
+実際，あっというまに mrbgem が量産された．
+今では Ruby の代替として考えてもよいのでは，と思える程の充実ぶりだ．</p>
+
+<p>この性質は，機器組込み屋にとっては，酷く辛く痛い．
+他の保守部品と同様に，機器組込み向けソフトウェアも，バージョン固定するのが基本線だから．</p>
+
+<h2>とはいえ，安定版にあまり意味は無い</h2>
+
+<p>mruby が抱えるサグラダ・ファミリア的性質と，機器組込み業界との親和性の無さは，私もどこかに登壇するたびに言ってきた．</p>
+
+<p>その言動と関係があるのかどうかは知らないが，mrubyを担いでいる方々も，安定版を出す方向で動いているらしい．
+私は軽量Rubyフォーラムに参加していないので，詳しいことは知らない．</p>
+
+<p>安定版の登場は，確かに，ビジネス的には意味がある．
+開発者をかき集めるときに，スキルセットを設定しやすくなる．
+応用製品を作る際に，準拠バージョンを設定しやすくなる．</p>
+
+<p>こういったメリットは，非技術系経営層への対策としては，一定の意味がある．とても大事なことだ．しかし，技術者たちは，あまり歓迎しないかもしれない．</p>
+
+<p>安定していることを再優先にしつつも， <strong>最新版に最も近いもの</strong> を，機器組込み系エンジニアは，使いたがる傾向がある．
+バージョン固定で永く付き合うことになるので，最初の時点で古いのは嫌なのだ．</p>
+
+<p>なので，機器組込み系エンジニアは，安定版を採用しないだろう．
+安定版が 3ヶ月おきに更新される，というような，想像しづらいリリース体制が構築されれば別だが．</p>
+
+<p>かつて「プロジェクトの数だけITRONは存在する」と言われたように，「プロジェクトの数だけ mruby が存在する」というような状況が展開されると予測する．
+コード規模で見ても，mruby は ITRON に各種ミドルウェアを付けた状態と概ね似ているので，同じような運用が為される可能性は高い．
+規格適合のための処理系テストスイートが，もてはやされることになるだろう．</p>
+
+<p>歴史に学ぶ，という観点では，TOPPERSプロジェクトの第一世代カーネル群が，おそらく参考になる．
+FI4カーネルは新規設計したほうが綺麗になるのは明らかだったのに，JSPカーネルへの拡張で済むように作った．
+そのようにした理由はいくつかあるが，JSPカーネルとFI4カーネルの中間的なカーネルを，実製品開発プロジェクト毎に作れるようにしたかったから．
+設計思想としては，mruby と mrbgems の関係に割と近い．
+そして，FI4カーネルは，目論見通りに使われた．</p>
+
+<p>だから何なのだ，という話ではないのだけれど．
+過去の分析と近未来予測は，使い方を考える上で重要だろうとは思う．</p>
+
+<p>あ，ぐだぐだ書いていたら，そろそろ会場へ向かう時間だ．
+そろそろ着替えるか．</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -113,8 +113,12 @@
         <lastmod>2014-01-28T16:05:40+09:00</lastmod>
     </url>
     <url>
+        <loc>http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby/</loc>
+        <lastmod>2014-01-31T11:40:07+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.monaka.org//blog/archives/</loc>
-        <lastmod>2014-01-29T12:13:22+09:00</lastmod>
+        <lastmod>2014-01-31T11:40:07+09:00</lastmod>
     </url>
     <url>
         <loc>http://www.monaka.org//human-automaton/demo-douga/</loc>
@@ -126,7 +130,7 @@
     </url>
     <url>
         <loc>http://www.monaka.org//</loc>
-        <lastmod>2014-01-29T12:13:22+09:00</lastmod>
+        <lastmod>2014-01-31T11:40:07+09:00</lastmod>
     </url>
     <url>
         <loc>http://www.monaka.org//robots.txt</loc>

@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-01-29T12:14:50+09:00</updated>
+  <updated>2014-01-31T11:41:24+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[今日現在のmrubyについて雑想]]></title>
+    <link href="http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby/"/>
+    <updated>2014-01-31T10:28:44+09:00</updated>
+    <id>http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby</id>
+    <content type="html"><![CDATA[<p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
+なんでこのタイミングなのかに，あまり深い意味はない．
+一つのきっかけとして，イベントはある．
+mruby を話題の中心に据えたイベントが，<a href="http://www.digitalfukuoka.jp/events/30?locale=ja">今日の午後開催される</a>．
+私も聴講者として参加する予定だ．
+参加した後だと，その感想と混じる．
+なんとなく私見の純度が下がるかな，とか．</p>
+
+<p>私は，何を書いても，誰かや何かをdisっているように受け取られがちだ．
+けれども，本稿もdisりの意図は全くない．
+徒然なるままに．</p>
+
+<!-- more -->
+
+
+<h2>小規模組込みも視野に入れている割に，Lチカに向かない言語</h2>
+
+<p>この tweet が象徴的だと思う．</p>
+
+<blockquote class="twitter-tweet"><p>TinyFeather+mrubyでLチカしてみたんだけど、意外と難しいかったw String &lt;=&gt; byte Arrayの変換がpack/unpackないのに苦労したっていうのが本題</p>&mdash; ふぇえ (@fenrir_n) <a href="https://twitter.com/fenrir_n/statuses/428290481617780738">January 28, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>IIJさんが pack/unpack を提供する mrbgem を提供しているのではあるけれども．
+小規模組込みでは，ペリフェラルレジスタの操作で，ビット演算を多用する．
+しかし mruby は，言語仕様からして，数値に対して態度が煮え切っていない．と，思う．</p>
+
+<p>オブジェクト指向脳でいうと，pack/unpack じゃなくて，GPIOクラスとかSPIクラスとかを作るのが正道だろう，製品開発の実務では，それらを作りこまないでいては生産性も上がらないとも思う．</p>
+
+<p>しかし，ボードが届いて最初にやるのは，Lチカなのだ．</p>
+
+<p>プロジェクトのスタートアップで手間がかかるというのは，製品採用にあたっては致命的に痛い．</p>
+
+<h2>不安定が活況を生み，それゆえ採用が難しい言語</h2>
+
+<p>これも他人様の tweet から．</p>
+
+<blockquote class="twitter-tweet"><p>mruby-gtk2が未だに動かない。。。多数のモジュール連結するタイプのプロジェクトは、私はコレで動かした！という動作確認済みのハッシュ一覧が欲しいな。どれかのモジュールで仕様変更があると総崩れ。</p>&mdash; きむしゅ (@kimu_shu) <a href="https://twitter.com/kimu_shu/statuses/427641049054322688">January 27, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+<blockquote class="twitter-tweet"><p>mrubyは本家のアップデートによるmrbgemの突然の死があるので、とりあえず、自分のmrubyリポジトリを持って、動く状態に整合性をとらないとつらい。</p>&mdash; take-cheeze (@take_cheeze) <a href="https://twitter.com/take_cheeze/statuses/428792261032177664">January 30, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>本家 mruby は走り続ける．
+おそらく永遠に不安定だ．
+それは，mruby の設計や実装がダメだからでは(もちろん)無い．
+原作者である Matz 氏の根本的な考え方が反映されているものだろう．
+本人が，こう tweet している．</p>
+
+<blockquote class="twitter-tweet"><p>タダ乗りから自由であるための条件として、そのプロジェクトを無視できない重要性、タダ乗りしただけでは置いて行かれてしまう進化の速さ、金や地位で言うことを聞かせられない没交渉性などはあまり知られていないかもしれない。特に最後。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/statuses/416389827181826048">December 27, 2013</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>タダ乗りしただけでは置いて行かれてしまう進化の速さ</p></blockquote>
+
+<p>こういった性質は，ハッカーと呼ばれる人たちのマインドに火をつけやすい．
+実際，あっというまに mrbgem が量産された．
+今では Ruby の代替として考えてもよいのでは，と思える程の充実ぶりだ．</p>
+
+<p>この性質は，機器組込み屋にとっては，酷く辛く痛い．
+他の保守部品と同様に，機器組込み向けソフトウェアも，バージョン固定するのが基本線だから．</p>
+
+<h2>とはいえ，安定版にあまり意味は無い</h2>
+
+<p>mruby が抱えるサグラダ・ファミリア的性質と，機器組込み業界との親和性の無さは，私もどこかに登壇するたびに言ってきた．</p>
+
+<p>その言動と関係があるのかどうかは知らないが，mrubyを担いでいる方々も，安定版を出す方向で動いているらしい．
+私は軽量Rubyフォーラムに参加していないので，詳しいことは知らない．</p>
+
+<p>安定版の登場は，確かに，ビジネス的には意味がある．
+開発者をかき集めるときに，スキルセットを設定しやすくなる．
+応用製品を作る際に，準拠バージョンを設定しやすくなる．</p>
+
+<p>こういったメリットは，非技術系経営層への対策としては，一定の意味がある．とても大事なことだ．しかし，技術者たちは，あまり歓迎しないかもしれない．</p>
+
+<p>安定していることを再優先にしつつも， <strong>最新版に最も近いもの</strong> を，機器組込み系エンジニアは，使いたがる傾向がある．
+バージョン固定で永く付き合うことになるので，最初の時点で古いのは嫌なのだ．</p>
+
+<p>なので，機器組込み系エンジニアは，安定版を採用しないだろう．
+安定版が 3ヶ月おきに更新される，というような，想像しづらいリリース体制が構築されれば別だが．</p>
+
+<p>かつて「プロジェクトの数だけITRONは存在する」と言われたように，「プロジェクトの数だけ mruby が存在する」というような状況が展開されると予測する．
+コード規模で見ても，mruby は ITRON に各種ミドルウェアを付けた状態と概ね似ているので，同じような運用が為される可能性は高い．
+規格適合のための処理系テストスイートが，もてはやされることになるだろう．</p>
+
+<p>歴史に学ぶ，という観点では，TOPPERSプロジェクトの第一世代カーネル群が，おそらく参考になる．
+FI4カーネルは新規設計したほうが綺麗になるのは明らかだったのに，JSPカーネルへの拡張で済むように作った．
+そのようにした理由はいくつかあるが，JSPカーネルとFI4カーネルの中間的なカーネルを，実製品開発プロジェクト毎に作れるようにしたかったから．
+設計思想としては，mruby と mrbgems の関係に割と近い．
+そして，FI4カーネルは，目論見通りに使われた．</p>
+
+<p>だから何なのだ，という話ではないのだけれど．
+過去の分析と近未来予測は，使い方を考える上で重要だろうとは思う．</p>
+
+<p>あ，ぐだぐだ書いていたら，そろそろ会場へ向かう時間だ．
+そろそろ着替えるか．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[スタートアップで優秀な技術者を探す方法]]></title>
@@ -1775,128 +1891,6 @@ JIT含めて．</p>
 Octopress に乗り換え．
 Lokkaも，大満足というわけでもないものの，悪くはない．
 ので，会社の代表ページなどでは引き続き使う予定．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nexus Oneがブート時再起動を繰り返す…．]]></title>
-    <link href="http://www.monaka.org//blog/2013/02/26/reboot/"/>
-    <updated>2013-02-26T11:29:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/02/26/reboot</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>E/dalvikvm-heap(  391): Out of memory on a 64-byte allocation.
-</span><span class='line'>I/dalvikvm(  391): "ActivityManager" prio=5 tid=9 RUNNABLE
-</span><span class='line'>I/dalvikvm(  391):   | group="main" sCount=0 dsCount=0 obj=0x405186a8 self=0x2d5f50
-</span><span class='line'>I/dalvikvm(  391):   | sysTid=410 nice=-2 sched=0/0 cgrp=default handle=2979456
-</span><span class='line'>I/dalvikvm(  391):   | schedstat=( 5564208967 1987365742 7625 )
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.nativeFillInStackTrace(Native Method)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.fillInStackTrace(Throwable.java:135)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Throwable.&lt;init&gt;(Throwable.java:74)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.Error.&lt;init&gt;(Error.java:38)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.VirtualMachineError.&lt;init&gt;(VirtualMachineError.java:36)
-</span><span class='line'>I/dalvikvm(  391):   at java.lang.OutOfMemoryError.&lt;init&gt;(OutOfMemoryError.java:34)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readHistory(BatteryStatsImpl.java:-1)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readSummaryFromParcel(BatteryStatsImpl.java:4746)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.internal.os.BatteryStatsImpl.readLocked(BatteryStatsImpl.java:4693)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:1413)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService.&lt;init&gt;(ActivityManagerService.java:142)
-</span><span class='line'>I/dalvikvm(  391):   at com.android.server.am.ActivityManagerService$AThread.run(ActivityManagerService.java:1320)
-</span><span class='line'>I/dalvikvm(  391): 
-</span><span class='line'>W/dalvikvm(  391): Exception thrown (Ljava/lang/OutOfMemoryError;) while throwing internal exception (Ljava/lang/OutOfMemoryError;)
-</span><span class='line'>W/dalvikvm(  391): threadid=9: thread exiting with uncaught exception (group=0x40015560)
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.030MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 0K, 8% free 28720K/31175K, external 1625K/2137K, paused 1ms+4ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 8K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
-</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 8-byte allocation
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 34.022MB to 32.000MB
-</span><span class='line'>D/dalvikvm(  391): GC_FOR_MALLOC freed 0K, 8% free 28711K/31175K, external 1625K/2137K, paused 197ms
-</span><span class='line'>I/dalvikvm-heap(  391): Clamp target GC heap from 32.022MB to 32.000MB
-</span><span class='line'>I/dalvikvm-heap(  391): Grow heap (frag case) to 32.000MB for 20-byte allocation
-</span><span class='line'>D/dalvikvm(  391): GC_CONCURRENT freed 25997K, 92% free 2714K/31175K, external 1625K/2137K, paused 2ms+5ms
-</span><span class='line'>I/Process (  391): Sending signal. PID: 391 SIG: 9
-</span><span class='line'>E/AndroidRuntime(  391): *** FATAL EXCEPTION IN SYSTEM PROCESS: ActivityManager
-</span><span class='line'>E/AndroidRuntime(  391): java.lang.OutOfMemoryError: [memory exhausted]
-</span><span class='line'>E/AndroidRuntime(  391):  at dalvik.system.NativeStart.main(Native Method)
-</span><span class='line'>E/AndroidRuntime(  391): Error reporting crash
-</span><span class='line'>E/AndroidRuntime(  391): java.lang.NullPointerException
-</span><span class='line'>E/AndroidRuntime(  391):  at com.android.internal.os.RuntimeInit$UncaughtHandler.uncaughtException(RuntimeInit.java:76)
-</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:854)
-</span><span class='line'>E/AndroidRuntime(  391):  at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:851)
-</span><span class='line'>D/BootAnimation(  404): SurfaceFlinger died, exiting...
-</span><span class='line'>I/ServiceManager(   61): service 'SurfaceFlinger' died
-</span><span class='line'>I/ServiceManager(   61): service 'sensorservice' died
-</span><span class='line'>I/ServiceManager(   61): service 'entropy' died
-</span><span class='line'>I/ServiceManager(   61): service 'power' died
-</span><span class='line'>I/Zygote  (  384): Exit zygote because system server (391) has terminated
-</span><span class='line'>I/ServiceManager(   61): service 'media.audio_flinger' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.player' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.camera' died
-</span><span class='line'>I/ServiceManager(   61): service 'media.audio_policy' died
-</span><span class='line'>I/Netd    (  412): Netd 1.0 starting
-</span><span class='line'>D/AndroidRuntime(  413): 
-</span><span class='line'>D/AndroidRuntime(  413): &gt;&gt;&gt;&gt;&gt;&gt; AndroidRuntime START com.android.internal.os.ZygoteInit &lt;&lt;&lt;&lt;&lt;&lt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>似た症例は，ググったら，<a href="http://forum.xda-developers.com/showthread.php?t=1304323">すぐに見つかった</a>．けれど答えなし．うむー．</p>
-
-<p>adb uninstall しようにも，PackageManager が立ち上がっていないときた．うむー．</p>
 ]]></content>
   </entry>
   
