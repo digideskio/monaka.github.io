@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-01T09:45:15+09:00</updated>
+  <updated>2014-02-01T09:48:34+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -35,8 +35,12 @@
 そこらそんじょのOSSなんざ蹴散らすくらいの採用例，出荷総数はあるだろう．</p>
 
 <p>今は辞めた．
-理事も辞めたし，今や会員ですらない．
-当時やっていた会社が傾いたとか，いろいろ直接的な理由はあるのだが．
+理事も辞めたし，今や会員ですらない．</p>
+
+<!-- more -->
+
+
+<p>当時やっていた会社が傾いたとか，いろいろ直接的な理由はあるのだが．
 大きな背景として， <strong>OSSプロジェクトとしてのアンチパターンを作っているのではないか</strong> ，という疑問が年を追う毎に，私の中で大きくなっていったのが，ある．</p>
 
 <p>TOPPERSプロジェクトには，会員以外には見せないよ，という仕組みがある．
