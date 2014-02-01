@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Android Emacs で日本語を入力する - もなもなもなかのページ</title>
+  <title>参加しないと見せないよ．を作った罪 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Android Emacs で，日本語の入出力をする tips． 背景 本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっているこのアプリケーション(Zeim版)を使う方法である． しかし，単に導入しただけでは， &hellip;">
+  <meta name="description" content="140字以内で纏めると，こういうこと． 「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w http://t.co/bVOtyNMrs9&mdash; もなか &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2012/12/24/android-emacs/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2014/02/01/my-fault/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Android Emacs で日本語を入力する</h1>
+      <h1 class="entry-title">参加しないと見せないよ．を作った罪</h1>
     
     
       <p class="meta">
@@ -97,82 +97,71 @@
   
 
 
-<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+<time datetime="2014-02-01T08:28:21+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="http://dl.dropbox.com/u/33717384/device-2012-12-24-101918.png" alt="日本語入力中" /></p>
+<div class="entry-content"><p>140字以内で纏めると，こういうこと．</p>
 
-<p>Android Emacs で，日本語の入出力をする tips．</p>
-
-<!-- more -->
+<blockquote class="twitter-tweet"><p>「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/429207095041224704">January 31, 2014</a></blockquote>
 
 
-<h1>背景</h1>
-
-<p>本エントリ執筆時点では，非rootの Android で Emacs を動作させる最も簡単な方法は，Google Play に上がっている<a href="https://play.google.com/store/apps/details?id=com.zielm.emacs">このアプリケーション(Zeim版)</a>を使う方法である．</p>
-
-<p>しかし，単に導入しただけでは，日本語の入力ができず，表示で文字化けする．
-入力は，頑張って SKK を入れればなんとかなるような気もするが，表示は困る．</p>
-
-<h1>注意</h1>
-
-<p>私は独自環境の構築中で，もしかすると Zeim版では何らかの理由で上手くいかないかもしれない．(でもたぶん大丈夫だと思う)</p>
-
-<p>また，Zeim版は，<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm">Android Terminal</a>の改変バージョンを端末エミュレータとして使っている．
-よってAndroid Terminal を使ってリモートログインし，Emacs を使うという場面でも，本エントリは役に立つのかもしれない．</p>
-
-<p>ちなみに，私の環境のソースコードは，GitHubに置いてある．</p>
-
-<ul>
-<li><a href="https://github.com/monaka/emacs-android">https://github.com/monaka/emacs-android</a></li>
-<li><a href="https://github.com/monaka/emacs-android-app">https://github.com/monaka/emacs-android-app</a></li>
-</ul>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-<h1>手段</h1>
+<p>私は，TOPPERSプロジェクトという，組込み系OSSを担いだNPOに参加していた．
+設立準備から手伝って，一応10年くらい理事もしていた．</p>
 
-<p>まず，端末側で UTF-8 を扱えるようにする必要がある．
-メニューから[設定] &ndash; [Default to UTF-8] のチェックボックスをonにする．</p>
+<p>NPO法人TOPPERSプロジェクトは，組込みソフトの団体として，成功したと思う．
+電子ピアノにも，宇宙機にも，自動車にも載った．
+私が書いたソースコードも，割と入っている．
+そこらそんじょのOSSなんざ蹴散らすくらいの採用例，出荷総数はあるだろう．</p>
 
-<p>続いて，Emacs 側の設定．
-~/.emacs.d/init.el を開き(無ければ作り)，最低限下記の通り設定する．</p>
+<p>今は辞めた．
+理事も辞めたし，今や会員ですらない．
+当時やっていた会社が傾いたとか，いろいろ直接的な理由はあるのだが．
+大きな背景として， <strong>OSSプロジェクトとしてのアンチパターンを作っているのではないか</strong> ，という疑問が年を追う毎に，私の中で大きくなっていったのが，ある．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-keyboard-coding-system 'utf-8)
-</span><span class='line'>(set-terminal-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
+<p>TOPPERSプロジェクトには，会員以外には見せないよ，という仕組みがある．
+具体的には，いわゆる，早期リリースという制度．
+当初から，会員企業が受託製品に使った場合の，ソースコードの扱いとか，厳密運用が難しいことは解っていた．
+私が辞める頃には，会員が，先に開かれたOSS (って表現は変だが) として公開し，そのあとプロジェクトにコントリビュートするなんてこともあったりして，制度として崩壊していた気もする．</p>
 
+<p>&ldquo;オープン&#8221;ソースを管理するプロジェクトがソースコードを隠す，というのは，少し考えればわかる．矛盾した話だ．</p>
 
-<p>set-terminal-coding-system の設定で表示を，set-keyboard-coding-system で入力をそれぞれ設定している．
-これで，入力はできる．</p>
+<p>そして，各方面が指摘しているとおり，オープンソースは，ソースコードもさることながら，生産や管理のプロセスの透明化にメリットがある．
+生産や管理のプロセスを，参加者にしか見せないというのは，ソースコードを隠すのと同様に，スジとしては最悪手の部類だろう．
+そこで，本稿最初に引用した tweet へ繋がる．</p>
 
-<p>加えて</p>
+<p>組織として成立させるためには，なんらかのメリットを出す必要はある．
+その辺りの仕込みは大変なところだと思うのだがしかし．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(set-language-environment 'utf-8)
-</span><span class='line'>(set-default-coding-system 'utf-8)
-</span><span class='line'>(prefer-coding-system 'utf-8)</span></code></pre></td></tr></table></div></figure>
+<p>言い訳になるが，TOPPERSプロジェクトが立ち上がった2000年当時，オープンソースは暗中模索だった．
+私は他人様よりも愚かなので，間違いも多い．
+でも，もうあれから月日は流れた．
+私は愚かなままかもしれないが，他人様はそろそろ良手を編み出しても良い頃だろう．</p>
 
+<p>良手を編み出す上で，悩ましいのが，TOPPERSプロジェクトの確かな成功ではないかという気がしている．
+厳密に言うと，NPO組織としては，安定収入で成功しているという事実だ．
+…というと不幸を望んでいるように読めそうだが，言うまでもなく，そうではない．
+今は袂を分かつ立場だが，成功するように私も頑張った．
+成功し続けていただかないと，日本の組込みソフト業界全体が困る．</p>
 
-<p>辺りも設定したほうがよいかも．
-set-default-coding-system だけで済むような気がするのだけれど，set-keyboard-coding-system と set-terminal-coding-system は，別途明示的に設定しないとダメっぽい．</p>
+<p>しかし，言葉を慎重に選ぶべきかもしれないが，OSSプロジェクトとしてのTOPPERSは失敗だったとも思っている．
+もともと「OSSは目的ではなく手段だ」という立ち位置の団体ではあった．
+なので，OSSプロジェクトとして側面がどうなろうとも，TOPPERSプロジェクトには何らの傷がつくわけでもない．</p>
 
-<p>あとは，メニューから [ソフトキーボード] を選択して，ご愛用のIMEを表示し，お好きなように．</p>
+<p>私がマズいと思っているのは，TOPPERSプロジェクトの成功が，OSS系NPOのロールモデルになりそうな傾向だ．
+実際，TOPPERSプロジェクトの定款を参照しました，という声は，他の{組込系|OSS系}NPOから，ずいぶんと頂いた．</p>
 
-<h1>(ワタクシ的には)要検討課題</h1>
+<p>「第8回 日本OSS貢献者賞・日本OSS奨励賞」が示す通り，ニッポンのOSSは，この点についてあまり深く考えていないか，判っていて目をつぶっているか，どちらからしい．
+そして，そのロールモデルが確立するまでの10余年には，間違いなく私がいる．
+割と中心に近いところに．</p>
 
-<p>IMEによっては，Ctrl を吸ってしまい，Emacs (というか端末エミュレータ)に渡してくれないものがあるっぽい．少なくとも Google 日本語入力は，その疑いが濃厚．
-だから，だーーーっと日本語ベタ打ちするならあまり気にならないけれど，日本語を入力しつつ編集をしようと思うとストレスが溜まるかも．</p>
-
-<p>AndroidだとIMEが吸う前のキーストロークをフックするのは困難な気がする．ワタクシ的には要調査．</p>
-
-<p>SKK 使えばこの課題は解消されるだろうと思うけれど．もうちょっと汎用的な解は無いものか…．</p>
+<p>罪なことをしたなぁ，と，肩を落としている．ごめんなさい．</p>
 </div>
 
 
@@ -195,16 +184,22 @@ set-default-coding-system だけで済むような気がするのだけれど，
   
 
 
-<time datetime="2012-12-24T10:20:00+09:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time>
+<time datetime="2014-02-01T08:28:21+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2012/12/24/android-emacs/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2014/02/01/my-fault/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2012/12/24/android-emacs/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2012/12/24/android-emacs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2014/02/01/my-fault/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2014/02/01/my-fault/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -217,10 +212,8 @@ set-default-coding-system だけで済むような気がするのだけれど，
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/30/did-it/" title="Previous Post: やっちまった">&laquo; やっちまった</a>
+        <a class="basic-alignment left" href="/blog/2014/01/31/memorandom-about-mruby/" title="Previous Post: 今日現在のmrubyについて雑想">&laquo; 今日現在のmrubyについて雑想</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/02/26/reboot/" title="Next Post: Nexus Oneがブート時再起動を繰り返す…．">Nexus Oneがブート時再起動を繰り返す…． &raquo;</a>
       
     </p>
   </footer>
