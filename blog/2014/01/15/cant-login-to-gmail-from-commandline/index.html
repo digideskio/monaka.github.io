@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Launchpad PPA 登録の罠 - もなもなもなかのページ</title>
+  <title>パスワードもユーザ名も正しいはずなのに，の巻 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです． &hellip;">
+  <meta name="description" content="ことの起こり AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
+難しい話ではない． だけど繋がらない． あれれ? だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
+IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">Launchpad PPA 登録の罠</h1>
+      <h1 class="entry-title">パスワードもユーザ名も正しいはずなのに，の巻</h1>
     
     
       <p class="meta">
@@ -99,56 +99,109 @@
   
 
 
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
+<time datetime="2014-01-15T01:33:07+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
+<div class="entry-content"><h1>ことの起こり</h1>
 
-<blockquote class="twitter-tweet" lang="ja"><p>Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．…私もたぶんブログに残さない．(汗</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">2013年5月4日</a></blockquote>
+<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
+難しい話ではない．</p>
 
+<p>だけど繋がらない． あれれ?</p>
 
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
+IMAP は有効にしたし，2段階認証はやっていないし．</p>
 
-
-<p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
+<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
 
 <!-- more -->
 
 
-<h2>CoC で署名した鍵でchangesを署名したか，しつこく確認</h2>
+<p>仕方がないな．
+OTRS は (Ruby ではなく) Perl で大半が書かれている．
+それと似たような記述でログインをテストしてみる．
+こんな感じ．</p>
 
-<p>当たり前?
-そう，当たり前です．
-CoC で署名したものと違う鍵で署名した changes が通用するのなら，なんのためにCoCで署名したのか解りません．</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use strict;
+</span><span class='line'>use warnings;
+</span><span class='line'>use Net::IMAP::Simple;
+</span><span class='line'>
+</span><span class='line'>use IO::Socket::SSL;
+</span><span class='line'>
+</span><span class='line'># Create the object
+</span><span class='line'>my $imap = Net::IMAP::Simple-&gt;new('imap.gmail.com', use_ssl =&gt; 1, port =&gt; 993) ||
+</span><span class='line'>  die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
+</span><span class='line'>
+</span><span class='line'># Log on
+</span><span class='line'>if (!$imap-&gt;login('___________@gmail.com','_p_a_s_s_w_o_r_d_', debug =&gt; 1)) {
+</span><span class='line'>  print STDERR "Login failed: " . $imap-&gt;errstr . "\n";
+</span><span class='line'>  exit(64);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-<p>私は，個人の鍵でCoCに署名し，会社の鍵でchangesに署名していました．
-これは，私のミス．</p>
 
-<p>ここで，Launchpad の恐ろしいところに，私は直面しました．
-このような，鍵の不一致を伴うアップロードに対して，Launchpad は，ダンマリ無視を決め込むようなのです．
-個人の鍵にあるメールアドレスにも，会社の鍵にあるメールアドレスにも，メールを返しません．
-(少なくとも私の場合は，何度試しても，帰ってきませんでした)
-dput時にも，それらしいことを言って来ません．
-Webインタフェースにも反応はありません．</p>
+<p>実行…あれれ?</p>
 
-<p>Accepted になった場合でも，ビルドは数時間から，混み合っているときは2日かかるという情報もweb上にはあります．
-何かがおかしいということに気づくまで，2日待つ必要があります．
-慣れている人は，途中で勘が働くでしょう．
-しかし，右も左も判らない状態でのダンマリは，非常に辛いものです．</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ip-10-0-0-208:~$ perl test.pl
+</span><span class='line'>Login failed: [ALERT] Please log in via your web browser: http://support.google.com/mail/accounts/bin/answer.py?answer=78754 (Failure)</span></code></pre></td></tr></table></div></figure>
 
-<p>github + Travis にみんな流れるわけだよ…と，痛感しました．</p>
 
-<h2>視界が開けたあと</h2>
+<p>んんん?</p>
 
-<p>一度，Accept なり Reject なりのメールが返ってくるようになると，一気に視界が開けます．
-残念ながら，解説文書の多くが英文です．
-しかし，技術者ならかろうじて理解できる程度の記述量と表記です．</p>
+<p>ブラウザでアクセスせよ，とな．
+でも，この動作環境，Ubuntu Server で，デスクトップ環境入ってないよ．もちろんブラウザも．</p>
+
+<p>手元のブラウザで事態を把握してみようと試みたところ，どうやらイカガワシイと思われるアクセスを遮断しているようだ．
+<img src="/blog/2014/01/15/screen-shot-2014-01-15.png" alt="赤い画面でお怒りのGmail様" /></p>
+
+<h1>socksサーバを立ってて逃げ道を作る．</h1>
+
+<p>w3m など，文字ターミナル向けブラウザを使ってアクセスすれば良いのかもしれない．
+でも，たぶん，Googleのことだから，JavaScriptとか入っていていろいろ面倒なことになりそうだ．</p>
+
+<p>なので，ssh についている socks サーバ機能を用いる．
+手元の端末から，次のようにして，1080 版をsocksの口にする．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -D1080 server.example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>server.example.com は，実際には，EC2のインスタンス．
+ここで指定した1080番ポートはlocalhostのもの．だから，EC2側のincomingはsshのポート，TCP 22番だけ開いていればよい．</p>
+
+<p>そして，手元のブラウザのproxy設定．localhost:1080 で socks を経由するよう設定する．</p>
+
+<p>ここまでで下ごしらえは完了．
+手元のブラウザから，Gmail へアクセスする．
+あとは…なりゆきでアクセスすれば，お怒りが解けた…はず．
+(2月に入ってからこの稿を書き上げているので，記憶が既に曖昧…)</p>
+
+<h1>まとめっぽい何か</h1>
+
+<p>ssh の -D オプションは，ヘッドレスサーバを管理している時に割と便利なので，覚えておくと何かと役に立つ．</p>
+
+<p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
+面倒だ，と不満を漏らしてはいけないのだろう．</p>
 </div>
 
 
@@ -171,22 +224,16 @@ Webインタフェースにも反応はありません．</p>
   
 
 
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
+<time datetime="2014-01-15T01:33:07+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -199,10 +246,10 @@ Webインタフェースにも反応はありません．</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/04/dirty-optimize/" title="Previous Post: よくわからない最適化，つづき">&laquo; よくわからない最適化，つづき</a>
+        <a class="basic-alignment left" href="/blog/2014/01/14/gmail-imap-sync-with-ruby/" title="Previous Post: Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法">&laquo; Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/05/09/what-is-software-creator/" title="Next Post: ソフトウェア作家とは何か．">ソフトウェア作家とは何か． &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/01/28/best-way-to-employ-on-startup-stage/" title="Next Post: スタートアップで優秀な技術者を探す方法">スタートアップで優秀な技術者を探す方法 &raquo;</a>
       
     </p>
   </footer>

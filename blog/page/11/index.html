@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Launchpad PPA 登録の罠 - もなもなもなかのページ</title>
+  <title>もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです． &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/11/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,12 +77,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Launchpad PPA 登録の罠</h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
     
     
       <p class="meta">
@@ -99,117 +101,29 @@
   
 
 
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p>Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．…私もたぶんブログに残さない．(汗</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">2013年5月4日</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
-
-<!-- more -->
-
-
-<h2>CoC で署名した鍵でchangesを署名したか，しつこく確認</h2>
-
-<p>当たり前?
-そう，当たり前です．
-CoC で署名したものと違う鍵で署名した changes が通用するのなら，なんのためにCoCで署名したのか解りません．</p>
-
-<p>私は，個人の鍵でCoCに署名し，会社の鍵でchangesに署名していました．
-これは，私のミス．</p>
-
-<p>ここで，Launchpad の恐ろしいところに，私は直面しました．
-このような，鍵の不一致を伴うアップロードに対して，Launchpad は，ダンマリ無視を決め込むようなのです．
-個人の鍵にあるメールアドレスにも，会社の鍵にあるメールアドレスにも，メールを返しません．
-(少なくとも私の場合は，何度試しても，帰ってきませんでした)
-dput時にも，それらしいことを言って来ません．
-Webインタフェースにも反応はありません．</p>
-
-<p>Accepted になった場合でも，ビルドは数時間から，混み合っているときは2日かかるという情報もweb上にはあります．
-何かがおかしいということに気づくまで，2日待つ必要があります．
-慣れている人は，途中で勘が働くでしょう．
-しかし，右も左も判らない状態でのダンマリは，非常に辛いものです．</p>
-
-<p>github + Travis にみんな流れるわけだよ…と，痛感しました．</p>
-
-<h2>視界が開けたあと</h2>
-
-<p>一度，Accept なり Reject なりのメールが返ってくるようになると，一気に視界が開けます．
-残念ながら，解説文書の多くが英文です．
-しかし，技術者ならかろうじて理解できる程度の記述量と表記です．</p>
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/05/04/dirty-optimize/" title="Previous Post: よくわからない最適化，つづき">&laquo; よくわからない最適化，つづき</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/05/09/what-is-software-creator/" title="Next Post: ソフトウェア作家とは何か．">ソフトウェア作家とは何か． &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/blog/page/10/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     
@@ -268,7 +182,7 @@ Webインタフェースにも反応はありません．</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -297,7 +211,6 @@ Webインタフェースにも反応はありません．</p>
 
   
 </aside>
-
 
     </div>
   </div>

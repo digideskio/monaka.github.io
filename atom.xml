@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-01T09:50:07+09:00</updated>
+  <updated>2014-02-02T16:08:29+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -271,6 +271,110 @@ FI4カーネルは新規設計したほうが綺麗になるのは明らかだ�
 <blockquote><p>採用は，本当に，難しいです．</p></blockquote>
 
 <p>(しみじみと)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[パスワードもユーザ名も正しいはずなのに，の巻]]></title>
+    <link href="http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/"/>
+    <updated>2014-01-15T01:33:07+09:00</updated>
+    <id>http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline</id>
+    <content type="html"><![CDATA[<h1>ことの起こり</h1>
+
+<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
+難しい話ではない．</p>
+
+<p>だけど繋がらない． あれれ?</p>
+
+<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
+IMAP は有効にしたし，2段階認証はやっていないし．</p>
+
+<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
+
+<!-- more -->
+
+
+<p>仕方がないな．
+OTRS は (Ruby ではなく) Perl で大半が書かれている．
+それと似たような記述でログインをテストしてみる．
+こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use strict;
+</span><span class='line'>use warnings;
+</span><span class='line'>use Net::IMAP::Simple;
+</span><span class='line'>
+</span><span class='line'>use IO::Socket::SSL;
+</span><span class='line'>
+</span><span class='line'># Create the object
+</span><span class='line'>my $imap = Net::IMAP::Simple-&gt;new('imap.gmail.com', use_ssl =&gt; 1, port =&gt; 993) ||
+</span><span class='line'>  die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
+</span><span class='line'>
+</span><span class='line'># Log on
+</span><span class='line'>if (!$imap-&gt;login('___________@gmail.com','_p_a_s_s_w_o_r_d_', debug =&gt; 1)) {
+</span><span class='line'>  print STDERR "Login failed: " . $imap-&gt;errstr . "\n";
+</span><span class='line'>  exit(64);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実行…あれれ?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ip-10-0-0-208:~$ perl test.pl
+</span><span class='line'>Login failed: [ALERT] Please log in via your web browser: http://support.google.com/mail/accounts/bin/answer.py?answer=78754 (Failure)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>んんん?</p>
+
+<p>ブラウザでアクセスせよ，とな．
+でも，この動作環境，Ubuntu Server で，デスクトップ環境入ってないよ．もちろんブラウザも．</p>
+
+<p>手元のブラウザで事態を把握してみようと試みたところ，どうやらイカガワシイと思われるアクセスを遮断しているようだ．
+<img src="http://www.monaka.org//blog/2014/01/15/screen-shot-2014-01-15.png" alt="赤い画面でお怒りのGmail様" /></p>
+
+<h1>socksサーバを立ってて逃げ道を作る．</h1>
+
+<p>w3m など，文字ターミナル向けブラウザを使ってアクセスすれば良いのかもしれない．
+でも，たぶん，Googleのことだから，JavaScriptとか入っていていろいろ面倒なことになりそうだ．</p>
+
+<p>なので，ssh についている socks サーバ機能を用いる．
+手元の端末から，次のようにして，1080 版をsocksの口にする．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -D1080 server.example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>server.example.com は，実際には，EC2のインスタンス．
+ここで指定した1080番ポートはlocalhostのもの．だから，EC2側のincomingはsshのポート，TCP 22番だけ開いていればよい．</p>
+
+<p>そして，手元のブラウザのproxy設定．localhost:1080 で socks を経由するよう設定する．</p>
+
+<p>ここまでで下ごしらえは完了．
+手元のブラウザから，Gmail へアクセスする．
+あとは…なりゆきでアクセスすれば，お怒りが解けた…はず．
+(2月に入ってからこの稿を書き上げているので，記憶が既に曖昧…)</p>
+
+<h1>まとめっぽい何か</h1>
+
+<p>ssh の -D オプションは，ヘッドレスサーバを管理している時に割と便利なので，覚えておくと何かと役に立つ．</p>
+
+<p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
+面倒だ，と不満を漏らしてはいけないのだろう．</p>
 ]]></content>
   </entry>
   
@@ -1608,346 +1712,6 @@ Webインタフェースにも反応はありません．</p>
 
 <p>どこかの時点で手動最適化を行ったことがなければ，非常時にも用いることができない，というジレンマもあります．
 「おまえはドコで，その手動最適化の手法を覚えたのだ? 現場だろ?」と言われると，言葉に詰まったりはします．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[よくわからない最適化]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/03/optimizer-in-c/"/>
-    <updated>2013-05-03T10:05:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/03/optimizer-in-c</id>
-    <content type="html"><![CDATA[<p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
-
-<h2>話のマクラ</h2>
-
-<p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
-
-<blockquote><p>ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>をを! 社長自ら！ すごい！</p>
-
-<blockquote><p>この関数は、一見すると無駄がないように見えますが、実は無駄の塊です。
-たとえばコンピュータは割り算が苦手です。なのに二回も割り算をやっています。
-割り算よりは掛け算(乗算)の方が圧倒的に速い(下手すると10～100倍くらい?)ので、まず割り算をしている部分を2.0の逆数の乗算に変更します。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>最近，トシのせいかすぐに感涙してしまう私は，感化されて，つい除算を積算に変えてみてベンチマークを取ってみました．
-ですが，手元のOSXではJITをoffにしても除算と積算で有意な差は出ませんでした．</p>
-
-<!-- more -->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class A {
-</span><span class='line'>  float div(float b) {
-</span><span class='line'>      return b / 12345678902.0f;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  float mul(float b) {
-</span><span class='line'>      return b * 12345678902.0f;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  public static void main(String[] s) {
-</span><span class='line'>      A a = new A();
-</span><span class='line'>//        for (long i = 0; i &lt; 100; i++) {
-</span><span class='line'>      for (long j = 0; j &lt; 100000000; j++) {
-</span><span class='line'>          a.div((float)Math.random());
-</span><span class='line'>}//}
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Math.random()が重いんじゃないの?」と思って，定数にしたり変数にしたりいろいろやりました．
-手元環境では，思いつく全ての例において有意な差は出せませんでした．</p>
-
-<p>まあ，FPU の性能など効いてきますので，どの環境でも有意な差が出ないとは申しません．
-しかし，このレベルまで最適化したければ，JNI 介してC/C++ でやったほうがよいのではないの?
-という気がそこはかとなくするわけです．
-「JNI のオーバヘッドがー」という残念な結果に終わる可能性も無きにしもあらずなわけではありますが．</p>
-
-<h2>徐々に本題</h2>
-
-<blockquote><p>こういう数式展開レベルの最適化は、どれだけコンパイラが賢くなってもまだまだやってもらえません。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>ホントでしょうか．
-まあ，数式の変形を縦横無尽に行うというのは，Metematica など極めて限られた，それこそ数式処理のみを対象とするような人のツールでないと無理です．
-でも，除算を積算に置き換えたり，定数が絡んで結果があからさまなものを省くなんていうのは，どのようなコンパイラでも考える局所最適化の基礎的テクニックです．</p>
-
-<p>確かに Oracle の javac では，float 型の定数除算から，そのまま除算命令(バイトコード)に落としています．
-他言語では，mruby の mrbc も同様でした．
-それは，コンパイラが馬鹿だからでしょうか．
-…まあ，たまにそういう時もあります．</p>
-
-<p>しかし，置き換えても意味が無いので置き換えてない可能性もあります．
-実際，上記のベンチマークだけで判断するのであれば，除算から積算への変換は無駄な努力なわけです．
-コンパイラが馬鹿なのか，プログラマが馬鹿なのかは，常にベンチマークにより客観的に判断される必要がありますね，と．</p>
-
-<p>高速度カメラまで持ち込んでおられる shi3z 氏は，当然そのことについて意識しておられるわけですが．
-「プログラマに成りたいんです!」と目をキラキラしている未来ある読者さんがたは，勘違いするよなぁコレ…と．</p>
-
-<h2>本題，またはボツ原稿の公表</h2>
-
-<p>ワタクシゴトですが，先日，ちょいとした経緯で，最適化に関する原稿が結果的にボツになりまして．
-主にC言語周りなのですが，このへんはコンパイラ一般で言えることなので，紹介しておきます．</p>
-
-<p>「一所懸命にループ内の関数呼び出しを手で最適化しても無駄ですよ，コンパイラが善きに計らいますよ」というネタです．
-ここには書いていませんが，ループ中の冗長な部分は外に出す最適化もかかります．
-…なんてことを考えると，「JNIの呼び出しオーバヘッドがー」みたいな話も帳消しになるかもしれなかったりします．</p>
-
-<h3>インライン最適化による変数の蒸発</h3>
-
-<p>(前略)
-もう一つの例も，蒸発に関するものです．
-ただし，この蒸発は，volatile の例とは異なり，バグの元にはなりません．
-しかし，ときどき，デバッグを困難にします．</p>
-
-<p>次のコードはは，別段バグが無さそうですし，実際に期待通りに動きます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdint.h&gt;
-</span><span class='line'>
-</span><span class='line'>void
-</span><span class='line'>busy_loop(int end)
-</span><span class='line'>{
-</span><span class='line'>  volatile int i;
-</span><span class='line'>
-</span><span class='line'>  for (i = 0; i &lt; end; i++) { }
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int
-</span><span class='line'>main(void)
-</span><span class='line'>{
-</span><span class='line'>  int a = 10;
-</span><span class='line'>
-</span><span class='line'>  busy_loop(a);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これをgccで最適化を有効にしてコンパイルし，GDBデバッガで追跡することにします．</p>
-
-<p>まず，main 文にブレイクポイントを貼り，実行します．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(gdb) b main
-</span><span class='line'>Breakpoint 1 at 0x100000ed4: file test.c, line 17.
-</span><span class='line'>(gdb) run</span></code></pre></td></tr></table></div></figure>
-
-
-<p>実行開始後，すぐに停止します．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Starting program: a.out
-</span><span class='line'>Reading symbols for shared libraries +. done
-</span><span class='line'>
-</span><span class='line'>Breakpoint 1, main () at test.c:17
-</span><span class='line'>17          busy_loop(a);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここで，変数 a の値を表示してみます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(gdb) print a
-</span><span class='line'>Unable to access variable "a"
-</span><span class='line'>$1 = &lt;variable optimized away by compiler&gt;
-</span><span class='line'>(gdb) </span></code></pre></td></tr></table></div></figure>
-
-
-<p>「変数 a にアクセスできない」と言われてしまいました．
-でも変数 a は，確かに存在するはずです．
-さらに見ると「変数は最適化により消えた」とあります．</p>
-
-<p>この不思議を追跡するべく，コンパイル結果のアセンブリ言語出力を見てみましょう．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>busy_loop:
-</span><span class='line'>  sub sp, sp, #8
-</span><span class='line'>  mov r3, #0
-</span><span class='line'>  str r3, [sp, #4]
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  cmp r0, r3
-</span><span class='line'>  ble .L1
-</span><span class='line'>.L4:
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  add r3, r3, #1
-</span><span class='line'>  str r3, [sp, #4]
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  cmp r3, r0
-</span><span class='line'>  blt .L4
-</span><span class='line'>.L1:
-</span><span class='line'>  add sp, sp, #8
-</span><span class='line'>  bx  lr
-</span><span class='line'>main:
-</span><span class='line'>  sub sp, sp, #8
-</span><span class='line'>  mov r3, #0
-</span><span class='line'>  str r3, [sp, #4]
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  cmp r3, #9
-</span><span class='line'>  bgt .L10
-</span><span class='line'>.L11:
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  add r3, r3, #1
-</span><span class='line'>  str r3, [sp, #4]
-</span><span class='line'>  ldr r3, [sp, #4]
-</span><span class='line'>  cmp r3, #9
-</span><span class='line'>  ble .L11
-</span><span class='line'>.L10:
-</span><span class='line'>  add sp, sp, #8
-</span><span class='line'>  bx  lr</span></code></pre></td></tr></table></div></figure>
-
-
-<p>じっくり眺めてみてください．busy_loop からの数行と main からの数行が極めて似通っています．</p>
-
-<p>コンパイラの中では，巧妙なことが起こっていました．
-コンパイラは， main 関数から busy_loop 関数を呼び出すよりも，main 関数の中に busy_loop 関数の中身を展開してしまったほうが，処理が速いコードになると判断したようです．
-つまり 次に示すリストと勝手に書き換えています．
-このように書き換えても，動作は変わりません．
-関数呼び出しのオーバヘッドが減る分だけ，処理速度も向上するはずです．
-しかし，変数 a は何処かに消えてしまいました．
-コンパイラは，変数 a が存在していた事実をデバッグシンボルに仕込みます．
-そのため，デバッガは，変数 a がソースコード上に存在したことは認識できます．
-しかし，値を示せと言われても，デバッガは示しようがありません．
-アセンブリコードには，変数 a に相当するコードが存在しないからです．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdint.h&gt;
-</span><span class='line'>
-</span><span class='line'>void
-</span><span class='line'>busy_loop(int end)
-</span><span class='line'>{
-</span><span class='line'>  volatile int i;
-</span><span class='line'>
-</span><span class='line'>  for (i = 0; i &lt; end; i++) { }
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>int
-</span><span class='line'>main(void)
-</span><span class='line'>{
-</span><span class='line'>  volatile int i;
-</span><span class='line'>
-</span><span class='line'>  for (i = 0; i &lt; 10; i++) { }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>(後略)
-てな感じの記事だったのでした．</p>
-
-<h2>まとめ</h2>
-
-<p>天才って，枠のなかで頑張ろうとするのですよね．
-その姿に，量産型凡人エンジニアの私はシビレてしまいます．</p>
-
-<p>しかし，私だったら，スプライン関数の局所最適化ではなく，コンパイラへのhackを先にやるでしょうなぁ．
-JIT含めて．</p>
-
-<p>自分以外もアプリ作る製品開発では，コンパイラに手をつけたほうが効率的ですから．
-自分以外が自分の能力よりも下ならば，とくに．</p>
-
-<p>「コンパイラって難しくて手がでないよ」という未来の天才プログラマの皆様にあられましては，mruby という，格好の教材があります．
-ご興味のおありのかたはどうぞ． <a href="http://github.com/mruby/mruby/">http://github.com/mruby/mruby/</a></p>
-
-<h3>蛇足</h3>
-
-<p>上記で紹介した最適化にまつわる記事って，電子書籍とかで出して，需要あるかしら?
-3万文字以上の解説記事が，行き先無く浮いちゃっているのですよね…．(汗</p>
 ]]></content>
   </entry>
   
