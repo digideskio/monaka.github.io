@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/android/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-03T16:50:13+09:00</updated>
+  <updated>2014-02-03T16:51:58+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OneBox リリースしました．]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/14/onebox-tools/"/>
+    <link href="http://www.monaka.org/blog/2013/05/14/onebox-tools/"/>
     <updated>2013-05-14T16:41:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/14/onebox-tools</id>
+    <id>http://www.monaka.org/blog/2013/05/14/onebox-tools</id>
     <content type="html"><![CDATA[<p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
 
 <!-- more -->

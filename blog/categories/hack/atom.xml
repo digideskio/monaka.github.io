@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hack | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/hack/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-03T16:50:13+09:00</updated>
+  <updated>2014-02-03T16:51:58+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/"/>
+    <link href="http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby/"/>
     <updated>2014-01-14T19:37:18+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby</id>
+    <id>http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby</id>
     <content type="html"><![CDATA[<h1>まくら</h1>
 
 <p>明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
@@ -110,8 +110,8 @@ end</p>
            ]
 </code></pre>
 
-<p>src_imap.login(&lsquo;<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x6d;&#x6f;&#110;&#97;&#107;&#x61;&#64;&#x73;&#x6f;&#x6d;&#101;&#x77;&#104;&#101;&#x72;&#x65;&#45;&#x75;&#115;&#x69;&#110;&#103;&#45;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x2e;&#106;&#112;">&#x6d;&#111;&#x6e;&#x61;&#107;&#97;&#x40;&#115;&#x6f;&#x6d;&#x65;&#119;&#104;&#x65;&#114;&#x65;&#45;&#117;&#x73;&#105;&#x6e;&#x67;&#45;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#46;&#106;&#x70;</a>&rsquo;, &lsquo;password&rsquo;)            #コピー元
-dst_imap.login(&lsquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#x61;&#110;&#111;&#116;&#104;&#x65;&#x72;&#45;&#109;&#x6f;&#x6e;&#97;&#x6b;&#x61;&#x2d;&#x6f;&#114;&#45;&#115;&#111;&#109;&#101;&#116;&#104;&#105;&#110;&#103;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x61;&#110;&#x6f;&#x74;&#x68;&#x65;&#114;&#x2d;&#109;&#111;&#x6e;&#97;&#107;&#x61;&#x2d;&#x6f;&#x72;&#x2d;&#x73;&#x6f;&#x6d;&#x65;&#116;&#104;&#105;&#110;&#103;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>&rsquo;, &lsquo;another-password&rsquo;) #コピー先</p>
+<p>src_imap.login(&lsquo;<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#109;&#x6f;&#x6e;&#97;&#x6b;&#x61;&#x40;&#x73;&#x6f;&#109;&#x65;&#x77;&#x68;&#101;&#x72;&#x65;&#45;&#117;&#x73;&#x69;&#110;&#103;&#45;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x2e;&#106;&#112;">&#109;&#111;&#110;&#x61;&#x6b;&#x61;&#x40;&#115;&#111;&#109;&#101;&#119;&#104;&#101;&#114;&#x65;&#x2d;&#117;&#x73;&#x69;&#110;&#x67;&#x2d;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x2e;&#x6a;&#x70;</a>&rsquo;, &lsquo;password&rsquo;)            #コピー元
+dst_imap.login(&lsquo;<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#111;&#x74;&#104;&#101;&#114;&#45;&#x6d;&#111;&#110;&#x61;&#x6b;&#97;&#45;&#x6f;&#114;&#45;&#115;&#x6f;&#x6d;&#101;&#116;&#104;&#105;&#110;&#103;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#97;&#110;&#x6f;&#116;&#x68;&#101;&#x72;&#x2d;&#109;&#111;&#x6e;&#97;&#x6b;&#x61;&#45;&#x6f;&#x72;&#45;&#x73;&#111;&#x6d;&#101;&#116;&#104;&#x69;&#x6e;&#x67;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>&rsquo;, &lsquo;another-password&rsquo;) #コピー先</p>
 
 <h1>この辺もお好みで．</h1>
 
@@ -151,9 +151,9 @@ dst_imap.disconnect()
   
   <entry>
     <title type="html"><![CDATA[OneBox リリースしました．]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/14/onebox-tools/"/>
+    <link href="http://www.monaka.org/blog/2013/05/14/onebox-tools/"/>
     <updated>2013-05-14T16:41:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/14/onebox-tools</id>
+    <id>http://www.monaka.org/blog/2013/05/14/onebox-tools</id>
     <content type="html"><![CDATA[<p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
 
 <!-- more -->

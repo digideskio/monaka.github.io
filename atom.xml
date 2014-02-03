@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-03T16:50:13+09:00</updated>
+  <updated>2014-02-03T16:51:58+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Keep good company]]></title>
-    <link href="http://www.monaka.org//blog/2014/02/03/keep-good-company/"/>
+    <link href="http://www.monaka.org/blog/2014/02/03/keep-good-company/"/>
     <updated>2014-02-03T15:30:22+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/02/03/keep-good-company</id>
+    <id>http://www.monaka.org/blog/2014/02/03/keep-good-company</id>
     <content type="html"><![CDATA[<p>起業したいという方と話をしていると，必ず出るのが，雇用に関する話．</p>
 
 <p>曰く，「起業をしたいのに，社員候補が居ない．」
@@ -102,9 +102,9 @@
   
   <entry>
     <title type="html"><![CDATA[参加しないと見せないよ．を作った罪]]></title>
-    <link href="http://www.monaka.org//blog/2014/02/01/my-fault/"/>
+    <link href="http://www.monaka.org/blog/2014/02/01/my-fault/"/>
     <updated>2014-02-01T08:28:21+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/02/01/my-fault</id>
+    <id>http://www.monaka.org/blog/2014/02/01/my-fault</id>
     <content type="html"><![CDATA[<p>140字以内で纏めると，こういうこと．</p>
 
 <blockquote class="twitter-tweet"><p>「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/429207095041224704">January 31, 2014</a></blockquote>
@@ -172,9 +172,9 @@
   
   <entry>
     <title type="html"><![CDATA[今日現在のmrubyについて雑想]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby/"/>
+    <link href="http://www.monaka.org/blog/2014/01/31/memorandom-about-mruby/"/>
     <updated>2014-01-31T10:28:44+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/31/memorandom-about-mruby</id>
+    <id>http://www.monaka.org/blog/2014/01/31/memorandom-about-mruby</id>
     <content type="html"><![CDATA[<p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
 なんでこのタイミングなのかに，あまり深い意味はない．
 一つのきっかけとして，イベントはある．
@@ -288,9 +288,9 @@ FI4カーネルは新規設計したほうが綺麗になるのは明らかだ�
   
   <entry>
     <title type="html"><![CDATA[スタートアップで優秀な技術者を探す方法]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage/"/>
+    <link href="http://www.monaka.org/blog/2014/01/28/best-way-to-employ-on-startup-stage/"/>
     <updated>2014-01-28T14:35:11+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/28/best-way-to-employ-on-startup-stage</id>
+    <id>http://www.monaka.org/blog/2014/01/28/best-way-to-employ-on-startup-stage</id>
     <content type="html"><![CDATA[<h1>雇用はいちばん難しい</h1>
 
 <p>かつてお世話になった方が，起業計画中とのことで，相談を受けた．
@@ -363,9 +363,9 @@ FI4カーネルは新規設計したほうが綺麗になるのは明らかだ�
   
   <entry>
     <title type="html"><![CDATA[パスワードもユーザ名も正しいはずなのに，の巻]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline/"/>
+    <link href="http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/"/>
     <updated>2014-01-15T01:33:07+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/15/cant-login-to-gmail-from-commandline</id>
+    <id>http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline</id>
     <content type="html"><![CDATA[<h1>ことの起こり</h1>
 
 <p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
@@ -467,9 +467,9 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
   
   <entry>
     <title type="html"><![CDATA[Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby/"/>
+    <link href="http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby/"/>
     <updated>2014-01-14T19:37:18+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/14/gmail-imap-sync-with-ruby</id>
+    <id>http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby</id>
     <content type="html"><![CDATA[<h1>まくら</h1>
 
 <p>明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
@@ -655,9 +655,9 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
   
   <entry>
     <title type="html"><![CDATA[誰のための義務教育?]]></title>
-    <link href="http://www.monaka.org//blog/2014/01/06/the-education-of-everyday-things/"/>
+    <link href="http://www.monaka.org/blog/2014/01/06/the-education-of-everyday-things/"/>
     <updated>2014-01-06T11:15:22+09:00</updated>
-    <id>http://www.monaka.org//blog/2014/01/06/the-education-of-everyday-things</id>
+    <id>http://www.monaka.org/blog/2014/01/06/the-education-of-everyday-things</id>
     <content type="html"><![CDATA[<p>中1になった長女が，学校の宿題で，百人一首の暗記で苦しめられている．</p>
 
 <p>3年前に，こんなツイートで，850 近い RT を得たのだし，流行りに乗って，なんかアプリ作ればとか思う．
@@ -703,9 +703,9 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
   
   <entry>
     <title type="html"><![CDATA[OSSはタダ乗りでもいいけどマズい]]></title>
-    <link href="http://www.monaka.org//blog/2013/12/26/oss-community-and-others/"/>
+    <link href="http://www.monaka.org/blog/2013/12/26/oss-community-and-others/"/>
     <updated>2013-12-26T10:17:50+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/12/26/oss-community-and-others</id>
+    <id>http://www.monaka.org/blog/2013/12/26/oss-community-and-others</id>
     <content type="html"><![CDATA[<p>Togetter で纏めるかどうか思案しつつ．
 まあ，コメントが付く話でもなかろうということで，当日記へ．</p>
 
@@ -828,9 +828,9 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
   
   <entry>
     <title type="html"><![CDATA[組込み技術者と'幸せ']]></title>
-    <link href="http://www.monaka.org//blog/2013/12/15/happiness-for-embedded-engineers/"/>
+    <link href="http://www.monaka.org/blog/2013/12/15/happiness-for-embedded-engineers/"/>
     <updated>2013-12-15T08:52:42+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/12/15/happiness-for-embedded-engineers</id>
+    <id>http://www.monaka.org/blog/2013/12/15/happiness-for-embedded-engineers</id>
     <content type="html"><![CDATA[<h2>まくら</h2>
 
 <p>とあるWebメディアから，新春インタビューの依頼を受けました．
@@ -937,9 +937,9 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
   
   <entry>
     <title type="html"><![CDATA[プロライターが教える｜学生のライティングにたった一つ足りない「読み手にとっての価値を考え*ない*」視点の補い方]]></title>
-    <link href="http://www.monaka.org//blog/2013/12/12/how-to-write/"/>
+    <link href="http://www.monaka.org/blog/2013/12/12/how-to-write/"/>
     <updated>2013-12-12T22:47:25+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/12/12/how-to-write</id>
+    <id>http://www.monaka.org/blog/2013/12/12/how-to-write</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>ググって来た方には，ワタクシが何者なのか判らないでしょうから．
@@ -1087,9 +1087,9 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
   
   <entry>
     <title type="html"><![CDATA[iTunes のアルバムアートワークを抽出する]]></title>
-    <link href="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/"/>
+    <link href="http://www.monaka.org/blog/2013/11/26/extracts-itune-artwork/"/>
     <updated>2013-11-26T07:43:19+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork</id>
+    <id>http://www.monaka.org/blog/2013/11/26/extracts-itune-artwork</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
@@ -1151,9 +1151,9 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
   
   <entry>
     <title type="html"><![CDATA[安全の礎たるもの]]></title>
-    <link href="http://www.monaka.org//blog/2013/11/16/safety-stands-on/"/>
+    <link href="http://www.monaka.org/blog/2013/11/16/safety-stands-on/"/>
     <updated>2013-11-16T16:26:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/11/16/safety-stands-on</id>
+    <id>http://www.monaka.org/blog/2013/11/16/safety-stands-on</id>
     <content type="html"><![CDATA[<p>もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました．</p>
 
 <ul>
@@ -1226,9 +1226,9 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
   
   <entry>
     <title type="html"><![CDATA[repo sync でストレージを節約するための group 機能の使い方]]></title>
-    <link href="http://www.monaka.org//blog/2013/11/04/group-in-repo/"/>
+    <link href="http://www.monaka.org/blog/2013/11/04/group-in-repo/"/>
     <updated>2013-11-04T09:28:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/11/04/group-in-repo</id>
+    <id>http://www.monaka.org/blog/2013/11/04/group-in-repo</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています．</p>
@@ -1336,9 +1336,9 @@ Android 系以外のプロジェクトでも repo を使っているプロジェ
   
   <entry>
     <title type="html"><![CDATA[狂ったように作るもの]]></title>
-    <link href="http://www.monaka.org//blog/2013/10/01/what-is-next/"/>
+    <link href="http://www.monaka.org/blog/2013/10/01/what-is-next/"/>
     <updated>2013-10-01T13:49:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/10/01/what-is-next</id>
+    <id>http://www.monaka.org/blog/2013/10/01/what-is-next</id>
     <content type="html"><![CDATA[<p>社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
 ( <a href="http://weekly.ascii.jp/elem/000/000/175/175062/">「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない</a> )</p>
 
@@ -1369,9 +1369,9 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
   
   <entry>
     <title type="html"><![CDATA[Restricted Words]]></title>
-    <link href="http://www.monaka.org//blog/2013/09/19/restricted-words/"/>
+    <link href="http://www.monaka.org/blog/2013/09/19/restricted-words/"/>
     <updated>2013-09-19T13:57:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/09/19/restricted-words</id>
+    <id>http://www.monaka.org/blog/2013/09/19/restricted-words</id>
     <content type="html"><![CDATA[<p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
 
 <h1>お題</h1>
@@ -1500,9 +1500,9 @@ LL系言語だと，シンボルを文字列に変換する機能をよく見か
   
   <entry>
     <title type="html"><![CDATA[ハッシュ関数をなんちゃってで理解する]]></title>
-    <link href="http://www.monaka.org//blog/2013/08/17/what-is-hash/"/>
+    <link href="http://www.monaka.org/blog/2013/08/17/what-is-hash/"/>
     <updated>2013-08-17T15:11:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/08/17/what-is-hash</id>
+    <id>http://www.monaka.org/blog/2013/08/17/what-is-hash</id>
     <content type="html"><![CDATA[<p>某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました．</p>
 
 <p>担当編集の方々や読者からの反応は悪くは無かったと自負はしているのですが，もっと大枠のところで色々と思うところありまして．主に私の側の問題です．</p>
@@ -1595,9 +1595,9 @@ LL系言語だと，シンボルを文字列に変換する機能をよく見か
   
   <entry>
     <title type="html"><![CDATA[Android (x86-jb) でのタッチスクリーンキャリブレーション]]></title>
-    <link href="http://www.monaka.org//blog/2013/06/01/calibrate-touchscreen-android-jb/"/>
+    <link href="http://www.monaka.org/blog/2013/06/01/calibrate-touchscreen-android-jb/"/>
     <updated>2013-06-01T07:17:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/06/01/calibrate-touchscreen-android-jb</id>
+    <id>http://www.monaka.org/blog/2013/06/01/calibrate-touchscreen-android-jb</id>
     <content type="html"><![CDATA[<p>Android でのタッチスクリーンのキャリブレーション法について．情報が溢れていそうで，案外無い，
 あっても，古くて使えない．
 ので，記録しておきます．</p>
@@ -1636,9 +1636,9 @@ Android は，当然ながら，画面を押さえていますので，衝突し
   
   <entry>
     <title type="html"><![CDATA[OneBox リリースしました．]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/14/onebox-tools/"/>
+    <link href="http://www.monaka.org/blog/2013/05/14/onebox-tools/"/>
     <updated>2013-05-14T16:41:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/14/onebox-tools</id>
+    <id>http://www.monaka.org/blog/2013/05/14/onebox-tools</id>
     <content type="html"><![CDATA[<p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
 
 <!-- more -->
@@ -1690,9 +1690,9 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
   
   <entry>
     <title type="html"><![CDATA[ソフトウェア作家とは何か．]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/09/what-is-software-creator/"/>
+    <link href="http://www.monaka.org/blog/2013/05/09/what-is-software-creator/"/>
     <updated>2013-05-09T10:47:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/09/what-is-software-creator</id>
+    <id>http://www.monaka.org/blog/2013/05/09/what-is-software-creator</id>
     <content type="html"><![CDATA[<h2>オレオレ定義</h2>
 
 <blockquote class="twitter-tweet" lang="ja"><p>専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/331615204184055808">2013年5月7日</a></blockquote>
@@ -1708,9 +1708,9 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
   
   <entry>
     <title type="html"><![CDATA[Launchpad PPA 登録の罠]]></title>
-    <link href="http://www.monaka.org//blog/2013/05/05/launchpad-ppa/"/>
+    <link href="http://www.monaka.org/blog/2013/05/05/launchpad-ppa/"/>
     <updated>2013-05-05T13:08:00+09:00</updated>
-    <id>http://www.monaka.org//blog/2013/05/05/launchpad-ppa</id>
+    <id>http://www.monaka.org/blog/2013/05/05/launchpad-ppa</id>
     <content type="html"><![CDATA[<p>Ubuntu にオレオレパッケージを追加する PPA．
 発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
 断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
