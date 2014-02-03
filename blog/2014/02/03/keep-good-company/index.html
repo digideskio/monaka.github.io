@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iTunes のアルバムアートワークを抽出する - もなもなもなかのページ</title>
+  <title>Keep good company - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="背景 さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
-たとえば，ざっとサムネイルとして眺めてみたいとか． 抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
-細かいことをいうと，個人利用の範囲でも厳密には， &hellip;">
+  <meta name="description" content="起業したいという方と話をしていると，必ず出るのが，雇用に関する話． 曰く，「起業をしたいのに，社員候補が居ない．」
+経営と雇用を混同している起業志望者の．典型だ． 別のパターンもある．
+同年代で先に起業した人たちの「社員の定着が悪い」とぼやくのを聞き，起業前から心配している． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/">
+  <link rel="canonical" href="http://www.monaka.org//blog/2014/02/03/keep-good-company/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">iTunes のアルバムアートワークを抽出する</h1>
+      <h1 class="entry-title">Keep Good Company</h1>
     
     
       <p class="meta">
@@ -99,69 +99,92 @@
   
 
 
-<time datetime="2013-11-26T07:43:19+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+<time datetime="2014-02-03T15:30:22+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>背景</h2>
+<div class="entry-content"><p>起業したいという方と話をしていると，必ず出るのが，雇用に関する話．</p>
 
-<p>さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
-たとえば，ざっとサムネイルとして眺めてみたいとか．</p>
+<p>曰く，「起業をしたいのに，社員候補が居ない．」
+経営と雇用を混同している起業志望者の．典型だ．</p>
 
-<p>抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
-細かいことをいうと，個人利用の範囲でも厳密には，マズいような気もします．
-本エントリは，技術的にはできますよね，的なお話．
-…ということで，ひとつよしなに．</p>
+<p>別のパターンもある．
+同年代で先に起業した人たちの「社員の定着が悪い」とぼやくのを聞き，起業前から心配している．
+中年から上の年代に多い．</p>
+
+<p>こんなふうに，起業/経営と，雇用することが不可分になっている方は，想像以上に多い．
+…というか，私自身が，割と長い間，不可分に考えていた．</p>
+
+<h2></h2>
+
+<p>今の私は，こう思う．
+「雇用するから，社員の心配をしなければいけなくなる．雇用はしちゃダメ」</p>
 
 <!-- more -->
 
 
-<p>iTunesのアルバムアートワークは，iTunesフォルダを <code>{itune_folder}</code>とすると<code>{itnue_folder}/Album Artwork/</code>配下の拡張子itcファイルに収められています．
-特に手を加えていなければ，<code>~/Music/iTuness/Album Artwork/</code>にあるはずです．
-ただし，itc ファイルには，様々なメタデータが画像の前についています．
-画像として扱うには，このメタデータを外す必要があります．</p>
+<p>限られた例外は，人材派遣会社だ．
+特に特定派遣は，雇用をしないわけにはいかない．社員にしないと派遣できないから．
+私に思い浮かぶのはこの1例のみだが，その他，許認可等で，雇用が避けられない場合も無くはないだろう．</p>
 
-<h2>スクリプト</h2>
+<p>しかしそれでも，雇用は可能な限り避けるべきだと，思う．</p>
 
-<p>サクッと答えだけ書きます．
-OSX を使っている前提に立っています．Windowsの方はCygwinなり何なりを入れてください．</p>
+<p>ネットの進展で，特に経理総務系の仕事の多くはアウトソーシングできる．
+10年前に Money Forward があったなら，私は総務雇用のみならず税理士との契約もしなかっただろう．
+物販のロジスティクスは，月5000円からでAmazonが引き受けてくれる．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!env bash
-</span><span class='line'>for i in $(find ~/Music/iTuness/Album\ Artwork/ -name '*.itc'); do
-</span><span class='line'>  dd if=$i of=$(basename $i .itc).png bs=1 skip=492
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+<p>セールスだけは，どんな分野であれ自社で抱えたほうがよいと，私も思う．
+しかし付随するPRやブランディングに関しては，外にだしたほうがよい結果が得られる．(もちろん，それらを商材としている会社は別)</p>
 
+<p>技術者も，優秀な人は必ずしも雇用しなくてもよい時代だ．
+もしIT関係なら，人材派遣や紹介業に頼らなくても，勉強会などで学生やフリーランスを一本釣りすることは不可能ではない．
+サラリーマンでも，以前ほど副業規定はきつくない．
+もちろん，一本釣りに見合うだけの目利きや信頼を，釣る側が備えている必要はあるけれども．</p>
 
-<h3>注意事項</h3>
+<h2></h2>
 
-<p>dd でアタマを落とすだけ．492 バイトは，環境(iTunesのバージョンなど?)によって違う可能性がありそうです．
-<a href="https://www.google.co.jp/search?q=itune+itc+500%E3%83%90%E3%82%A4%E3%83%88">ググると，この数値は500バイトであると主張している人が少なからず居る</a>ようですので．</p>
+<p>起業関連のセミナーに行くと，厚生労働省が数多くの雇用対策の助成を行っている，と紹介される．
+なんとなくお得に感じるのは，解る．
+でも，国が特定分野に助成を行うということは，
+経済合理性に任せた場合には，誰も国の思惑通りには選択しない，ということでもある．</p>
 
-<p>お手元環境で何バイトを削ればよいかは，目視でお判りになるでしょう．
-上記のスクリプトを理解できる人の手元には，愛用のバイナリエディタもおありでしょうから，</p>
+<p>中規模老舗企業は，なんだかんだいって資金的にも総務人事機能的にも体力がある．
+延命として，そういう貧乏くじを自ら引くのは，アリだろう．
+しかし，資本力が無いスタートアップにとっては，まさに自殺行為だ．</p>
 
-<p>あと，上記のスクリプトでは，拡張子を png に決め打っていますが，実際には，画像は，PNG と JPEG の2種類があります．
-言うまでもありませんが，これは file コマンドを使って容易に識別できます．
-こんなふうに．</p>
+<p>少し考えると，解ることだと思うのだが．
+目の前の現金に釣られたくなる気持ちも解るのだが．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ file *.png
-</span><span class='line'>4931EBE6BCC87C34-07FBFB2CA12DDA5D.png:   JPEG image data, JFIF standard 1.01, comment: "AppleMark"
-</span><span class='line'>4931EBE6BCC87C34-08F02BE333CFBBAA.png:   PNG image, 128 x 128, 8-bit/color RGBA, non-interlaced
-</span><span class='line'>4931EBE6BCC87C34-0A2AC7440B8F25B6.png:   JPEG image data, JFIF standard 1.01</span></code></pre></td></tr></table></div></figure>
+<h2></h2>
 
+<p>こういったことを切々と説明しても，起業志望者たちの少なからずは，納得した顔にならない．</p>
 
-<p>あとは，上手いことやってください．</p>
+<p>私の説明が舌足らずなのだろう．
+そんなときは，「そうですね．気のいい社員が見つかって，愉しい会社ができるといいですね」
+と作り笑顔で話を打ち切る．</p>
+
+<p>作り笑顔ではあるけれども，発した言葉は嘘ではない．
+そう．
+気のいい社員と一緒に製品やサービスと世に問うのは，とても愉しいことなのだ．</p>
+
+<p>だからこそ，起業家たちは，雇用には慎重にならなければならない．
+気のいい社員を解雇する瞬間の絶望を，先回りして想像しなければならない．
+経営をしたいのか，雇用をしたいのかを，常に自らに問わなければいけない．</p>
+
+<p>悪いことは言わん．
+絶望を味わったヤツの言うことは，聞いておけ．</p>
+
+<p>この辺甘く考えていると，My own Limited Company しか残らない最後が来るよ．</p>
+
+<h2></h2>
+
+<p>その上で，雇用をしたいなら，すればいいと思う．</p>
+
+<p>なお，言うまでもないことだけれども，雇用自身は絶対悪ではない．
+費用対効果が得られる確証があっての雇用は，経営者が決断すべき仕事ではある．</p>
 </div>
 
 
@@ -184,16 +207,22 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
   
 
 
-<time datetime="2013-11-26T07:43:19+09:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+<time datetime="2014-02-03T15:30:22+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>, <a class='category' href='/blog/categories/startup/'>startup</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org//blog/2014/02/03/keep-good-company/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2013/11/26/extracts-itune-artwork/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org//blog/2014/02/03/keep-good-company/" data-via="monamour555" data-counturl="http://www.monaka.org//blog/2014/02/03/keep-good-company/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -206,10 +235,8 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/16/safety-stands-on/" title="Previous Post: 安全の礎たるもの">&laquo; 安全の礎たるもの</a>
+        <a class="basic-alignment left" href="/blog/2014/02/01/my-fault/" title="Previous Post: 参加しないと見せないよ．を作った罪">&laquo; 参加しないと見せないよ．を作った罪</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/12/12/how-to-write/" title="Next Post: プロライターが教える｜学生のライティングにたった一つ足りない「読み手にとっての価値を考え*ない*」視点の補い方">プロライターが教える｜学生のライティングにたった一つ足りない「読み手にとっての価値を考え*ない*」視点の補い方 &raquo;</a>
       
     </p>
   </footer>

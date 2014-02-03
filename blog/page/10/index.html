@@ -9,7 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして． カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました． 3.1になっているせいなのか，nvflash &hellip;">
+  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
+んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/work_p/">動くのこれ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
+んー? んー?</p>
+
+<p>で，startup.s を見てみた．</p>
+
+<pre><code>.text
+
+    .extern     main
+    .extern     _sdata_loadaddr
+    .extern     _sp_base
+
+    #  Top of Stack
+    .long _sp_base 
+    # Reset Handler
+    .long _startup+1
+    .org 0x0C
+
+ .org 0xEC
+    .global _startup
+ _startup:
+        LDR     r1, =_sdata_loadaddr
+        LDR     r2, =_sdata
+        LDR     r3, =_edata
+</code></pre>
+
+<p>&hellip;(ﾟдﾟlll) ベクタどこよ…</p>
+
+<h2>あ，動くのか．</h2>
+
+<p>これ Cortex-M3系だものね…．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -192,54 +258,6 @@ Command send failed (usb write failed)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/02/bye/">さよなら，はてな．</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-02T14:35:00+09:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>別に嫌いになったわけではないのですけれども．</p>
-
-<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
-
-<p>村に住むメリットを感じなくなっちゃったのでした．</p>
-
-<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
-
-<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
-
-<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
-
-<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -275,6 +293,10 @@ Command send failed (usb write failed)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/03/keep-good-company/">Keep good company</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/01/my-fault/">参加しないと見せないよ．を作った罪</a>
       </li>
     
@@ -296,10 +318,6 @@ Command send failed (usb write failed)
     
       <li class="post">
         <a href="/blog/2014/01/06/the-education-of-everyday-things/">誰のための義務教育?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/26/oss-community-and-others/">OSSはタダ乗りでもいいけどマズい</a>
       </li>
     
   </ul>

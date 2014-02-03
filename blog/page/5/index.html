@@ -9,8 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
-( 「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない ) 私自身は，ベーマガ→Oh!MZ と進んで，月刊ASCIIはたまに立ち読みしたり図書館で読んだりという程度の記憶しかない． けれど， &hellip;">
+  <meta name="description" content="背景 最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています． しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/04/group-in-repo/">Repo Sync でストレージを節約するための Group 機能の使い方</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T09:28:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています．</p>
+
+<p>しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです．
+一部の Android 系プロジェクト (Android-x86 とか) では， manifest.xml を編集して，不要なプロジェクトを削除しています．
+しかし，ターゲットはさておき，ビルドホストは複数あったほうが開発者を増やすためには望ましいと言えます．
+また，AOSP の新しいリリースごとに manifest.xml の再編集を行うのは骨の折れる作業です．</p>
+
+<p>このような状況を解消するために，repo には group という機能があります．
+日本語のみならず，英語圏でも纏まって解説されている例は，ざっとググった限りでは無いようです．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/04/group-in-repo/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -193,59 +243,6 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/17/what-is-hash/">ハッシュ関数をなんちゃってで理解する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-17T15:11:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました．</p>
-
-<p>担当編集の方々や読者からの反応は悪くは無かったと自負はしているのですが，もっと大枠のところで色々と思うところありまして．主に私の側の問題です．</p>
-
-<p>計算機科学(工学)周りでは，高校生/高専生/(情報工学専攻以外の)大学生には触れる機会がないけれども，プログラミングするなら知らないと辛い概念が結構あります．
-私自身も専攻は物理で，計算機科学の高等教育を受けておらず，しんどい思いをしてきました．身に沁みています．
-計算機科学の触りを，初学者向けに軽め/短めに解説するという連載の趣旨そのものは，提案した私が言うのもナンですが，良いと思っています．
-どなたかパクっていただけないかなとも思うのですが…止めた私が言うのもナンですが．</p>
-
-<p>ともあれ，期待して頂いた読者がいらっしゃったかもと思うと，申し訳ない気持ちはあります．
-エアお詫びを兼ね，「4回目があったとしたら，何を扱うかな」というお題で，小一時間で書いてみました．
-編集/校正を通しておらず，イラストもありません．
-よって，読みづらいかもしれませんが，どうぞ．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/17/what-is-hash/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -281,6 +278,10 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/03/keep-good-company/">Keep good company</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/01/my-fault/">参加しないと見せないよ．を作った罪</a>
       </li>
     
@@ -302,10 +303,6 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
     
       <li class="post">
         <a href="/blog/2014/01/06/the-education-of-everyday-things/">誰のための義務教育?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/26/oss-community-and-others/">OSSはタダ乗りでもいいけどマズい</a>
       </li>
     
   </ul>
