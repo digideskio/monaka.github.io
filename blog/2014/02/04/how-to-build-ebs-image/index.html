@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>EC2でXenのmini-osを動かす手順 - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="余談 最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている． 一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない． &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">EC2でXenのmini-osを動かす手順</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T10:26:39+09:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>余談</h1>
+
+<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
+
+<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
+資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
+思案の最中．
+うだつが上がらんと，ほんと，なんにもできないねぇ．
+やだやだ．</p>
+
+<p>閑話休題．</p>
+
+<h1>まくら</h1>
+
+<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
+Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
+私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
+よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
+
+<p>手順は本家ヘルプページに割と細かく説明されている．
+解説ブログも，ググれば山盛り．
+さすがは，みんな大好きAWS．</p>
+
+<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
+
+<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
+
+<!-- more -->
+
+
+<h1>作業</h1>
+
+<h2>概要</h2>
+
+<p>独自のカーネルをEC2上で動作させるためのイメージ(以下，オレオレイメージ)は，EBS のスナップショットから作るようになっている．
+Xen ではおなじみの PV-GRUB が，オレオレイメージ中にある boot/grub/menu.lst を読み，
+kernel (本稿の場合は mini-os)をロードしブートする．
+手元環境でEBSを作ってアップロードすることもできるのかもしれないが(知らない)，ここでは EC2 上で t1.micro を立ち上げて作業する．
+一連の作業時間は，1時間もかからない．t1.micro なら10円にも満たないような額だろう．</p>
+
+<p>本稿では，ビルドは手元で行うことを想定している．ビルド環境さえもEC2上に立てるということも，もちろんできる．
+その際の作業の読み替え箇所は，いちいち言及するまでも無いだろう．</p>
+
+<h2>手順0: ~/.aws/config</h2>
+
+<p>こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[default]
+</span><span class='line'>aws_access_key_id=ないしょ
+</span><span class='line'>aws_secret_access_key=ないしょ
+</span><span class='line'>region=ap-northeast-1
+</span><span class='line'>output=text</span></code></pre></td></tr></table></div></figure>
+
+
+<p>region が違うと，下記例示の image-id やらなにやら変更が要るかもしれない．</p>
+
+<h2>手順1: EBSボリュームへのアクセスを行う EC2 インスタンスの生成</h2>
+
+<p>EC2のインスタンスを立ち上げる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 run-instances --image-id ami-dcfa4edd --instance-type t1.micro --security-group-ids quick-start-1 --key-name monaka</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&mdash;security-groups-ids や &mdash;key-name は，ご自分の環境に合わせて．
+&mdash;image-id も，好みの環境があるなら，それで．
+でも，本稿の例だと複雑なことはしないので，amiの選択に凝るのは時間の無駄かも．</p>
+
+<p>結果はこんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>578606849602 r-351e1831
+</span><span class='line'>GROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>INSTANCES 0   i386    None    False   xen ami-dcfa4edd    i-a3bec9a4  t1.micro    aki-ec5df7ed    monaka  2014-02-01T11:04:33.000Z    None    None    /dev/sda1   ebs None    paravirtual
+</span><span class='line'>MONITORING    disabled
+</span><span class='line'>PLACEMENT ap-northeast-1b None    default
+</span><span class='line'>SECURITYGROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>STATE 0   pending
+</span><span class='line'>STATEREASON   pending pending</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順2: 諸々のファイルを入れるEBSボリュームの生成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 create-volume --size 1 --availability-zone ap-northeast-1b</span></code></pre></td></tr></table></div></figure>
+
+
+<p>mini-os のサイズは1MB以下なのだが，EBSボリュームの最低サイズは1GB．無駄だがやむなし．</p>
+
+<p>結果はこんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ap-northeast-1b  2014-02-01T10:46:19.012Z    1   None    creating    vol-1cbb4b16    standard</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順3: EBSボリュームのEC2インスタンスへのアタッチ</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Monacintosh:~ monaka$ aws ec2 attach-volume --volume-id vol-1cbb4b16 --instance-id i-a3bec9a4 --device /dev/sdh1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vol-1cbb4b16 は，手順2の結果で得られたもの．i-a3bec9a4 は，手順1の結果で得られたもの．</p>
+
+<p>結果はこんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2014-02-01T11:05:25.613Z /dev/sdh1   i-a3bec9a4  attaching   vol-1cbb4b16</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順4: 作業用 EC2 インスタンスへの ssh ログイン</h2>
+
+<p>手順1で，インスタンスを立ち上げた直後は，サーバのFQDNが判らない．
+そろそろインスタンスのプロビジョニングも終わっているはずなので，確認．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 describe-instances --instance-ids i-a3bec9a4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果はこんな感じ</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RESERVATIONS 578606849602    r-351e1831
+</span><span class='line'>GROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>INSTANCES 0   i386    None    False   xen ami-dcfa4edd    i-a3bec9a4  t1.micro    aki-ec5df7ed    monaka  2014-02-01T11:04:33.000Z    ip-10-132-154-11.ap-northeast-1.compute.internal    10.132.154.11   ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com   54.199.18.76    /dev/sda1   ebs None    paravirtual
+</span><span class='line'>BLOCKDEVICEMAPPINGS   /dev/sda1
+</span><span class='line'>EBS   2014-02-01T11:04:36.000Z    True    attached    vol-69bc4c63
+</span><span class='line'>MONITORING    disabled
+</span><span class='line'>PLACEMENT ap-northeast-1b None    default
+</span><span class='line'>SECURITYGROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>STATE 16  running</span></code></pre></td></tr></table></div></figure>
+
+
+<p>compute.amazonaws.com で終わっているのが，外向きのFQDN．
+今回の場合は，ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com
+なので，おもむろに ssh．</p>
+
+<p>Amazon Linux の場合は，ログインユーザは ec2-user となる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh ec2-user@ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サーバの公開鍵を受け入れるかどうかなど聞かれる．
+結果は，こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The authenticity of host 'ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com (54.199.18.76)' can't be established.
+</span><span class='line'>RSA key fingerprint is e8:10:70:59:ce:4b:7b:59:97:92:35:d8:35:a7:3a:92.
+</span><span class='line'>Are you sure you want to continue connecting (yes/no)? yes
+</span><span class='line'>Warning: Permanently added 'ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com,54.199.18.76' (RSA) to the list of known hosts.
+</span><span class='line'>
+</span><span class='line'>       __|  __|_  )
+</span><span class='line'>       _|  (     /   Amazon Linux AMI
+</span><span class='line'>      ___|\___|___|
+</span><span class='line'>
+</span><span class='line'>See /usr/share/doc/system-release/ for latest release notes.
+</span><span class='line'>No packages needed for security; 170 packages available
+</span><span class='line'>Amazon Linux version 2013.09 is available.
+</span><span class='line'>[ec2-user@ip-10-132-154-11 ~]$ </span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順5: EBSボリュームのマウント</h2>
+
+<p>手順3では，EBSボリュームはアタッチしかしていない．
+ここでファイルシステムを作成して，マウントする．</p>
+
+<p>ファイルシステムの生成は，こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ec2-user@ip-10-132-154-11 ~]$ sudo mkfs.ext2 /dev/sdh1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果は，こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mke2fs 1.41.12 (17-May-2010)
+</span><span class='line'>Filesystem label=
+</span><span class='line'>OS type: Linux
+</span><span class='line'>Block size=4096 (log=2)
+</span><span class='line'>Fragment size=4096 (log=2)
+</span><span class='line'>Stride=0 blocks, Stripe width=0 blocks
+</span><span class='line'>65536 inodes, 262144 blocks
+</span><span class='line'>13107 blocks (5.00%) reserved for the super user
+</span><span class='line'>First data block=0
+</span><span class='line'>Maximum filesystem blocks=268435456
+</span><span class='line'>8 block groups
+</span><span class='line'>32768 blocks per group, 32768 fragments per group
+</span><span class='line'>8192 inodes per group
+</span><span class='line'>Superblock backups stored on blocks: 
+</span><span class='line'>  32768, 98304, 163840, 229376
+</span><span class='line'>
+</span><span class='line'>Writing inode tables: done                            
+</span><span class='line'>Writing superblocks and filesystem accounting information: done
+</span><span class='line'>
+</span><span class='line'>This filesystem will be automatically checked every 24 mounts or
+</span><span class='line'>180 days, whichever comes first.  Use tune2fs -c or -i to override.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ファイルシステムはできたので，早速マウント．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ec2-user@ip-10-132-154-11 ~]$ sudo mount /dev/sdh1 /mnt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>特にメッセージの出力など無く，コマンドプロンプトに戻ってくる．</p>
+
+<h2>手順6: menu.lst の生成</h2>
+
+<p>PV-GRUB が読む menu.lst を，EBSボリューム(の中にあるファイルシステム)に置く．
+エディタ使ってもいいけれど，この程度なら猫で十分．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@ip-10-132-154-11 ec2-user]# sudo -s
+</span><span class='line'>[root@ip-10-132-154-11 ec2-user]# cat &gt; /mnt/boot/grub/menu.lst
+</span><span class='line'>default 0
+</span><span class='line'>
+</span><span class='line'>title MiniOS test
+</span><span class='line'>        root (hd0)
+</span><span class='line'>        kernel /mini-os
+</span><span class='line'>[root@ip-10-132-154-11 ec2-user]# exit</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sudo -s を使ったので，最後には exit で，ec2-user に戻しておいた．</p>
+
+<h2>手順7: mini-os のコピー</h2>
+
+<p>何らかの方法で行う．
+ふつうは scp を使うと思う．
+そして，EC2 インスタンス上の /mnt/mini-os に配置する．
+ここでmenu.lst の記述に引っ張られて，うっかり，/mini-os に置いたりとかしないように．</p>
+
+<h2>手順8: スナップショットの生成</h2>
+
+<p>手順7までで，EC2インスタンスは用済みとなる．
+だから，stop-insrance なり terminate-instance なりで落としてもよい．
+けれども，最初の動作確認ができるまでは，立ち上げっぱなしのほうがよいかもしれない．
+EC2の課金は1時間単位だけれども，1時間以内にn回立ち上げ直すと，n時間分の料金になる．</p>
+
+<p>EC2のインスタンスにアタッチしたままでも，スナップショットは取れる．
+そうでないと，スナップショットの意味が無い．</p>
+
+<p>操作は，こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 create-snapshot --volume-id vol-1cbb4b16</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>結果は，こんな感じ．
+</span><span class='line'>None  578606849602    None    snap-940d6c7a   2014-02-01T11:24:16.000Z    pending vol-1cbb4b16    1</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順9: スナップショットからオレオレイメージの生成</h2>
+
+<p>いよいよ佳境．スナップショットからオレオレイメージを生成する．
+正直言うと，よく調べがついていないのだけれど，イメージの概要を示すjsonファイルが必要らしい．
+短いものなので，これもテキストエディタを持ち出すまでもないはず．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat &gt; blockdevice.json
+</span><span class='line'>[
+</span><span class='line'>        {"DeviceName":"/dev/xvda","Ebs":{"VolumeType":"standard","DeleteOnTermination":true,"VolumeSize":1,"SnapshotId":"snap-940d6c7a"}}
+</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>VolumeSize は，最初に 1GB で作ったから．SnapshotId は，手順8の出力と合わせる．</p>
+
+<p>そして，イメージの登録を行う．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 register-image --root-device-name /dev/xvda --name "Mini-os test" --block-device-mappings file://blockdevice.json --architecture x86_64</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果は，こんな感じ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ami-ef650eee</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>手順10: オレオレイメージの起動</h2>
+
+<p>そして感動のフィナーレ．オレオレイメージの起動．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 run-instances --image-id ami-ef650eee --instance-type t1.micro --security-group-ids quick-start-1 --key-name monaka</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果は，こんな感じ</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>578606849602 r-f17d65f5
+</span><span class='line'>GROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>INSTANCES 0   x86_64  None    False   xen ami-ef650eee    i-b38630b4  t1.micro    monaka  2014-02-01T11:46:28.000Z    None    None    /dev/xvda   ebs None    paravirtual
+</span><span class='line'>MONITORING    disabled
+</span><span class='line'>PLACEMENT ap-northeast-1b None    default
+</span><span class='line'>SECURITYGROUPS    sg-e242dbe3 quick-start-1
+</span><span class='line'>STATE 0   pending
+</span><span class='line'>STATEREASON   pending pending</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけだと，本当に立ち上がったのか判らない．</p>
+
+<p>ログの取得は，こんな感じで行う．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ aws ec2 get-console-output --instance-id i-b38630b4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>i-b38630b4 は，オレオレイメージの run-instance の結果から引っ張ってくる．</p>
+
+<p>mini-os 自身は小さいものの，mini-os の実行環境のプロビジョニングには，そこそこの時間がかかる．
+遅い時は5分以上かかるので，気長に待つ．
+どうせ1時間までは同じ時間だから．</p>
+
+<h1>雑感</h1>
+
+<p>EC2 == クラウド == インフラ屋さんやWeb屋さん</p>
+
+<p>という第一印象を持つかもしれないが，stubdom は，newlibだのlwIPだの使っていて，技術要素としては，むしろ組込み屋の定番ライブラリで成り立っている．</p>
+
+<p>2000年ごろには，IOKit を用いてオレオレOSを作るのが流行ったが，同様に，オレオレクラウドOSを作るのが地味に流行るかもしれない．
+情報量が少なくて，とっかかりは辛いが，#kernelvm の常連発表者のレベルであれば，たぶん半日のハッカソンで，何らか創り出せるだろう．そんな気がする．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T10:26:39+09:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/aws/'>aws</a>, <a class='category' href='/blog/categories/mocloud/'>mocloud</a>, <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/xen/'>xen</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="blog/2014/02/03/keep-good-company/" title="Previous Post: Keep good company">&laquo; Keep good company</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="blog/2014/02/04/how-to-build-ebs-image/">EC2でXenのmini-osを動かす手順</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/02/03/keep-good-company/">Keep good company</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/02/01/my-fault/">参加しないと見せないよ．を作った罪</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/01/31/memorandom-about-mruby/">今日現在のmrubyについて雑想</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/01/28/best-way-to-employ-on-startup-stage/">スタートアップで優秀な技術者を探す方法</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/01/15/cant-login-to-gmail-from-commandline/">パスワードもユーザ名も正しいはずなのに，の巻</a>
+      </li>
+    
+      <li class="post">
+        <a href="blog/2014/01/14/gmail-imap-sync-with-ruby/">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
