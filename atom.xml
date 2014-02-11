@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-11T14:10:54+09:00</updated>
+  <updated>2014-02-11T14:20:16+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -51,7 +51,7 @@ iPhone の兄弟である iPad が，壁面に掲げられ，パネルに埋め�
 この文明が滅ぶまで，膨張し続けるだろう．</p>
 
 <p>歴史の中で，確かに，ファームウェア書換ができないシステムが優位な時代もあった．
-今もあるだろう．今後も全滅するとは思わない．
+そういうシステムは今もあるだろう．今後も全滅するとは思わない．
 しかし，組込みシステムの守備範囲が広がっていく中で，割合として減っていくのは間違いない．
 かつて，自動車のエンジン制御用コンピュータは，ファームウェアの書換を想定した作りではなかった．家電も，同じ傾向があった．</p>
 
