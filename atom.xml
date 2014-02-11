@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-11T13:39:28+09:00</updated>
+  <updated>2014-02-11T14:10:54+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -43,7 +43,7 @@ iPhone の兄弟である iPad が，壁面に掲げられ，パネルに埋め�
 これらは組込みではないって?</p>
 
 <p>リセットベクタから管理するのが組込み?
-ならば.NET Micro flameworkや一部の組込みLinuxは，れっきとした組込みだろう．
+ならば.NET Micro frameworkや一部の組込みLinuxは，れっきとした組込みだろう．
 これらは自ら(つまりファーム)の一部を書き換えるケースを暗黙的に仮定している．</p>
 
 <p>組込みシステムの守備範囲は，膨大だ．
