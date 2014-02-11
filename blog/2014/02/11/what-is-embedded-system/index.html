@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>さよなら，はてな． - もなもなもなかのページ</title>
+  <title>組込みシステム is 何? - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="別に嫌いになったわけではないのですけれども． 日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし． 村に住むメリットを感じなくなっちゃったのでした． HNS まで戻るのは，ちょっとやりすぎ感がありますし &hellip;">
+  <meta name="description" content="曰く． 一円単位でコストを削っているのでファームウェア書き換え前提のプロセスは組み込みではないです。iPhoneは組み込みじゃないですから。 溜息が出る．
+組込みシステムの文脈で露出の高い方から，こういう類の意見が出るたびに． 組込みシステムでは，一円単位でのコスト抑制がかかることは，珍しくは無い &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org/blog/2012/04/02/bye/">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/02/11/what-is-embedded-system/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">さよなら，はてな．</h1>
+      <h1 class="entry-title">組込みシステム Is 何?</h1>
     
     
       <p class="meta">
@@ -97,26 +98,56 @@
   
 
 
-<time datetime="2012-04-02T14:35:00+09:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2014-02-11T12:57:57+09:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>別に嫌いになったわけではないのですけれども．</p>
+<div class="entry-content"><p>曰く．</p>
 
-<p>日記だったところが好きだったのに，ブログになってしまうとのことですし．ユーザートラッキングに対して，なんだかバレ後の対応が宜しくなかったようですし．</p>
+<blockquote><p>一円単位でコストを削っているのでファームウェア書き換え前提のプロセスは組み込みではないです。iPhoneは組み込みじゃないですから。</p></blockquote>
 
-<p>村に住むメリットを感じなくなっちゃったのでした．</p>
+<p>溜息が出る．
+組込みシステムの文脈で露出の高い方から，こういう類の意見が出るたびに．</p>
 
-<p>HNS まで戻るのは，ちょっとやりすぎ感がありますし，サーバ代はケチりたいですし．</p>
+<!--more-->
 
-<p>Heroku + Lokka で，テーマをポチポチとダサく作ると，あの時代っぽい空気になるなぁと思ったりしたので．</p>
 
-<p>Heroku の Postgres の無料分容量の限界までテキストを書き続けるのは無理でしょうから，運用コスト的には当面安心です．画像などバイナリコンテンツは DropBox 使えばよいですし．</p>
+<p>組込みシステムでは，一円単位でのコスト抑制がかかることは，珍しくは無い．
+それは，その通り．
+コストが全て．だから，最近の自動車のコンピュータは書き換え可能になっている．
+ムダ・ムラを徹底的に排除する，あのトヨタの自動車でさえも．</p>
 
-<p>しばらくこの形で運用していこうかなと思ったりしています．</p>
+<p>iPhone は組込みではないという．
+ならば，科学館や美術館へ行ってみるといい．
+iPhone の兄弟である iPad が，壁面に掲げられ，パネルに埋め込まれ，運用されているのをしばしば見かけるだろう．
+ああ，組込みシステムの開発者たちは，そういう場所に行く暇もないくらい忙しいのだっけか．</p>
+
+<p>サイネージの多くが，Windowsで動いている．
+自動販売機でLinuxのブートプロセスが表示されている写真が，SNSにアップロードされている．
+これらは組込みではないって?</p>
+
+<p>リセットベクタから管理するのが組込み?
+ならば.NET Micro flameworkや一部の組込みLinuxは，れっきとした組込みだろう．
+これらは自ら(つまりファーム)の一部を書き換えるケースを暗黙的に仮定している．</p>
+
+<p>組込みシステムの守備範囲は，膨大だ．
+そしていまだに膨張を続けている．
+この文明が滅ぶまで，膨張し続けるだろう．</p>
+
+<p>歴史の中で，確かに，ファームウェア書換ができないシステムが優位な時代もあった．
+今もあるだろう．今後も全滅するとは思わない．
+しかし，組込みシステムの守備範囲が広がっていく中で，割合として減っていくのは間違いない．
+かつて，自動車のエンジン制御用コンピュータは，ファームウェアの書換を想定した作りではなかった．家電も，同じ傾向があった．</p>
+
+<p>時代の流れに抗っても，得られるものは多くない．
+過去のある時点における優位をもって「組込み」を定義し続けたとき，
+得られるのは自己肯定感だけだろう．
+世間と専門家との定義の乖離は，専門家の価値低下を招き，組込みシステムを取り巻く業界を衰退に導くだろう．</p>
+
+<p>溜息が，こぼれる．</p>
 </div>
 
 
@@ -139,16 +170,16 @@
   
 
 
-<time datetime="2012-04-02T14:35:00+09:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
+<time datetime="2014-02-11T12:57:57+09:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
       
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2012/04/02/bye/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/02/11/what-is-embedded-system/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2012/04/02/bye/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2012/04/02/bye/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/02/11/what-is-embedded-system/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/02/11/what-is-embedded-system/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -161,10 +192,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="blog/2012/04/01/moved/" title="Previous Post: Lokka に引越しました">&laquo; Lokka に引越しました</a>
+        <a class="basic-alignment left" href="blog/2014/02/04/how-to-build-ebs-image/" title="Previous Post: EC2でXenのmini-osを動かす手順">&laquo; EC2でXenのmini-osを動かす手順</a>
       
-      
-        <a class="basic-alignment right" href="blog/2012/04/03/l-06c/" title="Next Post: L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い，">L-06C と iPad 用の Bluetooth キーボードは割とバランスが良い， &raquo;</a>
       
     </p>
   </footer>

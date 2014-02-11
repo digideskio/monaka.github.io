@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-04T20:36:11+09:00</updated>
+  <updated>2014-02-11T13:39:28+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[組込みシステム is 何?]]></title>
+    <link href="http://www.monaka.org/blog/2014/02/11/what-is-embedded-system/"/>
+    <updated>2014-02-11T12:57:57+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/02/11/what-is-embedded-system</id>
+    <content type="html"><![CDATA[<p>曰く．</p>
+
+<blockquote><p>一円単位でコストを削っているのでファームウェア書き換え前提のプロセスは組み込みではないです。iPhoneは組み込みじゃないですから。</p></blockquote>
+
+<p>溜息が出る．
+組込みシステムの文脈で露出の高い方から，こういう類の意見が出るたびに．</p>
+
+<!--more-->
+
+
+<p>組込みシステムでは，一円単位でのコスト抑制がかかることは，珍しくは無い．
+それは，その通り．
+コストが全て．だから，最近の自動車のコンピュータは書き換え可能になっている．
+ムダ・ムラを徹底的に排除する，あのトヨタの自動車でさえも．</p>
+
+<p>iPhone は組込みではないという．
+ならば，科学館や美術館へ行ってみるといい．
+iPhone の兄弟である iPad が，壁面に掲げられ，パネルに埋め込まれ，運用されているのをしばしば見かけるだろう．
+ああ，組込みシステムの開発者たちは，そういう場所に行く暇もないくらい忙しいのだっけか．</p>
+
+<p>サイネージの多くが，Windowsで動いている．
+自動販売機でLinuxのブートプロセスが表示されている写真が，SNSにアップロードされている．
+これらは組込みではないって?</p>
+
+<p>リセットベクタから管理するのが組込み?
+ならば.NET Micro flameworkや一部の組込みLinuxは，れっきとした組込みだろう．
+これらは自ら(つまりファーム)の一部を書き換えるケースを暗黙的に仮定している．</p>
+
+<p>組込みシステムの守備範囲は，膨大だ．
+そしていまだに膨張を続けている．
+この文明が滅ぶまで，膨張し続けるだろう．</p>
+
+<p>歴史の中で，確かに，ファームウェア書換ができないシステムが優位な時代もあった．
+今もあるだろう．今後も全滅するとは思わない．
+しかし，組込みシステムの守備範囲が広がっていく中で，割合として減っていくのは間違いない．
+かつて，自動車のエンジン制御用コンピュータは，ファームウェアの書換を想定した作りではなかった．家電も，同じ傾向があった．</p>
+
+<p>時代の流れに抗っても，得られるものは多くない．
+過去のある時点における優位をもって「組込み」を定義し続けたとき，
+得られるのは自己肯定感だけだろう．
+世間と専門家との定義の乖離は，専門家の価値低下を招き，組込みシステムを取り巻く業界を衰退に導くだろう．</p>
+
+<p>溜息が，こぼれる．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[EC2でXenのmini-osを動かす手順]]></title>
@@ -2089,24 +2140,6 @@ Android端末エミュレータ (jackpal.androidterm) に依存しているの�
 
 <p>ジャストフィットしないときは，無償/オープンソースで公開されている部分について，是非 <a href="https://bitbucket.org/onebox/oneboxpackagemanager/pull-requests">pull request を投げ</a>てください．
 検討します．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ソフトウェア作家とは何か．]]></title>
-    <link href="http://www.monaka.org/blog/2013/05/09/what-is-software-creator/"/>
-    <updated>2013-05-09T10:47:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/05/09/what-is-software-creator</id>
-    <content type="html"><![CDATA[<h2>オレオレ定義</h2>
-
-<blockquote class="twitter-tweet" lang="ja"><p>専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/331615204184055808">2013年5月7日</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>こんなオレオレ定義に何の意味があるのかと問われると，実は，私もよく判りません．
-まあ，誰かと意見すれ違ったときに，「ああ，あいつはこんなふうに定義しているのか」みたいな，ある種のアリバイかもしれませんね．</p>
 ]]></content>
   </entry>
   
