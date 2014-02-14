@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-15T00:11:32+09:00</updated>
+  <updated>2014-02-15T00:13:31+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[便利な世の中になったのに]]></title>
+    <link href="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/"/>
+    <updated>2014-02-15T00:00:00+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/02/15/does-it-become-easier</id>
+    <content type="html"><![CDATA[<p>特定の話題にインスパイヤされ，いくつか似た話題で連投した．
+けれども，これで一旦打ち止め．
+本稿は，アッサリと進め，終わる．
+オレオレ定義を始めると，長くなるし焦点はボケるし，ロクなことがない．</p>
+
+<p>本稿の契機(元ネタ)は「<a href="http://d.hatena.ne.jp/hyoshiok/">未来のいつか/hyoshiokの日記</a>」の「<a href="http://d.hatena.ne.jp/hyoshiok/20140212/p1">まつもとゆきひろのコピーは作れるのか。</a>」および，その反響 tweet から．</p>
+
+<p>元ネタ曰く，</p>
+
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。だけど、クラウドのサービスを使えば、それは1年に短縮できるとまつもとさんは言う。mrubyも成功したので、自分の方法論をまねすれば誰でもできるのになんで後進がいないのだろうか？と彼は問う。</p></blockquote>
+
+<!-- more -->
+
+
+<h2>1日なのか，20年+1日なのか</h2>
+
+<p>ここで唐突に，話題を移す．</p>
+
+<p>Ruby のような，世界の誰もが使うような素晴らしいソフトウェアの話 <strong>ではない</strong> ．
+世界の片隅ニッポンのとある休日に起きた，一人ハッカソンのお話．</p>
+
+<p>経緯の詳細は <a href="http://togetter.com/li/505758">togetter に纏まっている</a>．
+リンク先を読む必要は無い．
+「iPhone では存在するアプリが，Android には無い」という tweet を見て，うだつのあがらないAndroid好きエンジニアが立ち上があった，という．そこら辺に転がっているような話だ．
+で，結局，8時間かそこらで実働モックアップはできあがった．</p>
+
+<p>そのときのtweetで印象的だったものがあった．
+検索したけれど，出てこなかったので趣旨だけ要約する．</p>
+
+<blockquote><p>これって，1日仕事だけれど，25年+1日だよね．</p></blockquote>
+
+<p>そう．確かにAndroid版アプリは1日だけれども，そもそも25年前に宇宙研でパルサートラッキングに関わっていなければNMEAって何??? みたいな話だし，同時期からJavaに触れていたのは強みだし，震災がなければGPS連動アプリを作る経験も無かったし．
+8時間の背後には，亀みたいなノロマな伸びだったかも知れないが，25年がある．</p>
+
+<p>その25年を隠して，1日で作れたぞ，と言ったとしたら，ちょっとした詐欺だ．</p>
+
+<p>オッサンになると，ときどき，こういう小さな詐欺を働く．
+悪意は無いんだ．許しておくれ．</p>
+
+<h2>10年なのか，10+1年なのか</h2>
+
+<p>話を元に戻そう．</p>
+
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。</p></blockquote>
+
+<p>(中略)</p>
+
+<blockquote><p>それは1年に短縮できる</p></blockquote>
+
+<p>(中略)</p>
+
+<blockquote><p>mrubyも成功した</p></blockquote>
+
+<p>(mruby が成功したかどうかの断定には，若干の猶予が欲しい気もするが)概ね事実だと思う．
+1年に短縮できる．それは私も思う．10年前を知っているから．
+そして実際にmrubyの発展は1年だ．</p>
+
+<p>全てが便利になった．</p>
+
+<p>若い人に共感を得てもらうのは難しいけれど，便利になったのだよ．本当に．あらゆるものが．</p>
+
+<h2>さてはて</h2>
+
+<p>私の場合，25年+1日について指摘してくれた若者に対して，アタマを掻いた．
+そして少しだけ開き直った．その25年分こそがオッサンの強みだと．</p>
+
+<h2>スタートラインは，どこ?</h2>
+
+<p>同じスタートラインに立っていないのに，お前ら恵まれているのについてこない，っていうのはフェアじゃあない．
+私は，そう思う．</p>
+
+<p><em>1年でできたの? 10+1年なの?</em></p>
+
+<p>フェアでないものに，若い才能は集まらない．
+私の知る限りでは．</p>
+
+<p>しかし，言うまでもなく，私は，グローバルソフトウェアなんて縁遠い．
+せいぜい，世界中で演奏されているであろう楽器群に搭載されているRTOSと，
+輸出も視野にあるらしい宇宙機に組み込まれているはずのブートローダモニタくらいが，私の設計物だ．
+それらの製品は全体として素晴らしいが，私の意識からは，縁遠い．
+世界に対し，OSという，高々部品でしかないものを提供したに過ぎない．
+組込み屋の世界のソフトは，どのように評価されたとしても，高々部品だ．</p>
+
+<p>なので，グローバルソフトウェアの文脈では，違う意識が通用するのかもしれない．</p>
+
+<h2>なんにせよ</h2>
+
+<p>成功する若者を増やそうという試みそのものには，賛成ではある．
+成功した人たちに，ぜひ頑張っていただきたい．心から．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[howto と way]]></title>
@@ -2138,137 +2235,6 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
 <p>また，前のめりであるべきデジタル世界で，時計を戻して何かが良くなるような気もしない．</p>
 
 <p>今日，または明日，狂ったように突っ走るだけの価値があるものとは，何だろうか．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Restricted Words]]></title>
-    <link href="http://www.monaka.org/blog/2013/09/19/restricted-words/"/>
-    <updated>2013-09-19T13:57:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/09/19/restricted-words</id>
-    <content type="html"><![CDATA[<p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
-
-<h1>お題</h1>
-
-<p>引用する．</p>
-
-<blockquote><p>標準出力に
-Hello World
-と出力するプログラムを作成して下さい。</p>
-
-<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
-Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
-言語仕様をフル活用して下さい！</p></blockquote>
-
-<h1>解法の定石</h1>
-
-<p>定石は，数値を得て，その文字コードに変換する．
-ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
-
-<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
-出題者の意図は，この定石通りだった．
-回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
-
-<!-- more -->
-
-
-<blockquote><p>・C/C++
-初期化式を持たないグローバル変数はbssセクションに置かれます。main()が実行されるより前に0で初期化されるので、その変数をインクリメントすれば1になります。
-また、xorにより0を作り出し、それをインクリメントしても1になります。
-もしくは、少なくともx86/x64のgcc/clang上では、sizeof(char)は1です。</p></blockquote>
-
-<h1>もなもな的解法</h1>
-
-<p>定石通りに解くのは面白く無い．
-他の言語でなく GCC を選ぶからには，GCC なりの解き方で行かねば．
-なので，このように解いた．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/*
-</span><span class='line'> * Environment: gcc version 4.2.1 (Apple Inc. build 5666) (dot 3)
-</span><span class='line'> */
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>void
-</span><span class='line'>Hello(void)
-</span><span class='line'>{
-</span><span class='line'>  fputs(__func__, stdout);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>void
-</span><span class='line'>konokansuu_wa_space_wo_hyouji__(void)
-</span><span class='line'>{
-</span><span class='line'>  printf("%c", (int)sizeof(__func__));
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>void
-</span><span class='line'>World(void)
-</span><span class='line'>{
-</span><span class='line'>  puts(__func__);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int
-</span><span class='line'>main(void)
-</span><span class='line'>{
-</span><span class='line'>  Hello();
-</span><span class='line'>  konokansuu_wa_space_wo_hyouji__();
-</span><span class='line'>  World();    
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>__func__</code> は GCC拡張のビルトインマクロ．
-最終的には関数名の文字列リテラルに展開される．
-しかし，cpp を通した時点ではC言語仕様の数値，文字には展開されない．セーフ．</p>
-
-<p>スペース文字を関数名に含めることは(当然)できないので，一工夫．
-関数名を31文字にして，<code>__func__</code> の sizeof を取った．ナル文字含めて32．
-これを文字として表示すればスペース文字になる．</p>
-
-<blockquote><p>言語仕様をフル活用して下さい！</p></blockquote>
-
-<p>とのことで，GCC の言語仕様を活用．
-LL系言語だと，シンボルを文字列に変換する機能をよく見かけるけれど，C言語でこの技法を選ぶ奴は少ない…よね．たぶん．</p>
-
-<h1>馬脚，もしくは，見直しは大事だよ</h1>
-
-<p>なお，出題者からのコメント．</p>
-
-<blockquote><p>なお、putchar()を使えば&#8221;%c&#8221;は回避可能です。</p></blockquote>
-
-<p>確かに．</p>
-
-<p>そういや，学生だった頃も，最後の見直しをしないで提出して，必ず何点か引かれていたよなぁ…．
-こういうの，何歳になっても，治らんね．</p>
 ]]></content>
   </entry>
   

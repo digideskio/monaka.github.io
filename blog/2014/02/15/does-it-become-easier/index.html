@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>動くのこれ? - もなもなもなかのページ</title>
+  <title>便利な世の中になったのに - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
+  <meta name="description" content="特定の話題にインスパイヤされ，いくつか似た話題で連投した．
+けれども，これで一旦打ち止め．
+本稿は，アッサリと進め，終わる．
+オレオレ定義を始めると，長くなるし焦点はボケるし，ロクなことがない． 本稿の契機(元ネタ)は「未来のいつか/hyoshiokの日記」の「まつもとゆきひろのコピーは作れるのか &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org/blog/2012/05/22/work_p/">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">動くのこれ?</h1>
+      <h1 class="entry-title">便利な世の中になったのに</h1>
     
     
       <p class="meta">
@@ -98,43 +100,102 @@
   
 
 
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+<time datetime="2014-02-15T00:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
+<div class="entry-content"><p>特定の話題にインスパイヤされ，いくつか似た話題で連投した．
+けれども，これで一旦打ち止め．
+本稿は，アッサリと進め，終わる．
+オレオレ定義を始めると，長くなるし焦点はボケるし，ロクなことがない．</p>
 
-<p>で，startup.s を見てみた．</p>
+<p>本稿の契機(元ネタ)は「<a href="http://d.hatena.ne.jp/hyoshiok/">未来のいつか/hyoshiokの日記</a>」の「<a href="http://d.hatena.ne.jp/hyoshiok/20140212/p1">まつもとゆきひろのコピーは作れるのか。</a>」および，その反響 tweet から．</p>
 
-<pre><code>.text
+<p>元ネタ曰く，</p>
 
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。だけど、クラウドのサービスを使えば、それは1年に短縮できるとまつもとさんは言う。mrubyも成功したので、自分の方法論をまねすれば誰でもできるのになんで後進がいないのだろうか？と彼は問う。</p></blockquote>
 
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
+<!-- more -->
 
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
 
-<p>&hellip;(ﾟдﾟlll) ベクタどこよ…</p>
+<h2>1日なのか，20年+1日なのか</h2>
 
-<h2>あ，動くのか．</h2>
+<p>ここで唐突に，話題を移す．</p>
 
-<p>これ Cortex-M3系だものね…．</p>
+<p>Ruby のような，世界の誰もが使うような素晴らしいソフトウェアの話 <strong>ではない</strong> ．
+世界の片隅ニッポンのとある休日に起きた，一人ハッカソンのお話．</p>
+
+<p>経緯の詳細は <a href="http://togetter.com/li/505758">togetter に纏まっている</a>．
+リンク先を読む必要は無い．
+「iPhone では存在するアプリが，Android には無い」という tweet を見て，うだつのあがらないAndroid好きエンジニアが立ち上があった，という．そこら辺に転がっているような話だ．
+で，結局，8時間かそこらで実働モックアップはできあがった．</p>
+
+<p>そのときのtweetで印象的だったものがあった．
+検索したけれど，出てこなかったので趣旨だけ要約する．</p>
+
+<blockquote><p>これって，1日仕事だけれど，25年+1日だよね．</p></blockquote>
+
+<p>そう．確かにAndroid版アプリは1日だけれども，そもそも25年前に宇宙研でパルサートラッキングに関わっていなければNMEAって何??? みたいな話だし，同時期からJavaに触れていたのは強みだし，震災がなければGPS連動アプリを作る経験も無かったし．
+8時間の背後には，亀みたいなノロマな伸びだったかも知れないが，25年がある．</p>
+
+<p>その25年を隠して，1日で作れたぞ，と言ったとしたら，ちょっとした詐欺だ．</p>
+
+<p>オッサンになると，ときどき，こういう小さな詐欺を働く．
+悪意は無いんだ．許しておくれ．</p>
+
+<h2>10年なのか，10+1年なのか</h2>
+
+<p>話を元に戻そう．</p>
+
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。</p></blockquote>
+
+<p>(中略)</p>
+
+<blockquote><p>それは1年に短縮できる</p></blockquote>
+
+<p>(中略)</p>
+
+<blockquote><p>mrubyも成功した</p></blockquote>
+
+<p>(mruby が成功したかどうかの断定には，若干の猶予が欲しい気もするが)概ね事実だと思う．
+1年に短縮できる．それは私も思う．10年前を知っているから．
+そして実際にmrubyの発展は1年だ．</p>
+
+<p>全てが便利になった．</p>
+
+<p>若い人に共感を得てもらうのは難しいけれど，便利になったのだよ．本当に．あらゆるものが．</p>
+
+<h2>さてはて</h2>
+
+<p>私の場合，25年+1日について指摘してくれた若者に対して，アタマを掻いた．
+そして少しだけ開き直った．その25年分こそがオッサンの強みだと．</p>
+
+<h2>スタートラインは，どこ?</h2>
+
+<p>同じスタートラインに立っていないのに，お前ら恵まれているのについてこない，っていうのはフェアじゃあない．
+私は，そう思う．</p>
+
+<p><em>1年でできたの? 10+1年なの?</em></p>
+
+<p>フェアでないものに，若い才能は集まらない．
+私の知る限りでは．</p>
+
+<p>しかし，言うまでもなく，私は，グローバルソフトウェアなんて縁遠い．
+せいぜい，世界中で演奏されているであろう楽器群に搭載されているRTOSと，
+輸出も視野にあるらしい宇宙機に組み込まれているはずのブートローダモニタくらいが，私の設計物だ．
+それらの製品は全体として素晴らしいが，私の意識からは，縁遠い．
+世界に対し，OSという，高々部品でしかないものを提供したに過ぎない．
+組込み屋の世界のソフトは，どのように評価されたとしても，高々部品だ．</p>
+
+<p>なので，グローバルソフトウェアの文脈では，違う意識が通用するのかもしれない．</p>
+
+<h2>なんにせよ</h2>
+
+<p>成功する若者を増やそうという試みそのものには，賛成ではある．
+成功した人たちに，ぜひ頑張っていただきたい．心から．</p>
 </div>
 
 
@@ -157,16 +218,22 @@
   
 
 
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+<time datetime="2014-02-15T00:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/floss/'>FLOSS</a>, <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2012/05/22/work_p/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2012/05/22/work_p/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2012/05/22/work_p/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -179,10 +246,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="blog/2012/04/25/l-06c/" title="Previous Post: L-06C rooted">&laquo; L-06C rooted</a>
+        <a class="basic-alignment left" href="blog/2014/02/14/way-and-howto/" title="Previous Post: howto と way">&laquo; howto と way</a>
       
-      
-        <a class="basic-alignment right" href="blog/2012/06/19/mbp-batt/" title="Next Post: MacBookPro のバッテリー交換">MacBookPro のバッテリー交換 &raquo;</a>
       
     </p>
   </footer>
