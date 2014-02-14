@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-14T15:07:51+09:00</updated>
+  <updated>2014-02-14T15:09:50+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -14,21 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Luck For Being A Great Hacker]]></title>
+    <title type="html"><![CDATA[ハッカーとして名を成すための「運」]]></title>
     <link href="http://www.monaka.org/blog/2014/02/14/luck-for-being-a-great-hacker/"/>
-    <updated>2014-02-14T00:00:00+09:00</updated>
+    <updated>2014-02-14T13:14:58+09:00</updated>
     <id>http://www.monaka.org/blog/2014/02/14/luck-for-being-a-great-hacker</id>
-    <content type="html"><![CDATA[<blockquote><hr />
-
-<p>layout: post
-title: &ldquo;ハッカーとして名を成すための「運」&rdquo;
-date: 2014-02-14 13:14:58 +0900
-comments: true
-published: true</p>
-
-<h2>categories: </h2></blockquote>
-
-<p>本稿の契機(元ネタ)は「<a href="http://d.hatena.ne.jp/hyoshiok/">未来のいつか/hyoshiokの日記</a>」の「<a href="http://d.hatena.ne.jp/hyoshiok/20140212/p1">まつもとゆきひろのコピーは作れるのか。</a>」および，その反響 tweet から．</p>
+    <content type="html"><![CDATA[<p>本稿の契機(元ネタ)は「<a href="http://d.hatena.ne.jp/hyoshiok/">未来のいつか/hyoshiokの日記</a>」の「<a href="http://d.hatena.ne.jp/hyoshiok/20140212/p1">まつもとゆきひろのコピーは作れるのか。</a>」および，その反響 tweet から．</p>
 
 <p>元ネタで示されている「Rubyにみるグローバルソフトウェア開発」というタイトルでの講演は，聴講していない．
 そのため，今書いているエントリは，元の文脈から逸れている可能性はある．
