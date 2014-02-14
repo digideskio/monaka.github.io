@@ -9,9 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="余談 最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
-ざっくりとした経過は，先週末くらいからtwitterで呟いている． 一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
-でも開発資金もないし市場も立ち上がっている風でもない． &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/page/2/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/13/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/04/how-to-build-ebs-image/">EC2でXenのmini-osを動かす手順</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
     
     
       <p class="meta">
@@ -102,162 +101,16 @@
   
 
 
-<time datetime="2014-02-04T10:26:39+09:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h1>余談</h1>
-
-<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
-ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
-
-<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
-でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
-資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
-思案の最中．
-うだつが上がらんと，ほんと，なんにもできないねぇ．
-やだやだ．</p>
-
-<p>閑話休題．</p>
-
-<h1>まくら</h1>
-
-<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
-Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
-私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
-よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
-
-<p>手順は本家ヘルプページに割と細かく説明されている．
-解説ブログも，ググれば山盛り．
-さすがは，みんな大好きAWS．</p>
-
-<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
-
-<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
-
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/04/how-to-build-ebs-image/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/03/keep-good-company/">Keep Good Company</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-03T15:30:22+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>起業したいという方と話をしていると，必ず出るのが，雇用に関する話．</p>
-
-<p>曰く，「起業をしたいのに，社員候補が居ない．」
-経営と雇用を混同している起業志望者の．典型だ．</p>
-
-<p>別のパターンもある．
-同年代で先に起業した人たちの「社員の定着が悪い」とぼやくのを聞き，起業前から心配している．
-中年から上の年代に多い．</p>
-
-<p>こんなふうに，起業/経営と，雇用することが不可分になっている方は，想像以上に多い．
-…というか，私自身が，割と長い間，不可分に考えていた．</p>
-
-<h2></h2>
-
-<p>今の私は，こう思う．
-「雇用するから，社員の心配をしなければいけなくなる．雇用はしちゃダメ」</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/03/keep-good-company/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/01/my-fault/">参加しないと見せないよ．を作った罪</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-01T08:28:21+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>140字以内で纏めると，こういうこと．</p>
-
-<blockquote class="twitter-tweet"><p>「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/429207095041224704">January 31, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>私は，TOPPERSプロジェクトという，組込み系OSSを担いだNPOに参加していた．
-設立準備から手伝って，一応10年くらい理事もしていた．</p>
-
-<p>NPO法人TOPPERSプロジェクトは，組込みソフトの団体として，成功したと思う．
-電子ピアノにも，宇宙機にも，自動車にも載った．
-私が書いたソースコードも，割と入っている．
-そこらそんじょのOSSなんざ蹴散らすくらいの採用例，出荷総数はあるだろう．</p>
-
-<p>今は辞めた．
-理事も辞めたし，今や会員ですらない．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/01/my-fault/">Read on &rarr;</a>
-    </footer>
   
 
 
@@ -265,11 +118,9 @@ Amazon が提供していないカーネルを独自に EC2 で動作させる�
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
-    
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/12/">Newer &rarr;</a>
     
   </div>
 </div>
