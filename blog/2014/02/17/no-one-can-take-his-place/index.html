@@ -5,13 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>パスワードもユーザ名も正しいはずなのに，の巻 - もなもなもなかのページ</title>
+  <title>君の代わりはいない．ぼくの代わりもいない． - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ことの起こり AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
-難しい話ではない． だけど繋がらない． あれれ? だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
-IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
+  <meta name="description" content="食材の買い出しのため，八百屋に行った．
+タラの芽が並んでいた．
+そうか，そういう季節か． タラの芽の天ぷらは，この季節の定番だ．
+…大好きかと問われると，実は，そうでもない．
+でもまあ，今の季節なら，食べる．
+噛みしめると，そろそろ寒さも緩むな，という気がするから． タラの芽を， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +23,7 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/02/17/no-one-can-take-his-place/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +86,7 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
   <header>
     
-      <h1 class="entry-title">パスワードもユーザ名も正しいはずなのに，の巻</h1>
+      <h1 class="entry-title">君の代わりはいない．ぼくの代わりもいない．</h1>
     
     
       <p class="meta">
@@ -99,109 +102,92 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
 
 
-<time datetime="2014-01-15T01:33:07+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
+<time datetime="2014-02-17T15:35:11+09:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h1>ことの起こり</h1>
-
-<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
-難しい話ではない．</p>
-
-<p>だけど繋がらない． あれれ?</p>
-
-<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
-IMAP は有効にしたし，2段階認証はやっていないし．</p>
-
-<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
+<div class="entry-content"><p>食材の買い出しのため，八百屋に行った．
+タラの芽が並んでいた．
+そうか，そういう季節か．</p>
 
 <!-- more -->
 
 
-<p>仕方がないな．
-OTRS は (Ruby ではなく) Perl で大半が書かれている．
-それと似たような記述でログインをテストしてみる．
-こんな感じ．</p>
+<p>タラの芽の天ぷらは，この季節の定番だ．
+…大好きかと問われると，実は，そうでもない．
+でもまあ，今の季節なら，食べる．
+噛みしめると，そろそろ寒さも緩むな，という気がするから．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use Net::IMAP::Simple;
-</span><span class='line'>
-</span><span class='line'>use IO::Socket::SSL;
-</span><span class='line'>
-</span><span class='line'># Create the object
-</span><span class='line'>my $imap = Net::IMAP::Simple-&gt;new('imap.gmail.com', use_ssl =&gt; 1, port =&gt; 993) ||
-</span><span class='line'>  die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
-</span><span class='line'>
-</span><span class='line'># Log on
-</span><span class='line'>if (!$imap-&gt;login('___________@gmail.com','_p_a_s_s_w_o_r_d_', debug =&gt; 1)) {
-</span><span class='line'>  print STDERR "Login failed: " . $imap-&gt;errstr . "\n";
-</span><span class='line'>  exit(64);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<p>タラの芽を，夏の暑い盛りに食べても，別に変ではないだろう．
+独特の軽い苦味は，夏バテにも効きそうな気もする．
+でも食べない．
+旬じゃないから．</p>
 
+<h2></h2>
 
-<p>実行…あれれ?</p>
+<p>食べ物だけでなく，あらゆるものには旬がある．
+昔の人は，人生を，春夏秋冬になぞらえた．
+人は変わっていく．
+私は変わらないと胸を張る人でも，老いていかないということはない．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ip-10-0-0-208:~$ perl test.pl
-</span><span class='line'>Login failed: [ALERT] Please log in via your web browser: http://support.google.com/mail/accounts/bin/answer.py?answer=78754 (Failure)</span></code></pre></td></tr></table></div></figure>
+<p>そして昔の人は，世の中も，1年よりも長い何らか周期のあるものとして捉えた．
+その周期は，地方や時代によって様々だ．
+けれども一般論として，古今東西，環境が不変だいう解釈は無いということは言えるだろう．
+世の中にも，旬がある．</p>
 
+<p>人は，世の中で生きている．
+自分も変わる．周りも変わる．</p>
 
-<p>んんん?</p>
+<h2></h2>
 
-<p>ブラウザでアクセスせよ，とな．
-でも，この動作環境，Ubuntu Server で，デスクトップ環境入ってないよ．もちろんブラウザも．</p>
+<p>「<a href="http://internet.watch.impress.co.jp/cda/news/2006/10/24/13721.html">次のビル・ゲイツを</a>」「<a href="http://wired.jp/2012/04/24/sxsw-vol3/">日本のザッカーバーグは誰だ!?</a>」「<a href="http://www.nhk.or.jp/sakidori/backnumber/120909.html">日本のジョブズを探せ！</a>」</p>
 
-<p>手元のブラウザで事態を把握してみようと試みたところ，どうやらイカガワシイと思われるアクセスを遮断しているようだ．
-<img src="/blog/2014/01/15/screen-shot-2014-01-15.png" alt="赤い画面でお怒りのGmail様" /></p>
+<p>ビル・ゲイツ，マーク・ザッカーバーグ，スティーブ・ジョブズ，いずれも成功したアイコンであることは，否定の余地がない．
+しかし，彼らの成功は，旬を無視できるような，汎用的なメソドロジによって為されたのだろうか．</p>
 
-<h1>socksサーバを立ってて逃げ道を作る．</h1>
+<p>私は，疑わしいと思う．
+ある人の，ある時の成功は，世界を取り巻くあらゆるものが旬であったから成し得たのではないか．</p>
 
-<p>w3m など，文字ターミナル向けブラウザを使ってアクセスすれば良いのかもしれない．
-でも，たぶん，Googleのことだから，JavaScriptとか入っていていろいろ面倒なことになりそうだ．</p>
+<p>成功した人を見て，その成功を否定するほど，私はヒネてはいない．
+しかし，彼らの成功の要因には，その時代の旬が強く影響している，とは思う．
+旬の巡りあわせだけで成し遂げられる，なんてことも思わないが．
+こういった微妙なところを無視して真似して，成功に辿り着けるのだろうか．</p>
 
-<p>なので，ssh についている socks サーバ機能を用いる．
-手元の端末から，次のようにして，1080 版をsocksの口にする．</p>
+<p>だれも誰かの代わりには成れない．
+コピーにも成れない．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -D1080 server.example.com</span></code></pre></td></tr></table></div></figure>
+<h2></h2>
 
+<p>IT関連の所轄官庁の一つである経産省が，企業への支援から，その一部を優秀な個人をも支援するようになってから，約15年になる．
+具体例の一つであるIPA未踏事業については，実数は怠惰により調べていないが，3桁規模の採択者が存在するはずだ．
+採択者には，その後，大成した人もいれば，そうでもない人もいる．</p>
 
-<p>server.example.com は，実際には，EC2のインスタンス．
-ここで指定した1080番ポートはlocalhostのもの．だから，EC2側のincomingはsshのポート，TCP 22番だけ開いていればよい．</p>
+<p>おそらく，メソドロジ確立のための母集団としては，そこそこ成り立つ量になっているだろう．</p>
 
-<p>そして，手元のブラウザのproxy設定．localhost:1080 で socks を経由するよう設定する．</p>
+<p>IT関連の育成に関わる方々のお考えは様々だが，<strong>成功した人の二番煎じになる天才を見つけよう育てよう，という考え方については捨て</strong>たらどうだろうかと，思う．
+そこそこの才能の持ち主が確実に成功するためのメソッドは，有り得ないだろうか．
+そういうメソッドの開発を考えるだけのデータは，そろそろ貯まってきているのではないだろうか．</p>
 
-<p>ここまでで下ごしらえは完了．
-手元のブラウザから，Gmail へアクセスする．
-あとは…なりゆきでアクセスすれば，お怒りが解けた…はず．
-(2月に入ってからこの稿を書き上げているので，記憶が既に曖昧…)</p>
+<h2></h2>
 
-<h1>まとめっぽい何か</h1>
+<p>ニッポンは，優れた人材を輩出し組織化する能力はあるが，それらの要因を調べメソッドとして抽出する能力は，極めて低い．
+このことは，しばしば言及されるところだろう．</p>
 
-<p>ssh の -D オプションは，ヘッドレスサーバを管理している時に割と便利なので，覚えておくと何かと役に立つ．</p>
+<p>アジャイルプロセスは逆輸入だし，ジョブズのソニー好き，ジェフ・ベゾスのKaizen好きもよく知られている．
+日本の優れたところは，猿真似やコピーはされず，抽出・応用され，ニッポンを劣勢に追いやっている．</p>
 
-<p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
-面倒だ，と不満を漏らしてはいけないのだろう．</p>
+<p>日本は，メソドロジの開発を，考えていく必要があるのではと思う．
+苦手としている分，ことさら意識的に．</p>
+
+<p>本稿はIT関係について述べている．
+でも，テクノロジが関わるあらゆる分野についても，似たようなことが言えるのかもしれないとも思っている．</p>
+
+<h2>…</h2>
+
+<p>など考え事しながら買い物をしていたら，タラの芽を買ってくるのを忘れた．</p>
 </div>
 
 
@@ -224,16 +210,22 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
   
 
 
-<time datetime="2014-01-15T01:33:07+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
+<time datetime="2014-02-17T15:35:11+09:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/02/17/no-one-can-take-his-place/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/02/17/no-one-can-take-his-place/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/02/17/no-one-can-take-his-place/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -246,10 +238,8 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="blog/2014/01/14/gmail-imap-sync-with-ruby/" title="Previous Post: Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法">&laquo; Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
+        <a class="basic-alignment left" href="blog/2014/02/16/media-literacy-saves-you/" title="Previous Post: メディア・リテラシと，生存">&laquo; メディア・リテラシと，生存</a>
       
-      
-        <a class="basic-alignment right" href="blog/2014/01/28/best-way-to-employ-on-startup-stage/" title="Next Post: スタートアップで優秀な技術者を探す方法">スタートアップで優秀な技術者を探す方法 &raquo;</a>
       
     </p>
   </footer>
