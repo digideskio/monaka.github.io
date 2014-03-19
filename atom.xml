@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-19T14:54:46+09:00</updated>
+  <updated>2014-03-19T14:56:36+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -47,7 +47,7 @@
 OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
 そんな事態に陥っても，せめて API は互換になるよう頑張る．</p>
 
-<p>なぜなら，APIの分裂は，開発者のの利便性を下げる．
+<p>なぜなら，APIの分裂は，開発者の利便性を下げる．
 利便性の悪いソフトは，開発者コミュニティから敬遠される．
 結局のところ，分裂したプロジェクトの両方にとって損となる．</p>
 
@@ -59,8 +59,8 @@ OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
 
 <p>じゃあなんで，私が損な選択を敢えてしようとしたのか．</p>
 
-<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある．
-(上記tweetを読めば，解る人には解る)
+<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある
+(上記tweetを読めば，解る人には解る)．
 そして，私の言い分にも，もちろん妥当性はある．</p>
 
 <p>mrubyリポジトリ上の話題としては過ぎたことなので，どうでもよいといえばどうでもよいのだけれども．
