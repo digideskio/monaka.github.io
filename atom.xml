@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-19T16:58:22+09:00</updated>
+  <updated>2014-03-19T17:00:34+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,158 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C言語における暗黙の型変換とAPI設計]]></title>
+    <link href="http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/"/>
+    <updated>2014-03-19T14:06:12+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c</id>
+    <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
+
+<h2>C言語の整数型に潜む悪夢</h2>
+
+<p>まずは，よく知られているところから．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>#include &lt;stdlib.h&gt;
+</span><span class='line'>
+</span><span class='line'>int
+</span><span class='line'>main(void)
+</span><span class='line'>{
+</span><span class='line'>  int a = 65535;
+</span><span class='line'>  char b;
+</span><span class='line'>
+</span><span class='line'>  b = a;
+</span><span class='line'>
+</span><span class='line'>  printf("%d %d\n", a, b);
+</span><span class='line'>
+</span><span class='line'>  return EXIT_SUCCESS;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「a に 65535 を代入し，b に a の値を代入しているのだから，b も 65535 になるはず．」
+などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
+
+<p>なぜなら，一般に，char 型の変数が保持できる値の範囲は，int 型の変数が保持できる値の範囲よりも小さいから．
+概ね(…とボカす理由は後述)，char は -128 から 127 までの整数のみ保存できない．</p>
+
+<p>この性質は，ときどき，極めて恐ろしい．
+C言語は，上の例のように保持できる値の範囲が小さい変数への代入を，エラーとして扱わない．しかしその結果は，おそらく，プログラマの期待とは異なる．
+こういう挙動によるバグは，発見するのが困難なものとなる．</p>
+
+<p>もしかしたら気の利いた処理系では警告を出してくれるかもしれないが．
+しかし，私の手元にあった XCode の gcc では，割と厳格な警告を出すようオプションとして <code>-pedantic -std=c99 -W -Wall</code> を指定したが，素通りした．</p>
+
+<p>さて，それでは変数 b の型を int 型にすれば解決か?
+残念ながら，それもダメ．なぜなら，int 型が保持できる整数の範囲は処理系定義であるから．
+int 型のサイズが 16 ビットだったなら，保持できる整数の範囲は -32768 から 32767 までしかない．a への代入の時点で，数値が期待と異なる．
+つまり，上記のリストは，ある環境では動くかもしれないが，別の環境では動かない．</p>
+
+<p>さらに疑心暗鬼になると，char 型のサイズも実はC言語仕様は決めていない．
+だからもしかすると，int 型と char 型のサイズが共に17ビット以上ある処理系なら，上記のリストは期待通りに動くかもしれない．
+DSP など特殊用途のプロセッサでは，char 型が 24 ビットだったり 32 ビットだったりというのは，十分に有り得る．</p>
+
+<p>このように，学校などで無邪気に語られる「C言語には移植性がある」などというのは嘘っぱちも甚だしい．
+C言語プログラマは，細心の注意をもって，自ら移植性を担保しなければならない．</p>
+
+<p>さて，上記をまとめると，C言語プログラミングには，次のような鉄則がある．</p>
+
+<blockquote><p>整数型変数の代入の際には，右辺にある数値が，左辺にある変数の型に収まるかどうかを，しつこいほど気にしなければならない．</p></blockquote>
+
+<p>以上が前提知識．本題に入る．</p>
+
+<h2>移植性が確保できる C 言語 API</h2>
+
+<p>C 言語 API は，(プリプロセッサマクロで書けなくも無いが)普通はC言語の関数として用意する．</p>
+
+<p>C 言語の関数呼び出しは，値渡しだ．ポインタ渡しも，ポインタの値を渡している．
+つまり，関数呼び出しにおいて，代入と同じことが起こる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>#include &lt;stdlib.h&gt;
+</span><span class='line'>
+</span><span class='line'>int
+</span><span class='line'>foo(char b)
+</span><span class='line'>{
+</span><span class='line'>  printf("%d\n", b);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int
+</span><span class='line'>main(void)
+</span><span class='line'>{
+</span><span class='line'>  int a = 65535;
+</span><span class='line'>
+</span><span class='line'>  foo(a);
+</span><span class='line'>
+</span><span class='line'>  return EXIT_SUCCESS;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このリストも，エラーも(GCCでは警告も)出ずにリンクまで通る．
+代入に関する話題から判る通り printf の出力は，65535 にはならないかもしれないし，なるかもしれない．</p>
+
+<p>ここで C言語での API 設計における鉄則が見えてくる．</p>
+
+<blockquote><p>APIでは，暗黙の型変換を誘ってしまうような，関数宣言をしてはいけない．</p></blockquote>
+
+<p>この鉄則を守る方法として，安直なのは，API が受け取る整数型を大きめにとっておくこと．
+ダウンキャストでは値が落ちるが，アップキャスト(大きな範囲を取れる型へのキャスト)では整数が確実に代入できることは保証されている．
+しかし，&#8221;安直&#8221;である理由が2つあり，お薦めはしない．</p>
+
+<p>まず，大きな整数型というのは，コストが高いから．
+CPUから見て計算コストが高い．メモリも余計に消費する．</p>
+
+<p>そして，古めのC言語仕様では，最大の数値型が何なのか実は判らないから．
+C99標準以降，処理系が扱える最大の整数型 uintmax_t ならびに intmax_t という型が規定された．しかし，分野によっては無視できないシェアを誇る Microsoft Visual C++ は，C99 への対応が中途半端で，umaxint_t, intmax_t は，定義されていない．</p>
+
+<p>そんなわけで，API は，関数呼び出し時に，整数型のアップキャストもダウンキャストも，させてはいけない．</p>
+
+<p>暗黙の型変換が無いとC言語のコーディングは酷く窮屈になる．
+だから，C言語仕様も，容認している．
+しかし，こと API についていえば，暗黙の型変換は，害悪でしかない．</p>
+
+<p>結論として，APIでは，ユーザの関数呼び出し時に使うであろう型を，そのまま用いる，というのが唯一無二の選択となる．</p>
+
+<h2></h2>
+
+<p>さて，長くなった．
+Matz 氏と私が，mruby の API についてどのように考えたのか．
+それは明日以降に．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C言語APIの作り方 - 前口上]]></title>
@@ -2174,81 +2326,6 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
 
 
 <p>あとは，上手いことやってください．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[安全の礎たるもの]]></title>
-    <link href="http://www.monaka.org/blog/2013/11/16/safety-stands-on/"/>
-    <updated>2013-11-16T16:26:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/11/16/safety-stands-on</id>
-    <content type="html"><![CDATA[<p>もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました．</p>
-
-<ul>
-<li>&ldquo;<a href="http://eetimes.jp/ee/articles/1311/11/news072.html]">トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細</a>&rdquo;</li>
-</ul>
-
-
-<blockquote><p>2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」が急加速したことによる死亡事故が発生した。事故をめぐる訴訟において、原告側証人として事故原因の調査を行った組み込みソフトウェアの専門家は、裁判で「カムリのエンジン制御モジュール（ECM）のファームウェアに重大な欠陥が見つかった」と報告した。</p></blockquote>
-
-<p>だそうです．
-通常，組込み業界系メディアが一般の…プログラマ界隈でさえ…取り上げられることは滅多にないのですが，Twitter の TL を軸にして眺めていたところ，割と広く拡散したように見えます．
-トヨタという知名度，クルマという日常生活に深く関わるものに関すること，加えて，コード品質からの切り口は，組込み業界以外のプログラマでも話題にしやすかったということがあったのだろうと思います．</p>
-
-<!-- more -->
-
-
-<p>ワタクシは，経歴がどうであれ，傍流で眺めているだけのクズエンジニアですから．
-昼のラーメン屋で，タブロイド紙を面白可笑しくネタにするダメリーマンと同じく，適当なことを Twitter に放流していました．(あ，でも軽口はあっても嘘は入れていないつもりです)．
-調査をしたというMichael Barr氏の素性もよくわからないですし，報道の段階で誤解曲解があることは十分に想定の範囲ですし，ね．</p>
-
-<p>まあ，「&#8221;安全&#8221;とは何か!」みたいな哲学的な事柄を科学的に突き詰める方々については，お顔も思い浮かびますし，まあ怒って長文を投げる方もいらっしゃるだろうなぁ，くらいには思っていましたけれども．</p>
-
-<p>で，やはりというか，blogエントリが上がりました．</p>
-
-<ul>
-<li>&ldquo;<a href="http://embeddedsoftwaremanufactory.blogspot.jp/2013/11/blog-post.html">安全を売りにするな！安全を食いものにするな！</a>&rdquo;</li>
-</ul>
-
-
-<p>の，後半です．非公式な情報では全文のご執筆は4時間にもわたるものだそうで，読み応えがあります．
-ワタクシのアホtweetは，全くもってカスに見えます．
-ワタクシのtweetは不随意反射，タイピング時間を除くと 1[sec/tweet]もかかってないでしょうから，比べたら失礼の極みですが．</p>
-
-<p>ソフトウェアの安全，という話題を日本でするに当たり，言及がないことが考えられないくらい著名なエンジニアであり研究者である酒井氏の発言です．
-安全に関するご指摘に誤りがあろうはずもありません．
-特に，下記のご指摘は，とても重要と思います．</p>
-
-<blockquote><p>ソフトウェア品質とシステムの安全をごっちゃにしている。</p></blockquote>
-
-<p>件の元記事への批判としては，これで十分と思えます．
-にも関わらず，なんであんな冗長な文章を書く必要があったのかワタクシには判りませんが…安全とは，言葉を尽くさないと語れないものなのであります．たぶん．</p>
-
-<p>ま，そんなわけで，オーソリティにアホが何言っても詮ないのですが，底辺プログラマとして，気になることが，一つだけ．</p>
-
-<blockquote><blockquote><p>み込み機器向けのコンサルティングを手掛けるBarr GroupのCTO（最高技術責任者）であり、共同創設者でもあるMichael Barr氏＊）は2013年10月、EDNの問い合わせに対し、今回の調査結果を明らかにした。Barr氏は同僚とともに、裁判の原告側の専門家証人として徹底的な調査を実施した結果を明らかにした。<div style="color:red">これは、セーフティクリティカルシステム開発に携わる全ての人々に対する教訓となるだろう。</div>自動車業界や医療機器業界、航空宇宙業界などのいずれの分野においても、欠陥が生じることは決して許されない。</p></blockquote>
-
-<p>冗談だろう。教訓にもなにもならない。</p></blockquote>
-
-<p>ふーむ．教訓にもなにもならない，ですか…．</p>
-
-<p>Barr氏の言っていることのうち，コード品質に関する部分が本当であるならば，という仮定付きで，かつ，Barr氏の意図と必ずしも合致していないかもしれない，という前提付きでもありますが．
-ワタクシは，これ，安全だの信頼だの言っている人たちへの教訓に十分なると思ったりします．
-端的にいうと，こんな感じです．</p>
-
-<p><strong>全体最適だの機能安全だの崇高なことをいっている間に，根となるべきプログラマの品質確保に失敗しているってことではないですかね?  底辺プログラマでも天を仰ぐような品質問題がボコボコ指摘されるってことは．</strong></p>
-
-<p>「ソフトウェア品質とシステムの安全をごっちゃにしている。」のはワタクシも思うのですが， <strong>品質の悪いソフトはシステムの安全を脅かす</strong> ということは経験知としてさほどおかしな話でもなさげです．
-てか，品質が悪いソフトを内蔵しつつ安全なシステムで，顧客の満足も得られた例って，あるんですかね? 言葉遊びの上では在り得ることは解りますが．</p>
-
-<p>品質が良ければ安全とは限らないなんてのは，底辺プログラマのワタクシでも判ります．
-が，品質が悪く安全を担保できるのかって指摘に対して，安全とは，って解くの，専門家すぎて，よくわかんな〜いです．</p>
-
-<p><strong>スリカエじゃ無いですか? それって．（・＿・）</strong></p>
-
-<p>………なんてな．(CV:いかりや長介)</p>
-
-<p>twitter でのワタクシのゲス発言を基に，少し加筆してみました．ゲス発言に何を加筆しても，ゲス発言ですな．お目汚し，すんません． (_ _)</p>
 ]]></content>
   </entry>
   

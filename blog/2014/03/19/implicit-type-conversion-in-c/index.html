@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>C言語における暗黙の型変換とAPI設計 - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -36,7 +36,7 @@ main(void)
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -94,15 +94,12 @@ main(void)
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a></h1>
+      <h1 class="entry-title">C言語における暗黙の型変換とAPI設計</h1>
     
     
       <p class="meta">
@@ -125,7 +122,7 @@ main(void)
   </header>
 
 
-  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
+<div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
 
 <h2>C言語の整数型に潜む悪夢</h2>
 
@@ -270,107 +267,16 @@ C99標準以降，処理系が扱える最大の整数型 uintmax_t ならびに
 Matz 氏と私が，mruby の API についてどのように考えたのか．
 それは明日以降に．</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-03-18T22:00:12+09:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Twitter から</h2>
-
-<blockquote class="twitter-tweet"><p>この辺のやりとり勉強になるぅ <a href="https://t.co/BQzNAjSoyP">https://t.co/BQzNAjSoyP</a></p>&mdash; MATSUMOTO, Ryosuke (@matsumotory) <a href="https://twitter.com/matsumotory/statuses/445772972775571456">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>というやりとりは，こちら．</p>
-
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> ええ，それはRuby世界からの見方ですね．C世界から見れば，const char * の長さが mrb_int になるのは危険です．SIZE_MAX と MRB_INT_MAX の大小関係は，C言語処理系に依りますから．(続</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/445771388297564160">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>連ツイなので，前後も読んで頂ければと．</p>
-
-<p>ちなみに，この後，Matz 氏がコミットを一部撤回し，結局のところ，API の分裂は避けられた．</p>
-
-<h2>やっちゃマズい fork</h2>
-
-<p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
-やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
-
-<p>オトナの事情で分裂したオープンソースプロジェクトは，枚挙に暇がない．
-OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
-そんな事態に陥っても，せめて API は互換になるよう頑張る．</p>
-
-<p>なぜなら，APIの分裂は，開発者の利便性を下げる．
-利便性の悪いソフトは，開発者コミュニティから敬遠される．
-結局のところ，分裂したプロジェクトの両方にとって損となる．</p>
-
-<p>これは，どんなソフトウェアでも言える話ではある．
-が，特にオープンソースの世界では，深刻な話となる．
-開発者を惹きつけないと，旨味が出ないから．</p>
-
-<h2>なんでそんな損な fork を?</h2>
-
-<p>じゃあなんで，私が損な選択を敢えてしようとしたのか．</p>
-
-<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある
-(上記tweetを読めば，解る人には解る)．
-そして，私の言い分にも，もちろん妥当性はある．</p>
-
-<p>mrubyリポジトリ上の話題としては過ぎたことなので，どうでもよいといえばどうでもよいのだけれども．
-C言語の入門を脱したくらいのプログラマが，再利用性の高いライブラリを作ろうと思った時に，有用かもしれないと思った．
-なので，140字の行間を，私なりに(一方的に)埋めてみる．</p>
-
-<p>今日は，話のマクラだけ．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -382,36 +288,43 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
   
 
 
-<time datetime="2014-02-17T15:35:11+09:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-03-19T14:06:12+09:00" pubdate data-updated="true">Mar 19<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p>食材の買い出しのため，八百屋に行った．
-タラの芽が並んでいた．
-そうか，そういう季節か．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/18/how-to-write-portable-api-introduction/" title="Previous Post: C言語APIの作り方 - 前口上">&laquo; C言語APIの作り方 - 前口上</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/17/no-one-can-take-his-place/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -470,7 +383,7 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -499,6 +412,7 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
 
   
 </aside>
+
 
     </div>
   </div>
