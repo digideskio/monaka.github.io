@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | もなもなもなかのページ]]></title>
+  <link href="http://www.monaka.org//blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2014-03-19T14:54:46+09:00</updated>
+  <id>http://www.monaka.org//</id>
+  <author>
+    <name><![CDATA[Masaki "monaka" Muranaka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C言語APIの作り方 - 前口上]]></title>
+    <link href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/"/>
+    <updated>2014-03-18T22:00:12+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction</id>
+    <content type="html"><![CDATA[<h2>Twitter から</h2>
+
+<p><a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a>">https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a></a></p>
+
+<p>というやりとりは，こちら．</p>
+
+<p><a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a>">https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a></a></p>
+
+<p>連ツイなので，前後も読んで頂ければと．</p>
+
+<p>ちなみに，この後，Matz 氏がコミットを一部撤回し，結局のところ，API の分裂は避けられた．</p>
+
+<h2>やっちゃマズい fork</h2>
+
+<p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
+やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
+
+<p>オトナの事情で分裂したオープンソースプロジェクトは，枚挙に暇がない．
+OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
+そんな事態に陥っても，せめて API は互換になるよう頑張る．</p>
+
+<p>なぜなら，APIの分裂は，開発者のの利便性を下げる．
+利便性の悪いソフトは，開発者コミュニティから敬遠される．
+結局のところ，分裂したプロジェクトの両方にとって損となる．</p>
+
+<p>これは，どんなソフトウェアでも言える話ではある．
+が，特にオープンソースの世界では，深刻な話となる．
+開発者を惹きつけないと，旨味が出ないから．</p>
+
+<h2>なんでそんな損な fork を?</h2>
+
+<p>じゃあなんで，私が損な選択を敢えてしようとしたのか．</p>
+
+<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある．
+(上記tweetを読めば，解る人には解る)
+そして，私の言い分にも，もちろん妥当性はある．</p>
+
+<p>mrubyリポジトリ上の話題としては過ぎたことなので，どうでもよいといえばどうでもよいのだけれども．
+C言語の入門を脱したくらいのプログラマが，再利用性の高いライブラリを作ろうと思った時に，有用かもしれないと思った．
+なので，140字の行間を，私なりに(一方的に)埋めてみる．</p>
+
+<p>今日は，話のマクラだけ．</p>
+]]></content>
+  </entry>
+  
+</feed>

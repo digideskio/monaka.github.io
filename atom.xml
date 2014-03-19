@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-02-26T00:59:58+09:00</updated>
+  <updated>2014-03-19T14:54:46+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C言語APIの作り方 - 前口上]]></title>
+    <link href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/"/>
+    <updated>2014-03-18T22:00:12+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction</id>
+    <content type="html"><![CDATA[<h2>Twitter から</h2>
+
+<blockquote class="twitter-tweet"><p>この辺のやりとり勉強になるぅ <a href="https://t.co/BQzNAjSoyP">https://t.co/BQzNAjSoyP</a></p>&mdash; MATSUMOTO, Ryosuke (@matsumotory) <a href="https://twitter.com/matsumotory/statuses/445772972775571456">March 18, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>というやりとりは，こちら．</p>
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> ええ，それはRuby世界からの見方ですね．C世界から見れば，const char * の長さが mrb_int になるのは危険です．SIZE_MAX と MRB_INT_MAX の大小関係は，C言語処理系に依りますから．(続</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/445771388297564160">March 18, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>連ツイなので，前後も読んで頂ければと．</p>
+
+<p>ちなみに，この後，Matz 氏がコミットを一部撤回し，結局のところ，API の分裂は避けられた．</p>
+
+<h2>やっちゃマズい fork</h2>
+
+<p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
+やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
+
+<p>オトナの事情で分裂したオープンソースプロジェクトは，枚挙に暇がない．
+OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
+そんな事態に陥っても，せめて API は互換になるよう頑張る．</p>
+
+<p>なぜなら，APIの分裂は，開発者のの利便性を下げる．
+利便性の悪いソフトは，開発者コミュニティから敬遠される．
+結局のところ，分裂したプロジェクトの両方にとって損となる．</p>
+
+<p>これは，どんなソフトウェアでも言える話ではある．
+が，特にオープンソースの世界では，深刻な話となる．
+開発者を惹きつけないと，旨味が出ないから．</p>
+
+<h2>なんでそんな損な fork を?</h2>
+
+<p>じゃあなんで，私が損な選択を敢えてしようとしたのか．</p>
+
+<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある．
+(上記tweetを読めば，解る人には解る)
+そして，私の言い分にも，もちろん妥当性はある．</p>
+
+<p>mrubyリポジトリ上の話題としては過ぎたことなので，どうでもよいといえばどうでもよいのだけれども．
+C言語の入門を脱したくらいのプログラマが，再利用性の高いライブラリを作ろうと思った時に，有用かもしれないと思った．
+なので，140字の行間を，私なりに(一方的に)埋めてみる．</p>
+
+<p>今日は，話のマクラだけ．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[君の代わりはいない．ぼくの代わりもいない．]]></title>
@@ -2191,116 +2249,6 @@ OSX を使っている前提に立っています．Windowsの方はCygwinなり
 <p>………なんてな．(CV:いかりや長介)</p>
 
 <p>twitter でのワタクシのゲス発言を基に，少し加筆してみました．ゲス発言に何を加筆しても，ゲス発言ですな．お目汚し，すんません． (_ _)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[repo sync でストレージを節約するための group 機能の使い方]]></title>
-    <link href="http://www.monaka.org/blog/2013/11/04/group-in-repo/"/>
-    <updated>2013-11-04T09:28:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/11/04/group-in-repo</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています．</p>
-
-<p>しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです．
-一部の Android 系プロジェクト (Android-x86 とか) では， manifest.xml を編集して，不要なプロジェクトを削除しています．
-しかし，ターゲットはさておき，ビルドホストは複数あったほうが開発者を増やすためには望ましいと言えます．
-また，AOSP の新しいリリースごとに manifest.xml の再編集を行うのは骨の折れる作業です．</p>
-
-<p>このような状況を解消するために，repo には group という機能があります．
-日本語のみならず，英語圏でも纏まって解説されている例は，ざっとググった限りでは無いようです．</p>
-
-<!-- more -->
-
-
-<h2>manifest.xml</h2>
-
-<p>manifest.xml は，repo が引っ張ってくるプロジェクトの内容が記述されています．
-init の時に指定して，実体は {repo_root}/.repo/manifest.xml にあります．
-(細かいことを言うと，このファイルはシンボリックリンクですが，割愛します)</p>
-
-<p>manifest.xml のプロジェクトには，こんな感じで groups という属性を付けられます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;project groups="pdk,darwin,mips" name="platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8" path="prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8"/&gt;
-</span><span class='line'>  &lt;project groups="pdk,darwin,x86" name="platform/prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.6" path="prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.6"/&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この例は AOSP の manifest.xml から引用してきました．以降でも，この manifest.xml のコード片を引用します．</p>
-
-<h2>repo init の -g オプション</h2>
-
-<p>repo init には，あまり知られていないようですが，-g というオプションがあります．
-これは隠しオプションではありません． repo help init すると，解説がでてきます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-g GROUP, --groups=GROUP
-</span><span class='line'>                    restrict manifest projects to ones with specified
-</span><span class='line'>                    group(s) [default|all|G1,G2,G3|G4,-G5,-G6]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このオプションの使い方が，本稿の核心です．</p>
-
-<p>使い方は，判ってしまえば簡単です．-g には，引っ張ってきたいグループをカンマ区切りで指定します．
-ただし， <strong>引っ張ってきたくないグループには &ndash; を接頭します</strong>．</p>
-
-<p>たとえば，私が Android-x86 の開発者であり，mips ターゲットの開発をする可能性が限りなく 0 だったとしましょう．
-その場合には，repo init を実行する際のグループ指定時に，mipsターゲットを無視する -mips を付加します．具体的には，<code>-g 'default,-mips'</code> とします．これだけです．
-このようなオプションで初期化された repo リポジトリでは，無効にされたプロジェクトは sync を行っても無視されるようになります．
-プロジェクト名を明示した sync を行おうとすると，下記のように例外が発生します．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ repo sync platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.8
-</span><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 418, in &lt;module&gt;
-</span><span class='line'>    _Main(sys.argv[1:])
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 394, in _Main
-</span><span class='line'>    result = repo._Run(argv) or 0
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/main.py", line 142, in _Run
-</span><span class='line'>    result = cmd.Execute(copts, cargs)
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/subcmds/sync.py", line 606, in Execute
-</span><span class='line'>    submodules_ok=opt.fetch_submodules)
-</span><span class='line'>  File "/home/azureuser/repo/.repo/repo/command.py", line 180, in GetProjects
-</span><span class='line'>    raise InvalidProjectGroupsError(arg)
-</span><span class='line'>error.InvalidProjectGroupsError</span></code></pre></td></tr></table></div></figure>
-
-
-<p>AOSP のリポジトリは，いくつかの特殊な状況を除き，ビルドホストもターゲットも単一アーキテクチャでしょう．そんなときは，init 時のグループ指定をさらに厳密にできます．
-例えば，Ubuntu Linux上で Android-x86 系のビルドをする際に，私が使っているグループ指定は， <code>default,-arm,-mips,-darwin</code> です．</p>
-
-<h2>応用</h2>
-
-<p>group 指定には，特殊なグループ all, default, notdefault などあります．
-これらを詳説すると，紙幅がいくらあっても足りませんので，本稿では割愛します．
-repo の実体は Python スクリプトなのでご自身で調べられるでしょうし，私自身も完全に理解できているわけではありませんので．</p>
-
-<p>特殊なグループを除き，group には，お互いに衝突しない自由な名前を付けられます．
-Android 系以外のプロジェクトでも repo を使っているプロジェクトはあるようですが，そのようなプロジェクトでも group を活用することで，柔軟なプロジェクト運営が可能になるかもしれません．</p>
-
-<h2>注意事項</h2>
-
-<p>既に存在しているリポジトリに対して repo init を行う場合に -g オプションを指定すると，そのあとの sync から group 指定が有効になります．
-ただし，あとから無効にした場合，sync で pull はされてこなくなり，作業スペースからは削除されますが，ストレージ上には git リポジトリのクローンが残骸として残ります．.repo/ 内のリポジトリを削除することでストレージの節約になりますが，バッドノウハウすぎるので，本稿では割愛します．変なことをしないで rm -fr .repo してから init し直すほうが無難です．</p>
-
-<h2>追伸</h2>
-
-<p>どなたか，repo の詳細を纏めて頂けないでしょうか．有償だとしても読みたいです． <em>知らない言語のコード読むの，疲れるのよ…</em></p>
 ]]></content>
   </entry>
   
