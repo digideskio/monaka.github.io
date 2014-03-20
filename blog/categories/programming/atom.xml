@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-20T14:27:44+09:00</updated>
+  <updated>2014-03-20T14:36:11+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -56,6 +56,8 @@ C言語は，上の例のように保持できる値の範囲が小さい変数�
 
 <p>もしかしたら気の利いた処理系では警告を出してくれるかもしれないが．
 しかし，私の手元にあった XCode の gcc では，割と厳格な警告を出すようオプションとして <code>-pedantic -std=c99 -W -Wall</code> を指定したが，素通りした．</p>
+
+<p>(2014-Mar-20 補足: 上記，ちょっと筆が滑っている．ダウンキャストへの警告については<a href="/blog/2014/03/20/type-conversion-warning/">こちらのエントリ</a>もご参照頂きたい)</p>
 
 <p>さて，それでは変数 b の型を int 型にすれば解決か?
 残念ながら，それもダメ．なぜなら，int 型が保持できる整数の範囲は処理系定義であるから．
@@ -134,7 +136,7 @@ C99標準以降，処理系が扱える最大の整数型 uintmax_t ならびに
 
 <p>さて，長くなった．
 Matz 氏と私が，mruby の API についてどのように考えたのか．
-それは明日以降に．</p>
+それは<a href="/blog/2014/03/20/type-conversion-warning/">明日</a> 以降に．</p>
 ]]></content>
   </entry>
   
