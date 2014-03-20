@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/c/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-19T17:00:34+09:00</updated>
+  <updated>2014-03-20T14:27:44+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -48,7 +48,7 @@ main(void)
 などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
 
 <p>なぜなら，一般に，char 型の変数が保持できる値の範囲は，int 型の変数が保持できる値の範囲よりも小さいから．
-概ね(…とボカす理由は後述)，char は -128 から 127 までの整数のみ保存できない．</p>
+概ね(…とボカす理由は後述)，char は -128 から 127 までの整数しか保存できない．</p>
 
 <p>この性質は，ときどき，極めて恐ろしい．
 C言語は，上の例のように保持できる値の範囲が小さい変数への代入を，エラーとして扱わない．しかしその結果は，おそらく，プログラマの期待とは異なる．

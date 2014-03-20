@@ -164,7 +164,7 @@ main(void)
 などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
 
 <p>なぜなら，一般に，char 型の変数が保持できる値の範囲は，int 型の変数が保持できる値の範囲よりも小さいから．
-概ね(…とボカす理由は後述)，char は -128 から 127 までの整数のみ保存できない．</p>
+概ね(…とボカす理由は後述)，char は -128 から 127 までの整数しか保存できない．</p>
 
 <p>この性質は，ときどき，極めて恐ろしい．
 C言語は，上の例のように保持できる値の範囲が小さい変数への代入を，エラーとして扱わない．しかしその結果は，おそらく，プログラマの期待とは異なる．
@@ -319,6 +319,8 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
         <a class="basic-alignment left" href="/blog/2014/03/18/how-to-write-portable-api-introduction/" title="Previous Post: C言語APIの作り方 - 前口上">&laquo; C言語APIの作り方 - 前口上</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/03/20/type-conversion-warning/" title="Next Post: -Wconversion は，いかがでしょう?">-Wconversion は，いかがでしょう? &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -350,6 +352,10 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a>
       </li>
     
@@ -371,10 +377,6 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
     
       <li class="post">
         <a href="/blog/2014/02/14/way-and-howto/">howto と way</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/14/luck-for-being-a-great-hacker/">ハッカーとして名を成すための「運」</a>
       </li>
     
   </ul>

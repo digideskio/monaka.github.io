@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-19T17:00:34+09:00</updated>
+  <updated>2014-03-20T14:27:44+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,191 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[-Wconversion は，いかがでしょう?]]></title>
+    <link href="http://www.monaka.org/blog/2014/03/20/type-conversion-warning/"/>
+    <updated>2014-03-20T12:08:52+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/03/20/type-conversion-warning</id>
+    <content type="html"><![CDATA[<p>ちょいと寄り道して，<a href="http://www.monaka.org//blog/2014/03/19/implicit-type-conversion-in-c/">前回</a>の補足．</p>
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。</p>&mdash; ぬん。 (@amasawa_seiji) <a href="https://twitter.com/amasawa_seiji/statuses/446205477546762240">March 19, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>鋭い．(汗</p>
+
+<p>はい．<code>-Wconversion</code> ，使えます．記憶が正しければ GCC 2.95.x から．
+ただ，検出が割と難しいようで，3.4系でパッチが出て，立ち消えになったり．
+当時の経緯は<a href="http://d.hatena.ne.jp/yupo5656/20040830/p2">このエントリが詳しい</a>です．</p>
+
+<p>また，GCC 4.3 以降では，挙動が微妙に変わったりしています．
+変更内容の詳細は，<a href="http://gcc.gnu.org/wiki/NewWconversion">GCC Wiki</a> を．</p>
+
+<p>GCC は，そんな事情なので，前回の記述</p>
+
+<blockquote><p>もしかしたら気の利いた処理系では警告を出してくれるかもしれないが．</p></blockquote>
+
+<p>は，完全に筆が滑っております．
+お詫びします…が，必ずしも訂正はしません．</p>
+
+<p>今回の後半は，その辺りについて．</p>
+
+<h2>-Wconversion の頼りなさ</h2>
+
+<p>確かに -Wconversion オプションは，暗黙的なダウンキャストについて警告してくれる．
+なので，gcc/g++ を使ってコーディングする場合には，可能な限り付けておくべきだ．</p>
+
+<p>しかし，API 設計という今回の話題では，-Wconversion は必ずしも頼りにはならない．</p>
+
+<p>例示しよう．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int
+</span><span class='line'>main(void)
+</span><span class='line'>{
+</span><span class='line'>  int a = 65535;
+</span><span class='line'>  long b;
+</span><span class='line'>
+</span><span class='line'>  b = a;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これを手元の XCode の gcc (Apple LLVM version 5.1 (clang-503.0.38) (based on LLVM 3.4svn) Target: x86_64-apple-darwin13.1.0) でコンパイルする．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -Wconversion test.c
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>warning は出ない．</p>
+
+<p>Renesas製 H8/300 というマイコン向けのクロス gcc (gcc version 4.6.4 20130204 (prerelease) (GCC) )でコンパイルしてみる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /pizza/bin/h8300-pizzafactory-elf-gcc -Wconversion test.c 
+</span><span class='line'>test.c: In function 'main':
+</span><span class='line'>test.c:4:3: warning: conversion to 'int' alters 'long int' constant value [-Wconversion]
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今度は warning が出る．</p>
+
+<p>この差異は，gcc のバージョン違いに因るものではない．</p>
+
+<p>前回，C言語仕様の整数型は，決っているようで何も決まっていないことに言及した．
+char も int も short も long も，それぞれどんな範囲の整数を保持できるかは，実行対象のCPUの特性に合わせて，処理系(コンパイラ)が勝手に決めて良いのだ．</p>
+
+<p>(…まあ完全にフリーダムかというとそうでもなくて，long 型より広い範囲の整数を格納できる short 型はダメとか，制約はある．
+商業誌掲載原稿なら，このへんの細かいことも書く．けれども，本稿は日記なので割愛．ご興味ある方はGoogle先生へ．)</p>
+
+<p>H8/300 という系列のCPUは int が 16ビットであるほうが都合が良いので，デフォルトではそのようになっている．つまり 32767 までしか格納できない変数に 65535 を代入しようとしている．
+結果，警告が出る．</p>
+
+<p>ちなみにH8/300 は動作クロック 25MHz という，今や貧弱なCPUだが，有志のご尽力により Linux が動く．
+Linux は，元が i386 アーキテクチャ向けだったこともあって， int が 32ビット以上あることを暗に期待しているフシがある．
+そんな理由…だけではないだろうが，int を 32 ビットとみなしてコンパイルするオプション <code>-mint32</code> が用意されている．これを使ってコンパイルしてみる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /pizza/bin/h8300-pizzafactory-elf-gcc -Wconversion -mint32 test.c 
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>XCode の環境と同じく，警告は出なくなる．
+暗黙のダウンキャストが起きなくなるのだから，当然ではある．</p>
+
+<h2>API 設計者は，-Wconversion には頼れない</h2>
+
+<p>つまり，-Wconversion は，<em>今まさにコンパイルしようとしている環境において</em>，暗黙のダウンキャストを検知する．
+<em>他の処理系で何が起こるかは感知しない</em> ．
+H8/300 の例から判るとおり，同じコンパイラの同じターゲットでも，ABI (アプリケーション・バイナリ・インタフェース)が違えば，検出したりしなかったりする．</p>
+
+<p>このような動作では，API の移植性を担保できない．</p>
+
+<p>この点について，コンパイラの開発者を責めるのはお門違いだろうと，私は思う．
+責めるとしたら，整数型についてほぼフリーダムとした，最初期にC言語の仕様を決定した面々だろう．</p>
+
+<p>アプリケーションの開発者にとっては，-Wconversion で少なからずのミスは見つかるかもしれない．
+ただし，C 言語 API の設計者は，特に移植性を問われる種類の API の設計者にとって，-Wconversion は，頼りない．</p>
+
+<p>もう少し踏み込んで言ってもよい，頼ってはいけない．</p>
+
+<h2>API 設計者が取りうる態度は，2つある</h2>
+
+<p>よく言えばターゲットアーキテクチャに対して柔軟，悪く言えば何も決めてない優柔不断な，C言語の整数型．
+これに直面する際に， API 設計者が取りうるアプローチは 2つある．</p>
+
+<h3>完璧な移植性は諦める派</h3>
+
+<p>一つは，動作環境に期待する整数型を明示してしまうというアプローチ．</p>
+
+<blockquote><p>char は 8ビット符号付き・int は 32ビット・short は16ビット・long は32ビット・ポインタは32ビット．それ以外は認めない．以上</p></blockquote>
+
+<p>これは，20世紀のUnix世界ではしばしば見られる態度だった．
+C言語といえばUnix．そのUnix動作マシンが概ね備える整数型を前提にすれば，世の中のほとんどをカバーできるではないか，と．</p>
+
+<p>そのため，int やポインタが 16ビットであることが自然である MS-DOS の世界には移植できないソフトが山盛りになったりした．
+まあでも，MS-DOS なんて，俺らが使う Unix からみればオモチャだし，みたいな．</p>
+
+<h3>意地でも移植性を追い求める派</h3>
+
+<p>永らくC言語といえばUnixだったが，ゲーム機や組込みシステム開発に使われるようになるにつれ，話が若干違ってくる．</p>
+
+<blockquote><p>C99準拠って言っているのだから，それを達成するのがエンジニアとしての誠意ってモンだろう?
+DSPからスパコンまでで同じソースコードが動かなきゃ認めない．以上</p></blockquote>
+
+<p>冷蔵庫サイズのワークステーションよりも，ゲーム機やケータイのほうが出荷台数が多いのは，いくら世間に疎くても判る話だ．
+Unix も，ゲーム機やケータイの高機能化に助けられて，それらの中に入れるようにはなった．
+しかし，同時に組込みシステムの広がりも爆発的なものがある．
+いまやクルマはコンピュータなしには動かない．エンジンの環境性能を満たせない．
+ゲーム機本体がUnixでも，周辺機器を動かしているマイコンには Unix は入らない．</p>
+
+<p>このような，非Unixな世界では，整数型に前提を設けることなんてできない．
+移り変わりの早いマイコンの世界で，特定のアーキテクチャに依存するコードなんて，リスクが高すぎて書けない．
+ライブラリも同様に，アーキテクチャ独立が求められる．</p>
+
+<h2>C言語 API 設計者の異文化が交わる場所としてのmruby</h2>
+
+<p>実際には，このような2つの派閥の極端に立つ人は，まず居ないだろう．
+これがトレードオフの問題だということに気づけない人は，ソフト屋には向かない．
+だが，両極端の間のどこに重心を置くかというのは，人により，またはプロジェクトにより，分かれる．</p>
+
+<p>mruby というのは，立ち位置として面白いと，個人的には思っている．</p>
+
+<p>mruby が処理する Ruby 言語は，Unix 文化の代表的側面である Little Language がその根底にあるように思える．
+また，LAMP から Rails へという，Unix 系文化の進化に添って大きくなってきた．
+だから，その API 設計が Unix 的な方向に時々流れるのは，不思議なことではない．
+私の好みはさておき．</p>
+
+<p>同時に，mruby は<em>組込み向け</em>言語処理系でもある．
+利用者の少なからずは，移植性が担保されていないなら魅力を感じない．
+API は，C99に準拠する限りのあらゆる処理系であっても耐えうる設計か．
+そのことを常に問われる分野の人も，コードを観ている．</p>
+
+<p>mrubyでのMatz氏のAPI変更に対して，私が文句を言っているときは，APIに対する2つの派閥を思い浮かべると，解りやすいかなと思う．</p>
+
+<p>a bit philosophical とか言われて，まあそうだよなと心の何処かで思いつつも，あるんだよ．広大な組込み世界には．びっくりするような構成のアーキテクチャってのが．</p>
+
+<h1>#</h1>
+
+<p>ちょいと脇道に逸れたけれど，@amasawa_seiji さんから mention 頂かなかったら書きそびれたはずの話題に言及できた．
+あと1回…2回…くらい? あんまり長くても飽きるので．私が．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C言語における暗黙の型変換とAPI設計]]></title>
@@ -60,7 +245,7 @@
 などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
 
 <p>なぜなら，一般に，char 型の変数が保持できる値の範囲は，int 型の変数が保持できる値の範囲よりも小さいから．
-概ね(…とボカす理由は後述)，char は -128 から 127 までの整数のみ保存できない．</p>
+概ね(…とボカす理由は後述)，char は -128 から 127 までの整数しか保存できない．</p>
 
 <p>この性質は，ときどき，極めて恐ろしい．
 C言語は，上の例のように保持できる値の範囲が小さい変数への代入を，エラーとして扱わない．しかしその結果は，おそらく，プログラマの期待とは異なる．
@@ -2262,70 +2447,6 @@ Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
 <p>師走になってから，卒論・修論で死んでいる学生さんたちに，いまさら言っても，たぶん直近の締切には間に合わないでしょうけれども．</p>
 
 <p>…まあ，ほら，「どんな職業に就こうとも，世の中，文章で人に説明することからは逃げきれません．」ので，いつか役に立ちますよ…．たぶんね．きっとね．おそらくね．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iTunes のアルバムアートワークを抽出する]]></title>
-    <link href="http://www.monaka.org/blog/2013/11/26/extracts-itune-artwork/"/>
-    <updated>2013-11-26T07:43:19+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/11/26/extracts-itune-artwork</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>さまざまな理由で，iTunes のアルバムアートワークを画像として抽出したいときがあるでしょう．
-たとえば，ざっとサムネイルとして眺めてみたいとか．</p>
-
-<p>抽出した画像の2次利用や公衆配信は，明白に知財侵害なのでダメ絶対，です．
-細かいことをいうと，個人利用の範囲でも厳密には，マズいような気もします．
-本エントリは，技術的にはできますよね，的なお話．
-…ということで，ひとつよしなに．</p>
-
-<!-- more -->
-
-
-<p>iTunesのアルバムアートワークは，iTunesフォルダを <code>{itune_folder}</code>とすると<code>{itnue_folder}/Album Artwork/</code>配下の拡張子itcファイルに収められています．
-特に手を加えていなければ，<code>~/Music/iTuness/Album Artwork/</code>にあるはずです．
-ただし，itc ファイルには，様々なメタデータが画像の前についています．
-画像として扱うには，このメタデータを外す必要があります．</p>
-
-<h2>スクリプト</h2>
-
-<p>サクッと答えだけ書きます．
-OSX を使っている前提に立っています．Windowsの方はCygwinなり何なりを入れてください．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!env bash
-</span><span class='line'>for i in $(find ~/Music/iTuness/Album\ Artwork/ -name '*.itc'); do
-</span><span class='line'>  dd if=$i of=$(basename $i .itc).png bs=1 skip=492
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>注意事項</h3>
-
-<p>dd でアタマを落とすだけ．492 バイトは，環境(iTunesのバージョンなど?)によって違う可能性がありそうです．
-<a href="https://www.google.co.jp/search?q=itune+itc+500%E3%83%90%E3%82%A4%E3%83%88">ググると，この数値は500バイトであると主張している人が少なからず居る</a>ようですので．</p>
-
-<p>お手元環境で何バイトを削ればよいかは，目視でお判りになるでしょう．
-上記のスクリプトを理解できる人の手元には，愛用のバイナリエディタもおありでしょうから，</p>
-
-<p>あと，上記のスクリプトでは，拡張子を png に決め打っていますが，実際には，画像は，PNG と JPEG の2種類があります．
-言うまでもありませんが，これは file コマンドを使って容易に識別できます．
-こんなふうに．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ file *.png
-</span><span class='line'>4931EBE6BCC87C34-07FBFB2CA12DDA5D.png:   JPEG image data, JFIF standard 1.01, comment: "AppleMark"
-</span><span class='line'>4931EBE6BCC87C34-08F02BE333CFBBAA.png:   PNG image, 128 x 128, 8-bit/color RGBA, non-interlaced
-</span><span class='line'>4931EBE6BCC87C34-0A2AC7440B8F25B6.png:   JPEG image data, JFIF standard 1.01</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとは，上手いことやってください．</p>
 ]]></content>
   </entry>
   
