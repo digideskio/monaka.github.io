@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-21T14:17:10+09:00</updated>
+  <updated>2014-03-21T14:18:19+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -102,7 +102,8 @@ Matz 氏は実は理解しておられるだろうが，そうでない人もい
 mrb_int を返す strlen() の代替を作るのは，難しい作業ではない．</p>
 
 <p>しかし，sizeof は演算子である．
-Cにはそもそも演算子オーバーロードの機能が無いし，C++ でさえオーバーロードできない．</p>
+Cにはそもそも演算子オーバーロードの機能が無いし，C++ でさえオーバーロードできない．
+だから，sizeof 演算子の結果の型を size_t 以外にすることは，不可能である．</p>
 
 <p>そして，mruby の文字列系・シンボル系の長さには sizeof 演算子が使われる可能性が極めて高い．
 なにしろ，mruby の API 自身に， sizeof を内包するものもあるのだから．</p>
