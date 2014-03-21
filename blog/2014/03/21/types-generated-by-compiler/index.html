@@ -133,7 +133,7 @@
 加えて，仮想記憶などの技術で，またはムーアの法則に沿って，実装可能なメモリの量は爆発的に増えた．
 そのため sizeof の結果が unsigned long の上限を超える可能性が出てきた．</p>
 
-<p>たとえば，unsigned long がUnix系の慣習に沿ってビットだとしたら，4GB以上のメモリを占める配列の sizeof の結果は格納できない．
+<p>たとえば，unsigned long がUnix系の慣習に沿って32ビットだとしたら，4GB以上のメモリを占める配列の sizeof の結果は格納できない．
 本稿読者には言うまでもないが，4GB以上のRAMを持つ機器は，いまや珍しくない．</p>
 
 <p>このような問題への対処として，sizeof の結果を保存するための型を，C言語仕様は導入した．
@@ -161,6 +161,72 @@
 
 <p>mruby の mrb_int 型は，実際は符号付き整数型の typedef だ．
 しかも，mruby の実行環境に合わせて，ビット幅は変えてもよい造りになっている．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* 参考: include/mruby/value.h から引用 */
+</span><span class='line'>
+</span><span class='line'>#if defined(MRB_INT64)
+</span><span class='line'># ifdef MRB_NAN_BOXING
+</span><span class='line'>#  error Cannot use NaN boxing when mrb_int is 64bit
+</span><span class='line'># else
+</span><span class='line'>   typedef int64_t mrb_int;
+</span><span class='line'>#  define MRB_INT_BIT 64
+</span><span class='line'>#  define MRB_INT_MIN INT64_MIN
+</span><span class='line'>#  define MRB_INT_MAX INT64_MAX
+</span><span class='line'>#  define PRIdMRB_INT PRId64
+</span><span class='line'>#  define PRIiMRB_INT PRIi64
+</span><span class='line'>#  define PRIoMRB_INT PRIo64
+</span><span class='line'>#  define PRIxMRB_INT PRIx64
+</span><span class='line'>#  define PRIXMRB_INT PRIX64
+</span><span class='line'># endif
+</span><span class='line'>#elif defined(MRB_INT16)
+</span><span class='line'>  typedef int16_t mrb_int;
+</span><span class='line'># define MRB_INT_BIT 16
+</span><span class='line'># define MRB_INT_MIN INT16_MIN
+</span><span class='line'># define MRB_INT_MAX INT16_MAX
+</span><span class='line'>#else
+</span><span class='line'>  typedef int32_t mrb_int;
+</span><span class='line'># define MRB_INT_BIT 32
+</span><span class='line'># define MRB_INT_MIN INT32_MIN
+</span><span class='line'># define MRB_INT_MAX INT32_MAX
+</span><span class='line'># define PRIdMRB_INT PRId32
+</span><span class='line'># define PRIiMRB_INT PRIi32
+</span><span class='line'># define PRIoMRB_INT PRIo32
+</span><span class='line'># define PRIxMRB_INT PRIx32
+</span><span class='line'># define PRIXMRB_INT PRIX32
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
 
 <p>一方，size_t は，符号なし整数型の typedef だ．
 しかも，ビット幅は判らない．</p>
