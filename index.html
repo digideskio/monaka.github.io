@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ちょいと寄り道して，前回の補足． @monamour555 gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。&mdash; ぬん。 (@amasawa_seiji) March 19, 2014 鋭い．(汗 はい．-Wconversion ， &hellip;">
+  <meta name="description" content="前回 の続き． C言語のおさらい 繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい． にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある． OSやハードウェアの制約がなければ， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,139 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-21T07:53:49+09:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/blog/2014/03/20/type-conversion-warning/">前回</a> の続き．</p>
+
+<h2>C言語のおさらい</h2>
+
+<p>繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい．</p>
+
+<p>にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある．</p>
+
+<p>OSやハードウェアの制約がなければ，プログラム自身を含む，全てのメモリは参照可能で，書き込みもできる．
+ポインタは，加減算によってアドレスを変更できる．ポインタ同士の加減算も可能だ．</p>
+
+<p>自らが管理する変数を，ポインタを用いて，書き換えることもできる．
+そのような操作を支援するために，特定の変数が専有しているメモリサイズを取得することが可能だ．…など書くと無駄にややこしいが，要するに sizeof 演算子がある．</p>
+
+<p>sizeof は sizeof(foo) など括弧を添える書き方が一般的なので，ときどき関数やマクロと誤解されるが，<strong>演算子</strong> である．本稿では，この事実が大きな意味を持つ．</p>
+
+<h2>sizeof によって得られる値は?</h2>
+
+<p>sizeof の演算結果は，正整数となることは確実だ．マイナスのサイズなんてありえない．
+さて，では，unsigned int が適切だろうか? それとも unsigned long?</p>
+
+<p>ここで，C言語の整数型のフリーダムっぷりが仇となる．
+まず，unsigned long が扱える範囲が処理系定義だ．
+加えて，仮想記憶などの技術で，またはムーアの法則に沿って，実装可能なメモリの量は爆発的に増えた．
+そのため sizeof の結果が unsigned long の上限を超える可能性が出てきた．</p>
+
+<p>たとえば，unsigned long がUnix系の慣習に沿って32bitだとしたら，4GB以上のメモリを占める配列の sizeof の結果は格納できない．
+本稿読者には言うまでもないが，4GB以上のRAMを持つ機器は，いまや珍しくない．</p>
+
+<p>このような問題への対処として，sizeof の結果を保存するための型を，C言語仕様は導入した．
+それが，size_t である．</p>
+
+<p>size_t は，多くの場合，符号なし整数型の typedef となる．
+しかしどの型の typedef なのかは，処理系次第である．
+処理系は，動作するCPUが扱えるメモリサイズによって，処理系の作者が決める．</p>
+
+<p>たとえば，メモリアドレスの上限が65535ないのに uint128_t 相当を割り当てても無駄だろう．
+しかし，16ビットのメモリ空間なら，uint16_t 相当になる可能性はある．</p>
+
+<p>こんな按配なので，C言語を用いるプログラマは，size_t の最大値を決め打ちしたコーディングをしてはいけない．
+そのコーディングの典型が，size_t 以外の整数型変数への代入である．</p>
+
+<p>これは好みの問題ではない．
+仕様から容易に導き出される，事実だ．</p>
+
+<p>蛇足になるが，このように演算結果により処理系が生み出す型は，ptrdiff_t など他にもある．
+移植性を保ったAPIを考える際には，これらの型についても十分に理解しておく必要がある．</p>
+
+<h2>いつになく噛み付いた理由</h2>
+
+<p>ここまでくると，mruby の API 変更について，私が噛み付いた理由が見えてくるだろう．</p>
+
+<p>mruby の mrb_int 型は，実際は符号付き整数型の typedef だ．
+しかも，mruby の実行環境に合わせて，ビット幅は変えてもよい造りになっている．</p>
+
+<p>一方，size_t は，符号なし整数型の typedef だ．
+しかも，ビット幅は判らない．</p>
+
+<p>これらを，API 関数呼び出しという，値チェックを伴わない(実質的な)代入を行った時，何が起こるか．</p>
+
+<p><a href="/blog/2014/03/19/implicit-type-conversion-in-c/">先日</a>とりあげた，暗黙的なダウンキャストが，起こる．
+特定環境のみ，かつ特定のアプリケーションのみで．</p>
+
+<p>「概ね大丈夫だが，たまに致命的に動かない．」
+こういう挙動は，ライブラリとしては，忌み嫌われる最悪のパターンである．</p>
+
+<h2>strlen は問題ではない．</h2>
+
+<p><a href="https://github.com/mruby/mruby/commit/180b3d5678d613b79593ef202089e93abb4eacfc">この問題に対し Matz 氏が一部を revert した際のコミットメッセージ</a>は下記のとおりだ．</p>
+
+<blockquote><p>change mrb_int to size_t that would take strlen()</p></blockquote>
+
+<p>コミットメッセージなんて，ちゃっちゃっと済ますものなので，筆が滑ることはよくある．
+Matz 氏は実は理解しておられるだろうが，そうでない人もいるだろうから，書いておく．</p>
+
+<p>strlen() の返値も，size_t ではある．
+しかし，別に strlen() はどうでもよい．
+なぜならば，strlen() は関数だから．
+mrb_int を返す strlen() の代替を作るのは，難しい作業ではない．</p>
+
+<p>しかし，sizeof は演算子である．
+Cにはそもそも演算子オーバーロードの機能が無いし，C++ でさえオーバーロードできない．</p>
+
+<p>そして，mruby の文字列系・シンボル系の長さには sizeof 演算子が使われる可能性が極めて高い．
+なにしろ，mruby の API 自身に， sizeof を内包するものもあるのだから．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define mrb_strlen_lit(lit) (sizeof(lit "") - 1)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2></h2>
+
+<p>というわけで，C言語仕様の視点から，なぜ私が一連のAPI変更に異議を立てたのかということを纏めた．
+本件は，好みの問題ではない．
+ISO Cの仕様を踏まえると，自明として適切な結果が浮かび上がる．</p>
+
+<p>とはいえ，mrb_int にしたくなる気持ちも解らなくもない．
+明日以降，その辺りの，わりと人情系というかピープルウェア的な話で，一連の話題を閉じたいと思っている．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -472,91 +605,6 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-18T22:00:12+09:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Twitter から</h2>
-
-<blockquote class="twitter-tweet"><p>この辺のやりとり勉強になるぅ <a href="https://t.co/BQzNAjSoyP">https://t.co/BQzNAjSoyP</a></p>&mdash; MATSUMOTO, Ryosuke (@matsumotory) <a href="https://twitter.com/matsumotory/statuses/445772972775571456">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>というやりとりは，こちら．</p>
-
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> ええ，それはRuby世界からの見方ですね．C世界から見れば，const char * の長さが mrb_int になるのは危険です．SIZE_MAX と MRB_INT_MAX の大小関係は，C言語処理系に依りますから．(続</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/445771388297564160">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>連ツイなので，前後も読んで頂ければと．</p>
-
-<p>ちなみに，この後，Matz 氏がコミットを一部撤回し，結局のところ，API の分裂は避けられた．</p>
-
-<h2>やっちゃマズい fork</h2>
-
-<p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
-やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
-
-<p>オトナの事情で分裂したオープンソースプロジェクトは，枚挙に暇がない．
-OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
-そんな事態に陥っても，せめて API は互換になるよう頑張る．</p>
-
-<p>なぜなら，APIの分裂は，開発者の利便性を下げる．
-利便性の悪いソフトは，開発者コミュニティから敬遠される．
-結局のところ，分裂したプロジェクトの両方にとって損となる．</p>
-
-<p>これは，どんなソフトウェアでも言える話ではある．
-が，特にオープンソースの世界では，深刻な話となる．
-開発者を惹きつけないと，旨味が出ないから．</p>
-
-<h2>なんでそんな損な fork を?</h2>
-
-<p>じゃあなんで，私が損な選択を敢えてしようとしたのか．</p>
-
-<p>Matz氏がAPIを変えたいと思った理由にも，妥当性はある
-(上記tweetを読めば，解る人には解る)．
-そして，私の言い分にも，もちろん妥当性はある．</p>
-
-<p>mrubyリポジトリ上の話題としては過ぎたことなので，どうでもよいといえばどうでもよいのだけれども．
-C言語の入門を脱したくらいのプログラマが，再利用性の高いライブラリを作ろうと思った時に，有用かもしれないと思った．
-なので，140字の行間を，私なりに(一方的に)埋めてみる．</p>
-
-<p>今日は，話のマクラだけ．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -590,6 +638,10 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a>
       </li>
     
@@ -611,10 +663,6 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
     
       <li class="post">
         <a href="/blog/2014/02/15/does-it-become-easier/">便利な世の中になったのに</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/14/way-and-howto/">howto と way</a>
       </li>
     
   </ul>

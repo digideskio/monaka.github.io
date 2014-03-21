@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>コンパイラが生成する型とAPI - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="前回 の続き． C言語のおさらい 繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい． にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある． OSやハードウェアの制約がなければ， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">コンパイラが生成する型とAPI</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-21T07:53:49+09:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="/blog/2014/03/20/type-conversion-warning/">前回</a> の続き．</p>
+
+<h2>C言語のおさらい</h2>
+
+<p>繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい．</p>
+
+<p>にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある．</p>
+
+<p>OSやハードウェアの制約がなければ，プログラム自身を含む，全てのメモリは参照可能で，書き込みもできる．
+ポインタは，加減算によってアドレスを変更できる．ポインタ同士の加減算も可能だ．</p>
+
+<p>自らが管理する変数を，ポインタを用いて，書き換えることもできる．
+そのような操作を支援するために，特定の変数が専有しているメモリサイズを取得することが可能だ．…など書くと無駄にややこしいが，要するに sizeof 演算子がある．</p>
+
+<p>sizeof は sizeof(foo) など括弧を添える書き方が一般的なので，ときどき関数やマクロと誤解されるが，<strong>演算子</strong> である．本稿では，この事実が大きな意味を持つ．</p>
+
+<h2>sizeof によって得られる値は?</h2>
+
+<p>sizeof の演算結果は，正整数となることは確実だ．マイナスのサイズなんてありえない．
+さて，では，unsigned int が適切だろうか? それとも unsigned long?</p>
+
+<p>ここで，C言語の整数型のフリーダムっぷりが仇となる．
+まず，unsigned long が扱える範囲が処理系定義だ．
+加えて，仮想記憶などの技術で，またはムーアの法則に沿って，実装可能なメモリの量は爆発的に増えた．
+そのため sizeof の結果が unsigned long の上限を超える可能性が出てきた．</p>
+
+<p>たとえば，unsigned long がUnix系の慣習に沿って32bitだとしたら，4GB以上のメモリを占める配列の sizeof の結果は格納できない．
+本稿読者には言うまでもないが，4GB以上のRAMを持つ機器は，いまや珍しくない．</p>
+
+<p>このような問題への対処として，sizeof の結果を保存するための型を，C言語仕様は導入した．
+それが，size_t である．</p>
+
+<p>size_t は，多くの場合，符号なし整数型の typedef となる．
+しかしどの型の typedef なのかは，処理系次第である．
+処理系は，動作するCPUが扱えるメモリサイズによって，処理系の作者が決める．</p>
+
+<p>たとえば，メモリアドレスの上限が65535ないのに uint128_t 相当を割り当てても無駄だろう．
+しかし，16ビットのメモリ空間なら，uint16_t 相当になる可能性はある．</p>
+
+<p>こんな按配なので，C言語を用いるプログラマは，size_t の最大値を決め打ちしたコーディングをしてはいけない．
+そのコーディングの典型が，size_t 以外の整数型変数への代入である．</p>
+
+<p>これは好みの問題ではない．
+仕様から容易に導き出される，事実だ．</p>
+
+<p>蛇足になるが，このように演算結果により処理系が生み出す型は，ptrdiff_t など他にもある．
+移植性を保ったAPIを考える際には，これらの型についても十分に理解しておく必要がある．</p>
+
+<h2>いつになく噛み付いた理由</h2>
+
+<p>ここまでくると，mruby の API 変更について，私が噛み付いた理由が見えてくるだろう．</p>
+
+<p>mruby の mrb_int 型は，実際は符号付き整数型の typedef だ．
+しかも，mruby の実行環境に合わせて，ビット幅は変えてもよい造りになっている．</p>
+
+<p>一方，size_t は，符号なし整数型の typedef だ．
+しかも，ビット幅は判らない．</p>
+
+<p>これらを，API 関数呼び出しという，値チェックを伴わない(実質的な)代入を行った時，何が起こるか．</p>
+
+<p><a href="/blog/2014/03/19/implicit-type-conversion-in-c/">先日</a>とりあげた，暗黙的なダウンキャストが，起こる．
+特定環境のみ，かつ特定のアプリケーションのみで．</p>
+
+<p>「概ね大丈夫だが，たまに致命的に動かない．」
+こういう挙動は，ライブラリとしては，忌み嫌われる最悪のパターンである．</p>
+
+<h2>strlen は問題ではない．</h2>
+
+<p><a href="https://github.com/mruby/mruby/commit/180b3d5678d613b79593ef202089e93abb4eacfc">この問題に対し Matz 氏が一部を revert した際のコミットメッセージ</a>は下記のとおりだ．</p>
+
+<blockquote><p>change mrb_int to size_t that would take strlen()</p></blockquote>
+
+<p>コミットメッセージなんて，ちゃっちゃっと済ますものなので，筆が滑ることはよくある．
+Matz 氏は実は理解しておられるだろうが，そうでない人もいるだろうから，書いておく．</p>
+
+<p>strlen() の返値も，size_t ではある．
+しかし，別に strlen() はどうでもよい．
+なぜならば，strlen() は関数だから．
+mrb_int を返す strlen() の代替を作るのは，難しい作業ではない．</p>
+
+<p>しかし，sizeof は演算子である．
+Cにはそもそも演算子オーバーロードの機能が無いし，C++ でさえオーバーロードできない．</p>
+
+<p>そして，mruby の文字列系・シンボル系の長さには sizeof 演算子が使われる可能性が極めて高い．
+なにしろ，mruby の API 自身に， sizeof を内包するものもあるのだから．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define mrb_strlen_lit(lit) (sizeof(lit "") - 1)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2></h2>
+
+<p>というわけで，C言語仕様の視点から，なぜ私が一連のAPI変更に異議を立てたのかということを纏めた．
+本件は，好みの問題ではない．
+ISO Cの仕様を踏まえると，自明として適切な結果が浮かび上がる．</p>
+
+<p>とはいえ，mrb_int にしたくなる気持ちも解らなくもない．
+明日以降，その辺りの，わりと人情系というかピープルウェア的な話で，一連の話題を閉じたいと思っている．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-21T07:53:49+09:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/20/type-conversion-warning/" title="Previous Post: -Wconversion は，いかがでしょう?">&laquo; -Wconversion は，いかがでしょう?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/16/media-literacy-saves-you/">メディア・リテラシと，生存</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/15/does-it-become-easier/">便利な世の中になったのに</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
