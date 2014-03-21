@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/c/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-03-21T09:12:59+09:00</updated>
+  <updated>2014-03-21T09:15:51+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -46,6 +46,9 @@ main(void)
 
 <p>「a に 65535 を代入し，b に a の値を代入しているのだから，b も 65535 になるはず．」
 などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
+
+<!-- more -->
+
 
 <p>なぜなら，一般に，char 型の変数が保持できる値の範囲は，int 型の変数が保持できる値の範囲よりも小さいから．
 概ね(…とボカす理由は後述)，char は -128 から 127 までの整数しか保存できない．</p>
@@ -161,6 +164,9 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
 
 <p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
 やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
+
+<!-- more -->
+
 
 <p>オトナの事情で分裂したオープンソースプロジェクトは，枚挙に暇がない．
 OpenOffice.org と LibreOffice，Hudson と Jenkins，などなど．
