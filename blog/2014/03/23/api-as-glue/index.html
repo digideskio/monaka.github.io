@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>橋渡しとしてのAPI - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="前回 の続き．
+たぶんこれで本件に関する一応の最終回． APIは世界の境界線 異なる世界観の端境にあって，両者の言い分を理解して橋渡しをする．
+API の設計は，端的には橋渡しに尽きる． API の直交性など，細かく言うと設計上気をつけるべき点はある．
+しかし，それは，より美しく使いやすい API &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/03/23/api-as-glue/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">橋渡しとしてのAPI</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T18:03:49+09:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="/blog/2014/03/21/types-generated-by-compiler/">前回</a> の続き．
+たぶんこれで本件に関する一応の最終回．</p>
+
+<h2>APIは世界の境界線</h2>
+
+<p>異なる世界観の端境にあって，両者の言い分を理解して橋渡しをする．
+API の設計は，端的には橋渡しに尽きる．</p>
+
+<p>API の直交性など，細かく言うと設計上気をつけるべき点はある．
+しかし，それは，より美しく使いやすい API であるための付加価値である．
+大事だけれども本質ではない．</p>
+
+<p>API の代表例として，OS が提供するものがある．
+システムコールとかサービスコールという名で呼ばれる．</p>
+
+<p>フリーダムなユーザランドと，好き勝手されては困るOSとの間の橋渡しをする．
+一例として，リアルタイムカーネル TOPPERS/JSP のサービスコール関数の冒頭を引用する．</p>
+
+<p>心配ない．
+RTOSのコードなんて読んだことが無いよ，という方でもざっくりと理解できれば十分．</p>
+
+<!-- more -->
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'> *  メールボックスへの送信
+</span><span class='line'> */
+</span><span class='line'>#ifdef __snd_mbx
+</span><span class='line'>
+</span><span class='line'>SYSCALL ER
+</span><span class='line'>snd_mbx(ID mbxid, T_MSG *pk_msg)
+</span><span class='line'>{
+</span><span class='line'>    MBXCB   *mbxcb;
+</span><span class='line'>    TCB *tcb;
+</span><span class='line'>    ER  ercd;
+</span><span class='line'>    
+</span><span class='line'>    LOG_SND_MBX_ENTER(mbxid, pk_msg);
+</span><span class='line'>    CHECK_TSKCTX_UNL();
+</span><span class='line'>    CHECK_MBXID(mbxid);
+</span><span class='line'>    mbxcb = get_mbxcb(mbxid);
+</span><span class='line'>    CHECK_PAR((mbxcb-&gt;mbxinib-&gt;mbxatr & TA_MPRI) == 0
+</span><span class='line'>        || (TMIN_MPRI &lt;= MSGPRI(pk_msg)
+</span><span class='line'>            && MSGPRI(pk_msg) &lt;= mbxcb-&gt;mbxinib-&gt;maxmpri));
+</span><span class='line'>
+</span><span class='line'>    t_lock_cpu();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まず，関数に入った直後で，CHECK_* マクロの洗礼がある．
+ここで，アプリケーションから渡された引数に，OS内部にとって不都合がないかどうかを調べる．
+マクロだから見えないが，不都合な引数があった場合には，即座にエラーリターンとなる．</p>
+
+<p>次に，t_lock_cpu() で，割込みが発生しない状況にする．
+つまり，カーネルが CPU を独り占めする．
+ここから先はカーネルの世界である．アプリケーションからは不可侵．</p>
+
+<p>このような引数チェックは，API が備えるべき基本的な機能だ．
+API の向こうは，全く違った世界観で動いている．
+つまり，悪意，未必の故意，不理解により，有り得ないような引数で呼び出される可能性がある．
+API は，どんな引数で呼び出されるかは判らないし，信用してもいけない．
+上記のリストはシンブルなほうで，マルチプロセッサやメモリ保護など加わればその分だけ，チェックの量は増える．</p>
+
+<p>呼び出し元を信用しない．
+これが，単なる関数呼び出しとAPIとを分ける，ほぼ唯一の，しかし決定的な違いとなる．
+APIの設計経験が浅い人は，呼び出し元を信用しがちである．
+そして，呼び出し元のアプリケーションのせいで起きたバグなのに，APIの内側でのバグだとの冤罪を受け，無罪証明のために膨大な時間を費やしたりする．</p>
+
+<h2>API と&#8221;ヒゲ&#8221;とC言語</h2>
+
+<p>API の内外は，異なる世界観である．
+だから，相手側の世界には，なるべく自分側の世界観を押し付けないように設計すべきだ．</p>
+
+<p>けれども，何事にも限度というものがある．</p>
+
+<p>例えば，mruby の API には，ほぼ全てに mrb_state 型のポインタがついている．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* mruby/include/mruby.h から引用 */
+</span><span class='line'>typedef mrb_value (*mrb_func_t)(mrb_state *mrb, mrb_value);
+</span><span class='line'>struct RClass *mrb_define_class(mrb_state *, const char*, struct RClass*);
+</span><span class='line'>struct RClass *mrb_define_module(mrb_state *, const char*);
+</span><span class='line'>mrb_value mrb_singleton_class(mrb_state*, mrb_value);
+</span><span class='line'>void mrb_include_module(mrb_state*, struct RClass*, struct RClass*);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これを，C99 標準には mrb_state なんて型はない，など言って無理やり合わせようとするのは，筋が良くない考え方だ．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* こういう変更はよくない */
+</span><span class='line'>typedef mrb_value (*mrb_func_t)(void *mrb, mrb_value);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(C言語の基礎が解ればすぐに判るだろうけれども，念の為に理由を示すならば)
+mrb_state * から void * に型を変更することで，コンパイラによる型チェックが効かなくなり，mruby の内側を危険に晒す．</p>
+
+<p>こういった，API を跨いで漏れだしてしまう変数型を，私は密かに「ヒゲ」と呼んでいる．
+個人的に用いている語で，たぶん他の誰にも通じない．</p>
+
+<p>「ヒゲ」は可能な限り少ないほうが，APIとしては優れた設計と言える．
+C言語の標準ライブラリは，コンパイラが生成する型を完全に理解していて，C言語向けのAPIとしては優れている．
+POSIX の各種 API は，独自の型はあるものの，それらの命名規則はC言語の標準ライブラリを踏襲しており，優れている．</p>
+
+<p>しかし，あったほうが魅力的だったり安全になったりする「ヒゲ」もある．
+mruby の C言語APIにある，mrb_state ポインタがその例といえる．
+Windows API は，独自型の乱発など，現代的なC言語仕様から見ると眉をひそめたくなる部分もある．
+しかし，ISO C 標準よりも先に存在していたAPI仕様なので，仕方がない部分もある．安全を求めた結果の「ヒゲ」の部類だ．
+μITRON仕様も Windows API と同様．</p>
+
+<p>そして，「鼻毛」もある．
+「鼻毛」は，APIの内外にある世界観，ならびに言語仕様を考えた上で，どう考えても魅力がない…というか残念というか危険結果しか想像できない場合．
+前回取り上げた，size_t の代わりに mrb_int を使おうとした例がこれに当たる…</p>
+
+<p>…のだが，「ヒゲ」が「鼻毛」か否かは，立ち位置によって，変わりうる．</p>
+
+<h2>長さに関する立ち位置の違い</h2>
+
+<p>当然ながら Ruby は C言語ではないので，size_t なんていう型はない．符号なし整数型もない．Fixnum 型となる．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mirb - Embeddable Interactive Ruby Shell
+</span><span class='line'>
+</span><span class='line'>&gt; [].length.class
+</span><span class='line'> =&gt; Fixnum</span></code></pre></td></tr></table></div></figure>
+
+
+<p>mruby の内部では，Fixnum の値は mrb_int 型として格納される．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* include/mruby/value.h から引用 */
+</span><span class='line'>typedef union mrb_value {
+</span><span class='line'>  union {
+</span><span class='line'>    void *p;
+</span><span class='line'>    struct {
+</span><span class='line'>      unsigned int i_flag : MRB_FIXNUM_SHIFT;
+</span><span class='line'>      mrb_int i : (MRB_INT_BIT - MRB_FIXNUM_SHIFT);  /* ←これが Fixnum の実体 */
+</span><span class='line'>    };
+</span><span class='line'>    struct {</span></code></pre></td></tr></table></div></figure>
+
+
+<p>したがって，文字列の長さも，mrb_int 型で格納されている．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/* include/mruby/string.h から引用 */
+</span><span class='line'>struct RString {
+</span><span class='line'>  MRB_OBJECT_HEADER;
+</span><span class='line'>  union {
+</span><span class='line'>    struct {
+</span><span class='line'>      mrb_int len; /* ←これが長さ */
+</span><span class='line'>      union {
+</span><span class='line'>        mrb_int capa;
+</span><span class='line'>        struct mrb_shared_string *shared;
+</span><span class='line'>      } aux;
+</span><span class='line'>      char *ptr;
+</span><span class='line'>    } heap;
+</span><span class='line'>    char ary[RSTRING_EMBED_LEN_MAX + 1];
+</span><span class='line'>  } as;
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここで，視点の差に基づく見解の相違について，可能性が見えてくる．</p>
+
+<p>C言語標準の側から見れば size_t を使わないのはどう考えでも「鼻毛」なのだが，敢えて，Ruby の内側から見てみよう．
+<strong>外側にあるC言語の連中は，mrb_int を使いやがれ．お前らmrubyに依存しているんだろう?</strong> という意見には，一定の合理性がある．</p>
+
+<p>ああ，Matz氏とは面識もあるし，ジェントルな方である．
+上記太字は，私が相当に盛った表現だ．
+皆さんご存知だろうが一応補足．</p>
+
+<p>表現はさておき，世間一般の論として「APIの内側と外側で，どちらが主人でどちらが従属か」というのは，API設計で，必ず出てくる悩みどころといえる．</p>
+
+<h2>API の主従と設計</h2>
+
+<p>実例を挙げる．</p>
+
+<p>μITRON仕様OSは，UW, UH, UB など，uint32_t, uint16_t, uint8_t で済む型を，独自に定義している．
+これは，C99標準よりも遥かに前からμITRON仕様が存在したためである．
+同様のオレオレ型定義は Windows などにも見られる．</p>
+
+<p>しかし，μITRON仕様の系譜を汲む TOPPERS カーネルは，第2世代カーネル (ASPカーネルベース)を境に，
+μITRON仕様流の定義を捨てた．
+現世代のTOPPERSカーネルは，全てC99標準に準拠したデータ型で API を定義している．
+(構造体などで，独自定義の型もある．)</p>
+
+<p>一方，同じくμITRON仕様の系譜を汲む T-Kernel は，今でもμITRON仕様の流儀で API のデータ型を定義している．</p>
+
+<p>T-Kernel は，OSが主であるという考え方であるといえる．
+この場合，しもべたるアプリケーションは，OSが定義した型に則るのがスジである．
+他環境で動くライブラリを移植する際に悩ましかろうが，そんなことは知ったことではない．</p>
+
+<p>一方，TOPPERSの第2世代以降の仕様は，API仕様から見ると，アプリケーション，もしくはC言語処理系の都合が主である．
+仕様策定者たちの正確な意図は判らない．
+size_tなどコンパイラが生成する型との摺り合わせについて考えたり，MISRA系のコーディングガイドラインとの整合性を考えたり，いくつかの要因があるのだろう．
+しかし，結果として，ベアメタル(フリースタンディング)環境のC言語アプリケーションのための，
+スレッドライブラリとして，TOPPERSカーネルのAPIは，自然にフィットする．
+他のライブラリを応用する際にも，ライブラリがC99が推奨するデータ型にそっている限り，悩む箇所は多くない．</p>
+
+<p>T-kernel と TOPPERS という，2つのカーネルのAPIは，その視点の違いで，使う型が異なる．
+同じRTOS仕様を起源とし，今でも提供する機能に大差がないにも関わらず，である．
+この例は，APIの主従関係の捉えかたがデータ型の選び方に影響することを，示している．</p>
+
+<h2>mruby と C言語アプリの主従，そしてAPI設計</h2>
+
+<p>というわけで，mruby へのコミットで，size_t から mrb_int へ変えたいと思ったことには，一定の妥当性がある，
+というか，API設計をするものとして，気持ちは判る．
+Matz 氏は，自他共に認める「Ruby のパパ」であり，彼が Ruby 世界を中心に mruby を考えるのは仕方がない．
+仕方がないというか，そういう立ち位置でいて頂かないと皆困る．</p>
+
+<p>一方で，mruby は，アプリケーションに組込むライブラリであり，そのAPIは，結合先の言語(今回の場合はC言語)を無視することができない．
+C言語もれっきとした言語であり仕様標準があり，コーディングパターンもある．</p>
+
+<p>片方の世界でベストプラクティスだったとしても，片方の世界でアンチパターンになることは，少なくない．
+API設計の最も難しく，かつ醍醐味であるところ，それは，2つの世界を理解して橋渡しすることにある．</p>
+
+<p>ここまでザザッと説明して，最後に2つほど質問．</p>
+
+<p>mruby で mrb_int を使うのが「鼻毛」なのに，μITRON仕様やWindows API では「鼻毛」にはならないのは何故か?
+これをスラっと回答できるのは，少なくともデータ型に関しては API 設計をするに十分なスキルのある人であろう．</p>
+
+<p>μITRON仕様のAPIには，「鼻毛」と呼ぶのにふさわしいサービスコール群がある．それはどれか．
+本稿読者の多くはμITRON仕様を知らないかもしれないが，批判な目で知らないAPIレビューできるのは，API設計者に
+必要なスキルである．</p>
+
+<h2></h2>
+
+<p>てな感じで，結論があるような，無いような，けむに巻いた感じで，一連の話は終わり．</p>
+
+<p>今回はC言語APIを題材にしたが，ビルド構成ファイルである build_config.rb に与える機能の話など，Ruby を使った DSL の設計に関わる話題もある．でもそちら方面は私の得意分野ではないので，割愛．</p>
+
+<p>mruby の面白いところは，Matz 氏が作った世界である Ruby は当然のこととして，プルリクを送る開発者たちの多様性にあると個人的には思っている．
+Cのほうが得意な人．C++のほうが得意な人．運用系への適用に興味を持つ人，gemsを量産する人，JITに魂を売った人，ちっちゃいものクラブ会員，などなど．
+こういう状況だと，mruby に興味がなくても，プルリクを眺めているだけで，プログラミングの学習になりうる．
+専門分野に属すると，その分野の定石みたいなものに縛られてしまう．
+今のところ，mruby には，それがない．</p>
+
+<p>大した分量ではない 2つのコミットから，ここまで話を伸ばせる．
+他のコミットも，たとえ数行の変更でも，深い洞察の末だったりすることも，しばしばある．
+C言語を覚えたけれども，その先の学習で伸び悩んでいるという向きにとって，mruby はなかなかよい教材だろうと思う．</p>
+
+<p>最近，涼風 ( @suzukaze_jp )氏が，<a href="http://mruby-master-changes.hatenablog.com/">mruby masterの変更履歴を定期的にまとめている</a>ようなので，気が向いたらご参考に．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T18:03:49+09:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/03/23/api-as-glue/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/03/23/api-as-glue/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/03/23/api-as-glue/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/21/types-generated-by-compiler/" title="Previous Post: コンパイラが生成する型とAPI">&laquo; コンパイラが生成する型とAPI</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/23/api-as-glue/">橋渡しとしてのAPI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/16/media-literacy-saves-you/">メディア・リテラシと，生存</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
