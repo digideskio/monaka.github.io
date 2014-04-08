@@ -9,9 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな，ということで解いてみた． お題 引用する． 標準出力に
-Hello World
-と出力するプログラムを作成して下さい。 ただし、数値、 &hellip;">
+  <meta name="description" content="社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
+( 「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない ) 私自身は，ベーマガ→Oh!MZ と進んで，月刊ASCIIはたまに立ち読みしたり図書館で読んだりという程度の記憶しかない． けれど， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +79,57 @@ Hello World
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/01/what-is-next/">狂ったように作るもの</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-01T13:49:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
+( <a href="http://weekly.ascii.jp/elem/000/000/175/175062/">「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない</a> )</p>
+
+<p>私自身は，ベーマガ→Oh!MZ と進んで，月刊ASCIIはたまに立ち読みしたり図書館で読んだりという程度の記憶しかない．</p>
+
+<p>けれど，MinixへのパッチキットでOSS的活動への名乗りを上げ，初台へ遊びにいったこともあったりするし，256倍やらマーフィーの法則やらハッカーズ大辞典やら，今もネタ元にしている書籍がたくさんある．
+PostScriptやUnixの知識も，ASCII無しには得られなかっただろう．
+TeXで日本語が使えるようになったのもASCII(だけではないけれど)のおかげだ．
+残念というか，寂しいというか，時代の流れを感じるというか，そういう類の何かはある．</p>
+
+<p>とはいえ，関係者ではない薄情な私の興味は，消えゆくものよりも，&#8221;この先生きのこるには&#8221;ということ．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/01/what-is-next/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -196,74 +246,6 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/01/calibrate-touchscreen-android-jb/">Android (X86-jb) でのタッチスクリーンキャリブレーション</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-01T07:17:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Android でのタッチスクリーンのキャリブレーション法について．情報が溢れていそうで，案外無い，
-あっても，古くて使えない．
-ので，記録しておきます．</p>
-
-<p>(少なくとも AOSP での)タッチスクリーンサポートは，tslib を用いています．
-tslib には，ts_calibrate というコマンドがついています．
-ts_calibrate は，LinuxのフレームバッファとタッチパネルデバイスをLinuxのinputデバイスとを直接アクセスします．
-Android は，当然ながら，画面を押さえていますので，衝突します．
-そこで，下記のような手順で実行を行います．</p>
-
-<p>以下，Android-x86.org が提供している x86-jb での手順です．</p>
-
-<p>たぶん ICS 以降の Android の多くで使えるはずですが，中には，tslib を使っていないディストロもあります．(例えば AndroVM)
-あと，rootが必要です．
-スマホやパネルコンピュータなど，きちんと製品に作りこまれた状態でも，この方法は使えないかもしれません．
-(その場合，キャリブレーションツールが必要なら，きちんとしたのがついてくるだろうと思います．)</p>
-
-<ol>
-<li>普通にAndroidを起動します．</li>
-<li>adb shell など用いて，コマンドラインアクセス可能にします．</li>
-<li><code>stop zygote</code> <code>stop bootanim</code> <code>stop surfaceflinger</code> として，zygote サービスを停止します．</li>
-<li>多くの場合，キャリブレーションデータを保存するディレクトリが存在しません．<code>mkdir /data/system/tslib</code>を実行して作ります．</li>
-<li><code>ts_calibrate</code> を実行します．</li>
-<li>言われるままにタッチします．</li>
-<li>念のため，<code>ls /data/system/tslib/pointercal</code> などしてキャリブレーションデータが作成されていることを確認します．</li>
-<li>止めた順番と逆順で，<code>start surfaceflinger</code> <code>start bootanim</code> <code>start zygote</code> として，zygote サービスを再開します．</li>
-</ol>
-
-
-<h2>補足</h2>
-
-<p>仮想コンソールがサポートされている場合，上記2の手順で，Alt+F1 などで移動し，作業することもできます．
-その場合，ts_calibrate を実行する際に必要なのは zygote サービスの停止だけです．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -299,6 +281,10 @@ Android は，当然ながら，画面を押さえていますので，衝突し
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/07/i-am-finally-restart-from-bung/">経済産業省に引導を渡された私，やっと，経済的な死亡宣告が出ました．</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/23/api-as-glue/">橋渡しとしてのAPI</a>
       </li>
     
@@ -320,10 +306,6 @@ Android は，当然ながら，画面を押さえていますので，衝突し
     
       <li class="post">
         <a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/16/media-literacy-saves-you/">メディア・リテラシと，生存</a>
       </li>
     
   </ul>
