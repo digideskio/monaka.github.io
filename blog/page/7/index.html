@@ -9,10 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="まくら 明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
-数ヶ月もすれば暖かくもなりましょう．
-そしてやってくるのは，別れと出会いの春でございます． いまどき，IT関連でなくてもメールくらいは日用品になっておるわけでして．
-所属が変わるときには，自分も， &hellip;">
+  <meta name="description" content="ことの起こり AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
+難しい話ではない． だけど繋がらない． あれれ? だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
+IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/15/cant-login-to-gmail-from-commandline/">パスワードもユーザ名も正しいはずなのに，の巻</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-15T01:33:07+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>ことの起こり</h1>
+
+<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
+難しい話ではない．</p>
+
+<p>だけど繋がらない． あれれ?</p>
+
+<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
+IMAP は有効にしたし，2段階認証はやっていないし．</p>
+
+<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/15/cant-login-to-gmail-from-commandline/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -214,64 +264,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/26/oss-community-and-others/">OSSはタダ乗りでもいいけどマズい</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-26T10:17:50+09:00" pubdate data-updated="true">Dec 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Togetter で纏めるかどうか思案しつつ．
-まあ，コメントが付く話でもなかろうということで，当日記へ．</p>
-
-<blockquote class="twitter-tweet"><p><a href="http://t.co/w1u1XPzH9S">http://t.co/w1u1XPzH9S</a>&#10;こういう人には、モラトリアムを使ってオープンソース活動をして欲しいなぁ&#10;みんなスタートアップ行って死ぬほど働いちゃうから、OSS系の若者が減ってきている印象。</p>&mdash; Yuichiro MASUI (@masuidrive) <a href="https://twitter.com/masuidrive/statuses/415363396410699776">December 24, 2013</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<blockquote class="twitter-tweet"><p>OSSに敬意を払わないスタートアップ系が増えているのだとしたら，深刻だぬ．&#10;OSSは手段であって目的ではない，っていう好意をジャイアニズム的に解釈して，昔から今まで不毛なままの分野を，アテクシ知ってる． <a href="https://twitter.com/search?q=%23%E3%83%8B%E3%83%83%E3%83%9D%E3%83%B3%E7%9A%84%E7%B5%84%E8%BE%BC%E3%81%BF&amp;src=hash">#ニッポン的組込み</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/415825872898117632">December 25, 2013</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/26/oss-community-and-others/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -307,6 +299,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/09/startup-and-angel/">社長と投資家の役割，その理解なく明日は来ない</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/07/i-am-finally-restart-from-bung/">経済産業省に引導を渡された私，やっと，経済的な死亡宣告が出ました．</a>
       </li>
     
@@ -328,10 +324,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a>
       </li>
     
   </ul>
