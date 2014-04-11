@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-09T00:58:52+09:00</updated>
+  <updated>2014-04-12T01:01:12+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[失敗分析:リスクのこと]]></title>
+    <link href="http://www.monaka.org/blog/2014/04/11/postmortem-1/"/>
+    <updated>2014-04-11T23:02:30+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/04/11/postmortem-1</id>
+    <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
+でも，書いておくべきなのだろうなと思うので．</p>
+
+<p>何故書くべきと思うかというとですね．
+成功する人が出てくるためには，失敗事例の分析が大事だと思うのです．
+「破産とか怖いから起業はダメだ」とは思う人が増えてしまうと，私は完全に無駄死ですので．</p>
+
+<p>ですので．自分で自分の検死をする．
+…なんかグロテスクですが…．</p>
+
+<p>リスタートをかけている私にとっても，それは大事だと思ったりします．</p>
+
+<p>事後分析(検死)については，コンピュータ業界では，日経BPさんの「動かないコンピュータ」系列，経営だと同じく日経BPさんの「敗戦の将，兵を語る」辺りは有名で，各回の内容も蓄積も濃いと思うのですけれども．
+たぶんスタートアップがだめになる経緯を記した和書って，板倉雄一郎さんの「社長失格」が突出した名著で，あとは在りましたっけかなぁ，という感じではないかなと思っています．
+(「この本を読め！」というお心当たりがある方は，はてブやtwitterで教えてください)</p>
+
+<p>とはいえ，何から書くべきなのか，また何が大事なポイントなのか，私自身，十分に整理がついていません．</p>
+
+<p>なので，前回，前々回の日記に対して頂いたはてブやtwitterでのご意見について，書いてみようかなと思います．</p>
+
+<!-- more -->
+
+
+<p>通常の私の場合，前回のように，あまりにも的はずれなtweetは温和ながらもハッキリと晒します．
+しかし，今回から数回で取り上げるご意見の，引用元のお名前は伏せます．
+私の舌足らずな日記へのコメントがズバリ正解だとしたら，その方はエスパーか何かでしょう．
+また，私も，ご指摘の内容は(条件付きながらも)正しいと思っています．
+もし，私が引用したtweetの主で，正しい引用でのご紹介をお望みの方がいらっしゃいましたら，お知らせください．</p>
+
+<h2>お金のこと</h2>
+
+<blockquote><p>社長の賃金を資産計上できず倒れたってこと？CFがマイナスって時点で、リスクの大きい経営だったんだなあと思ってしまったりも。</p></blockquote>
+
+<p>社長だけではなくて，取締役級の1名も，大幅な減額になっています．
+社長以下4〜5名の会社で半分の給与が確保できない(そもそも研究開発助成なので，その他社員の給与も満額は出ない)となると，さすがにキツいです．</p>
+
+<p>この辺りの事情は，記録も残っていることですし，機会があれば取り上げはできますが…．</p>
+
+<p>ですが，経済産業省のスキームはたぶん変わります．
+事情通によると，私以外にも，潰れる寸前まで追い詰められた組込みソフト会社さんがあるそうです．
+このサイトの日記も，たぶん霞ヶ関の情報感度の高い方々には，既に伝わっています．
+ですので，過去の話をしても，あんまり役に立たないかなぁと．</p>
+
+<p>お役人さんを叩いても，潰れた会社は帰ってきませんし．</p>
+
+<p>そもそも，0円査定の原因となった，無茶な単価設定をしたというどこかに居るバカ社長が悪いのであります．
+そいつには窒息するまでパイ投げしてやりたいとは思いますけれどもね．</p>
+
+<h2>高リスクであること，それは全くもって意識的でした．</h2>
+
+<p>で，リスクの大きい経営だったかというと．ええ，リスクの大きい経営でした．
+誤解を招く表現ですが，「我ながら，よく10年続いたな」と．</p>
+
+<p>既にざっくりと tweet しています．</p>
+
+<blockquote class="twitter-tweet"><p>ハイリスクな経営だったというのは，全くその通りで，そこはまったくもって自覚的だった．&#10;ニッポンの組込みシステムというガチガチの保守層にOSSをぶつける，という発想からして，ハイリスクだったわけだから．&#10;皿回しをしない人は，皿を割らない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/453856186874351616">April 9, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>全くもって無鉄砲かというと，そういうわけでもなかったりはします．</p>
+
+<p>組込みシステムにオープンソースを適用するというのは，今は RedHat に買収された <a href="">Cygnus solutions</a> の<a href="http://www.law.co.jp/okamura/OpenSource_Web_Version/chapter06/chapter06.html">成功事例</a>が，起業した 2000 年の段階でありました．
+加えて，ちょうど <a href="http://toppers.jp/">TOPPERS プロジェクト</a> が興る頃でした．世間よりも少し早くソースコードを読む機会があって「これは業界の空気を変えられる」と確信しました．</p>
+
+<p>ただし，ARMやMIPSといった海外セミコンダクタに比べて，日本のセミコンダクタ各社は，極めて保守的でした．それは起業時点で判っていたことでした．
+(だから最近になって危機的状況に陥っているのですよね，みたいな話は，また別の機会に)</p>
+
+<p>その各社が作るチップを使う日本の組込み業界も，医療，航空宇宙，自動車，のみならず，白物家電のレベルまで，保守的なのも，自明でした．</p>
+
+<p>そこに，まだ Linux でさえ十分に受け入れられていなかった2000年の段階で，オープンソースの旗を振って参入したわけです．
+経済的な後ろ盾のない零細が．
+これを高リスクでないという人は，きっとアタマがおかしいです．</p>
+
+<p>高リスクであること，それは全くもって意識的でした．</p>
+
+<p>意識的だったので，もなみソフトウェアは，常に結果を出しました．
+私が，ではないです．…私も，ですが．
+もなみソフトウェアには，優れたエンジニアが集っていましたから，</p>
+
+<p>成果を出して次に繋げていかないと，保守の力に負けて潰れる，そういう危機感が常にありました．</p>
+
+<p>TOPPERS/FI4 カーネルは，楽器店にならぶシンセサイザ・デジタルピアノ・PA卓や，ネットワークカメラ，等々幅広く採用されました．白物家電レベルには，ソリューションを出しました．</p>
+
+<p>実働するまでの多くの箇所で貢献した TOPPERS/HRP カーネルは，航空宇宙系と言っても誰も異議を挟まない，JAXAのH2Bロケットに採用されました．</p>
+
+<p>PizzaFactory は，gcc や gdb などの上流にコントリビュートしながら，教材から，プラント制御のようなミッションクリティカルな現場まで，幅広く使われました．</p>
+
+<p>あえなく潰えましたが，サポイン事業でのメインターゲットは，自動車業界でした．</p>
+
+<p>設立当時3万円，最終的には903万円しか資本金がなかった会社が，保守でガチガチな日本の組込み業界に切り込む．
+そして目に見える結果を出す．
+その10年間，毎日が薄氷を踏むようでした．
+資金繰りがよくて数日間の温泉旅行に出た日も，気持ちは薄氷の上でした．</p>
+
+<p>高リスクでしたよ．仰るとおりです．</p>
+
+<p>でも，私，思うのですよ．
+皿を回さない人は，皿を割りません．</p>
+
+<p>割っちゃダメなのですけれども．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[社長と投資家の役割，その理解なく明日は来ない]]></title>
@@ -2582,194 +2692,6 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
 
 <p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
 面倒だ，と不満を漏らしてはいけないのだろう．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法]]></title>
-    <link href="http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby/"/>
-    <updated>2014-01-14T19:37:18+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/01/14/gmail-imap-sync-with-ruby</id>
-    <content type="html"><![CDATA[<h1>まくら</h1>
-
-<p>明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
-数ヶ月もすれば暖かくもなりましょう．
-そしてやってくるのは，別れと出会いの春でございます．</p>
-
-<p>いまどき，IT関連でなくてもメールくらいは日用品になっておるわけでして．
-所属が変わるときには，自分も，自分の所属組織も，この扱いに困ったりするわけです．
-私が最初にメアドなるものを貰ってから20年以上経ちますが，この辺りは何の進歩も見られないなと，思ったりするような，しないような．</p>
-
-<h1>Gmailの内容保全について考える．</h1>
-
-<p>今や社会インフラといえるよなサービスの代表として Gmail は筆頭でしょう．
-個人，学生のみならず，Google Apps for Bysiness (GAB)などで会社でも使われていることも多いですし．</p>
-
-<p>学生が学校のアカウントとして Gmail を持っている場合は，卒業と同時にそれを失うのが一般的なはずです．
-卒業後を見越していればよいのですが，新入生の頃は右も左も判らないので，つい学校の Gmail に頼っちゃった，ということは十分に有り得るでしょう．</p>
-
-<p>会社の場合は，退職と同時に，その持ち出しを禁止されるのが一般的だろうと思います．
-この場合，困るのは，会社に残った側です．
-メールのやり取りは，退職者が行っていた仕事のログでもあり，保全したいと思うはずです．
-が，GABのアカウントは有料でして，アカウントを消して経費節減に繋げたいという経営経理側の言い分もわかります．
-その辺を上手く調整しないと…</p>
-
-<blockquote class="twitter-tweet"><p>退職者のGoogleアカウントが削除されたため、その退職者がオーナーになっていたGoogleドライブのファイルが全て消え失せて大騒ぎしている。</p>&mdash; わいお (@KanjiruWaio) <a href="https://twitter.com/KanjiruWaio/statuses/421468843513376768">January 10, 2014</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>…こういう哀しいできごとがおこるわけです．(この例はメールではありませんが)</p>
-
-<!-- more -->
-
-
-<h1>それ，Rubyでやってみよう．</h1>
-
-<p>いや別に Ruby でなくてもできますが…(汗．閑話休題．</p>
-
-<p>一般的に言うと，Gmail の保全には，imapsync などの汎用ツールを使うだろうと思います．
-しかし，ここでは，独自にスクリプトを書くという提案をします．</p>
-
-<p>Ruby には，強力なIMAPライブラリがあるので，あんまり難しくはありません．
-あと，Ruby 入門の日記ではありませんので，処理の詳細は説明しません．</p>
-
-<h2>注目は X-GM-RAW</h2>
-
-<p>注目していただきたいのは，「 <strong>#ここに注目</strong> 」の行です．
-Gmail は IMAP の SEARCH に X-GM-RAW なる指定ができます．
-これは，Gmail のweb画面にある検索窓に入力する書式を，そのまま指定できます．
-この例では，Googleグループのandroid-x86というグループから来ているメールを抽出してコピーしています．</p>
-
-<p>Gmail はディスク容量が大きく，検索のスピードも早いため，一般的なメールフォルダよりも多くのメールを溜め込みがちです(個人差はありますが)．
-これを，imapsync などの汎用ツールを使って全コピーしようとすると，涙目になります．</p>
-
-<h2>まとめ</h2>
-
-<p>スクリプトの中には，いろいろ細かいネタが仕込まれているのですが，それらもサックリと省略します．
-汎用ツールで開発時間を短縮するという考え方も間違いではありませんが，汎用ツールでは対応できない機能を見つけたときには，小さなスクリプトを作るのもアリですよね，と．
-まとめになっていませんが，今日はこんな感じで．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env ruby
-</span><span class='line'># -*- coding: utf-8 -*-
-</span><span class='line'># Copyright (C) 2014 Masaki "monaka" Muranaka.
-</span><span class='line'># License: MIT.
-</span><span class='line'>
-</span><span class='line'>require 'net/imap'
-</span><span class='line'>require 'time'
-</span><span class='line'>
-</span><span class='line'>src_imap = Net::IMAP.new('imap.gmail.com', 993, true)
-</span><span class='line'>dst_imap = Net::IMAP.new('imap.gmail.com', 993, true)
-</span><span class='line'>
-</span><span class='line'>def parseHeader(msg)
-</span><span class='line'>  msg =~/\A(.*?)\r\n\r\n(.*)\Z/m
-</span><span class='line'>  head,body=$1,$2
-</span><span class='line'>  head=head.split(/\r\n/).map{|i|i[0]+i}.join("\r\n")[1..-1].split(/\r\n[^\s]/).map{|i|i.split(/\r\n\s\s/).join("")}
-</span><span class='line'>  Hash[*head.map{|i|i=~/^(.*?):\s(.*)$/;[$1,$2]}.flatten]
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>###################################################################
-</span><span class='line'># ここは設定
-</span><span class='line'>searchParams = [
-</span><span class='line'>                ['FROM', 'tomono@example.com'],
-</span><span class='line'>                ['X-GM-RAW', 'list:(&lt;android-x86.googlegroups.com&gt;)'],      #ここに注目
-</span><span class='line'>                ['X-GM-RAW', 'list:(&lt;receipt.movsign.info&gt;)']
-</span><span class='line'>               ]
-</span><span class='line'>
-</span><span class='line'>src_imap.login('monaka@somewhere-using-gmail.co.jp', 'password')            #コピー元
-</span><span class='line'>dst_imap.login('another-monaka-or-something@gmail.com', 'another-password') #コピー先
-</span><span class='line'>
-</span><span class='line'>#この辺もお好みで．
-</span><span class='line'>src_imap.select('INBOX')
-</span><span class='line'>dst_imap.select('INBOX')
-</span><span class='line'>
-</span><span class='line'>###################################################################
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>searchParams.each do |searchArray|
-</span><span class='line'>  puts "Searching #{searchArray[1]}"
-</span><span class='line'>  searchIds = src_imap.search(searchArray).each do |id|
-</span><span class='line'>    msg = src_imap.fetch(id, 'RFC822')[0].attr['RFC822']
-</span><span class='line'>    head = parseHeader(msg)
-</span><span class='line'>
-</span><span class='line'>    searchIds = dst_imap.search(['X-GM-RAW', "rfc822msgid:#{head[%q{Message-ID}]}"])
-</span><span class='line'>    if (searchIds.length == 0) # このチェックを省くと遅くなる
-</span><span class='line'>      dst_imap.append('INBOX', msg, nil, Time.parse(head['Date']))
-</span><span class='line'>      putc 'w'
-</span><span class='line'>    else
-</span><span class='line'>      putc '.'
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>  puts
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>src_imap.logout()
-</span><span class='line'>dst_imap.logout()
-</span><span class='line'>
-</span><span class='line'>src_imap.disconnect()
-</span><span class='line'>dst_imap.disconnect()</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
