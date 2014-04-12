@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-12T20:42:17+09:00</updated>
+  <updated>2014-04-12T22:25:29+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -14,11 +14,117 @@
 
   
   <entry>
+    <title type="html"><![CDATA[失敗分析:経理のこと]]></title>
+    <link href="http://www.monaka.org/blog/2014/04/12/postmortem-2/"/>
+    <updated>2014-04-12T21:21:37+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/04/12/postmortem-2</id>
+    <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
+という前口上は<a href="http://www.monaka.org//blog/2014/04/11/postmortem-1/">前回と同じ</a>なので省略です．</p>
+
+<p>そして，前回同様，ご指摘頂いた方のお名前は伏せます．</p>
+
+<h2>経理のこと</h2>
+
+<blockquote><p>もそっと経理を学ぶべきだったんじゃないかとか。</p></blockquote>
+
+<p>そのとおり．</p>
+
+<p>しかし，「もっと〇〇を学ぶべき」という指摘は，ワイルドカードなのですよね．</p>
+
+<p>大事なところでコケちゃった浅田真央選手に「もっとジャンプを練習すべき」は正しいです．
+でも，そこには，情報量が無いですね．</p>
+
+<p>…や，浅田真央選手を持ちだしたのは，ちょっとミスリードでした．
+でも，資格試験に落ちたとか，恋人に振られたとか，全てにおいて「もっと〇〇すべきだった」という指摘は，常に当てはまります．ワイルドカードなのですよね．</p>
+
+<!-- more -->
+
+
+<p>実際の私はどうだったか．
+たぶん簿記3級は確実に受かります．
+資格試験には，実務知識以外の，試験のための勉強というものもあります．
+ですから，今日受験して受かるとまでは言いません．</p>
+
+<p>でもまあしかし，2週間くらいの余裕があれば，対策はつくレベルです．
+もなみソフトウェアの最初の2年くらいは，顧問税理士はつかず，私が確定申告書を書いていましたから．</p>
+
+<p>2級が受からないという理由は，在庫の扱いについて疎いからです．
+経営としても，可能な限りの無在庫は標榜していましたので．
+その部分を除くと…というと，何も残らないかもしれませんが…歯が全く立たないというわけでもないです．</p>
+
+<h2>売掛サイトの実態</h2>
+
+<p>でも，もなみソフトウェアは，潰れました．</p>
+
+<p>その事実をもって，これから起業する方に，私が言えることがあるとすれば．</p>
+
+<p>「大事なのは，経理担当としての知識レベルではない」ということだろうと思います．</p>
+
+<p>「回収済みの売掛金が何年にも残っていた」という事実を自分で見つけられなかったことは，経営者としてとても恥ずかしいものです．
+しかしながら，&#8221;回収サイトが長期に渡る売掛金は発生させてこなかった&#8221;ということの裏返しでもあります．</p>
+
+<p>売掛の回転率は，資金繰りにおいて，大きな問題です．
+多く零細の場合，回収サイトの長い売掛を発生させて，資金繰りを悪化させます．</p>
+
+<p>しかし，もなみソフトウェアの場合，締日から50日を超える案件は，ほぼ0でした．
+失礼な言い方ですが，取引先も選びました．その点でのリスク管理は万全でした．</p>
+
+<p>お役所案件の場合は，そうもいかず，回収サイトは長くなります．0というのは，企業間取引の場合です．
+しかし，お役所案件の場合は，単年度主義です．
+どんなに長くても，365.25日以上の回収サイトにはなりません．</p>
+
+<p>ですので，売掛金が2期以上残ったままになるということが，私の頭の中には，有り得ないわけです．</p>
+
+<h1>経営と信任</h1>
+
+<p>元を正せば，経営者として，エンジニアとして，さらには経理担当として．
+全ての業務を全うするのは無理でした．
+そのため，経理のうち，帳簿に関するところは，お任せすることにしました．</p>
+
+<p>ここまでは，経営としては普通の話です．
+そして，売掛回収管理という点では，営業も見ている経営者として，きちんとお仕事ができていました．</p>
+
+<p>ところが，お任せしたところ，ある時点で振り返ってみたら，帳簿に関するところで，色々と漏れがありました．
+それによって，無罪の税務調査が入ったり，メインバンクが激怒したり，ひいては資金繰りに行き詰まりました．
+実態は，こんなところです．</p>
+
+<p>もちろん，税理士事務所さんのほうにも言い分はあるのだろうと思います．
+きちんと情報をくれなかった，とか．</p>
+
+<p>それら諸々ひっくるめて，最後は印鑑を押した私が悪いと認めた上で．</p>
+
+<p>…<em>信任と丸投げを混同すると，会社は潰れる</em></p>
+
+<p>ということなのだろうと思っています．
+仕事の規模が大きくなって，いろいろと忙しくなって，信任から丸投げになっていました．
+私は，簿記会計の知識よりも，丸投げ化の事実のほうが，致命傷になったと今は思っています．</p>
+
+<p>「まさか，回収サイト50日未満の会社なのに，前期と今期の売掛金残高が一緒だということに不思議を感じない税理士は居ないだろう」
+「まさか，税法の取扱いの変更について，通達を理解していない税理士事務所は無いだろう」</p>
+
+<p>…でも，ありました．</p>
+
+<p>経営者は，自分以外の存在は，たとえ専門家であっても，士業であったとしても，信じてはいけない．そういうことです．</p>
+
+<h1>任せる度量と，矛盾する猜疑</h1>
+
+<p>&ldquo;任せる度量と，矛盾する猜疑&rdquo; ，それが経営者に求められるものだと思いますし，私に足りなかったものだろうと思います．
+なんだかんだ言って，信じてしまい，甘えていたのでしょう．</p>
+
+<p>なので，起業を考えている方，起業してこれから伸ばそうと思っている方には，こう提言します．</p>
+
+<p><strong>もそっと経理を学ぶべきだろうけれども，経理を学ぶ以上に大切な思考がある．</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[失敗分析:リスクのこと]]></title>
     <link href="http://www.monaka.org/blog/2014/04/11/postmortem-1/"/>
     <updated>2014-04-11T23:02:30+09:00</updated>
     <id>http://www.monaka.org/blog/2014/04/11/postmortem-1</id>
-    <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
+    <content type="html"><![CDATA[<p><strong>2014-04-12 リンクの追加や，ちょっとした補足</strong></p>
+
+<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
 でも，書いておくべきなのだろうなと思うので．</p>
 
 <p>何故書くべきと思うかというとですね．
@@ -2589,110 +2695,6 @@ FI4カーネルは新規設計したほうが綺麗になるのは明らかだ�
 <blockquote><p>採用は，本当に，難しいです．</p></blockquote>
 
 <p>(しみじみと)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[パスワードもユーザ名も正しいはずなのに，の巻]]></title>
-    <link href="http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline/"/>
-    <updated>2014-01-15T01:33:07+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/01/15/cant-login-to-gmail-from-commandline</id>
-    <content type="html"><![CDATA[<h1>ことの起こり</h1>
-
-<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
-難しい話ではない．</p>
-
-<p>だけど繋がらない． あれれ?</p>
-
-<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
-IMAP は有効にしたし，2段階認証はやっていないし．</p>
-
-<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
-
-<!-- more -->
-
-
-<p>仕方がないな．
-OTRS は (Ruby ではなく) Perl で大半が書かれている．
-それと似たような記述でログインをテストしてみる．
-こんな感じ．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use Net::IMAP::Simple;
-</span><span class='line'>
-</span><span class='line'>use IO::Socket::SSL;
-</span><span class='line'>
-</span><span class='line'># Create the object
-</span><span class='line'>my $imap = Net::IMAP::Simple-&gt;new('imap.gmail.com', use_ssl =&gt; 1, port =&gt; 993) ||
-</span><span class='line'>  die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
-</span><span class='line'>
-</span><span class='line'># Log on
-</span><span class='line'>if (!$imap-&gt;login('___________@gmail.com','_p_a_s_s_w_o_r_d_', debug =&gt; 1)) {
-</span><span class='line'>  print STDERR "Login failed: " . $imap-&gt;errstr . "\n";
-</span><span class='line'>  exit(64);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>実行…あれれ?</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ip-10-0-0-208:~$ perl test.pl
-</span><span class='line'>Login failed: [ALERT] Please log in via your web browser: http://support.google.com/mail/accounts/bin/answer.py?answer=78754 (Failure)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>んんん?</p>
-
-<p>ブラウザでアクセスせよ，とな．
-でも，この動作環境，Ubuntu Server で，デスクトップ環境入ってないよ．もちろんブラウザも．</p>
-
-<p>手元のブラウザで事態を把握してみようと試みたところ，どうやらイカガワシイと思われるアクセスを遮断しているようだ．
-<img src="http://www.monaka.org//blog/2014/01/15/screen-shot-2014-01-15.png" alt="赤い画面でお怒りのGmail様" /></p>
-
-<h1>socksサーバを立ってて逃げ道を作る．</h1>
-
-<p>w3m など，文字ターミナル向けブラウザを使ってアクセスすれば良いのかもしれない．
-でも，たぶん，Googleのことだから，JavaScriptとか入っていていろいろ面倒なことになりそうだ．</p>
-
-<p>なので，ssh についている socks サーバ機能を用いる．
-手元の端末から，次のようにして，1080 版をsocksの口にする．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -D1080 server.example.com</span></code></pre></td></tr></table></div></figure>
-
-
-<p>server.example.com は，実際には，EC2のインスタンス．
-ここで指定した1080番ポートはlocalhostのもの．だから，EC2側のincomingはsshのポート，TCP 22番だけ開いていればよい．</p>
-
-<p>そして，手元のブラウザのproxy設定．localhost:1080 で socks を経由するよう設定する．</p>
-
-<p>ここまでで下ごしらえは完了．
-手元のブラウザから，Gmail へアクセスする．
-あとは…なりゆきでアクセスすれば，お怒りが解けた…はず．
-(2月に入ってからこの稿を書き上げているので，記憶が既に曖昧…)</p>
-
-<h1>まとめっぽい何か</h1>
-
-<p>ssh の -D オプションは，ヘッドレスサーバを管理している時に割と便利なので，覚えておくと何かと役に立つ．</p>
-
-<p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
-面倒だ，と不満を漏らしてはいけないのだろう．</p>
 ]]></content>
   </entry>
   

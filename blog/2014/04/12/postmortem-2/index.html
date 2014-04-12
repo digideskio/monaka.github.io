@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>失敗分析:経理のこと - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/04/12/postmortem-2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,15 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/04/12/postmortem-2/">失敗分析:経理のこと</a></h1>
+      <h1 class="entry-title">失敗分析:経理のこと</h1>
     
     
       <p class="meta">
@@ -108,7 +105,7 @@
   </header>
 
 
-  <div class="entry-content"><p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
+<div class="entry-content"><p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
 という前口上は<a href="/blog/2014/04/11/postmortem-1/">前回と同じ</a>なので省略です．</p>
 
 <p>そして，前回同様，ご指摘頂いた方のお名前は伏せます．</p>
@@ -127,88 +124,94 @@
 <p>…や，浅田真央選手を持ちだしたのは，ちょっとミスリードでした．
 でも，資格試験に落ちたとか，恋人に振られたとか，全てにおいて「もっと〇〇すべきだった」という指摘は，常に当てはまります．ワイルドカードなのですよね．</p>
 
+<!-- more -->
+
+
+<p>実際の私はどうだったか．
+たぶん簿記3級は確実に受かります．
+資格試験には，実務知識以外の，試験のための勉強というものもあります．
+ですから，今日受験して受かるとまでは言いません．</p>
+
+<p>でもまあしかし，2週間くらいの余裕があれば，対策はつくレベルです．
+もなみソフトウェアの最初の2年くらいは，顧問税理士はつかず，私が確定申告書を書いていましたから．</p>
+
+<p>2級が受からないという理由は，在庫の扱いについて疎いからです．
+経営としても，可能な限りの無在庫は標榜していましたので．
+その部分を除くと…というと，何も残らないかもしれませんが…歯が全く立たないというわけでもないです．</p>
+
+<h2>売掛サイトの実態</h2>
+
+<p>でも，もなみソフトウェアは，潰れました．</p>
+
+<p>その事実をもって，これから起業する方に，私が言えることがあるとすれば．</p>
+
+<p>「大事なのは，経理担当としての知識レベルではない」ということだろうと思います．</p>
+
+<p>「回収済みの売掛金が何年にも残っていた」という事実を自分で見つけられなかったことは，経営者としてとても恥ずかしいものです．
+しかしながら，&#8221;回収サイトが長期に渡る売掛金は発生させてこなかった&#8221;ということの裏返しでもあります．</p>
+
+<p>売掛の回転率は，資金繰りにおいて，大きな問題です．
+多く零細の場合，回収サイトの長い売掛を発生させて，資金繰りを悪化させます．</p>
+
+<p>しかし，もなみソフトウェアの場合，締日から50日を超える案件は，ほぼ0でした．
+失礼な言い方ですが，取引先も選びました．その点でのリスク管理は万全でした．</p>
+
+<p>お役所案件の場合は，そうもいかず，回収サイトは長くなります．0というのは，企業間取引の場合です．
+しかし，お役所案件の場合は，単年度主義です．
+どんなに長くても，365.25日以上の回収サイトにはなりません．</p>
+
+<p>ですので，売掛金が2期以上残ったままになるということが，私の頭の中には，有り得ないわけです．</p>
+
+<h1>経営と信任</h1>
+
+<p>元を正せば，経営者として，エンジニアとして，さらには経理担当として．
+全ての業務を全うするのは無理でした．
+そのため，経理のうち，帳簿に関するところは，お任せすることにしました．</p>
+
+<p>ここまでは，経営としては普通の話です．
+そして，売掛回収管理という点では，営業も見ている経営者として，きちんとお仕事ができていました．</p>
+
+<p>ところが，お任せしたところ，ある時点で振り返ってみたら，帳簿に関するところで，色々と漏れがありました．
+それによって，無罪の税務調査が入ったり，メインバンクが激怒したり，ひいては資金繰りに行き詰まりました．
+実態は，こんなところです．</p>
+
+<p>もちろん，税理士事務所さんのほうにも言い分はあるのだろうと思います．
+きちんと情報をくれなかった，とか．</p>
+
+<p>それら諸々ひっくるめて，最後は印鑑を押した私が悪いと認めた上で．</p>
+
+<p>…<em>信任と丸投げを混同すると，会社は潰れる</em></p>
+
+<p>ということなのだろうと思っています．
+仕事の規模が大きくなって，いろいろと忙しくなって，信任から丸投げになっていました．
+私は，簿記会計の知識よりも，丸投げ化の事実のほうが，致命傷になったと今は思っています．</p>
+
+<p>「まさか，回収サイト50日未満の会社なのに，前期と今期の売掛金残高が一緒だということに不思議を感じない税理士は居ないだろう」
+「まさか，税法の取扱いの変更について，通達を理解していない税理士事務所は無いだろう」</p>
+
+<p>…でも，ありました．</p>
+
+<p>経営者は，自分以外の存在は，たとえ専門家であっても，士業であったとしても，信じてはいけない．そういうことです．</p>
+
+<h1>任せる度量と，矛盾する猜疑</h1>
+
+<p>&ldquo;任せる度量と，矛盾する猜疑&rdquo; ，それが経営者に求められるものだと思いますし，私に足りなかったものだろうと思います．
+なんだかんだ言って，信じてしまい，甘えていたのでしょう．</p>
+
+<p>なので，起業を考えている方，起業してこれから伸ばそうと思っている方には，こう提言します．</p>
+
+<p><strong>もそっと経理を学ぶべきだろうけれども，経理を学ぶ以上に大切な思考がある．</strong></p>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/12/postmortem-2/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/11/postmortem-1/">失敗分析:リスクのこと</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-04-11T23:02:30+09:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>2014-04-12 リンクの追加や，ちょっとした補足</strong></p>
-
-<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
-でも，書いておくべきなのだろうなと思うので．</p>
-
-<p>何故書くべきと思うかというとですね．
-成功する人が出てくるためには，失敗事例の分析が大事だと思うのです．
-「破産とか怖いから起業はダメだ」とは思う人が増えてしまうと，私は完全に無駄死ですので．</p>
-
-<p>ですので．自分で自分の検死をする．
-…なんかグロテスクですが…．</p>
-
-<p>リスタートをかけている私にとっても，それは大事だと思ったりします．</p>
-
-<p>事後分析(検死)については，コンピュータ業界では，日経BPさんの「動かないコンピュータ」系列，経営だと同じく日経BPさんの「敗戦の将，兵を語る」辺りは有名で，各回の内容も蓄積も濃いと思うのですけれども．
-たぶんスタートアップがだめになる経緯を記した和書って，板倉雄一郎さんの「社長失格」が突出した名著で，あとは在りましたっけかなぁ，という感じではないかなと思っています．
-(「この本を読め！」というお心当たりがある方は，はてブやtwitterで教えてください)</p>
-
-<p>とはいえ，何から書くべきなのか，また何が大事なポイントなのか，私自身，十分に整理がついていません．</p>
-
-<p>なので，<a href="http://www.monaka.org/blog/2014/04/09/startup-and-angel/">前回</a>，<a href="/blog/2014/04/07/i-am-finally-restart-from-bung/">前々回</a>の日記に対して頂いたはてブやtwitterでのご意見について，書いてみようかなと思います．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/11/postmortem-1/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/09/startup-and-angel/">社長と投資家の役割，その理解なく明日は来ない</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -220,54 +223,37 @@
   
 
 
-<time datetime="2014-04-09T00:30:00+09:00" pubdate data-updated="true">Apr 9<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-04-12T21:21:37+09:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/04/12/postmortem-2/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/04/12/postmortem-2/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/04/12/postmortem-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p>昨日のエントリの反響は大きく，色々な意見がありました．
-多くは暖かいご支援で涙が出てきました．</p>
-
-<p>もちろん様々な意見はあり，そのほうが世の中としては健全と思います．</p>
-
-<blockquote><p>そうは言っても経産省悪くないし</p></blockquote>
-
-<p>的な意見もありました．
-私もそう思います．
-見積もりを出してきちんと名簿も積算もしたのに，後出しジャンケンをする．
-これは，個人的には卑劣だと思いますが， <strong>_だってこの国ニッポンの商習慣じゃないですか，これ</strong>__ ．
-(と同様のご意見も頂きました)</p>
-
-<p>別に経産省は悪く無いです．
-ニッポンの商習慣を踏襲しただけです．
-昨日のエントリにも書きましたが，私は，黙って机を蹴って退席し，契約印を推さなきゃ良かっただけです．</p>
-
-<p>…だからこそ，この国ニッポンには，未来がない．
-とも，思いますけれどね．</p>
-
-<p>そんな感じではあるのですが，一つだけ，いい大人がこの理解は無いわ，というご意見があったので，マイルドに晒します．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/11/postmortem-1/" title="Previous Post: 失敗分析:リスクのこと">&laquo; 失敗分析:リスクのこと</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/09/startup-and-angel/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -326,7 +312,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -355,6 +341,7 @@
 
   
 </aside>
+
 
     </div>
   </div>

@@ -9,9 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです． &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/page/13/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/17/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/05/05/launchpad-ppa/">Launchpad PPA 登録の罠</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
     
     
       <p class="meta">
@@ -102,134 +101,16 @@
   
 
 
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p>Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．…私もたぶんブログに残さない．(汗</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">2013年5月4日</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
-
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/05/launchpad-ppa/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/04/dirty-optimize/">よくわからない最適化，つづき</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-04T09:10:00+09:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>当ブログの読者層には居なさそうな，将来，ソフトウェアエンジニアを志している方々に向けて．</em></p>
-
-<p>昨日のエントリに関連して，ネタ元のshi3z氏と若干のやりとりがあったので，<a href="http://togetter.com/li/497402">togetter に纏めておきました</a>．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/04/dirty-optimize/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/03/optimizer-in-c/">よくわからない最適化</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-03T10:05:00+09:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
-
-<h2>話のマクラ</h2>
-
-<p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
-
-<blockquote><p>ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>をを! 社長自ら！ すごい！</p>
-
-<blockquote><p>この関数は、一見すると無駄がないように見えますが、実は無駄の塊です。
-たとえばコンピュータは割り算が苦手です。なのに二回も割り算をやっています。
-割り算よりは掛け算(乗算)の方が圧倒的に速い(下手すると10～100倍くらい?)ので、まず割り算をしている部分を2.0の逆数の乗算に変更します。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>最近，トシのせいかすぐに感涙してしまう私は，感化されて，つい除算を積算に変えてみてベンチマークを取ってみました．
-ですが，手元のOSXではJITをoffにしても除算と積算で有意な差は出ませんでした．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/03/optimizer-in-c/">Read on &rarr;</a>
-    </footer>
   
 
 
@@ -237,11 +118,9 @@
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/14/">&larr; Older</a>
-    
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/12/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/16/">Newer &rarr;</a>
     
   </div>
 </div>
