@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-12T01:11:15+09:00</updated>
+  <updated>2014-04-12T20:42:17+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -101,13 +101,14 @@
 
 <p>成果を出して次に繋げていかないと，保守の力に負けて潰れる，そういう危機感が常にありました．</p>
 
-<p>TOPPERS/FI4 カーネルは，楽器店にならぶシンセサイザ・デジタルピアノ・PA卓や，ネットワークカメラ，等々幅広く採用されました．白物家電レベルには，ソリューションを出しました．</p>
+<p>TOPPERS/FI4 カーネルは，楽器店にならぶ<a href="http://www.toppers.jp/press/release-0504-2.pdf">シンセサイザ・デジタルピアノ・PA卓</a>や，ネットワークカメラ，等々幅広く採用されました．白物家電レベルには，ソリューションを出しました．</p>
 
-<p>実働するまでの多くの箇所で貢献した TOPPERS/HRP カーネルは，航空宇宙系と言っても誰も異議を挟まない，JAXAのH2Bロケットに採用されました．</p>
+<p><a href="http://www.toppers.jp/press/release-0504-2.pdf">実働するまでの多くの箇所で貢献した</a> TOPPERS/HRP カーネルは，航空宇宙系と言っても誰も異議を挟まない，<a href="http://ja.wikipedia.org/wiki/H-IIB%E3%83%AD%E3%82%B1%E3%83%83%E3%83%88">JAXAのH2Bロケットに採用されました</a>．
+(いつのまにか，公式発表からは，もなみソフトウェアの記述が消え，ウィキペには名大の名前さえ消えていますが．どういうことなのでしょうかね)</p>
 
 <p>PizzaFactory は，gcc や gdb などの上流にコントリビュートしながら，教材から，プラント制御のようなミッションクリティカルな現場まで，幅広く使われました．</p>
 
-<p>あえなく潰えましたが，サポイン事業でのメインターゲットは，自動車業界でした．</p>
+<p>あえなく潰えましたが，<a href="http://www.chubu.meti.go.jp/interface/php/chubu/kikai/sapoin/index.php/program/detail/37">サポイン事業でのメインターゲットは，自動車業界</a>でした．</p>
 
 <p>設立当時3万円，最終的には903万円しか資本金がなかった会社が，保守でガチガチな日本の組込み業界に切り込む．
 そして目に見える結果を出す．
