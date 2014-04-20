@@ -9,9 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです． &hellip;">
+  <meta name="description" content="オレオレ定義 専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．&mdash; もなかさん (@monamour555) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +78,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/09/what-is-software-creator/">ソフトウェア作家とは何か．</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T10:47:00+09:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>オレオレ定義</h2>
+
+<blockquote class="twitter-tweet" lang="ja"><p>専門を持たず，必要とあらばカーネルからコンパイラから果てはハードウェアまで，あらゆるものを組み合わせ，独自の世界観を込めつつ，特定用途のために供する．アテクシによる，&#8221;ソフトウェア作家&#8221;の定義．</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/331615204184055808">2013年5月7日</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>こんなオレオレ定義に何の意味があるのかと問われると，実は，私もよく判りません．
+まあ，誰かと意見すれ違ったときに，「ああ，あいつはこんなふうに定義しているのか」みたいな，ある種のアリバイかもしれませんね．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -175,66 +218,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/03/optimizer-in-c/">よくわからない最適化</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-03T10:05:00+09:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
-
-<h2>話のマクラ</h2>
-
-<p>新製品リリース前でプログラマーズハイになっておられるらしい shi3z 氏が，イカしたエントリを挙げておられる．</p>
-
-<blockquote><p>ついに僕もソースコードを確認しないと気が済まなくなりました。本当にちゃんと最適化してるのか、自分の目と頭とで確認しています。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>をを! 社長自ら！ すごい！</p>
-
-<blockquote><p>この関数は、一見すると無駄がないように見えますが、実は無駄の塊です。
-たとえばコンピュータは割り算が苦手です。なのに二回も割り算をやっています。
-割り算よりは掛け算(乗算)の方が圧倒的に速い(下手すると10～100倍くらい?)ので、まず割り算をしている部分を2.0の逆数の乗算に変更します。</p>
-
-<p><a href="http://d.hatena.ne.jp/shi3z/20130502/1367490202">よくわかる最適化 &ndash; UEI shi3zの日記</a></p></blockquote>
-
-<p>最近，トシのせいかすぐに感涙してしまう私は，感化されて，つい除算を積算に変えてみてベンチマークを取ってみました．
-ですが，手元のOSXではJITをoffにしても除算と積算で有意な差は出ませんでした．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/03/optimizer-in-c/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -270,6 +253,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/20/you-may-kill-someone/">無責任な倫理観は，&#8217;無責任な&#8217;人を殺すかもしれない</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/12/postmortem-2/">失敗分析:経理のこと</a>
       </li>
     
@@ -291,10 +278,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a>
       </li>
     
   </ul>
