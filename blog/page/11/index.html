@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="もう半年前くらいになるが，柔軟仕上げ剤のにおいについて相談が増えているという発表を国民生活センターが行い，各メディアも報じた． NHKの報道に拠ると… 業界団体の調査によりますと、柔軟剤の利用者の４人に１人までが、定められた量の２倍以上を使っているという結果も出ています。 2倍以上!? &hellip;">
+  <meta name="description" content="背景 最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています． しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/04/group-in-repo/">Repo Sync でストレージを節約するための Group 機能の使い方</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T09:28:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています．</p>
+
+<p>しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです．
+一部の Android 系プロジェクト (Android-x86 とか) では， manifest.xml を編集して，不要なプロジェクトを削除しています．
+しかし，ターゲットはさておき，ビルドホストは複数あったほうが開発者を増やすためには望ましいと言えます．
+また，AOSP の新しいリリースごとに manifest.xml の再編集を行うのは骨の折れる作業です．</p>
+
+<p>このような状況を解消するために，repo には group という機能があります．
+日本語のみならず，英語圏でも纏まって解説されている例は，ざっとググった限りでは無いようです．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/04/group-in-repo/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -180,68 +231,6 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/19/restricted-words/">Restricted Words</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-19T13:57:00+09:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
-
-<h1>お題</h1>
-
-<p>引用する．</p>
-
-<blockquote><p>標準出力に
-Hello World
-と出力するプログラムを作成して下さい。</p>
-
-<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
-Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
-言語仕様をフル活用して下さい！</p></blockquote>
-
-<h1>解法の定石</h1>
-
-<p>定石は，数値を得て，その文字コードに変換する．
-ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
-
-<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
-出題者の意図は，この定石通りだった．
-回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/19/restricted-words/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -277,6 +266,10 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/20/postmortem-3/">失敗分析: 債務のこと</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/20/you-may-kill-someone/">無責任な倫理観は，&#8217;無責任な&#8217;人を殺すかもしれない</a>
       </li>
     
@@ -298,10 +291,6 @@ ASCIIコードでなくEBCDICな処理系だったらどうするの? みたい�
     
       <li class="post">
         <a href="/blog/2014/03/23/api-as-glue/">橋渡しとしてのAPI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a>
       </li>
     
   </ul>
