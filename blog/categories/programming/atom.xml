@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-21T14:45:59+09:00</updated>
+  <updated>2014-04-30T17:43:03+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -150,11 +150,11 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
     <id>http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction</id>
     <content type="html"><![CDATA[<h2>Twitter から</h2>
 
-<p><a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a>">https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a></a></p>
+<p>{% oembed <a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a> %}</p>
 
 <p>というやりとりは，こちら．</p>
 
-<p><a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a>">https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a></a></p>
+<p>{% oembed <a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a> %}</p>
 
 <p>連ツイなので，前後も読んで頂ければと．</p>
 

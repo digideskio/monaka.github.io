@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-21T14:45:59+09:00</updated>
+  <updated>2014-04-30T17:43:03+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -150,11 +150,11 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
     <id>http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction</id>
     <content type="html"><![CDATA[<h2>Twitter から</h2>
 
-<p><a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a>">https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a></a></p>
+<p>{% oembed <a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a> %}</p>
 
 <p>というやりとりは，こちら．</p>
 
-<p><a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a>">https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a></a></p>
+<p>{% oembed <a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a> %}</p>
 
 <p>連ツイなので，前後も読んで頂ければと．</p>
 
@@ -220,7 +220,7 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
 
 <p>この tweet が象徴的だと思う．</p>
 
-<p><a href="https://twitter.com/fenrir_n/status/428290481617780738">https://twitter.com/fenrir_n/status/428290481617780738</a>">https://twitter.com/fenrir_n/status/428290481617780738">https://twitter.com/fenrir_n/status/428290481617780738</a></a></p>
+<p>{% oembed <a href="https://twitter.com/fenrir_n/status/428290481617780738">https://twitter.com/fenrir_n/status/428290481617780738</a> %}</p>
 
 <p>IIJさんが pack/unpack を提供する mrbgem を提供しているのではあるけれども．
 小規模組込みでは，ペリフェラルレジスタの操作で，ビット演算を多用する．
@@ -236,9 +236,9 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
 
 <p>これも他人様の tweet から．</p>
 
-<p><a href="https://twitter.com/kimu_shu/status/427641049054322688">https://twitter.com/kimu_shu/status/427641049054322688</a>">https://twitter.com/kimu_shu/status/427641049054322688">https://twitter.com/kimu_shu/status/427641049054322688</a></a></p>
+<p>{% oembed <a href="https://twitter.com/kimu_shu/status/427641049054322688">https://twitter.com/kimu_shu/status/427641049054322688</a> %}</p>
 
-<p><a href="https://twitter.com/take_cheeze/status/428792261032177664">https://twitter.com/take_cheeze/status/428792261032177664</a>">https://twitter.com/take_cheeze/status/428792261032177664">https://twitter.com/take_cheeze/status/428792261032177664</a></a></p>
+<p>{% oembed <a href="https://twitter.com/take_cheeze/status/428792261032177664">https://twitter.com/take_cheeze/status/428792261032177664</a> %}</p>
 
 <p>本家 mruby は走り続ける．
 おそらく永遠に不安定だ．
@@ -246,7 +246,7 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
 原作者である Matz 氏の根本的な考え方が反映されているものだろう．
 本人が，こう tweet している．</p>
 
-<p><a href="https://twitter.com/yukihiro_matz/status/416389827181826048">https://twitter.com/yukihiro_matz/status/416389827181826048</a>">https://twitter.com/yukihiro_matz/status/416389827181826048">https://twitter.com/yukihiro_matz/status/416389827181826048</a></a></p>
+<p>{% oembed <a href="https://twitter.com/yukihiro_matz/status/416389827181826048">https://twitter.com/yukihiro_matz/status/416389827181826048</a> %}</p>
 
 <blockquote><p>タダ乗りしただけでは置いて行かれてしまう進化の速さ</p></blockquote>
 

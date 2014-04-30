@@ -4,7 +4,7 @@
   <title><![CDATA[Category: FLOSS | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/floss/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-21T14:45:59+09:00</updated>
+  <updated>2014-04-30T17:43:03+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -117,7 +117,7 @@
     <id>http://www.monaka.org/blog/2014/02/14/way-and-howto</id>
     <content type="html"><![CDATA[<h2>一言で纏めると</h2>
 
-<p><a href="https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a>">https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a></a></p>
+<p>{% oembed <a href="https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a> %}</p>
 
 <p>みたいなエントリは，地べた這いつくばっている私みたいな雑魚が書くのはいいけれど，
 OSSコミュニティの後進育成とか考えているひとは思案のしどころですよね，てな話．</p>
