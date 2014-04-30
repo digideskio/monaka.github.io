@@ -4,7 +4,7 @@
   <title><![CDATA[Category: development | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/development/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-30T18:05:09+09:00</updated>
+  <updated>2014-04-30T18:08:52+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -24,6 +24,9 @@ PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，�
 <h2>PizzaFactory for Homebrew アルファリリース</h2>
 
 <h3>背景</h3>
+
+<!-- more -->
+
 
 <p>私個人としては，OSX でパッケージ管理ソフトを使うのは，PPC だった時代に fink を使ってあまりよい印象を持っておりませんでした．
 そんなわけで，<a href="http://sourceforge.jp/projects/pf3gnuchains/releases/">OSX版のPizzaFactoryも，pkg を作って配ってきた</a>わけです．</p>

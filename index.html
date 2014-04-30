@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="たまには技術の話．
-PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので． PizzaFactory for Homebrew アルファリリース 背景 私個人としては，OSX でパッケージ管理ソフトを使うのは， &hellip;">
+PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので． PizzaFactory for Homebrew アルファリリース 背景 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -115,125 +115,12 @@ PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，�
 
 <h3>背景</h3>
 
-<p>私個人としては，OSX でパッケージ管理ソフトを使うのは，PPC だった時代に fink を使ってあまりよい印象を持っておりませんでした．
-そんなわけで，<a href="http://sourceforge.jp/projects/pf3gnuchains/releases/">OSX版のPizzaFactoryも，pkg を作って配ってきた</a>わけです．</p>
-
-<p>しかし，pkg は，それなりに手間のかかること．
-更新頻度が私の忙しさで決まってしまうのが悩みでした．</p>
-
-<h3>Homebrew</h3>
-
-<p>で，最近になって，TOPPERS のカーネルコンフィギュレータを作らねばならなくなって，boost のインストールが必要になり，ココロが折れました．
-そして Homebrew に助けてもらいました．</p>
-
-<p>OSXのデフォルトのコマンドを上書きしないという方針，気に入りました．
-あと，Formula 既述の簡潔さも．</p>
-
-<p>それに，Linux や MinGW/MSYS への対応も，そこそこ進んでいる様子．</p>
-
-<p>ああ，もう PizzaFactory も Homebrew で配っちゃえばいいんじゃないの? と．</p>
-
-<h3>PizzaFactory for Homebrew のインストール方法</h3>
-
-<p>Homebrew のインストール方法は割愛します．
-brew doctor の対応がある程度済んだら，PizzaFactory 用の tap を追加します．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap PizzaFactory/commandline</span></code></pre></td></tr></table></div></figure>
-
-
-<p>つらつらと読み込まれてきます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Cloning into '/usr/local/Library/Taps/pizzafactory/homebrew-commandline'...
-</span><span class='line'>remote: Counting objects: 114, done.
-</span><span class='line'>remote: Compressing objects: 100% (39/39), done.
-</span><span class='line'>remote: Total 114 (delta 82), reused 104 (delta 73)
-</span><span class='line'>Receiving objects: 100% (114/114), 11.70 KiB | 0 bytes/s, done.
-</span><span class='line'>Resolving deltas: 100% (82/82), done.
-</span><span class='line'>Checking connectivity... done.
-</span><span class='line'>Tapped 67 formula</span></code></pre></td></tr></table></div></figure>
-
-
-<p>続いて インストール可能なツールチェインの一覧を得ます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew search 'pf-gnuchains4x-' | grep -v 'lib$'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ズラズラっと出てきます．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pf-gnuchains4x-arm-eabi
-</span><span class='line'>pf-gnuchains4x-arm-elf
-</span><span class='line'>pf-gnuchains4x-avr-elf
-</span><span class='line'>pf-gnuchains4x-bfin-elf
-</span><span class='line'>pf-gnuchains4x-fr30-elf
-</span><span class='line'>pf-gnuchains4x-h8300-elf
-</span><span class='line'>pf-gnuchains4x-i386-elf
-</span><span class='line'>pf-gnuchains4x-lm32-elf
-</span><span class='line'>pf-gnuchains4x-m32c-elf
-</span><span class='line'>pf-gnuchains4x-m32r-elf
-</span><span class='line'>pf-gnuchains4x-m68k-elf
-</span><span class='line'>pf-gnuchains4x-microblaze-elf
-</span><span class='line'>pf-gnuchains4x-mips-elf
-</span><span class='line'>pf-gnuchains4x-mips64-elf
-</span><span class='line'>pf-gnuchains4x-mips64-toppershrp
-</span><span class='line'>pf-gnuchains4x-nios2-elf
-</span><span class='line'>pf-gnuchains4x-powerpc-elf
-</span><span class='line'>pf-gnuchains4x-rx-elf
-</span><span class='line'>pf-gnuchains4x-sh-elf
-</span><span class='line'>pf-gnuchains4x-v850-elf
-</span><span class='line'>pf-gnuchains4x-xstormy16-elf
-</span><span class='line'>pf-gnuchains4x-xtensa-elf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>arm-eabi ならば，次のようにしてインストールします．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew install pf-gnuchains4x-arm-eabi</span></code></pre></td></tr></table></div></figure>
-
-
-<p>お手軽ですが，本稿執筆時点では，ソースコードからビルドします．
-1〜2時間は覚悟してください．</p>
-
-<p>この点が，正式リリースと言わない理由です．
-Homebrew には，bottle と呼ばれる，バイナリパッケージによるインストールのサポートがあります．
-しかし，これが <a href="https://github.com/travis-ci/travis-ci/issues/2202">Travis-CI のバグ修正のため</a>滞っています．</p>
-
-<p>なので，今のところは，どうしても欲しくて欲しくてという方のみお勧めします．</p>
-
-<p>あと，<a href="https://github.com/PizzaFactory/homebrew-commandline/">tapへのプルリクは歓迎</a>です．</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/30/pizzafactory-meets-brew/">Read on &rarr;</a>
+    </footer>
   
 
 
