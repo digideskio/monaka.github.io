@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: development | もなもなもなかのページ]]></title>
+  <link href="http://www.monaka.org//blog/categories/development/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2014-04-30T18:05:09+09:00</updated>
+  <id>http://www.monaka.org//</id>
+  <author>
+    <name><![CDATA[Masaki "monaka" Muranaka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ピザ屋がお酒も始めました]]></title>
+    <link href="http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew/"/>
+    <updated>2014-04-30T16:56:48+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew</id>
+    <content type="html"><![CDATA[<p>たまには技術の話．
+PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので．</p>
+
+<h2>PizzaFactory for Homebrew アルファリリース</h2>
+
+<h3>背景</h3>
+
+<p>私個人としては，OSX でパッケージ管理ソフトを使うのは，PPC だった時代に fink を使ってあまりよい印象を持っておりませんでした．
+そんなわけで，<a href="http://sourceforge.jp/projects/pf3gnuchains/releases/">OSX版のPizzaFactoryも，pkg を作って配ってきた</a>わけです．</p>
+
+<p>しかし，pkg は，それなりに手間のかかること．
+更新頻度が私の忙しさで決まってしまうのが悩みでした．</p>
+
+<h3>Homebrew</h3>
+
+<p>で，最近になって，TOPPERS のカーネルコンフィギュレータを作らねばならなくなって，boost のインストールが必要になり，ココロが折れました．
+そして Homebrew に助けてもらいました．</p>
+
+<p>OSXのデフォルトのコマンドを上書きしないという方針，気に入りました．
+あと，Formula 既述の簡潔さも．</p>
+
+<p>それに，Linux や MinGW/MSYS への対応も，そこそこ進んでいる様子．</p>
+
+<p>ああ，もう PizzaFactory も Homebrew で配っちゃえばいいんじゃないの? と．</p>
+
+<h3>PizzaFactory for Homebrew のインストール方法</h3>
+
+<p>Homebrew のインストール方法は割愛します．
+brew doctor の対応がある程度済んだら，PizzaFactory 用の tap を追加します．</p>
+
+<p><code>
+brew tap PizzaFactory/commandline
+</code></p>
+
+<p>つらつらと読み込まれてきます．</p>
+
+<p><code>
+Cloning into '/usr/local/Library/Taps/pizzafactory/homebrew-commandline'...
+remote: Counting objects: 114, done.
+remote: Compressing objects: 100% (39/39), done.
+remote: Total 114 (delta 82), reused 104 (delta 73)
+Receiving objects: 100% (114/114), 11.70 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (82/82), done.
+Checking connectivity... done.
+Tapped 67 formula
+</code></p>
+
+<p>続いて インストール可能なツールチェインの一覧を得ます．</p>
+
+<p><code>
+brew search 'pf-gnuchains4x-' | grep -v 'lib$'
+</code></p>
+
+<p>ズラズラっと出てきます．</p>
+
+<p><code>
+pf-gnuchains4x-arm-eabi
+pf-gnuchains4x-arm-elf
+pf-gnuchains4x-avr-elf
+pf-gnuchains4x-bfin-elf
+pf-gnuchains4x-fr30-elf
+pf-gnuchains4x-h8300-elf
+pf-gnuchains4x-i386-elf
+pf-gnuchains4x-lm32-elf
+pf-gnuchains4x-m32c-elf
+pf-gnuchains4x-m32r-elf
+pf-gnuchains4x-m68k-elf
+pf-gnuchains4x-microblaze-elf
+pf-gnuchains4x-mips-elf
+pf-gnuchains4x-mips64-elf
+pf-gnuchains4x-mips64-toppershrp
+pf-gnuchains4x-nios2-elf
+pf-gnuchains4x-powerpc-elf
+pf-gnuchains4x-rx-elf
+pf-gnuchains4x-sh-elf
+pf-gnuchains4x-v850-elf
+pf-gnuchains4x-xstormy16-elf
+pf-gnuchains4x-xtensa-elf
+</code></p>
+
+<p>arm-eabi ならば，次のようにしてインストールします．</p>
+
+<p><code>
+brew install pf-gnuchains4x-arm-eabi
+</code></p>
+
+<p>お手軽ですが，本稿執筆時点では，ソースコードからビルドします．
+1〜2時間は覚悟してください．</p>
+
+<p>この点が，正式リリースと言わない理由です．
+Homebrew には，bottle と呼ばれる，バイナリパッケージによるインストールのサポートがあります．
+しかし，これが <a href="https://github.com/travis-ci/travis-ci/issues/2202">Travis-CI のバグ修正のため</a>滞っています．</p>
+
+<p>なので，今のところは，どうしても欲しくて欲しくてという方のみお勧めします．</p>
+
+<p>あと，<a href="https://github.com/PizzaFactory/homebrew-commandline/">tapへのプルリクは歓迎</a>です．</p>
+]]></content>
+  </entry>
+  
+</feed>

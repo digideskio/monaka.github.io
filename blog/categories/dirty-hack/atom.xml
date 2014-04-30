@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dirty-hack | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/dirty-hack/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-30T17:43:03+09:00</updated>
+  <updated>2014-04-30T18:05:09+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -25,7 +25,7 @@
 <!-- more -->
 
 
-<p>{% oembed <a href="https://twitter.com/monamour555/status/330200605069037568">https://twitter.com/monamour555/status/330200605069037568</a> %}</p>
+<p><a href="https://twitter.com/monamour555/status/330200605069037568">https://twitter.com/monamour555/status/330200605069037568</a>">https://twitter.com/monamour555/status/330200605069037568">https://twitter.com/monamour555/status/330200605069037568</a></a></p>
 
 <p>踏まえておくべき大事なことは，限られたハードウェア資源や時間の中で，処理系にゴマする最適化が必要な時もあるということ．
 さらに踏み込むと，必要に応じて処理系に対してゴマを擦るための十分な知識を蓄えている必要がプロには求められるということです．

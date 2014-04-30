@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ICSへのアップグレードが見送りになったせいなのか，アキバの中古市場では2万円前半までグッと下がった L-06C ．もっさりしているけれど，バッテリーの持ちも悪くはないし，良いマシンだと思うのだけれど…． せっかく画面がでかいので， &hellip;">
+  <meta name="description" content="公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして． カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました． 3.1になっているせいなのか，nvflash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/25/l-06c/">L-06C Rooted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-25T02:50:00+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>公式 ICS アップデートの芽も無くなったようですし．それと root が必要な作業が一つありまして．</p>
+
+<p>カスなのでググりました．簡単でした．Windowsだとドライバ周りでハマるという記述があったので，Ubuntu使いました．</p>
+
+<p>3.1になっているせいなのか，nvflash では以下のようなエラーが出て失敗しました．</p>
+
+<p>~~~~</p>
+
+<pre><code># ./nvflash --bl bootloader.bin --getpartitiontable ptable.txt
+Nvflash started
+rcm version 0X4
+Command send failed (usb write failed)
+</code></pre>
+
+<p>~~~~</p>
+
+<p>あと，fastboot は root で実行しないとダメ…なの?</p>
+
+<p>~~~~</p>
+
+<pre><code>$ ./fastboot oem unlock
+&lt; waiting for device &gt;
+</code></pre>
+
+<p>~~~~</p>
+
+<p>でウンともスンとも言わず．sudo したら上手く行ったので，まあ，そういうものなのかな，と．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -178,43 +240,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/18/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -253,6 +281,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/30/pizzafactory-meets-brew/">ピザ屋がお酒も始めました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/20/postmortem-3/">失敗分析: 債務のこと</a>
       </li>
     
@@ -274,10 +306,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/07/i-am-finally-restart-from-bung/">経済産業省に引導を渡された私，やっと，経済的な死亡宣告が出ました．</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/23/api-as-glue/">橋渡しとしてのAPI</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-04-27T00:32:42+09:00</updated>
+  <updated>2014-04-30T18:05:09+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ピザ屋がお酒も始めました]]></title>
+    <link href="http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew/"/>
+    <updated>2014-04-30T16:56:48+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew</id>
+    <content type="html"><![CDATA[<p>たまには技術の話．
+PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので．</p>
+
+<h2>PizzaFactory for Homebrew アルファリリース</h2>
+
+<h3>背景</h3>
+
+<p>私個人としては，OSX でパッケージ管理ソフトを使うのは，PPC だった時代に fink を使ってあまりよい印象を持っておりませんでした．
+そんなわけで，<a href="http://sourceforge.jp/projects/pf3gnuchains/releases/">OSX版のPizzaFactoryも，pkg を作って配ってきた</a>わけです．</p>
+
+<p>しかし，pkg は，それなりに手間のかかること．
+更新頻度が私の忙しさで決まってしまうのが悩みでした．</p>
+
+<h3>Homebrew</h3>
+
+<p>で，最近になって，TOPPERS のカーネルコンフィギュレータを作らねばならなくなって，boost のインストールが必要になり，ココロが折れました．
+そして Homebrew に助けてもらいました．</p>
+
+<p>OSXのデフォルトのコマンドを上書きしないという方針，気に入りました．
+あと，Formula 既述の簡潔さも．</p>
+
+<p>それに，Linux や MinGW/MSYS への対応も，そこそこ進んでいる様子．</p>
+
+<p>ああ，もう PizzaFactory も Homebrew で配っちゃえばいいんじゃないの? と．</p>
+
+<h3>PizzaFactory for Homebrew のインストール方法</h3>
+
+<p>Homebrew のインストール方法は割愛します．
+brew doctor の対応がある程度済んだら，PizzaFactory 用の tap を追加します．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap PizzaFactory/commandline</span></code></pre></td></tr></table></div></figure>
+
+
+<p>つらつらと読み込まれてきます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cloning into '/usr/local/Library/Taps/pizzafactory/homebrew-commandline'...
+</span><span class='line'>remote: Counting objects: 114, done.
+</span><span class='line'>remote: Compressing objects: 100% (39/39), done.
+</span><span class='line'>remote: Total 114 (delta 82), reused 104 (delta 73)
+</span><span class='line'>Receiving objects: 100% (114/114), 11.70 KiB | 0 bytes/s, done.
+</span><span class='line'>Resolving deltas: 100% (82/82), done.
+</span><span class='line'>Checking connectivity... done.
+</span><span class='line'>Tapped 67 formula</span></code></pre></td></tr></table></div></figure>
+
+
+<p>続いて インストール可能なツールチェインの一覧を得ます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew search 'pf-gnuchains4x-' | grep -v 'lib$'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ズラズラっと出てきます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pf-gnuchains4x-arm-eabi
+</span><span class='line'>pf-gnuchains4x-arm-elf
+</span><span class='line'>pf-gnuchains4x-avr-elf
+</span><span class='line'>pf-gnuchains4x-bfin-elf
+</span><span class='line'>pf-gnuchains4x-fr30-elf
+</span><span class='line'>pf-gnuchains4x-h8300-elf
+</span><span class='line'>pf-gnuchains4x-i386-elf
+</span><span class='line'>pf-gnuchains4x-lm32-elf
+</span><span class='line'>pf-gnuchains4x-m32c-elf
+</span><span class='line'>pf-gnuchains4x-m32r-elf
+</span><span class='line'>pf-gnuchains4x-m68k-elf
+</span><span class='line'>pf-gnuchains4x-microblaze-elf
+</span><span class='line'>pf-gnuchains4x-mips-elf
+</span><span class='line'>pf-gnuchains4x-mips64-elf
+</span><span class='line'>pf-gnuchains4x-mips64-toppershrp
+</span><span class='line'>pf-gnuchains4x-nios2-elf
+</span><span class='line'>pf-gnuchains4x-powerpc-elf
+</span><span class='line'>pf-gnuchains4x-rx-elf
+</span><span class='line'>pf-gnuchains4x-sh-elf
+</span><span class='line'>pf-gnuchains4x-v850-elf
+</span><span class='line'>pf-gnuchains4x-xstormy16-elf
+</span><span class='line'>pf-gnuchains4x-xtensa-elf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>arm-eabi ならば，次のようにしてインストールします．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install pf-gnuchains4x-arm-eabi</span></code></pre></td></tr></table></div></figure>
+
+
+<p>お手軽ですが，本稿執筆時点では，ソースコードからビルドします．
+1〜2時間は覚悟してください．</p>
+
+<p>この点が，正式リリースと言わない理由です．
+Homebrew には，bottle と呼ばれる，バイナリパッケージによるインストールのサポートがあります．
+しかし，これが <a href="https://github.com/travis-ci/travis-ci/issues/2202">Travis-CI のバグ修正のため</a>滞っています．</p>
+
+<p>なので，今のところは，どうしても欲しくて欲しくてという方のみお勧めします．</p>
+
+<p>あと，<a href="https://github.com/PizzaFactory/homebrew-commandline/">tapへのプルリクは歓迎</a>です．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[失敗分析: 債務のこと]]></title>
@@ -2674,76 +2806,6 @@ EC2の課金は1時間単位だけれども，1時間以内にn回立ち上げ�
 
 <p>なお，言うまでもないことだけれども，雇用自身は絶対悪ではない．
 費用対効果が得られる確証があっての雇用は，経営者が決断すべき仕事ではある．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[参加しないと見せないよ．を作った罪]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/01/my-fault/"/>
-    <updated>2014-02-01T08:28:21+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/01/my-fault</id>
-    <content type="html"><![CDATA[<p>140字以内で纏めると，こういうこと．</p>
-
-<blockquote class="twitter-tweet"><p>「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/429207095041224704">January 31, 2014</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>私は，TOPPERSプロジェクトという，組込み系OSSを担いだNPOに参加していた．
-設立準備から手伝って，一応10年くらい理事もしていた．</p>
-
-<p>NPO法人TOPPERSプロジェクトは，組込みソフトの団体として，成功したと思う．
-電子ピアノにも，宇宙機にも，自動車にも載った．
-私が書いたソースコードも，割と入っている．
-そこらそんじょのOSSなんざ蹴散らすくらいの採用例，出荷総数はあるだろう．</p>
-
-<p>今は辞めた．
-理事も辞めたし，今や会員ですらない．</p>
-
-<!-- more -->
-
-
-<p>当時やっていた会社が傾いたとか，いろいろ直接的な理由はあるのだが．
-大きな背景として， <strong>OSSプロジェクトとしてのアンチパターンを作っているのではないか</strong> ，という疑問が年を追う毎に，私の中で大きくなっていったのが，ある．</p>
-
-<p>TOPPERSプロジェクトには，会員以外には見せないよ，という仕組みがある．
-具体的には，いわゆる，早期リリースという制度．
-当初から，会員企業が受託製品に使った場合の，ソースコードの扱いとか，厳密運用が難しいことは解っていた．
-私が辞める頃には，会員が，先に開かれたOSS (って表現は変だが) として公開し，そのあとプロジェクトにコントリビュートするなんてこともあったりして，制度として崩壊していた気もする．</p>
-
-<p>&ldquo;オープン&#8221;ソースを管理するプロジェクトがソースコードを隠す，というのは，少し考えればわかる．矛盾した話だ．なんで当時気づかなかったのだろうw．</p>
-
-<p>そして，各方面が指摘しているとおり，オープンソースは，ソースコードもさることながら，生産や管理のプロセスの透明化にメリットがある．
-生産や管理のプロセスを，参加者にしか見せないというのは，ソースコードを隠すのと同様に，スジとしては最悪手の部類だろう．
-そこで，本稿最初に引用した tweet へ繋がる．</p>
-
-<p>組織として成立させるためには，なんらかのメリットを出す必要はある．
-その辺りの仕込みは大変なところだと思うのだがしかし．</p>
-
-<p>言い訳になるが，TOPPERSプロジェクトが立ち上がった2000年当時，オープンソースは暗中模索だった．
-私は他人様よりも愚かなので，間違いも多い．
-でも，もうあれから月日は流れた．
-私は愚かなままかもしれないが，他人様はそろそろ良手を編み出しても良い頃だろう．</p>
-
-<p>良手を編み出す上で，悩ましいのが，TOPPERSプロジェクトの確かな成功ではないかという気がしている．
-厳密に言うと，NPO組織としては，安定収入で成功しているという事実だ．
-…というと不幸を望んでいるように読めそうだが，言うまでもなく，そうではない．
-今は袂を分かつ立場だが，成功するように私も頑張った．
-成功し続けていただかないと，日本の組込みソフト業界全体が困る．</p>
-
-<p>しかし，言葉を慎重に選ぶべきかもしれないが，OSSプロジェクトとしてのTOPPERSは失敗だったとも思っている．
-もともと「OSSは目的ではなく手段だ」という立ち位置の団体ではあった．
-なので，OSSプロジェクトとして側面がどうなろうとも，TOPPERSプロジェクトには何らの傷がつくわけでもない．</p>
-
-<p>私がマズいと思っているのは，TOPPERSプロジェクトの成功が，OSS系NPOのロールモデルになりそうな傾向だ．
-実際，TOPPERSプロジェクトの定款を参照しました，という声は，他の{組込系|OSS系}NPOから，ずいぶんと頂いた．</p>
-
-<p><a href="http://ossforum.jp/ossaward8th2">「第8回 日本OSS貢献者賞・日本OSS奨励賞」</a> が示す通り，ニッポンのOSSは，この点についてあまり深く考えていないか，判っていて目をつぶっているか，どちらからしい．
-そして，そのロールモデルが確立するまでの10余年には，間違いなく私がいる．
-割と中心に近いところに．</p>
-
-<p>罪なことをしたなぁ，と，肩を落としている．ごめんなさい．</p>
 ]]></content>
   </entry>
   
