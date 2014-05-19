@@ -4,7 +4,7 @@
   <title><![CDATA[Category: business | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/business/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-05-19T15:49:56+09:00</updated>
+  <updated>2014-05-19T17:45:57+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その2)]]></title>
+    <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding-2/"/>
+    <updated>2014-05-19T16:09:22+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding-2</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2014/05/19/funding-for-funding/">前回</a>の続きです．</p>
+
+<!-- more -->
+
+
+<h2>オンラインのカード決済サービス，日本の状況</h2>
+
+<p>前回，米国での状況は説明しました．
+小規模法人や個人が，ネット通販のサイトを開いていることからお判り頂ける通り，
+オンラインのカード決済サービスは，いくつかあります．</p>
+
+<p>しかし，目標額達成後，速やか(数営業日以内)に代金を回収できるのは，今のところ，
+<a href="http://webpay.jp">WebPay</a> と <a href="https://fastpay.yahoo.co.jp/">Yahoo!ウォレットFastPay</a> の2社に限られます．とはいえ，今後，類似のサービスは，日本国内でも増えていくことでしょう．</p>
+
+<p>現存する両社のAPIは，かなり似通っています．
+(<a href="http://blog.webpay.co.jp/post/webpay%E3%81%A8yahoo%E3%82%A6%E3%82%A9%E3%83%AC%E3%83%83%E3%83%88fastpay%E3%81%AF%E7%AB%B6%E5%90%88%E3%81%A7%E3%81%99%EF%BC%81%E6%AD%93%E8%BF%8E%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%E5%BE%B9%E5%BA%95">WebPayの運営者ブログで示唆</a>されているとおり，FastPay が WebPay の互換を狙っているように見えます．)</p>
+
+<p>しかしながら，クラウドファンディングサイト構築のためのオープンソースが用いている <a href="https://www.balancedpayments.com/">Balanced Payment</a> や <a href="https://payments.amazon.com/home">Amazon Payments</a> とは，すくならず API が異なります．</p>
+
+<p>やや悲観的な状況です．
+しかし，逆説的にいうと，この部分を突破すれば，日本でもクラウドファンディングサイトの構築は圧倒的に容易になるということでもあります．</p>
+
+<h2>この問題の解決って，もしかして社会起業的．</h2>
+
+<p>例えば，地方自治体で，地元の産業活性化のために，クラウドファンディングを使いたいというような案件は，既にいくつかあります．最近だと<a href="http://www.city.yubari.lg.jp/contents/municipal/funding/">夕張市</a>や<a href="http://www.pref.hokkaido.lg.jp/kz/csk/crowdfundingsogyoumodel.htm">北海道</a>で見かけました．
+各地観光協会や商工会など含めれば，潜在需要は大きなものでしょう．
+それと，Fablab や発明クラブのような，民間団体にも需要はあるでしょう．</p>
+
+<p>しかし，私は，それらの大きな潜在需要に食い込もうという気は，今のところ，ありません．
+それは自分のビジネスではありません．</p>
+
+<p>私は，単に私のビジネスのスタートアップの問題を解決したいだけなのです．
+日本で使えるカード決済のモジュールを，既存のオープンソースに付け加えたい．</p>
+
+<p>しかし，その副産物には，社会起業的なインパクトが…そんな気がしているのですが，どうでしょうか．</p>
+
+<h2>問題: 日本人は，放っておいても作る人に寄付/投資をするか</h2>
+
+<p>という感じで，話が大きくなりました．巻き戻しまして…．</p>
+
+<p>私には，私が行おうとするビジネスに対して，一つだけ不安があります．
+それは，「日本人は，放っておいても作る人に寄付/投資をするか否か」という点です．</p>
+
+<p>また海外の比較になりますが，海外では，無料で入手できるオープンソース製品に対して，
+バグフィックスや機能拡張に対してお金を払える，または投資を募ることができるという
+サイトがいくつかあります．しかし，それらのサイトで，日本人らしきアカウントの姿は
+見かけません．</p>
+
+<p>言語の壁ということもあるかもしれませんが，もしや，</p>
+
+<blockquote><p>どうせ，作りたい奴は勝手に作るし，できあがった成果(回路図やソースコードなど)が無料でwebサイトに上がったら使わせてもらうわ</p></blockquote>
+
+<p>というメンタリティが主流だとすると，日本では，「電子工作好きのための小規模クラウドファンディング」は，成り立たないかもしれません．
+その辺りについて，読みきれずにいます．</p>
+
+<h2>お願い: テストマーケティングをさせてください</h2>
+
+<p>「長々文章を読ませておいて，さいご，これかよ…」ということで，すみません．</p>
+
+<ul>
+<li>私は，オープンソースのクラウドファンディングサイトを日本で使えるようにするための決済モジュールを，夏前を目処に，作ります．</li>
+<li>決済モジュールは WebPay に対応させます．FastPay は互換路線なので，追って使えるようになるはずです．</li>
+<li>サイト用のオープンソース製品として，<a href="https://github.com/crowdtilt/crowdtiltopen">CrowdtitltOpen</a> を使います．</li>
+<li>決済モジュールは，MIT License として公開します．改変も含めて自由にお使いいただけます．</li>
+<li>目標額に未達でも，おそらく作ります．作りたいので．ただもしかすると，少し馬力は下がります．</li>
+<li>目標額を超えたら，その分は，メッセージ和訳など，広く日本国内で使えるようにするために使います．</li>
+</ul>
+
+
+<p>ちなみに，作業は私が行う想定です．誰かに頼むにしても私が監修します．
+本件に関する私のスペックは，下記のとおりです．</p>
+
+<ul>
+<li>Lokitron が提供しているサイトを FastPay に対応させるという hack をしました．(未運用:デモサイトは上がっています．)</li>
+<li>Ruby on Rails のスキルは，そこそこ．</li>
+<li>Ruby のスキルは，そこそこ．</li>
+<li>mruby については，全網羅のスキル．</li>
+</ul>
+
+
+<p>本件のクラウドファンディングのサイトとして，オープンソース向けののクラウドファンディング機能がある <a href="https://www.bountysource.com/">Bountysource</a>を使います．
+国内のほうが心理的に安心かもしれないと思いつつ，このお話を国内の大手クラウドファンディングサイトに持ちかけるほど，私の心臓は強くはありませんでした．</p>
+
+<p><a href="https://www.bountysource.com/teams/crowdtiltopen-ja/fundraiser">ファンディングサイトへのリンクはこちら</a>です．</p>
+
+<p>極めて勝手なお願いですが，ご協力頂ければ幸いです．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その1)]]></title>

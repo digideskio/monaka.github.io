@@ -9,7 +9,10 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="前回 の続き． C言語のおさらい 繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい． にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある． ">
+  <meta name="description" content="前回 の続き．
+たぶんこれで本件に関する一応の最終回． APIは世界の境界線 異なる世界観の端境にあって，両者の言い分を理解して橋渡しをする．
+API の設計は，端的には橋渡しに尽きる． API の直交性など，細かく言うと設計上気をつけるべき点はある．
+しかし，それは，より美しく使いやすい API &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +81,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/23/api-as-glue/">橋渡しとしてのAPI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-23T18:03:49+09:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/blog/2014/03/21/types-generated-by-compiler/">前回</a> の続き．
+たぶんこれで本件に関する一応の最終回．</p>
+
+<h2>APIは世界の境界線</h2>
+
+<p>異なる世界観の端境にあって，両者の言い分を理解して橋渡しをする．
+API の設計は，端的には橋渡しに尽きる．</p>
+
+<p>API の直交性など，細かく言うと設計上気をつけるべき点はある．
+しかし，それは，より美しく使いやすい API であるための付加価値である．
+大事だけれども本質ではない．</p>
+
+<p>API の代表例として，OS が提供するものがある．
+システムコールとかサービスコールという名で呼ばれる．</p>
+
+<p>フリーダムなユーザランドと，好き勝手されては困るOSとの間の橋渡しをする．
+一例として，リアルタイムカーネル TOPPERS/JSP のサービスコール関数の冒頭を引用する．</p>
+
+<p>心配ない．
+RTOSのコードなんて読んだことが無いよ，という方でもざっくりと理解できれば十分．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/23/api-as-glue/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -191,86 +254,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-19T14:06:12+09:00" pubdate data-updated="true">Mar 19<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
-
-<h2>C言語の整数型に潜む悪夢</h2>
-
-<p>まずは，よく知られているところから．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>#include &lt;stdlib.h&gt;
-</span><span class='line'>
-</span><span class='line'>int
-</span><span class='line'>main(void)
-</span><span class='line'>{
-</span><span class='line'>  int a = 65535;
-</span><span class='line'>  char b;
-</span><span class='line'>
-</span><span class='line'>  b = a;
-</span><span class='line'>
-</span><span class='line'>  printf("%d %d\n", a, b);
-</span><span class='line'>
-</span><span class='line'>  return EXIT_SUCCESS;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>「a に 65535 を代入し，b に a の値を代入しているのだから，b も 65535 になるはず．」
-などとLL言語(JavaScript や Ruby など)に慣れていると思ってしまいがちだが，そうはならない．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/19/implicit-type-conversion-in-c/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -312,6 +295,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/19/funding-for-funding/">ファンディングのためのファンディング，始めます．(その1)</a>
       </li>
     
@@ -333,10 +320,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/11/postmortem-1/">失敗分析:リスクのこと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/09/startup-and-angel/">社長と投資家の役割，その理解なく明日は来ない</a>
       </li>
     
   </ul>
