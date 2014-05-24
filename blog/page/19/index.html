@@ -9,9 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
-ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
-両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる． 素晴らしいセーフティネットなのだが， &hellip;">
+  <meta name="description" content="Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//blog/page/17/">
+  <link rel="canonical" href="http://www.monaka.org//blog/page/19/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/30/did-it/">やっちまった</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/01/moved/">Lokka に引越しました</a></h1>
     
     
       <p class="meta">
@@ -102,142 +101,14 @@
   
 
 
-<time datetime="2012-10-30T10:28:00+09:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
+<time datetime="2012-04-01T01:42:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>某ネット銀行は，ネットバンキングに入るためにログインパスワードが要る．
-ログインパスワードを忘れた場合は，振込み等の時に使う web取引パスワードでリセットできる．
-両方忘れた場合は，申し込むと，仮パスワードを転送不要郵便で送ってくれる．</p>
-
-<p>素晴らしいセーフティネットなのだが，その全ての網をくぐり抜けて落下してしまった．
-バカすぎる．</p>
-
-<p>で，お手紙書いた．</p>
-
-<blockquote><p>Webログインパスワードとweb取引パスワードの両方を忘れてしまいました．
-その状態で，先日転居を行いました．</p>
-
-<p>仮パスワードを郵送して頂けることは解っているのですが，転居しているので転送不要郵便を受け取れません．
-住所変更は，webログインパスワードが必要と認識しています．
-この場合，どのように手続きすればよいでしょうか．</p></blockquote>
-
-<p>本人の名誉のために言い訳しておくと，別に忘れたわけではなくて，Keypass で自動生成したパスワードを，セーブするのを忘れただけ．言い訳になっていない．</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/19/mbp-batt/">MacBookPro のバッテリー交換</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-19T21:18:00+09:00" pubdate data-updated="true">Jun 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>2年ほど使っているMacBookPro (M986A/J)が，数カ月前からバッテリー交換修理の警告を出すようになっていた．のに面倒なので放置していた．…そしたらマルチタッチなトラックパッドの効きがおかしくなってきた．
-裏蓋とバッテリーを外して調整してみたけれど，以前は治ったことがあるのに，今回はダメ．</p>
-
-<p>当該MacBookProは，保証が切れる数週間前にトラックパッドが逝って無償修理になったことがある．
-もしかしたら，ハズレなのかもしれない．
-けれども，そういえばトラックパッドの下にあるバッテリーが膨れて，効きがおかしくなる例があるという話を，twitter辺りで見かけた気がする．
-ならば…一か八か，バッテリー交換してみるか，という流れに．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/19/mbp-batt/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/22/work_p/">動くのこれ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
-
-<p>で，startup.s を見てみた．</p>
-
-<pre><code>.text
-
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
-
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
-
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
-
-<p>&hellip;(ﾟдﾟlll) ベクタどこよ…</p>
-
-<h2>あ，動くのか．</h2>
-
-<p>これ Cortex-M3系だものね…．</p>
+  <div class="entry-content"><p>Google Sites が出力する HTML が恥ずかしかったので，引っ越しました．</p>
 </div>
   
   
@@ -247,11 +118,9 @@
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/18/">&larr; Older</a>
-    
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/16/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/18/">Newer &rarr;</a>
     
   </div>
 </div>

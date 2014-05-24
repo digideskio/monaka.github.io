@@ -9,7 +9,10 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です． ">
+  <meta name="description" content="Android でのタッチスクリーンのキャリブレーション法について．情報が溢れていそうで，案外無い，
+あっても，古くて使えない．
+ので，記録しておきます． (少なくとも AOSP での)タッチスクリーンサポートは，tslib を用いています．
+tslib には，ts_calibrate &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +81,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/01/calibrate-touchscreen-android-jb/">Android (X86-jb) でのタッチスクリーンキャリブレーション</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-01T07:17:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Android でのタッチスクリーンのキャリブレーション法について．情報が溢れていそうで，案外無い，
+あっても，古くて使えない．
+ので，記録しておきます．</p>
+
+<p>(少なくとも AOSP での)タッチスクリーンサポートは，tslib を用いています．
+tslib には，ts_calibrate というコマンドがついています．
+ts_calibrate は，LinuxのフレームバッファとタッチパネルデバイスをLinuxのinputデバイスとを直接アクセスします．
+Android は，当然ながら，画面を押さえていますので，衝突します．
+そこで，下記のような手順で実行を行います．</p>
+
+<p>以下，Android-x86.org が提供している x86-jb での手順です．</p>
+
+<p>たぶん ICS 以降の Android の多くで使えるはずですが，中には，tslib を使っていないディストロもあります．(例えば AndroVM)
+あと，rootが必要です．
+スマホやパネルコンピュータなど，きちんと製品に作りこまれた状態でも，この方法は使えないかもしれません．
+(その場合，キャリブレーションツールが必要なら，きちんとしたのがついてくるだろうと思います．)</p>
+
+<ol>
+<li>普通にAndroidを起動します．</li>
+<li>adb shell など用いて，コマンドラインアクセス可能にします．</li>
+<li><code>stop zygote</code> <code>stop bootanim</code> <code>stop surfaceflinger</code> として，zygote サービスを停止します．</li>
+<li>多くの場合，キャリブレーションデータを保存するディレクトリが存在しません．<code>mkdir /data/system/tslib</code>を実行して作ります．</li>
+<li><code>ts_calibrate</code> を実行します．</li>
+<li>言われるままにタッチします．</li>
+<li>念のため，<code>ls /data/system/tslib/pointercal</code> などしてキャリブレーションデータが作成されていることを確認します．</li>
+<li>止めた順番と逆順で，<code>start surfaceflinger</code> <code>start bootanim</code> <code>start zygote</code> として，zygote サービスを再開します．</li>
+</ol>
+
+
+<h2>補足</h2>
+
+<p>仮想コンソールがサポートされている場合，上記2の手順で，Alt+F1 などで移動し，作業することもできます．
+その場合，ts_calibrate を実行する際に必要なのは zygote サービスの停止だけです．</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -165,57 +236,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/05/launchpad-ppa/">Launchpad PPA 登録の罠</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-05T13:08:00+09:00" pubdate data-updated="true">May 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ubuntu にオレオレパッケージを追加する PPA．
-発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
-断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p>Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．…私もたぶんブログに残さない．(汗</p>&mdash; もなかさん (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">2013年5月4日</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/05/launchpad-ppa/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -257,6 +277,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
       </li>
     
@@ -278,10 +302,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/12/postmortem-2/">失敗分析:経理のこと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/11/postmortem-1/">失敗分析:リスクのこと</a>
       </li>
     
   </ul>
