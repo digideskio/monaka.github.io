@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-05-31T21:01:07+09:00</updated>
+  <updated>2014-05-31T21:12:44+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -76,7 +76,7 @@ mruby のコア開発者なら，当たり前の知識ですよね．アテク�
 ブログエントリって，エッジ効いた技術に平民がどれだけついてこれているかを示す，解りやすい指標ですからね．</p>
 
 <p>角が立つのを承知で，(でももう，どーでもいいので)，事例を言えば，uT 以降の T-kernel とか，新世代以降の TOPPERS とかですね．
-説明不十分でプレゼンスをを落としたOSS，しばしば見かけるのは気のせいですかね．</p>
+技術的に正しいながらも，説明不十分でプレゼンスを落としたOSS，しばしば見かけるのは気のせいですかね．</p>
 
 <p>mruby，どうなのですかね? &ldquo;長期的な視点"を持っているグルには，答えが見えているに違いない．信じるのじゃ．
 …ので，大丈夫ですかね．</p>
