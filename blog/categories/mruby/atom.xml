@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-05-24T16:27:23+09:00</updated>
+  <updated>2014-05-31T20:56:01+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
+    <link href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/"/>
+    <updated>2014-05-31T18:52:30+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly</id>
+    <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
+
+<p><a href="https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a>">https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a></a></p>
+
+<!--
+https://twitter.com/yukihiro_matz/status/472033974219325440
+@monamour555 まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。
+-->
+
+
+<p>全く御意でございます．低頭拝聴です．</p>
+
+<p>賤民である私も，OSS という言葉が無かったころ，Ruby が世に放流された頃には，この世界を見ていた気も無くもないですが．
+きっと気のせいですね．
+uClinux, Xen, Android で kernel の fork が起こったのは，失われる運命だったのですね．だめだ fork はダメだ．失われる！だめだ！</p>
+
+<h2>やっぱ fork はダメだ失われる！</h2>
+
+<p>あーやっぱり，私が書いたコードなんて，消えちゃうよなー．すべからく，そういう人生だったしなー．何しろ長老がそう言っているもんなー．
+って陰惨に思いながら，残りのコードを書いていたのですが．</p>
+
+<p>…あれ?</p>
+
+<!-- more -->
+
+
+<p>コンパイルが通らないよ?</p>
+
+<p><code>
+mrb_proc_new(mrb, mrb-&gt;irep[n],
+</code></p>
+
+<blockquote><p>んー? んー? ググル先生に聞いても解法がわからないよー．コピペできなよー．えーん．
+こんな単純なところでコピペできない OSS なんか，使えないよー．マサカリ担いだ人しか使えない処理系なんてー (棒</p></blockquote>
+
+<h2>自分で fork しまくる OSS は長期的には失われれる運命になりそうです．</h2>
+
+<p>あはは，忘れていました．
+IREP の扱い方，途中で，変わりました．
+mruby のコア開発者なら，当たり前の知識ですよね．アテクシ，死ねばいいのに．</p>
+
+<p>コードベースの進化は，OSS の華です．いいんじゃないですかね，
+ただし，ユーザがその変更についていけていない OSS が，長期的には失われなかったのかな．</p>
+
+<h2>タマにはマジメに．</h2>
+
+<p>賤民の私に言わせてもらえるなら，これ，良くない兆候ですよ．</p>
+
+<p>この節だけは，マジメに言いますけれど．</p>
+
+<p>私が fork したコードなんてどうでもよいです．</p>
+
+<p>良くない兆候ですよ． マージされ得ないオレオレ fork を繰り返して周りがついてこれなくなっている，<strong><em>本家のコード</em></strong> が．</p>
+
+<p>過去の事例によると．
+ブログエントリって，エッジ効いた技術に平民がどれだけついてこれているかを示す，解りやすい指標ですからね．</p>
+
+<p>角が立つのを承知で，(でももう，どーでもいいので)，事例を言えば，uT 以降の T-kernel とか，新世代以降の TOPPERS とかですね．
+説明不十分でプレゼンスをを落としたOSS，しばしば見かけるのは気のせいですかね．</p>
+
+<p>mruby，どうなのですかね? &ldquo;長期的な視点"を持っているグルには，答えが見えているに違いない．信じるのじゃ．
+…ので，大丈夫ですかね．</p>
+
+<p>どうなのですかね?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C言語における暗黙の型変換とAPI設計]]></title>
