@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: monami-ya.mrb | もなもなもなかのページ]]></title>
+  <link href="http://www.monaka.org//blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2014-06-15T09:14:23+09:00</updated>
+  <id>http://www.monaka.org//</id>
+  <author>
+    <name><![CDATA[Masaki "monaka" Muranaka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/"/>
+    <updated>2014-06-15T08:45:14+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
+    <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
+まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます．</p>
+
+<p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
+何故この機能が必要なのか，という話は後日するとして，どう使うかということを記しておきます．
+master ブランチに入るまでに，API 等の変更があるかもしれません．</p>
+
+<p>また，mruby 本体に取り込まれるかどうかは，解りません．</p>
+
+<h2>機能概要</h2>
+
+<h3>前提知識</h3>
+
+<p>本家 mruby では，mrbgems による機能拡張がサポートされています．
+これは，monami-ya.mrb でも同様です．</p>
+
+<p>mruby は，複数の実行環境を持てます．
+実行環境は mrb_state という構造体が代表します．</p>
+
+<p>mrb_state は，mrb_open() の呼び出しによって作成されます．
+mrb_open() の実行時には，build_config.rb で静的に指定した全ての mrbgems が，
+mrb_state で使用するものとして初期化されます．</p>
+
+<h3>sandbox が提供する機能</h3>
+
+<p>mrb_state ごとに，利用する mrbgems を限定できます．
+限定する mrbgems は，静的に指定します．</p>
+
+<h2>実装</h2>
+
+<p>実例として，monami-ya-mrb/mruby-sqlite3 と monami-ya-mrb/mruby-bin-sqlite3 のみを含む sandbox を挙げます．</p>
+
+<p>monami-ya-mrb/mruby-sqlite3 は monami-ya-mrb/mruby-bin-sqlite3 に依存しています．</p>
+
+<h3>build_config.rb への記述</h3>
+
+<p>build_config.rb に，sandbox メソッドを記述できるようになりました．</p>
+
+<p>```
+MRuby::CrossBuild.new(&lsquo;jsp-bfin&rsquo;) do |conf|
+&hellip;
+  conf.sandbox(&lsquo;sqlite&rsquo;) do</p>
+
+<pre><code>gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+gem :github =&gt; 'monami-ya-mrb/mruby-bin-sqlite3'
+</code></pre>
+
+<p>  end
+&hellip;
+```</p>
+
+<p>この例では &lsquo;sqilte&rsquo; という名前の sandbox を指定しています．
+ブロック内の gem は，従来のと同じです．</p>
+
+<p>このような記述があるとき，minirake を実行すると，build/jsp-bfin/mrbgems/gem_init.c には，従来に加えていくつかの定義が生成されます．</p>
+
+<p>```
+void
+mrb_init_sqlite_sandbox(mrb_state *mrb) {
+  GENERATED_TMP_mrb_mruby_bin_sqlite3_gem_init(mrb);
+  GENERATED_TMP_mrb_mruby_sqlite3_gem_init(mrb);
+}</p>
+
+<p>void
+mrb_final_sqlite_sandbox(mrb_state *mrb) {
+  GENERATED_TMP_mrb_mruby_bin_sqlite3_gem_final(mrb);
+  GENERATED_TMP_mrb_mruby_sqlite3_gem_final(mrb);
+}</p>
+
+<p>struct mrb_sandbox_inib mrb_sandbox_inib_array[] = {
+  {</p>
+
+<pre><code>mrb_init_sqlite_sandbox,
+mrb_final_sqlite_sandbox,
+</code></pre>
+
+<p>  },
+  { NULL, NULL }
+};
+```</p>
+
+<p>さらに， build/jsp-bfin/mrb_sandbox_id.h というヘッダファイルが生成されます．</p>
+
+<p>```
+/<em>
+ * IMPORTANT:
+ *   This file was generated!
+ *   All manual changes will get lost.
+ </em>/</p>
+
+<h1>define MRB_SANDBOX_SQLITE (1u)</h1>
+
+<p>```</p>
+
+<h3>実行時の sandbox 生成</h3>
+
+<p>API として mrb_open_sandbox() および mrb_open_sandbox_allocf() が追加になりました．</p>
+
+<p><code>
+mrb_state* mrb_open_sandbox(unsigned int sandbox_id);
+mrb_state* mrb_open_sandbox_allocf(mrb_allocf, uintptr_t ud, unsigned int sandbox_id);
+</code></p>
+
+<p>引数 sandbox_id は，mrb_sandbox_id.h にある定義を与えます．</p>
+
+<p><code>
+  mrb = mrb_open_sandbox(MRB_SANDBOX_SQLITE);
+</code></p>
+
+<p>sandbox_id が 0 のときは，mrb_open() を呼んだ時と同じになります．
+すなわち，登録されている全ての mrbgems が初期化されます．</p>
+
+<p>どの sandbox を指定したかは，mrb_state に保持されます．
+そのため，mrb_state を破棄する際には，単に mrb_close() を呼び出してください．</p>
+]]></content>
+  </entry>
+  
+</feed>

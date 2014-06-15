@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-05T09:33:42+09:00</updated>
+  <updated>2014-06-15T09:14:23+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/"/>
+    <updated>2014-06-15T08:45:14+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
+    <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
+まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます．</p>
+
+<p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
+何故この機能が必要なのか，という話は後日するとして，どう使うかということを記しておきます．
+master ブランチに入るまでに，API 等の変更があるかもしれません．</p>
+
+<p>また，mruby 本体に取り込まれるかどうかは，解りません．</p>
+
+<h2>機能概要</h2>
+
+<h3>前提知識</h3>
+
+<p>本家 mruby では，mrbgems による機能拡張がサポートされています．
+これは，monami-ya.mrb でも同様です．</p>
+
+<p>mruby は，複数の実行環境を持てます．
+実行環境は mrb_state という構造体が代表します．</p>
+
+<p>mrb_state は，mrb_open() の呼び出しによって作成されます．
+mrb_open() の実行時には，build_config.rb で静的に指定した全ての mrbgems が，
+mrb_state で使用するものとして初期化されます．</p>
+
+<h3>sandbox が提供する機能</h3>
+
+<p>mrb_state ごとに，利用する mrbgems を限定できます．
+限定する mrbgems は，静的に指定します．</p>
+
+<h2>実装</h2>
+
+<p>実例として，monami-ya-mrb/mruby-sqlite3 と monami-ya-mrb/mruby-bin-sqlite3 のみを含む sandbox を挙げます．</p>
+
+<p>monami-ya-mrb/mruby-sqlite3 は monami-ya-mrb/mruby-bin-sqlite3 に依存しています．</p>
+
+<h3>build_config.rb への記述</h3>
+
+<p>build_config.rb に，sandbox メソッドを記述できるようになりました．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MRuby::CrossBuild.new('jsp-bfin') do |conf|
+</span><span class='line'>...
+</span><span class='line'>  conf.sandbox('sqlite') do
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-bin-sqlite3'
+</span><span class='line'>  end
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この例では &lsquo;sqilte&rsquo; という名前の sandbox を指定しています．
+ブロック内の gem は，従来のと同じです．</p>
+
+<p>このような記述があるとき，minirake を実行すると，build/jsp-bfin/mrbgems/gem_init.c には，従来に加えていくつかの定義が生成されます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>void
+</span><span class='line'>mrb_init_sqlite_sandbox(mrb_state *mrb) {
+</span><span class='line'>  GENERATED_TMP_mrb_mruby_bin_sqlite3_gem_init(mrb);
+</span><span class='line'>  GENERATED_TMP_mrb_mruby_sqlite3_gem_init(mrb);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>mrb_final_sqlite_sandbox(mrb_state *mrb) {
+</span><span class='line'>  GENERATED_TMP_mrb_mruby_bin_sqlite3_gem_final(mrb);
+</span><span class='line'>  GENERATED_TMP_mrb_mruby_sqlite3_gem_final(mrb);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>struct mrb_sandbox_inib mrb_sandbox_inib_array[] = {
+</span><span class='line'>  {
+</span><span class='line'>    mrb_init_sqlite_sandbox,
+</span><span class='line'>    mrb_final_sqlite_sandbox,
+</span><span class='line'>  },
+</span><span class='line'>  { NULL, NULL }
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>さらに， build/jsp-bfin/mrb_sandbox_id.h というヘッダファイルが生成されます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'> * IMPORTANT:
+</span><span class='line'> *   This file was generated!
+</span><span class='line'> *   All manual changes will get lost.
+</span><span class='line'> */
+</span><span class='line'>
+</span><span class='line'>#define MRB_SANDBOX_SQLITE (1u)</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>実行時の sandbox 生成</h3>
+
+<p>API として mrb_open_sandbox() および mrb_open_sandbox_allocf() が追加になりました．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mrb_state* mrb_open_sandbox(unsigned int sandbox_id);
+</span><span class='line'>mrb_state* mrb_open_sandbox_allocf(mrb_allocf, uintptr_t ud, unsigned int sandbox_id);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>引数 sandbox_id は，mrb_sandbox_id.h にある定義を与えます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  mrb = mrb_open_sandbox(MRB_SANDBOX_SQLITE);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sandbox_id が 0 のときは，mrb_open() を呼んだ時と同じになります．
+すなわち，登録されている全ての mrbgems が初期化されます．</p>
+
+<p>どの sandbox を指定したかは，mrb_state に保持されます．
+そのため，mrb_state を破棄する際には，単に mrb_close() を呼び出してください．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
@@ -2345,141 +2491,6 @@ IT系をひっさげて立候補し落選した陣営が，おばあちゃんの
 
 <p>成功する若者を増やそうという試みそのものには，賛成ではある．
 成功した人たちに，ぜひ頑張っていただきたい．心から．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[howto と way]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/14/way-and-howto/"/>
-    <updated>2014-02-14T21:49:23+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/14/way-and-howto</id>
-    <content type="html"><![CDATA[<h2>一言で纏めると</h2>
-
-<blockquote class="twitter-tweet"><p>一時期流行った，〇〇やらない人のtweetと〇〇やる人のtweetみたいな話だもんなぁ．「OSSやりたいです」は一生やらない．「パッチ投げました」でしか前には進めない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/433831823135621120">February 13, 2014</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>みたいなエントリは，地べた這いつくばっている私みたいな雑魚が書くのはいいけれど，
-OSSコミュニティの後進育成とか考えているひとは思案のしどころですよね，てな話．</p>
-
-<h2>政治家と議員</h2>
-
-<p>何年か前に読んで「へぇなるほど」と思って，曖昧な記憶のまま，何度か引用しているブログエントリがある．
-本稿を書くにあたり探してみたら，割と難なくみつかった．</p>
-
-<!-- more -->
-
-
-<p>「<a href="http://www.t-ken.jp/">田中けんWeb事務所</a>」の「<a href="http://www.t-ken.jp/diary/20101213">職業としての地方議員</a>」から引用する．</p>
-
-<blockquote><p>　一般的には政治家と議員を同意語として使っている場合が多い。その点、私は政治家と議員を別の言葉として分けて使っている。</p>
-
-<p>　政治家というのは、生き方の問題。政治的な主張をして具体的な行動をしている人間は広義で全て政治家である。</p></blockquote>
-
-<p>(中略)</p>
-
-<blockquote><p>　それに比べて、議員とは、狭義で言う政治家の更に狭い範囲である、現職議員にしか使えない言葉だ。働いて報酬をもらう。つまりその多くが職業でなければ、議員とは言わない。</p></blockquote>
-
-<p>本稿に関係ないところは中略した．また，私は江戸川区に居住しておらず，引用に政治的な何らの意図もないことも述べておく．</p>
-
-<p>引用した理由は，シンプル．
-&ldquo;しごと&#8221;には，&#8221;生き方(ライフスタイル，主義，信条)&#8221;と&#8221;職業&#8221;の2つの側面で成立するという例示が欲しかったから．</p>
-
-<h2>生き方と職業</h2>
-
-<p>世の中では，&#8221;しごと&#8221;の2つの側面に関する微妙な差は無視されることが多い．
-議員と政治家の呼び分けなんて，ふつうは深く考えない．</p>
-
-<p>でも，経営層はこの辺りについて，実に敏感だ．</p>
-
-<p>数年前に，トヨタが「トヨタ・ウェイ」という本を出して書店のビジネス棚を賑わした．
-世界企業のトヨタが，微々たる印税を期待して本を出すはずがない．
-これは，国際企業として成長するトヨタが，関連企業向けに，自社の精神を説くべく作られた本である．</p>
-
-<p>IT関連でいえば，ある時期，Microsoft press から「私がマイクロソフトで学んだこと」系のライトビジネス書がぼこぼこと出た．
-本体であるマイクロソフトの経営層の流れと出版年を見比べると，なるほどと思うだろう
-．</p>
-
-<p>IBMの「巨象も踊る」も，社外への広告宣伝の要素もあれば，自社関連企業への要素もあるだろう．</p>
-
-<p>これら巨大企業は，当然のこととして，自社内従業員のための作業手順書を完備している．
-それでもなお，各社は，各社の哲学や精神論を通じ，身の処し方のレベルまで従業員に考えさせ，考えを合わせていく．</p>
-
-<p>そういう潮流を，キモチワルイと切り捨てたくなるとしたら，その気持ちは判る．
-ただ，かつて国家のレベルで行っていたことが，国境を軽々と跨ぐようになってきて，多国籍巨大企業が自ら行わなければならなくなった，と考えると，それは必要なこと…必要悪なのかもしれないが…ではないだろうか．</p>
-
-<p>これはたぶん営利企業に限らない．
-NPO/NGO無しでは今の世界は回らず，それぞれにそれぞれのアイデンティティがあり，構成員は自らの生き方と組織の生き方をすりあわせているのだろう．</p>
-
-<h2>howto と way</h2>
-
-<p>そして，私は思うのだ．
-OSSエンジニアにも，職業と生き方との，2側面が存在するのでは，と．</p>
-
-<p>本稿では，２つの側面を表現する適切な語が思いつかなかったので，howto と way という言葉を使う．</p>
-
-<p>howto は，OSSエンジニアが開発を遂行するに当たって直接的に必要な知識，直接的に賃金を得るための手段．つまり職業に相当する．
-一例を挙げるなら，Linux界隈で膨大に存在する howto 文書を理解し開発なり設定なりする能力だ．</p>
-
-<p>一方，way は，OSSエンジニアとして円滑に生き続けられるために必要な知恵．つまり，生き方，に相当する．
-具体的には，ソフトウェアの自由に対する知識と自分なりの見解，ハッカーマインドの実践，などなど．</p>
-
-<p>これらは，両方必要に見えて，短期ならば，片方でも割とどうにかなる．</p>
-
-<p>顧客や上司からLinuxを指定された，という理由でOSSに関わる技術者は，howto だけ心得ておけばよい．
-実際そういう技術者も，世の中には少なくない．
-ときどき GPL のコードをコピペして炎上するかもしれないが，まあ，なんとかなる．</p>
-
-<p>wayだけ理解して食いっぱぐれないでいるのは，エンジニアとしては厳しい．
-しかし，ヒョーロンカとか扇動家としてなら，wayだけでも関与はできる．
-某巨大匿名掲示板などを眺めていると，この層も，案外多いように思う．</p>
-
-<p>ただしもちろん，両方備えるのがスタートラインではある．
-片方だけでは，エコシステムに参加できず，やがて消えていくであろう．</p>
-
-<h2>howto と way，何にフォーカスするか</h2>
-
-<p>OSS関連のコミュニティ活動を傍から見ていて，不思議だなと思うことがある．
-参加したいと思う側も受け入れる側も，howto と way の区別があんまりついていないのではないか．
-これがニッポン固有のことなのか，世界普遍な傾向なのかは判らない．</p>
-
-<p>壇上に登るような方々は，OSSエンジニアとして大成しており，両者は不可分のものとして会得してるものだろう．だからこそ大成したという言い方もできるだろうとも思う．</p>
-
-<p>一方で，「OSSにあこがれています．スーパーハカーすごいと思います」「でも VCS よくわかりません苦手です．英語もダメです．上司の説得が」という層は，howto と way の両側面があるということも，理解できていないだろう．</p>
-
-<p>その辺り，整理できていないと，伝わるべき情報が上手く伝授されないのではないか．
-「憧れたけれど，何をすれば判らなくて，やっぱ俺には無理だったわ」と，情熱の無駄使いだけが起きて終わるのではないだろうか．</p>
-
-<p>さて，冒頭の私の tweet は，howto についてのみ言及している．
-そして，howto には way も伴うと，根拠なく期待している．
-おそらくスジの悪い言い回しだ．
-しかし私はそういう tweet でも許される．</p>
-
-<p>だって，私が気にする必要なんてあるの?
-tweetを眺めていると，後進育成の文脈で目立つ方々も，深く考えていなさげなのに．</p>
-
-<h2>そして神格化と娯楽化で終わる</h2>
-
-<p>かくして壇上は「よくわからないけれど，すごい」一代芸を持つエンジニアの舞台となる．
-行き着く先は，神格化と娯楽化．</p>
-
-<p>義務教育では，なぜかやたらと偉人の伝記を読ませられる．
-それらは，偉人たちにとっては(脚色はあるかもしれないが)リアルな人生だ．
-しかし，読む子供たちには，ファンタジーの一種である．
-なぜすごいのか，近づくためにはどうすればよいのか．
-そういうことをリアルに感じられない物語は，容易にファンタジー化する．
-たぶん成人でも一緒だ．意識高い層の，奇妙なジョブズ信仰をみればいい．</p>
-
-<p>「OSSの仲間を増やしたい」「興味のある人に伝えたい」
-そう思っても，至るのは，神格化と，娯楽化．
-聴衆に与えるのは一時の高揚感と，名刺交換をしたという事実．</p>
-
-<p>それで十分だ，という人もいるだろう．
-解る人には解る，伝わる人には伝わる．</p>
-
-<p>…まあ，それはそれでもよいのかもしれないが．</p>
 ]]></content>
   </entry>
   

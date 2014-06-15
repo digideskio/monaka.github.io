@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>monami-ya.mrb での sandbox サポート - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,15 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での Sandbox サポート</a></h1>
+      <h1 class="entry-title">monami-ya.mrb での Sandbox サポート</h1>
     
     
       <p class="meta">
@@ -108,7 +105,7 @@
   </header>
 
 
-  <div class="entry-content"><p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
+<div class="entry-content"><p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
 まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます．</p>
 
 <p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
@@ -247,84 +244,16 @@ mrb_state で使用するものとして初期化されます．</p>
 <p>どの sandbox を指定したかは，mrb_state に保持されます．
 そのため，mrb_state を破棄する際には，単に mrb_close() を呼び出してください．</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-05-31T18:52:30+09:00" pubdate data-updated="true">May 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
-
-<p><a href="https://twitter.com/yukihiro_matz/status/472033974219325440""><a href="https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a>&#8221;</a></p>
-
-<!--
-https://twitter.com/yukihiro_matz/status/472033974219325440
-@monamour555 まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。
--->
-
-
-<p>全く御意でございます．低頭拝聴です．</p>
-
-<p>賤民である私も，OSS という言葉が無かったころ，Ruby が世に放流された頃には，この世界を見ていた気も無くもないですが．
-きっと気のせいですね．
-uClinux, Xen, Android で kernel の fork が起こったのは，失われる運命だったのですね．だめだ fork はダメだ．失われる！だめだ！</p>
-
-<h2>やっぱ fork はダメだ失われる！</h2>
-
-<p>あーやっぱり，私が書いたコードなんて，消えちゃうよなー．すべからく，そういう人生だったしなー．何しろ長老がそう言っているもんなー．
-って陰惨に思いながら，残りのコードを書いていたのですが．</p>
-
-<p>…あれ?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/31/fork-will-dead-itself-exactly/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -336,38 +265,43 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
   
 
 
-<time datetime="2014-05-24T14:57:08+09:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-15T08:45:14+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/monami-ya-dot-mrb/'>monami-ya.mrb</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p>会社名義で出したサービスの裏話．</p>
-
-<p>機能としては，ソフト屋さんから別段の注目を浴びるほどのものでもなく．
-プレスリリース等派手なことはしませんでしたが．
-<a href="http://www.monami-ya.jp/blog/2014/05/24/movsign-map-redirect-beta/">合同会社もなみ屋の名義で，Webアプリをリリース</a>しました．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/31/fork-will-dead-itself-exactly/" title="Previous Post: 過去の事例だとこの手のOSSは長期的には失われる結果になりそうです">&laquo; 過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/24/why-i-create-rails-app/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -432,7 +366,7 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -472,6 +406,7 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
 
   
 </aside>
+
 
     </div>
   </div>
