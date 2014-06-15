@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>monami-ya.mrb が sandbox サポートを追加する理由 - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="先ほどの続き． sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．&mdash; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">monami-ya.mrb が Sandbox サポートを追加する理由</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-15T09:58:37+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
+
+<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/477722322862759938">June 14, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>など言って，実装理由を表明しないのは，ちょっとイケ好かないかなということで．</p>
+
+<p>本題に入るには，OS が提供する thread の使い方について，寄り道をする必要があります．</p>
+
+<p>注: 本稿は，mruby の内部構造，特に，mrb_state と mrbgems の関係を理解していることを前提にしています．</p>
+
+<!-- more -->
+
+
+<h2>thread の使い方，2通り</h2>
+
+<p>thread は，たかが機構なので，使い方は幾通りもありえます．</p>
+
+<p>しかし，代表的なパターンとして，2通りの使い方があります．
+たぶんデザインパターン的な名前がありそうですが，知らないのでオレオレ命名で．</p>
+
+<h3>対称(symmetric)なスレッド</h3>
+
+<p>同じデータ構造で同じ処理を持つスレッドが，多数あるパターンです．</p>
+
+<p>非同期に起こる多数の要求を裁くときに，しばしば見られます．
+具体例としては，サーバのワーカースレッドや，ファイルシステム内の処理などがあります．</p>
+
+<p><img src="symmetric.png" alt="対称なスレッド" /></p>
+
+<h3>非対称なスレッド</h3>
+
+<p>複数のスレッドが，それぞれ異なるデータ構造を管理するパターンです．
+データ構造が異なるのですから，各スレッドが行う処理も，当然異なります．</p>
+
+<p>「そういう時はプロセス分けるだろ」と思った方は，POSIX や Windows に頭を侵されています．</p>
+
+<p>多くの RTOS では，スレッドに相当する概念はあります．
+しかし，プロセスに相当するリソース抽象化概念がありません．(注: 持っている RTOS もあります)</p>
+
+<p>また，POSIX や Windows も，OS の内部では，スレッドに相当する概念はありますが，リソース抽象化の概念は無いか，希薄です．
+OSが抽象化を提供しているので，当然です．</p>
+
+<p><img src="asymmetric.png" alt="非対称なスレッド" /></p>
+
+<h2>mruby のスレッドバインディングとmrbgems</h2>
+
+<p>mruby は，言語としては，今のところスレッドを提供していません．
+しかし，マルチスレッディングの要求は，上記の2通りのいずれにせよ，間違いなくあります．</p>
+
+<p>mruby を下位 OS のスレッドとバインドする典型的手法として，スレッド毎に mrb_state を割り当てる手法があります．</p>
+
+<p>私は mod_mruby のソースコードを精読したわけではないですが．
+サーバへの mruby 活用の代表である， mod_mruby も，Apache のワーカースレッドに対し 1 つの mrb_state を割り当てているようです．
+この場合は，各スレッドは「対称」です．
+全ての mrb_state は，同じように初期化されて構いません．
+使える mrbgems も全てのスレッド(mrb_state)で同じもので構いません．</p>
+
+<h2>さて，本稿の本題．</h2>
+
+<p>非対称なスレッド構成を取ったシステムを考えてみます．</p>
+
+<p>実例として，uITRON, OSEK/VDX クラスの RTOS 上にファイルシステムとユーザアプリを mruby のみで作るとします．</p>
+
+<p>構成としては，デバドラ + ファイルシステム + ユーザアプリになります．</p>
+
+<p>デバドラとファイルシステムは，再利用性が高いので，おそらく mrbgems として実装するでしょう．
+そして，非同期処理になりますので，(デバドラ + ファイルシステム)のスレッドと，ユーザアプリのスレッドに分けるでしょう．スレッド間通信も mrbgems として提供するかもしれません．
+常識的な RTOS のアプリ設計です．</p>
+
+<p>ここで，思い出してみましょう．
+現在の mruby では，全ての mrb_state で，全ての mrbgems を共有します．
+つまり，スレッドを分けても，ユーザアプリは，ファイルシステムを迂回して直接デバドラのメソッドを叩けます．</p>
+
+<p><img src="sandbox.png" alt="sandboxの有無と非対称スレッド" /></p>
+
+<p>これを気持ち悪くないと思う開発者が居たとしたら，別の職種にジョブチェンジしたほうがよいでしょう．</p>
+
+<h2>なぜ他のmruby開発者はsandboxを必要と思わないのか．</h2>
+
+<p>今のところ，mruby へ sandbox を仕掛ける実装は殆どみかけません．
+mattn 氏が <a href="https://github.com/mattn/mruby-sandbox">mruby-sandbox</a> なる実験をしてはいますけれども．
+私はかつて，<a href="https://github.com/mruby/mruby/pull/1844">lazy initialization なる提案</a>をしていて，これは sandbox を狙ったものだったのですが，意図がうまく伝わらなかったのか，フルボッコに終わりました．</p>
+
+<p>実のところ，彼らでないので真の理由は解りません．
+しかし，私の想像が及ぶ限りにおいて，必要と思わない理由は，2種類あります．</p>
+
+<h3>説: Web サーバくらいまでしか考えてない</h3>
+
+<p>ひとつは，結局 web サーバのことまでしか考えが及ばないから．
+対称なスレッドなら，今の実装でも十分です．</p>
+
+<p>もちろん，世界最高水準の開発者集団ですから，非対称スレッドの設計についても，頭では理解できておられるでしょう．
+それと，腹に落として理解できるというのは，必ずしも一致しません．
+技術というものの難しいところです．</p>
+
+<h3>説: コードゴルフに偏りすぎている</h3>
+
+<p>もう一つは，組み込み系技術者たちは，小さな機器組み込みに偏りすぎているから．
+ちっちゃいもの好きは，ニッポンの組み込みのガラパゴ特徴ですが，mruby も漏れずに思えます．
+Mindstorms/NXT やらFM3-USBSTICKやら STM32F4 やら，RTOSを載せるのさえも一苦労な環境に，開発者たちの視線が集中しています．</p>
+
+<p>コードゴルフは私も嫌いではないですが．
+現在でもオンチップ 256KB は珍しくないマイコン世界．
+MB 級の RAM がオンチップになるのは時間の問題なのになぁ…．
+盆栽みたいなものですかね．</p>
+
+<p>ともあれ，mrb_state をひとつ持たせるのがやっとの環境では，スレッドと mrb_state の組が複数存在する環境で起こることを想定するのは難しいでしょう．
+私は，Mocloudos や mruby + TOPPERS + Blackfin といった，潤沢なスペックを持つ(とはいってもデスクトップやサーバに比べると極めて貧弱な)環境上で mruby を動作させています．
+そのため，早期に気がついた，ということはあるでしょう．</p>
+
+<h2></h2>
+
+<p>というわけで，mruby で sandbox が何故必要なのか，なぜ本家に登場しないのか，ざざっと意見表明いたしました．</p>
+
+<p>こう言ってはナンですが，今の体制のままだと，本家mrubyが機器組み込みに応用されるようになるのは，ずいぶんと先になるんじゃないかな…．</p>
+
+<p>まあ，別に，&#8221;本家&#8221;に拘る必要も無いといえば無いのですが．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-15T09:58:37+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/monami-ya-dot-mrb/'>monami-ya.mrb</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/" title="Previous Post: monami-ya.mrb での sandbox サポート">&laquo; monami-ya.mrb での sandbox サポート</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <script data-gittip-username="monaka"
+        src="//gttp.co/v1.js"></script>
+</section>
+
+
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/funding-for-funding/">ファンディングのためのファンディング，始めます．(その1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/pizzafactory-meets-brew/">ピザ屋がお酒も始めました</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+邑中雅樹?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

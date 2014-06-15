@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monami-ya.mrb | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T09:27:48+09:00</updated>
+  <updated>2014-06-15T12:43:21+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
+    <updated>2014-06-15T09:58:37+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
+    <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
+
+<p><a href="https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a>">https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a></a></p>
+
+<p>など言って，実装理由を表明しないのは，ちょっとイケ好かないかなということで．</p>
+
+<p>本題に入るには，OS が提供する thread の使い方について，寄り道をする必要があります．</p>
+
+<p>注: 本稿は，mruby の内部構造，特に，mrb_state と mrbgems の関係を理解していることを前提にしています．</p>
+
+<!-- more -->
+
+
+<h2>thread の使い方，2通り</h2>
+
+<p>thread は，たかが機構なので，使い方は幾通りもありえます．</p>
+
+<p>しかし，代表的なパターンとして，2通りの使い方があります．
+たぶんデザインパターン的な名前がありそうですが，知らないのでオレオレ命名で．</p>
+
+<h3>対称(symmetric)なスレッド</h3>
+
+<p>同じデータ構造で同じ処理を持つスレッドが，多数あるパターンです．</p>
+
+<p>非同期に起こる多数の要求を裁くときに，しばしば見られます．
+具体例としては，サーバのワーカースレッドや，ファイルシステム内の処理などがあります．</p>
+
+<p><img src="symmetric.png" alt="対称なスレッド" /></p>
+
+<h3>非対称なスレッド</h3>
+
+<p>複数のスレッドが，それぞれ異なるデータ構造を管理するパターンです．
+データ構造が異なるのですから，各スレッドが行う処理も，当然異なります．</p>
+
+<p>「そういう時はプロセス分けるだろ」と思った方は，POSIX や Windows に頭を侵されています．</p>
+
+<p>多くの RTOS では，スレッドに相当する概念はあります．
+しかし，プロセスに相当するリソース抽象化概念がありません．(注: 持っている RTOS もあります)</p>
+
+<p>また，POSIX や Windows も，OS の内部では，スレッドに相当する概念はありますが，リソース抽象化の概念は無いか，希薄です．
+OSが抽象化を提供しているので，当然です．</p>
+
+<p><img src="asymmetric.png" alt="非対称なスレッド" /></p>
+
+<h2>mruby のスレッドバインディングとmrbgems</h2>
+
+<p>mruby は，言語としては，今のところスレッドを提供していません．
+しかし，マルチスレッディングの要求は，上記の2通りのいずれにせよ，間違いなくあります．</p>
+
+<p>mruby を下位 OS のスレッドとバインドする典型的手法として，スレッド毎に mrb_state を割り当てる手法があります．</p>
+
+<p>私は mod_mruby のソースコードを精読したわけではないですが．
+サーバへの mruby 活用の代表である， mod_mruby も，Apache のワーカースレッドに対し 1 つの mrb_state を割り当てているようです．
+この場合は，各スレッドは「対称」です．
+全ての mrb_state は，同じように初期化されて構いません．
+使える mrbgems も全てのスレッド(mrb_state)で同じもので構いません．</p>
+
+<h2>さて，本稿の本題．</h2>
+
+<p>非対称なスレッド構成を取ったシステムを考えてみます．</p>
+
+<p>実例として，uITRON, OSEK/VDX クラスの RTOS 上にファイルシステムとユーザアプリを mruby のみで作るとします．</p>
+
+<p>構成としては，デバドラ + ファイルシステム + ユーザアプリになります．</p>
+
+<p>デバドラとファイルシステムは，再利用性が高いので，おそらく mrbgems として実装するでしょう．
+そして，非同期処理になりますので，(デバドラ + ファイルシステム)のスレッドと，ユーザアプリのスレッドに分けるでしょう．スレッド間通信も mrbgems として提供するかもしれません．
+常識的な RTOS のアプリ設計です．</p>
+
+<p>ここで，思い出してみましょう．
+現在の mruby では，全ての mrb_state で，全ての mrbgems を共有します．
+つまり，スレッドを分けても，ユーザアプリは，ファイルシステムを迂回して直接デバドラのメソッドを叩けます．</p>
+
+<p><img src="sandbox.png" alt="sandboxの有無と非対称スレッド" /></p>
+
+<p>これを気持ち悪くないと思う開発者が居たとしたら，別の職種にジョブチェンジしたほうがよいでしょう．</p>
+
+<h2>なぜ他のmruby開発者はsandboxを必要と思わないのか．</h2>
+
+<p>今のところ，mruby へ sandbox を仕掛ける実装は殆どみかけません．
+mattn 氏が <a href="https://github.com/mattn/mruby-sandbox">mruby-sandbox</a> なる実験をしてはいますけれども．
+私はかつて，<a href="https://github.com/mruby/mruby/pull/1844">lazy initialization なる提案</a>をしていて，これは sandbox を狙ったものだったのですが，意図がうまく伝わらなかったのか，フルボッコに終わりました．</p>
+
+<p>実のところ，彼らでないので真の理由は解りません．
+しかし，私の想像が及ぶ限りにおいて，必要と思わない理由は，2種類あります．</p>
+
+<h3>説: Web サーバくらいまでしか考えてない</h3>
+
+<p>ひとつは，結局 web サーバのことまでしか考えが及ばないから．
+対称なスレッドなら，今の実装でも十分です．</p>
+
+<p>もちろん，世界最高水準の開発者集団ですから，非対称スレッドの設計についても，頭では理解できておられるでしょう．
+それと，腹に落として理解できるというのは，必ずしも一致しません．
+技術というものの難しいところです．</p>
+
+<h3>説: コードゴルフに偏りすぎている</h3>
+
+<p>もう一つは，組み込み系技術者たちは，小さな機器組み込みに偏りすぎているから．
+ちっちゃいもの好きは，ニッポンの組み込みのガラパゴ特徴ですが，mruby も漏れずに思えます．
+Mindstorms/NXT やらFM3-USBSTICKやら STM32F4 やら，RTOSを載せるのさえも一苦労な環境に，開発者たちの視線が集中しています．</p>
+
+<p>コードゴルフは私も嫌いではないですが．
+現在でもオンチップ 256KB は珍しくないマイコン世界．
+MB 級の RAM がオンチップになるのは時間の問題なのになぁ…．
+盆栽みたいなものですかね．</p>
+
+<p>ともあれ，mrb_state をひとつ持たせるのがやっとの環境では，スレッドと mrb_state の組が複数存在する環境で起こることを想定するのは難しいでしょう．
+私は，Mocloudos や mruby + TOPPERS + Blackfin といった，潤沢なスペックを持つ(とはいってもデスクトップやサーバに比べると極めて貧弱な)環境上で mruby を動作させています．
+そのため，早期に気がついた，ということはあるでしょう．</p>
+
+<h2></h2>
+
+<p>というわけで，mruby で sandbox が何故必要なのか，なぜ本家に登場しないのか，ざざっと意見表明いたしました．</p>
+
+<p>こう言ってはナンですが，今の体制のままだと，本家mrubyが機器組み込みに応用されるようになるのは，ずいぶんと先になるんじゃないかな…．</p>
+
+<p>まあ，別に，"本家"に拘る必要も無いといえば無いのですが．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
@@ -22,7 +147,7 @@
 まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
 <p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
-何故この機能が必要なのか，という話は後日するとして，どう使うかということを記しておきます．
+何故この機能が必要なのか，という話は<a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">後日する</a>として，どう使うかということを記しておきます．
 master ブランチに入るまでに，API 等の変更があるかもしれません．</p>
 
 <p>また，mruby 本体に取り込まれるかどうかは，解りません．</p>

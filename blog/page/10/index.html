@@ -9,8 +9,11 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="雇用はいちばん難しい かつてお世話になった方が，起業計画中とのことで，相談を受けた．
-私は，起業家としては失格の部類なのだけれども，スタートアップの空気感は解る，みたいなレベルではあるので，返事を書いた． 送信後，読みなおしたら割と一般論っぽかったので，ちょちょいと書きなおして当日記にも載せておく &hellip;">
+  <meta name="description" content="なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
+なんでこのタイミングなのかに，あまり深い意味はない．
+一つのきっかけとして，イベントはある．
+mruby を話題の中心に据えたイベントが，今日の午後開催される．
+私も聴講者として参加する予定だ． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/31/memorandom-about-mruby/">今日現在のmrubyについて雑想</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-31T10:28:44+09:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
+なんでこのタイミングなのかに，あまり深い意味はない．
+一つのきっかけとして，イベントはある．
+mruby を話題の中心に据えたイベントが，<a href="http://www.digitalfukuoka.jp/events/30?locale=ja">今日の午後開催される</a>．
+私も聴講者として参加する予定だ．
+参加した後だと，その感想と混じる．
+なんとなく私見の純度が下がるかな，とか．</p>
+
+<p>私は，何を書いても，誰かや何かをdisっているように受け取られがちだ．
+けれども，本稿もdisりの意図は全くない．
+徒然なるままに．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/31/memorandom-about-mruby/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -181,77 +235,6 @@ IMAP は有効にしたし，2段階認証はやっていないし．</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-14T19:37:18+09:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>まくら</h1>
-
-<p>明日の東京は，予想最高気温4℃とか降雪とか，もう勘弁して下さいという感じのようなのですが．
-数ヶ月もすれば暖かくもなりましょう．
-そしてやってくるのは，別れと出会いの春でございます．</p>
-
-<p>いまどき，IT関連でなくてもメールくらいは日用品になっておるわけでして．
-所属が変わるときには，自分も，自分の所属組織も，この扱いに困ったりするわけです．
-私が最初にメアドなるものを貰ってから20年以上経ちますが，この辺りは何の進歩も見られないなと，思ったりするような，しないような．</p>
-
-<h1>Gmailの内容保全について考える．</h1>
-
-<p>今や社会インフラといえるよなサービスの代表として Gmail は筆頭でしょう．
-個人，学生のみならず，Google Apps for Bysiness (GAB)などで会社でも使われていることも多いですし．</p>
-
-<p>学生が学校のアカウントとして Gmail を持っている場合は，卒業と同時にそれを失うのが一般的なはずです．
-卒業後を見越していればよいのですが，新入生の頃は右も左も判らないので，つい学校の Gmail に頼っちゃった，ということは十分に有り得るでしょう．</p>
-
-<p>会社の場合は，退職と同時に，その持ち出しを禁止されるのが一般的だろうと思います．
-この場合，困るのは，会社に残った側です．
-メールのやり取りは，退職者が行っていた仕事のログでもあり，保全したいと思うはずです．
-が，GABのアカウントは有料でして，アカウントを消して経費節減に繋げたいという経営経理側の言い分もわかります．
-その辺を上手く調整しないと…</p>
-
-<blockquote class="twitter-tweet"><p>退職者のGoogleアカウントが削除されたため、その退職者がオーナーになっていたGoogleドライブのファイルが全て消え失せて大騒ぎしている。</p>&mdash; わいお (@KanjiruWaio) <a href="https://twitter.com/KanjiruWaio/statuses/421468843513376768">January 10, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>…こういう哀しいできごとがおこるわけです．(この例はメールではありませんが)</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/14/gmail-imap-sync-with-ruby/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -293,6 +276,10 @@ IMAP は有効にしたし，2段階認証はやっていないし．</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
       </li>
     
@@ -314,10 +301,6 @@ IMAP は有効にしたし，2段階認証はやっていないし．</p>
     
       <li class="post">
         <a href="/blog/2014/04/30/pizzafactory-meets-brew/">ピザ屋がお酒も始めました</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/20/postmortem-3/">失敗分析: 債務のこと</a>
       </li>
     
   </ul>
