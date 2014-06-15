@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monami-ya.mrb | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T12:43:21+09:00</updated>
+  <updated>2014-06-15T12:44:27+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -22,7 +22,7 @@
 
 <p><a href="https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a>">https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a></a></p>
 
-<p>など言って，実装理由を表明しないのは，ちょっとイケ好かないかなということで．</p>
+<p>など言って，実装理由を詳説しないのは，ちょっとイケ好かないかなということで．</p>
 
 <p>本題に入るには，OS が提供する thread の使い方について，寄り道をする必要があります．</p>
 
