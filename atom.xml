@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T12:52:44+09:00</updated>
+  <updated>2014-06-15T12:54:19+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -136,7 +136,7 @@ MB 級の RAM がオンチップになるのは時間の問題なのになぁ…
 
 <p>というわけで，mruby で sandbox が何故必要なのか，なぜ本家に登場しないのか，ざざっと意見表明いたしました．</p>
 
-<p>こう言ってはナンですが，今の体制のままだと，本家mrubyが機器組み込みに応用されるようになるのは，ずいぶんと先になるんじゃないかな…．</p>
+<p>こう言ってはナンですが，今の体制のままだと，本家mrubyがベアメタルな機器組み込みに応用されるようになるのは，ずいぶんと先になるんじゃないかな…．</p>
 
 <p>まあ，別に，&#8221;本家&#8221;に拘る必要も無いといえば無いのですが．</p>
 ]]></content>
