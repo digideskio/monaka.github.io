@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T09:15:59+09:00</updated>
+  <updated>2014-06-15T09:27:48+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-06-15T08:45:14+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
     <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
-まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます．</p>
+まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
 <p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
 何故この機能が必要なのか，という話は後日するとして，どう使うかということを記しておきます．
@@ -114,6 +114,32 @@ mrb_final_sqlite_sandbox,
 <h1>define MRB_SANDBOX_SQLITE (1u)</h1>
 
 <p>```</p>
+
+<h3>依存性チェック</h3>
+
+<p>もし， mruby-sqlite3 のみを指定し，依存性のある mruby-bin-sqlite3 を
+含め忘れたとします．</p>
+
+<p>```
+MRuby::CrossBuild.new(&lsquo;jsp-bfin&rsquo;) do |conf|
+&hellip;
+  conf.sandbox(&lsquo;sqlite&rsquo;) do</p>
+
+<pre><code>gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+</code></pre>
+
+<p>  end
+&hellip;
+```</p>
+
+<p>このような依存性の破れを含む記述で minirake を実行した場合には，エラーとなります．</p>
+
+<p><code>
+(in /Users/monaka/git/monami-ya.mrb/monami-ya.mrb)
+rake aborted!
+GEM mruby-bin-sqlite3 not found in the sandbox `sqlite'
+rakefile:27:in `load'
+</code></p>
 
 <h3>実行時の sandbox 生成</h3>
 

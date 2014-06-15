@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="たぶん会社の公式サイトに乗るべき情報のような気もしますが．
-まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます． mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox &hellip;">
+まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます． mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,7 +106,7 @@
 
 
 <div class="entry-content"><p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
-まだ master ブランチどころか develop ブランチに入っていないので，メモとして，こちらに書いておきます．</p>
+まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
 <p>mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox 機能を追加しました．
 何故この機能が必要なのか，という話は後日するとして，どう使うかということを記しておきます．
@@ -223,6 +223,37 @@ mrb_state で使用するものとして初期化されます．</p>
 </span><span class='line'> */
 </span><span class='line'>
 </span><span class='line'>#define MRB_SANDBOX_SQLITE (1u)</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>依存性チェック</h3>
+
+<p>もし， mruby-sqlite3 のみを指定し，依存性のある mruby-bin-sqlite3 を
+含め忘れたとします．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MRuby::CrossBuild.new('jsp-bfin') do |conf|
+</span><span class='line'>...
+</span><span class='line'>  conf.sandbox('sqlite') do
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+</span><span class='line'>  end
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このような依存性の破れを含む記述で minirake を実行した場合には，エラーとなります．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(in /Users/monaka/git/monami-ya.mrb/monami-ya.mrb)
+</span><span class='line'>rake aborted!
+</span><span class='line'>GEM mruby-bin-sqlite3 not found in the sandbox `sqlite'
+</span><span class='line'>rakefile:27:in `load'</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>実行時の sandbox 生成</h3>
