@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T09:14:23+09:00</updated>
+  <updated>2014-06-15T09:15:59+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -28,6 +28,9 @@ master ブランチに入るまでに，API 等の変更があるかもしれま
 <p>また，mruby 本体に取り込まれるかどうかは，解りません．</p>
 
 <h2>機能概要</h2>
+
+<!-- more -->
+
 
 <h3>前提知識</h3>
 
