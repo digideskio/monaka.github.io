@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>monami-ya.mrb での static thread binding サポート - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました． 当日記でも，実装と背景について取り上げました． その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
+つまり，monami-ya.mrb は，下位層にスレッドライブラリ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">monami-ya.mrb での Static Thread Binding サポート</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T11:15:55+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
+
+<p>当日記でも，<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
+
+<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
+つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
+
+<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
+
+<p>みたいなことを仰る方も，世間には稀にいます．
+それは概ね誤解です．
+その辺りの話は，別の機会に取り扱いましょう．</p>
+
+<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
+
+<h2>目指せ，ゆるふわ組み込みライフ</h2>
+
+<!-- more -->
+
+
+<blockquote class="twitter-tweet"><p>って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/478026904457326592">June 15, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>いやほんと，組み込み向け軽量 Ruby って言葉を聞いた時に，大いに期待したのですが．
+組み込みって，分野広いですから，仕方ないと言えば仕方ないのですが．</p>
+
+<p>愚痴っていてもしかたがないので，fork して拡張するのです．</p>
+
+<h2>解決したいこと</h2>
+
+<p>せっかく軽量 Ruby で &ldquo;ゆるふわ&rdquo; したくても，RTOS の細かい差異に振り回されるようではゲンナリです．</p>
+
+<p>OSEK の OIL とか，uITRON/TOPPERS のコンフィギュレーションファイルとか，書きたくないわけです．</p>
+
+<p>そこで，static thread binding の登場となります．</p>
+
+<h2>記述と内部処理</h2>
+
+<p>static thread initialize は，sandbox 同様， monami-ya.mrb の master ブランチにも develop ブランチにさえも入っていません．
+なので，仕様は微調整される可能性があります．
+でも，もう手元では概ね動いているので，ガッツリ変わるということは，ないでしょう．たぶん．</p>
+
+<h3>build_config.rb への記述</h3>
+
+<p>&ldquo;static&rdquo; と謳っているくらいですから，記述箇所は build_config.rb になります．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  s = conf.sandbox('sqlite') do
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-bin-sqlite3'
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  conf.thread do |conf|
+</span><span class='line'>    conf.sandbox = s
+</span><span class='line'>    conf.script_path = "script/hello.rb"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前半は，sandbox です．後半の conf.thread でスレッドを定義します．
+あまり説明の必要は無いでしょう．
+アクセサは，こんな感じです．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ThreadBind
+</span><span class='line'>  attr_accessor :activate
+</span><span class='line'>  attr_accessor :script_path
+</span><span class='line'>  attr_accessor :sandbox
+</span><span class='line'>  attr_accessor :priority
+</span><span class='line'>  attr_accessor :stack_size
+</span><span class='line'>  attr_accessor :type</span></code></pre></td></tr></table></div></figure>
+
+
+<p>activate は，システム起動時に，スレッドを実行開始の状態にするかを決めます．
+Win32 や POSIX では無視かエラーかかもしれません．
+RTOS ではシステム起動時のタスクの実行状態を決められることが多いので，重要なパラメタです．</p>
+
+<p>stack_size は，RTOS では必要でしょうけれども，Win32 や POSIX なら無視されるのでしょう．
+type は，uITRON/TOPPERS の場合には，:task, :cycric, :alarm, :interrupt とかになるでしょう．</p>
+
+<p>script_path は，そのスレッドが実行する Ruby (mruby)スクリプトを指定します．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1 + 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とか．
+タスクなら，while ループの中で何かをさせるのでしょう．</p>
+
+<h4>余談:割り込みハンドラをRubyで書けるか</h4>
+
+<p>ええ，割り込みハンドラも書けます． monami-ya.mrb ならね．</p>
+
+<p>性能的に使い物になるかどうかなんて気にしてはいけません．
+ムーアの法則が解消する可能性が高いからです．</p>
+
+<p>割り込みハンドラを RiteVM (mruby の VM) で書く場合に，物理時間制約以外のリスクがあるとすると，malloc 時のロックとメモリ枯渇です．
+monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間のロックフリー化をしてあります．
+また，VMのスタック上限をmrb_state毎に指定可能にしてあるため，どうしようもない枯渇は起こし辛いようにしてあります．</p>
+
+<p>現在の本家 mruby では，これらの対応が抜けています．
+本家のままでは，割り込みハンドラを Ruby で書くのはリスクが高すぎて実用不能でしょう．
+まさか割り込みハンドラまで書くとは思っていないフシがあるので，たぶん今後も．</p>
+
+<h3>内部処理</h3>
+
+<p>build_config.rb の記述から，下位のスレッドライブラリへのバインディングに必要なコードを静的に生成します．</p>
+
+<p>現時点では，TOPPERS/JSP 用のコードを生成します．決め打ちです．
+将来的には， toolchain のように，動作環境の OS を build_config.rb に記述することで，生成されるコードを，変更可能になるべきでしょう．</p>
+
+<p>具体的には，このようなファイルができます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "mrb_thread_bind.h"
+</span><span class='line'>INCLUDE("\"mrb_thread_bind.h\"")
+</span><span class='line'>ATT_INI({TA_HLNG, 0, mrb_thread_bind_initialize});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>uITRON4.0 のコンフィギュレーションファイル</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "itron.h"
+</span><span class='line'>extern void mrb_thread_bind_initialize(VP_INT exinf);
+</span><span class='line'>extern void mrb_thread_bind_entry(VP_INT exinf);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>TOPPERS/JSP側が用いるヘッダファイル</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdint.h&gt;
+</span><span class='line'>const uint8_t mrb_thread_script0[] = {
+</span><span class='line'>0x52,0x49,0x54,0x65,0x30,0x30,0x30,0x32,0xb4,0x2b,0x00,0x00,0x00,0x58,0x4d,0x41,
+</span><span class='line'>0x54,0x5a,0x30,0x30,0x30,0x30,0x49,0x52,0x45,0x50,0x00,0x00,0x00,0x3a,0x30,0x30,
+</span><span class='line'>0x30,0x30,0x00,0x00,0x00,0x2e,0x00,0x01,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x04,
+</span><span class='line'>0x01,0x00,0x00,0x02,0x02,0x00,0x00,0x02,0x01,0x00,0x01,0x2c,0x00,0x00,0x00,0x4a,
+</span><span class='line'>0x00,0x00,0x00,0x01,0x01,0x00,0x01,0x31,0x00,0x00,0x00,0x01,0x00,0x01,0x2b,0x00,
+</span><span class='line'>0x45,0x4e,0x44,0x00,0x00,0x00,0x00,0x08,
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>conf.script_path で指定したスクリプトファイルのコンパイル結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "itron.h"
+</span><span class='line'>#include "mruby.h"
+</span><span class='line'>#include "mruby/irep.h"
+</span><span class='line'>#include "/Users/monaka/git/monami-ya.mrb/monami-ya.mrb/build/jsp-bfin/threads/thread_script_0.cinc"
+</span><span class='line'>
+</span><span class='line'>static const uint8_t *thread_scripts[] = {
+</span><span class='line'>  mrb_thread_script0,
+</span><span class='line'>  NULL
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>static mrb_state *mrb[1];
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>mrb_thread_bind_initialize()
+</span><span class='line'>{
+</span><span class='line'>  mrb[0] = mrb_open_sandbox(1);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void mrb_thread_bind_entry(VP_INT exinf)
+</span><span class='line'>{
+</span><span class='line'>  mrb_load_irep(mrb[(size_t)exinf], thread_scripts[(size_t)exinf]);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ITRONタスクのエントリポイントと，カーネル初期化ルーチンのエントリポイント．</p>
+
+<p>これらのうち，Cソースコードは，コンパイルされ libmruby.a に纏められます．</p>
+
+<p>最終的に，TOPPERS/JSP の libitron.a とコンパイルするところは，monami-ya.mrb の外です．
+イマイチ，パンチに欠けますが．
+あんまりタイトにバインドさせると，OS毎のビルドシステムの差異に苦しめられることになるので，今のところはここまでです．</p>
+
+<p>セルフビルドが可能な環境では，全てを隠ぺいすることは容易でしょう．</p>
+
+<h2>設計方針</h2>
+
+<p>繰り返しになりますが「ゆるふわ Ruby でガチ組み込み」です．
+Arduinoのスケッチみたいなのにも存在価値は認めますが，狙っているのは，そこではありません．</p>
+
+<p>ここで，monami-ya.mrb は全てのタスクを Ruby で書くことを強要しては <em>いない</em> ということは，注目して頂きたい点です．</p>
+
+<p>大目に見ても，RiteVM の処理時間は，C で書く場合より 2桁のオーダで遅いでしょう．
+なので，物理時間制約の大きなところでは，Cでタスク(スレッド)を書きたくなるはずです．
+そもそも，いちいち Ruby に移植しないと使えないというのであれば，使う気が削がれます．</p>
+
+<p>TOPPERS にせよ uT-Kernel にせよ，既に資産があるわけです．
+それら資産を活用しながらも，新しいことができる．
+そういう設計方針で，この機能は作られます．</p>
+
+<p>それと，この機能はスレッドバインディングに特化しています．
+スレッドがある以上，スレッド間の通信機能が必要になります．
+この設計では，通信機能は mrbgems として提供されるべき，と割り切っています．</p>
+
+<p>静的OSの場合，mrbgems だけで通信機能のためのカーネルオブジェクト生成を行うのは
+辛いはずですが…それは今後の課題です．</p>
+
+<h2>本家へのマージは…?</h2>
+
+<p>MITライセンスで出します．
+誰かが本家にプルリクを投げることは止め用が無いですし，止めませんが．
+常識的に考えて，マージは無いでしょう．
+ターゲットが違いすぎます．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T11:15:55+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/" title="Previous Post: monami-ya.mrb が sandbox サポートを追加する理由">&laquo; monami-ya.mrb が sandbox サポートを追加する理由</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <script data-gittip-username="monaka"
+        src="//gttp.co/v1.js"></script>
+</section>
+
+
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での static thread binding サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/funding-for-funding/">ファンディングのためのファンディング，始めます．(その1)</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+邑中雅樹?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-15T12:54:19+09:00</updated>
+  <updated>2014-06-16T12:29:19+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,269 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[monami-ya.mrb での static thread binding サポート]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/"/>
+    <updated>2014-06-16T11:15:55+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding</id>
+    <content type="html"><![CDATA[<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
+
+<p>当日記でも，<a href="http://www.monaka.org//blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="http://www.monaka.org//blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
+
+<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
+つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
+
+<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
+
+<p>みたいなことを仰る方も，世間には稀にいます．
+それは概ね誤解です．
+その辺りの話は，別の機会に取り扱いましょう．</p>
+
+<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
+
+<h2>目指せ，ゆるふわ組み込みライフ</h2>
+
+<!-- more -->
+
+
+<blockquote class="twitter-tweet"><p>って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/478026904457326592">June 15, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>いやほんと，組み込み向け軽量 Ruby って言葉を聞いた時に，大いに期待したのですが．
+組み込みって，分野広いですから，仕方ないと言えば仕方ないのですが．</p>
+
+<p>愚痴っていてもしかたがないので，fork して拡張するのです．</p>
+
+<h2>解決したいこと</h2>
+
+<p>せっかく軽量 Ruby で &ldquo;ゆるふわ&rdquo; したくても，RTOS の細かい差異に振り回されるようではゲンナリです．</p>
+
+<p>OSEK の OIL とか，uITRON/TOPPERS のコンフィギュレーションファイルとか，書きたくないわけです．</p>
+
+<p>そこで，static thread binding の登場となります．</p>
+
+<h2>記述と内部処理</h2>
+
+<p>static thread initialize は，sandbox 同様， monami-ya.mrb の master ブランチにも develop ブランチにさえも入っていません．
+なので，仕様は微調整される可能性があります．
+でも，もう手元では概ね動いているので，ガッツリ変わるということは，ないでしょう．たぶん．</p>
+
+<h3>build_config.rb への記述</h3>
+
+<p>&ldquo;static&rdquo; と謳っているくらいですから，記述箇所は build_config.rb になります．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  s = conf.sandbox('sqlite') do
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
+</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-bin-sqlite3'
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  conf.thread do |conf|
+</span><span class='line'>    conf.sandbox = s
+</span><span class='line'>    conf.script_path = "script/hello.rb"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前半は，sandbox です．後半の conf.thread でスレッドを定義します．
+あまり説明の必要は無いでしょう．
+アクセサは，こんな感じです．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ThreadBind
+</span><span class='line'>  attr_accessor :activate
+</span><span class='line'>  attr_accessor :script_path
+</span><span class='line'>  attr_accessor :sandbox
+</span><span class='line'>  attr_accessor :priority
+</span><span class='line'>  attr_accessor :stack_size
+</span><span class='line'>  attr_accessor :type</span></code></pre></td></tr></table></div></figure>
+
+
+<p>activate は，システム起動時に，スレッドを実行開始の状態にするかを決めます．
+Win32 や POSIX では無視かエラーかかもしれません．
+RTOS ではシステム起動時のタスクの実行状態を決められることが多いので，重要なパラメタです．</p>
+
+<p>stack_size は，RTOS では必要でしょうけれども，Win32 や POSIX なら無視されるのでしょう．
+type は，uITRON/TOPPERS の場合には，:task, :cycric, :alarm, :interrupt とかになるでしょう．</p>
+
+<p>script_path は，そのスレッドが実行する Ruby (mruby)スクリプトを指定します．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1 + 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とか．
+タスクなら，while ループの中で何かをさせるのでしょう．</p>
+
+<h4>余談:割り込みハンドラをRubyで書けるか</h4>
+
+<p>ええ，割り込みハンドラも書けます． monami-ya.mrb ならね．</p>
+
+<p>性能的に使い物になるかどうかなんて気にしてはいけません．
+ムーアの法則が解消する可能性が高いからです．</p>
+
+<p>割り込みハンドラを RiteVM (mruby の VM) で書く場合に，物理時間制約以外のリスクがあるとすると，malloc 時のロックとメモリ枯渇です．
+monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間のロックフリー化をしてあります．
+また，VMのスタック上限をmrb_state毎に指定可能にしてあるため，どうしようもない枯渇は起こし辛いようにしてあります．</p>
+
+<p>現在の本家 mruby では，これらの対応が抜けています．
+本家のままでは，割り込みハンドラを Ruby で書くのはリスクが高すぎて実用不能でしょう．
+まさか割り込みハンドラまで書くとは思っていないフシがあるので，たぶん今後も．</p>
+
+<h3>内部処理</h3>
+
+<p>build_config.rb の記述から，下位のスレッドライブラリへのバインディングに必要なコードを静的に生成します．</p>
+
+<p>現時点では，TOPPERS/JSP 用のコードを生成します．決め打ちです．
+将来的には， toolchain のように，動作環境の OS を build_config.rb に記述することで，生成されるコードを，変更可能になるべきでしょう．</p>
+
+<p>具体的には，このようなファイルができます．</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "mrb_thread_bind.h"
+</span><span class='line'>INCLUDE("\"mrb_thread_bind.h\"")
+</span><span class='line'>ATT_INI({TA_HLNG, 0, mrb_thread_bind_initialize});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>uITRON4.0 のコンフィギュレーションファイル</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "itron.h"
+</span><span class='line'>extern void mrb_thread_bind_initialize(VP_INT exinf);
+</span><span class='line'>extern void mrb_thread_bind_entry(VP_INT exinf);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>TOPPERS/JSP側が用いるヘッダファイル</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdint.h&gt;
+</span><span class='line'>const uint8_t mrb_thread_script0[] = {
+</span><span class='line'>0x52,0x49,0x54,0x65,0x30,0x30,0x30,0x32,0xb4,0x2b,0x00,0x00,0x00,0x58,0x4d,0x41,
+</span><span class='line'>0x54,0x5a,0x30,0x30,0x30,0x30,0x49,0x52,0x45,0x50,0x00,0x00,0x00,0x3a,0x30,0x30,
+</span><span class='line'>0x30,0x30,0x00,0x00,0x00,0x2e,0x00,0x01,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x04,
+</span><span class='line'>0x01,0x00,0x00,0x02,0x02,0x00,0x00,0x02,0x01,0x00,0x01,0x2c,0x00,0x00,0x00,0x4a,
+</span><span class='line'>0x00,0x00,0x00,0x01,0x01,0x00,0x01,0x31,0x00,0x00,0x00,0x01,0x00,0x01,0x2b,0x00,
+</span><span class='line'>0x45,0x4e,0x44,0x00,0x00,0x00,0x00,0x08,
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>conf.script_path で指定したスクリプトファイルのコンパイル結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "itron.h"
+</span><span class='line'>#include "mruby.h"
+</span><span class='line'>#include "mruby/irep.h"
+</span><span class='line'>#include "/Users/monaka/git/monami-ya.mrb/monami-ya.mrb/build/jsp-bfin/threads/thread_script_0.cinc"
+</span><span class='line'>
+</span><span class='line'>static const uint8_t *thread_scripts[] = {
+</span><span class='line'>  mrb_thread_script0,
+</span><span class='line'>  NULL
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>static mrb_state *mrb[1];
+</span><span class='line'>
+</span><span class='line'>void
+</span><span class='line'>mrb_thread_bind_initialize()
+</span><span class='line'>{
+</span><span class='line'>  mrb[0] = mrb_open_sandbox(1);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>void mrb_thread_bind_entry(VP_INT exinf)
+</span><span class='line'>{
+</span><span class='line'>  mrb_load_irep(mrb[(size_t)exinf], thread_scripts[(size_t)exinf]);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ITRONタスクのエントリポイントと，カーネル初期化ルーチンのエントリポイント．</p>
+
+<p>これらのうち，Cソースコードは，コンパイルされ libmruby.a に纏められます．</p>
+
+<p>最終的に，TOPPERS/JSP の libitron.a とコンパイルするところは，monami-ya.mrb の外です．
+イマイチ，パンチに欠けますが．
+あんまりタイトにバインドさせると，OS毎のビルドシステムの差異に苦しめられることになるので，今のところはここまでです．</p>
+
+<p>セルフビルドが可能な環境では，全てを隠ぺいすることは容易でしょう．</p>
+
+<h2>設計方針</h2>
+
+<p>繰り返しになりますが「ゆるふわ Ruby でガチ組み込み」です．
+Arduinoのスケッチみたいなのにも存在価値は認めますが，狙っているのは，そこではありません．</p>
+
+<p>ここで，monami-ya.mrb は全てのタスクを Ruby で書くことを強要しては <em>いない</em> ということは，注目して頂きたい点です．</p>
+
+<p>大目に見ても，RiteVM の処理時間は，C で書く場合より 2桁のオーダで遅いでしょう．
+なので，物理時間制約の大きなところでは，Cでタスク(スレッド)を書きたくなるはずです．
+そもそも，いちいち Ruby に移植しないと使えないというのであれば，使う気が削がれます．</p>
+
+<p>TOPPERS にせよ uT-Kernel にせよ，既に資産があるわけです．
+それら資産を活用しながらも，新しいことができる．
+そういう設計方針で，この機能は作られます．</p>
+
+<p>それと，この機能はスレッドバインディングに特化しています．
+スレッドがある以上，スレッド間の通信機能が必要になります．
+この設計では，通信機能は mrbgems として提供されるべき，と割り切っています．</p>
+
+<p>静的OSの場合，mrbgems だけで通信機能のためのカーネルオブジェクト生成を行うのは
+辛いはずですが…それは今後の課題です．</p>
+
+<h2>本家へのマージは…?</h2>
+
+<p>MITライセンスで出します．
+誰かが本家にプルリクを投げることは止め用が無いですし，止めませんが．
+常識的に考えて，マージは無いでしょう．
+ターゲットが違いすぎます．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
@@ -2488,75 +2751,6 @@ C言語の入門を脱したくらいのプログラマが，再利用性の高�
 <h2>…</h2>
 
 <p>など考え事しながら買い物をしていたら，タラの芽を買ってくるのを忘れた．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[メディア・リテラシと，生存]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/16/media-literacy-saves-you/"/>
-    <updated>2014-02-16T13:56:50+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/16/media-literacy-saves-you</id>
-    <content type="html"><![CDATA[<p>大雪が降った．
-東京浅草，スカイツリー界隈も大変だった．
-しかし，その後の雨と，今日の好天もあって，残雪はあるものの乾いたアスファルトも顔を出している．</p>
-
-<h2></h2>
-
-<p>山梨方面では，積雪が1mを超え，自衛隊が出るほどの騒ぎになっているらしい．
-被害者救援募金の立ち上げも行われていないところをみると，まだ被害の全貌も明らかになっていない状態なのだろう．</p>
-
-<p>ニュースを眺めていて，ふと思った．</p>
-
-<!-- more -->
-
-
-<blockquote class="twitter-tweet"><p>もしアテクシが大雪でホテルに缶詰になったら，ネットの接続が切れるまでありったけの力で救援を求めるとは思うのだが．&#10;それによって救援の順序がついてしまうとしたら，それはどんなもんなのだろうか．&#10;など，コーヒーを淹れながら，ぼんやりと思う．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/434911942117818368">February 16, 2014</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>助かってよかったね，と素直に思う．
-自衛隊の皆様お疲れ様でした，とも．</p>
-
-<p>別にトリアージなんかついていなくて，メディアへの露出とかも関係なく，例えば，救援活動拠点の近くに閉じ込められていただけかもしれない．
-事情がよく伝わっていない状態では，いかなる考えも，邪推とか妄想とか，そういうものでしかない．</p>
-
-<h2></h2>
-
-<p>義父母が，神奈川県の，山梨との県境に近いところに住んでいる．
-とんでもない量の雪が写ったの写メが送られてきた．
-山の中腹にあり玄関までは，結構な長さの階段もある．
-しかしながら，不幸中の幸いというか，体格の良い義弟が同居している．
-雪かき戦力の心配は無さそうではある．</p>
-
-<p>スカイツリー界隈も，雪は解けてきた．
-下町特有の細い路地でも，ほぼ長靴でなくても歩けるようにはなった．でも，ときどき，路面が雪に覆われたままの箇所もある．
-雪とアスファルトがトラ模様になっている道路を見ながら，そういえば，雪が残っている箇所のお宅は，おばあさんしか見かけないような気がする．
-など気づく．
-雪かき，したくても，できないのかな．</p>
-
-<p><a href="http://area-info.jpn.org/nenHN0001190004.html">山梨は高齢者が多い</a>．
-おそらく，豪雪で身動きがとれなくなっている家の中には，高齢者のみ世帯もあるだろう．
-ホテルでさえ備蓄の食料がなくなるような状態で，ライフラインがストップし，助けを求める方法がなければ，生命の危機にも直面するだろう．
-私の畏れが杞憂で，みなさんご無事であればよいのだが．</p>
-
-<h2></h2>
-
-<p>そういえば．ふと，先週の都知事選に関する，報道映像を思い出した．
-IT系をひっさげて立候補し落選した陣営が，おばあちゃんの原宿，巣鴨へ繰り出して支持を訴えたらしい．</p>
-
-<p>SNSを駆使した選挙戦では，高齢者へは伝わらない．
-このことは，合わせ鏡でもある．
-高齢者は，何か困ったときに，ブロードキャストする声を持っていない．</p>
-
-<h2></h2>
-
-<p>これからの時代に取り残されないために，ではなく，万が一の事態でも生き残るために．
-そういう視点で，高齢者へのメディア・リテラシ啓発を行う余地があるのかもしれない．</p>
-
-<p>雪害に見舞われた若者たちが，ソーシャルメディアを駆使してニュースになり，救援物資が届いた．
-そんなハッピーニュースをwebブラウザで眺めながら，思った．ぼんやりと．</p>
 ]]></content>
   </entry>
   
