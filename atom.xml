@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-16T12:29:19+09:00</updated>
+  <updated>2014-06-17T00:33:05+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -18,7 +18,9 @@
     <link href="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/"/>
     <updated>2014-06-16T11:15:55+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding</id>
-    <content type="html"><![CDATA[<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
+    <content type="html"><![CDATA[<blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
+
+<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
 
 <p>当日記でも，<a href="http://www.monaka.org//blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="http://www.monaka.org//blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
 
@@ -59,7 +61,7 @@
 
 <h2>記述と内部処理</h2>
 
-<p>static thread initialize は，sandbox 同様， monami-ya.mrb の master ブランチにも develop ブランチにさえも入っていません．
+<p>static thread binding は，sandbox 同様， monami-ya.mrb の master ブランチにも develop ブランチにさえも入っていません．
 なので，仕様は微調整される可能性があります．
 でも，もう手元では概ね動いているので，ガッツリ変わるということは，ないでしょう．たぶん．</p>
 
@@ -76,14 +78,18 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  s = conf.sandbox('sqlite') do
-</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-sqlite3'
-</span><span class='line'>    gem :github =&gt; 'monami-ya-mrb/mruby-bin-sqlite3'
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  s = conf.sandbox('blink') do |conf|
+</span><span class='line'>    conf.gem :github =&gt; 'ShinyaEsu/mruby-direct'
+</span><span class='line'>    conf.gem :bitbucket =&gt; 'monami_ya_mrb/mruby-toppers-itron'
 </span><span class='line'>  end
 </span><span class='line'>
 </span><span class='line'>  conf.thread do |conf|
 </span><span class='line'>    conf.sandbox = s
-</span><span class='line'>    conf.script_path = "script/hello.rb"
+</span><span class='line'>    conf.activate = true
+</span><span class='line'>    conf.type = :task
+</span><span class='line'>    conf.script_path = "script/bf533cb/led_blink.rb"
 </span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
 
 
@@ -117,11 +123,23 @@ type は，uITRON/TOPPERS の場合には，:task, :cycric, :alarm, :interrupt �
 <p>script_path は，そのスレッドが実行する Ruby (mruby)スクリプトを指定します．</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>1 + 1</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Direct.write16(0xffc00730, 0x0001)
+</span><span class='line'>while true
+</span><span class='line'>  ITRON.dly_tsk 1000
+</span><span class='line'>  Direct.write16(0xffc0070c, 0x0001)
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
 <p>とか．
-タスクなら，while ループの中で何かをさせるのでしょう．</p>
+普通のスレッド(タスク)なら，while ループの中で何かをさせる感じになります．
+上記の場合は，BF533CB ボード上の LED を 1000ms 周期で Lチカしています．</p>
+
+<p>ワンショットのスレッド(uITRONでの，alarm / cyclic / 割り込みハンドラ)では
+ループをさせないで終わらせることになるでしょう．</p>
 
 <h4>余談:割り込みハンドラをRubyで書けるか</h4>
 
@@ -151,7 +169,7 @@ monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間の
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include "mrb_thread_bind.h"
-</span><span class='line'>INCLUDE("\"mrb_thread_bind.h\"")
+</span><span class='line'>INCLUDE("\"mrb_thread_bind.h\"");
 </span><span class='line'>ATT_INI({TA_HLNG, 0, mrb_thread_bind_initialize});</span></code></pre></td></tr></table></div></figure>
 
 
@@ -160,9 +178,13 @@ monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間の
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include "itron.h"
+</span><span class='line'>#ifdef _MACRO_ONLY
 </span><span class='line'>extern void mrb_thread_bind_initialize(VP_INT exinf);
-</span><span class='line'>extern void mrb_thread_bind_entry(VP_INT exinf);</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>extern void mrb_thread_bind_entry(VP_INT exinf);
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
 
 
 <p>TOPPERS/JSP側が用いるヘッダファイル</p>
@@ -176,14 +198,32 @@ monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間の
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdint.h&gt;
 </span><span class='line'>const uint8_t mrb_thread_script0[] = {
-</span><span class='line'>0x52,0x49,0x54,0x65,0x30,0x30,0x30,0x32,0xb4,0x2b,0x00,0x00,0x00,0x58,0x4d,0x41,
-</span><span class='line'>0x54,0x5a,0x30,0x30,0x30,0x30,0x49,0x52,0x45,0x50,0x00,0x00,0x00,0x3a,0x30,0x30,
-</span><span class='line'>0x30,0x30,0x00,0x00,0x00,0x2e,0x00,0x01,0x00,0x04,0x00,0x00,0x00,0x00,0x00,0x04,
-</span><span class='line'>0x01,0x00,0x00,0x02,0x02,0x00,0x00,0x02,0x01,0x00,0x01,0x2c,0x00,0x00,0x00,0x4a,
-</span><span class='line'>0x00,0x00,0x00,0x01,0x01,0x00,0x01,0x31,0x00,0x00,0x00,0x01,0x00,0x01,0x2b,0x00,
-</span><span class='line'>0x45,0x4e,0x44,0x00,0x00,0x00,0x00,0x08,
+</span><span class='line'>0x52,0x49,0x54,0x65,0x30,0x30,0x30,0x32,0xe9,0xce,0x00,0x00,0x00,0xe2,0x4d,0x41,
+</span><span class='line'>0x54,0x5a,0x30,0x30,0x30,0x30,0x49,0x52,0x45,0x50,0x00,0x00,0x00,0xc4,0x30,0x30,
+</span><span class='line'>0x30,0x30,0x00,0x00,0x00,0xb8,0x00,0x01,0x00,0x05,0x00,0x00,0x00,0x00,0x00,0x10,
+</span><span class='line'>0x01,0x00,0x00,0x11,0x02,0x00,0x00,0x02,0x03,0x00,0x01,0x02,0x01,0x00,0x82,0x20,
+</span><span class='line'>0x00,0x80,0x07,0x17,0x01,0x00,0x02,0x11,0x02,0x00,0x02,0x02,0x01,0x01,0x81,0x20,
+</span><span class='line'>0x01,0x00,0x00,0x11,0x02,0x00,0x03,0x02,0x03,0x00,0x01,0x02,0x01,0x00,0x82,0x20,
+</span><span class='line'>0x01,0x00,0x00,0x07,0x01,0x7f,0xf7,0x18,0x01,0x00,0x00,0x05,0x00,0x00,0x00,0x4a,
+</span><span class='line'>0x00,0x00,0x00,0x04,0x02,0x00,0x16,0x34,0x2e,0x32,0x39,0x30,0x37,0x37,0x34,0x38,
+</span><span class='line'>0x33,0x32,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x65,0x2b,0x30,0x39,0x01,0x00,0x01,
+</span><span class='line'>0x31,0x01,0x00,0x04,0x31,0x30,0x30,0x30,0x02,0x00,0x16,0x34,0x2e,0x32,0x39,0x30,
+</span><span class='line'>0x37,0x37,0x34,0x37,0x39,0x36,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x65,0x2b,0x30,
+</span><span class='line'>0x39,0x00,0x00,0x00,0x04,0x00,0x06,0x44,0x69,0x72,0x65,0x63,0x74,0x00,0x00,0x07,
+</span><span class='line'>0x77,0x72,0x69,0x74,0x65,0x31,0x36,0x00,0x00,0x05,0x49,0x54,0x52,0x4f,0x4e,0x00,
+</span><span class='line'>0x00,0x07,0x64,0x6c,0x79,0x5f,0x74,0x73,0x6b,0x00,0x45,0x4e,0x44,0x00,0x00,0x00,
+</span><span class='line'>0x00,0x08,
 </span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
 
 
@@ -247,8 +287,15 @@ monami-ya.mrb では，TLSF アロケータの採用による，mrb_state 間の
 
 <h2>設計方針</h2>
 
-<p>繰り返しになりますが「ゆるふわ Ruby でガチ組み込み」です．
-Arduinoのスケッチみたいなのにも存在価値は認めますが，狙っているのは，そこではありません．</p>
+<p>設計方針は，繰り返しになりますが「ゆるふわ Ruby でガチ組み込み」です．</p>
+
+<h3>Arduino 方面ではありません．</h3>
+
+<p>Arduinoのスケッチみたいなのにも存在価値は認めますが，狙っているのは，そこではありません．
+mruby と Arduino的なライブラリの組み合わせについては，<a href="http://d.hatena.ne.jp/kyab/20130806">kyab 氏が約1年ほど先行</a>しています．
+そこを今更になって再発明する必要性は無いでしょう．</p>
+
+<h3>Ruby で全ての記述をすべきとは思いません．</h3>
 
 <p>ここで，monami-ya.mrb は全てのタスクを Ruby で書くことを強要しては <em>いない</em> ということは，注目して頂きたい点です．</p>
 
@@ -259,6 +306,8 @@ Arduinoのスケッチみたいなのにも存在価値は認めますが，狙�
 <p>TOPPERS にせよ uT-Kernel にせよ，既に資産があるわけです．
 それら資産を活用しながらも，新しいことができる．
 そういう設計方針で，この機能は作られます．</p>
+
+<h3>この機能だけで RTOS とのバインディングをする気はありません．(但:要検討)</h3>
 
 <p>それと，この機能はスレッドバインディングに特化しています．
 スレッドがある以上，スレッド間の通信機能が必要になります．
