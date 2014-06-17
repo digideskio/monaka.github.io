@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-17T14:17:25+09:00</updated>
+  <updated>2014-06-17T14:19:14+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -38,6 +38,9 @@
 <p>＼ゆるふわ Ruby だけで，ガチ組み込み開発をしたい／ that&rsquo;s all.</p>
 
 <h3>大目標(言い換え): ゆるふわでない Ruby で，ガチ組み込み開発をする気なんて無い</h3>
+
+<!-- more -->
+
 
 <p>対極的な大目標として「mrbgems を全部削って，parser も削って，バイトコード実行だけできればよい．場合によってはバイトコードの命令セットも削る．」という設定がありえます．
 これもまた組み込み風味，いや，むしろ従来型の組み込みシステムっぽくて安全な気がします．</p>
