@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-17T14:25:15+09:00</updated>
+  <updated>2014-06-17T14:26:27+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -69,7 +69,7 @@
 <p>さらに，&#8221;ゆるふわ&#8221; なら，何も考えずに Socket や File を使い出せないと嘘です．
 ファイルシステムやプロトコルスタックを載せたくなります．</p>
 
-<p>きっと使う mrbgems も malloc とかバンバン使っています．</p>
+<p>きっと使う mrbgems も，中で malloc とかからループとかバンバン使っています．</p>
 
 <p>うーん，&#8221;ゆるふわ&#8221;．
 でも，その環境で，ガチ組み込みをしたいわけです．</p>
