@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-17T12:31:13+09:00</updated>
+  <updated>2014-06-17T12:32:29+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -23,7 +23,7 @@
 
 <blockquote><p>mruby 自身もC言語に比べて処理に時間がかかるところに，RTOSが入るとさらに遅くなったりしないのか少し心配です．</p></blockquote>
 
-<p>同じような直感を持たれる方，案外多いのではないかなと思います．
+<p>個人が特定されるどころか，同じような直感を持たれる方，案外多いのではないかなと思います．
 機器組み込み業界で働いておられるエンジニアの中にもいらっしゃるのではないかな，とも．</p>
 
 <p>端的に言うと，RTOS が入ると遅くなるというのは，概ね誤解です．
