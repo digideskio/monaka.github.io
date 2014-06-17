@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>なぜ monami-ya.mrb は RTOSとバインドするのか - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,15 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a></h1>
+      <h1 class="entry-title">なぜ monami-ya.mrb は RTOSとバインドするのか</h1>
     
     
       <p class="meta">
@@ -108,7 +105,7 @@
   </header>
 
 
-  <div class="entry-content"><p>さきほどは，重くはならないよ，という，疑問への回答でした．</p>
+<div class="entry-content"><p>さきほどは，重くはならないよ，という，疑問への回答でした．</p>
 
 <p>加えて，RTOS とバインドする積極的な理由を述べておきます．</p>
 
@@ -224,77 +221,16 @@ RTOS の上に構築した場合，mruby より下の層を気にせずに保守
 
 <p>私の実装が生き残れるか，というのとは，また別の話ではありますけれども．</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-06-17T11:01:52+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>とある，案件契約ではない非公式なやりとりから．
-個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
-
-<blockquote><p>mruby 自身もC言語に比べて処理に時間がかかるところに，RTOSが入るとさらに遅くなったりしないのか少し心配です．</p></blockquote>
-
-<p>個人が特定されるどころか，同じような直感を持たれる方，案外多いのではないかなと思います．
-機器組み込み業界で働いておられるエンジニアの中にもいらっしゃるのではないかな，とも．</p>
-
-<p>端的に言うと，RTOS が入ると遅くなるというのは，概ね誤解です．
-いやもちろん RTOS がゼロオーバヘッドだと言っているわけではありません．</p>
-
-<p>いまや<a href="http://www.monami-ya.jp/product/monami-ya.mrb/about/index.html">会社の製品の機能として提供されている部分</a>なので，本来なら会社の公式ページに書くべきところですが，そうすると定量計測してホワイトペーパーにしないと格好がつきません．
-そこまで喫緊の話でもない(非公式なやりとりですし)ので，こちらに書いておきます．</p>
-
-<h2>RTOS とは何か?</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での Static Thread Binding サポート</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -306,51 +242,37 @@ RTOS の上に構築した場合，mruby より下の層を気にせずに保守
   
 
 
-<time datetime="2014-06-16T11:15:55+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-17T13:19:03+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
-
-<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
-
-<p>当日記でも，<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
-
-<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
-つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
-
-<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
-
-<p>みたいなことを仰る方も，世間には稀にいます．
-それは概ね誤解です．
-その辺りの話は，別の機会に取り扱いましょう．</p>
-
-<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
-
-<h2>目指せ，ゆるふわ組み込みライフ</h2>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/17/rtos-makes-mruby-slow-p/" title="Previous Post: RTOS は monami-ya.mrb を遅くするか?">&laquo; RTOS は monami-ya.mrb を遅くするか?</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -415,7 +337,7 @@ RTOS の上に構築した場合，mruby より下の層を気にせずに保守
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -455,6 +377,7 @@ RTOS の上に構築した場合，mruby より下の層を気にせずに保守
 
   
 </aside>
+
 
     </div>
   </div>

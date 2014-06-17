@@ -9,8 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="本稿の契機(元ネタ)は「未来のいつか/hyoshiokの日記」の「まつもとゆきひろのコピーは作れるのか。」および，その反響 tweet から． 元ネタで示されている「Rubyにみるグローバルソフトウェア開発」というタイトルでの講演は，聴講していない．
-そのため，今書いているエントリは， &hellip;">
+  <meta name="description" content="一言で纏めると 一時期流行った，〇〇やらない人のtweetと〇〇やる人のtweetみたいな話だもんなぁ．「OSSやりたいです」は一生やらない．「パッチ投げました」でしか前には進めない．&mdash; もなか (@monamour555) February 13, 2014 みたいなエントリは， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/14/way-and-howto/">Howto と Way</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-14T21:49:23+09:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>一言で纏めると</h2>
+
+<blockquote class="twitter-tweet"><p>一時期流行った，〇〇やらない人のtweetと〇〇やる人のtweetみたいな話だもんなぁ．「OSSやりたいです」は一生やらない．「パッチ投げました」でしか前には進めない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/433831823135621120">February 13, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>みたいなエントリは，地べた這いつくばっている私みたいな雑魚が書くのはいいけれど，
+OSSコミュニティの後進育成とか考えているひとは思案のしどころですよね，てな話．</p>
+
+<h2>政治家と議員</h2>
+
+<p>何年か前に読んで「へぇなるほど」と思って，曖昧な記憶のまま，何度か引用しているブログエントリがある．
+本稿を書くにあたり探してみたら，割と難なくみつかった．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/14/way-and-howto/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -183,74 +237,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/04/how-to-build-ebs-image/">EC2でXenのmini-osを動かす手順</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-04T10:26:39+09:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>余談</h1>
-
-<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
-ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
-
-<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
-でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
-資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
-思案の最中．
-うだつが上がらんと，ほんと，なんにもできないねぇ．
-やだやだ．</p>
-
-<p>閑話休題．</p>
-
-<h1>まくら</h1>
-
-<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
-Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
-私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
-よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
-
-<p>手順は本家ヘルプページに割と細かく説明されている．
-解説ブログも，ググれば山盛り．
-さすがは，みんな大好きAWS．</p>
-
-<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
-
-<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/04/how-to-build-ebs-image/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -292,6 +278,10 @@ Amazon が提供していないカーネルを独自に EC2 で動作させる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
       </li>
     
@@ -313,10 +303,6 @@ Amazon が提供していないカーネルを独自に EC2 で動作させる�
     
       <li class="post">
         <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
       </li>
     
   </ul>

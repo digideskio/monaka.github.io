@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="背景 最近の AOSP は，対応するビルドホストもターゲットも増えたため，prebuilt バイナリの量が膨大になってきました．これが sync の時間を伸ばし，ビルドマシンのストレージを圧迫しています． しかし，対応しないビルドホストやターゲットの prebuilt バイナリは，不要なわけです &hellip;">
+  <meta name="description" content="もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました． &ldquo;トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細&rdquo; 2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/16/safety-stands-on/">安全の礎たるもの</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-16T16:26:00+09:00" pubdate data-updated="true">Nov 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>もう一週間ほど前になりますが，EE Timesという組込み業界系メディアにとある記事が掲載されました．</p>
+
+<ul>
+<li>&ldquo;<a href="http://eetimes.jp/ee/articles/1311/11/news072.html]">トヨタの急加速事故は欠陥だらけのファームウェアが原因？――原告側調査の詳細</a>&rdquo;</li>
+</ul>
+
+
+<blockquote><p>2007年に米国オクラホマ州で、トヨタ自動車の乗用車「カムリ」が急加速したことによる死亡事故が発生した。事故をめぐる訴訟において、原告側証人として事故原因の調査を行った組み込みソフトウェアの専門家は、裁判で「カムリのエンジン制御モジュール（ECM）のファームウェアに重大な欠陥が見つかった」と報告した。</p></blockquote>
+
+<p>だそうです．
+通常，組込み業界系メディアが一般の…プログラマ界隈でさえ…取り上げられることは滅多にないのですが，Twitter の TL を軸にして眺めていたところ，割と広く拡散したように見えます．
+トヨタという知名度，クルマという日常生活に深く関わるものに関すること，加えて，コード品質からの切り口は，組込み業界以外のプログラマでも話題にしやすかったということがあったのだろうと思います．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/16/safety-stands-on/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -180,57 +232,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/01/what-is-next/">狂ったように作るもの</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-01T13:49:00+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>社名としてのASCIIが消えたとのこと．遠藤諭氏が寄稿した記事を，読んだ．
-( <a href="http://weekly.ascii.jp/elem/000/000/175/175062/">「さらばアスキー」社名と小惑星 ～ASCIIはホビーのブランドではない</a> )</p>
-
-<p>私自身は，ベーマガ→Oh!MZ と進んで，月刊ASCIIはたまに立ち読みしたり図書館で読んだりという程度の記憶しかない．</p>
-
-<p>けれど，MinixへのパッチキットでOSS的活動への名乗りを上げ，初台へ遊びにいったこともあったりするし，256倍やらマーフィーの法則やらハッカーズ大辞典やら，今もネタ元にしている書籍がたくさんある．
-PostScriptやUnixの知識も，ASCII無しには得られなかっただろう．
-TeXで日本語が使えるようになったのもASCII(だけではないけれど)のおかげだ．
-残念というか，寂しいというか，時代の流れを感じるというか，そういう類の何かはある．</p>
-
-<p>とはいえ，関係者ではない薄情な私の興味は，消えゆくものよりも，&#8221;この先生きのこるには&#8221;ということ．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/01/what-is-next/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -272,6 +273,10 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
       </li>
     
@@ -293,10 +298,6 @@ TeXで日本語が使えるようになったのもASCII(だけではないけ�
     
       <li class="post">
         <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/19/funding-for-funding-2/">ファンディングのためのファンディング，始めます．(その2)</a>
       </li>
     
   </ul>
