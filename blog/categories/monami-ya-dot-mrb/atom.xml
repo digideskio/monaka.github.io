@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monami-ya.mrb | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-17T12:32:29+09:00</updated>
+  <updated>2014-06-17T13:06:32+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -40,7 +40,7 @@
 <h3>そもそも OS とは何か</h3>
 
 <p>RTOS の前に OS とは何か，から確認していきましょう．
-多くのデスクトップ環境では，CPUのコア数はたかがか8個程度でしょうけれども，OS上ではより多くのCPUが存在しているかのように見えています．
+多くのデスクトップ環境では，CPUのコア数はたかだか8個程度でしょうけれども，OS上ではより多くのCPUが存在しているかのように見えています．
 本当は1つしかないメモリ空間は，MMUなどメモリ管理ハードウェアの支援を得て，プロセス毎に分けつつも，プロセス内では全メモリを専有しているように見せかけています．
 ストレージも，本当は1つしかなくても，ファイルシステムという構造を導入することで，複数のプロセスに競合しないように調停されます．</p>
 
