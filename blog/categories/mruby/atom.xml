@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-17T14:26:27+09:00</updated>
+  <updated>2014-06-17T14:28:19+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -77,7 +77,7 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
 
 <h2>RTOS のオーバヘッド</h2>
 
-<p>RTOS は，複数の処理(タスク)に対して，CPU が複数あるように見せかける抽象化を行っています．
+<p>RTOS は，複数の処理(タスク)に対して，それぞれが CPU が専有しているかのように見せかける抽象化を行っています．
 抽象化の裏には，オーバヘッドがあります．
 これは，時間量として見ると，コンテキストスイッチに要する時間で表されます．
 商用 RTOS の星取表で，この数値が俎上にあるのを見たことがある方も多いでしょう．</p>
