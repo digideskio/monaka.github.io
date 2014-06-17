@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>RTOS は monami-ya.mrb を遅くするか? - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,15 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a></h1>
+      <h1 class="entry-title">RTOS は monami-ya.mrb を遅くするか?</h1>
     
     
       <p class="meta">
@@ -108,7 +105,7 @@
   </header>
 
 
-  <div class="entry-content"><p>とある，案件契約ではない非公式なやりとりから．
+<div class="entry-content"><p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
 
 <blockquote><p>mruby 自身もC言語に比べて処理に時間がかかるところに，RTOSが入るとさらに遅くなったりしないのか少し心配です．</p></blockquote>
@@ -124,85 +121,96 @@
 
 <h2>RTOS とは何か?</h2>
 
+<!-- more -->
+
+
+<h3>そもそも OS とは何か</h3>
+
+<p>RTOS の前に OS とは何か，から確認していきましょう．
+多くのデスクトップ環境では，CPUのコア数はたかがか8個程度でしょうけれども，OS上ではより多くのCPUが存在しているかのように見えています．
+本当は1つしかないメモリ空間は，MMUなどメモリ管理ハードウェアの支援を得て，複数あるかのように(プロセス内では)見えています．
+ストレージも，本当は1つしかなくても，ファイルシステムという構造を導入することで，複数のプロセスに競合しないように調停されます．</p>
+
+<p>ざっくり言うと，OS というのは，何かを抽象化し管理し保護するソフトウェアです．
+現在的なOSのほとんどは，プロセスという単位を管理し，それぞれのプロセスやOS本体が管理する計算機資源を保護しています．</p>
+
+<h3>RTOS は何を保護するものか</h3>
+
+<p>RTOS の抽象化対象は，CPUです．
+そして保護対象は，RT == Real Time が示す通り，時間です．
+なので，多くの RTOS は時間以外のリソースの保護については，かなり無頓着です．
+最近になって，セキュリティについての世論が固まったため，リソース保護機能付きのRTOSも増えました．
+それでも，リソース保護機能が時間保護を阻害するとなれば，時間保護のほうが優先されます．</p>
+
+<p>ここでいう時間には，2種類あります．</p>
+
+<p>ひとつは物理時間です．これは一般的な「壁時計」と同じと思って頂いて構いません．
+RTOS自身オーバヘッドが影響するので重要といえば重要なのですが，CPUに与えるクロック次第で改善されやすいものでもあります．</p>
+
+<p>もう一つは実行順序制約です．RTOS ではこちらのほうが重要です．
+RTOS では，実行順序が事前に見積もれなければならない，とされます．
+そして，優先されるべき処理については，他の処理を止めてでも実行して良い，とされます．
+他の処理を止めれば，実行順序を見積もりやすくなりますから．</p>
+
+<p>通常のOSにも優先度の概念はあります．しかしRTOSの場合は強烈です．
+アプリケーション設計者が必要と思うなら，デバイスへの割り込みすら止めることができます．
+CPUが持つ計算資源の全てを，特定の処理に割り当てられるというのが，RTOS の特徴です．</p>
+
+<p>RTOS は時間を管理する OS なので，これは当然の特徴と言えます．
+(計算資源 == 計算に要するクロック数 == 時間)ですから．</p>
+
+<h2>RTOS のオーバヘッド</h2>
+
+<p>RTOS は，複数の処理(タスク)に対して，CPU が複数あるように見せかける抽象化を行っています．
+抽象化の裏には，オーバヘッドがあります．
+これは，時間量として見ると，コンテキストスイッチに要する時間で表されます．
+商用 RTOS の星取表で，この数値が俎上に上がっているのを見たことがある方も多いでしょう．</p>
+
+<p>あまりにも商用 RTOS の営業さん達がけたたましく言うので，このオーバヘッドが無視できないと誤解する方が後を絶ちません．
+しかし実際のところ，このオーバヘッドが致命的かどうかは，アプリケーションに依ります．</p>
+
+<p>mruby は，大目に見ても C言語で書くよりも2桁のオーダで遅くなります．
+「週に何度も口にしない飴玉のカロリーを気にするなら，まず毎日の三食を見直しましょう」という喩えでお分かり頂けますでしょうか．</p>
+
+<p>なお，RTOS のオーバヘッドとして有名な指標には，コンテキストスイッチの他に，割り込みへの応答時間もあります．
+こちらも，似たような議論が成り立ちます．</p>
+
+<h2>「RTOS は重い」神話の，ミもフタもない理由</h2>
+
+<p>とはいえ，「RTOS は重い」にも相応の理由は思いつきます．
+それは，優先度設計の難しさ，です．</p>
+
+<p>既述の通り，RTOS では，高優先度の処理は，CPUへの割り込みさえも止められます．
+このような条件で，高優先度で実行される処理の設計が悪くCPUを専有した場合は，システムは最悪の状態になります．
+低優先度の処理にはいつまでたっても，処理の機会が与えられません．
+(ちなみに，このような状態に陥った低優先度の処理は，RTOS 界隈の用語では，&#8221;飢餓状態&#8221;としばしば言われます．)</p>
+
+<p>日本の組み込み業界では，優先度設計から詳細実装まで全てを一人でこなす例もありますが，
+上流が検討もしないで適当に優先度を割り振った仕様書を元に，受託で(再受託で(再々受託で))詳細を実装するということが，しばしば行われます．
+こういうケースでは，組み上げてみたら真っ当に動かない，ということは，珍しくなかったりします．</p>
+
+<p>それは設計の不備であり，RTOS が悪いわけではないのですが．
+外から買ってきた RTOS をスケープゴートにする，ということが起こるのは，人として理解できないわけでもありません．</p>
+
+<h2>monami-ya.mrb は，RTOS で処理が重くなったりはしません．</h2>
+
+<p>…もちろん，高優先度の処理で無限ループなどされるとダメですけれども．</p>
+
+<p>優先度の設定に気をつけている限りにおいて，monami-ya.mrbはRTOSと併用しても処理が重くなったりはしません．
+その辺りには，20年前から RTOS 関わり，TOPPERS/FI4 など RTOS の実装にも関わった経験を活かしてあります．</p>
+
+<p>本家 mruby は…? メモリアロケータの部分をキチンとケアできれば，大丈夫にできると思いますよ．たぶん．</p>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での Static Thread Binding サポート</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-06-16T11:15:55+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
-
-<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
-
-<p>当日記でも，<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
-
-<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
-つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
-
-<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
-
-<p>みたいなことを仰る方も，世間には稀にいます．
-それは概ね誤解です．
-その辺りの話は，別の機会に取り扱いましょう．</p>
-
-<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
-
-<h2>目指せ，ゆるふわ組み込みライフ</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が Sandbox サポートを追加する理由</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -214,46 +222,43 @@
   
 
 
-<time datetime="2014-06-15T09:58:37+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-17T11:01:52+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>, <a class='category' href='/blog/categories/monami-ya-dot-mrb/'>monami-ya.mrb</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
-
-<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/477722322862759938">June 14, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>など言って，実装理由を詳説しないのは，ちょっとイケ好かないかなということで．</p>
-
-<p>本題に入るには，OS が提供する thread の使い方について，寄り道をする必要があります．</p>
-
-<p>注: 本稿は，mruby の内部構造，特に，mrb_state と mrbgems の関係を理解していることを前提にしています．</p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/" title="Previous Post: monami-ya.mrb での static thread binding サポート">&laquo; monami-ya.mrb での static thread binding サポート</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -318,7 +323,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -358,6 +363,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
