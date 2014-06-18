@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/mruby/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-18T14:37:12+09:00</updated>
+  <updated>2014-06-18T14:37:56+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -46,7 +46,7 @@ PIC32 も，他の PIC アーキテクチャが援軍となっているのか，
 多くの RTOS は API が枯れているはずなのですが，ドライバやミドルウェアが成長していきます．
 本棚と本の関係と一緒で，計算機資源があるかぎり，ソフトウェアは膨張していきます．</p>
 
-<p>一方，シェアの低いアーキテクチャは，その姿を脇に見て，歯ぎしりをして済ますわけにはいきません．
+<p>一方，シェアの低いアーキテクチャとそのユーザは，その姿を脇に見て，歯ぎしりをして済ますわけにはいきません．
 死活問題ですから．
 そのため，一部だけでも移植して，メインストリームが享受している生産性の，喩え一部でも得ようとします．</p>
 
