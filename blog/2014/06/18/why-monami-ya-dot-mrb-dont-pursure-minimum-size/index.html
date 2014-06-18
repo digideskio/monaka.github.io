@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>monami-ya.mrb が最小スペックを追求しない理由 - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています． 設計思想に関する話です．
+一つのシステムに対して，設計思想は幾通りもあるのが普通です．
+どの思想にも，一定の理があります． 読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">monami-ya.mrb が最小スペックを追求しない理由</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T13:21:58+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
+
+<p>設計思想に関する話です．
+一つのシステムに対して，設計思想は幾通りもあるのが普通です．
+どの思想にも，一定の理があります．</p>
+
+<p>読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に，参考になればと思います．</p>
+
+<h2>コードゴルフは滅びの道?</h2>
+
+<!-- more -->
+
+
+<p>ムーアの法則は，まだしばらく正しい状態にあるでしょう．</p>
+
+<p>つまり，市場シェアが高い(有り体にいうと開発資金のある)があるアーキテクチャには，まだまだ計算機資源が潤沢になる余地があります．
+一方，市場シェアが低いアーキテクチャは，性能向上は伸び悩むでしょう．</p>
+
+<p>別に特定のアーキテクチャを云々したいわけではありませんが，SuperH アーキテクチャは，一時期，動作クロック数をメキメキと上げていきました．
+今は， ARM Cortex アーキテクチャがその状態のように見えます．
+PIC32 も，他の PIC アーキテクチャが援軍となっているのか，頑張っているようです．</p>
+
+<p>それが，市場原理というものであります．</p>
+
+<p>このようなメインストリームのアーキテクチャ(今なら Cotrtex)では，ソフトウェアの規模がどんどんと成長します．
+多くの RTOS は API が枯れているはずなのですが，ドライバやミドルウェアが成長していきます．
+本棚と本の関係と一緒で，計算機資源があるかぎり，ソフトウェアは膨張していきます．</p>
+
+<p>一方，シェアの低いアーキテクチャは，その姿を脇に見て，歯ぎしりをして済ますわけにはいきません．
+死活問題ですから．
+そのため，一部だけでも移植して，メインストリームが享受している生産性の，喩え一部でも得ようとします．</p>
+
+<p>しかし，サブセットは，所詮サブセットです．
+シェアの低さをひっくり返すことはできず，そのうち，アーキテクチャが消えます．
+それが，市場原理というものであります．</p>
+
+<p>動作環境がないソフトに価値はありません．
+せっかく作ったサブセットは，ビット世界のどこかに霧散します．</p>
+
+<h3>サブセットの全てが悪ではない</h3>
+
+<p>もちろん，成功する例もあります．</p>
+
+<p>機器組み込み屋からWeb屋まで幅広く知られている例として sqlite があるでしょう．
+他の SQL データベースからすれば，サブセットです．
+しかし，sqlite は，型が極端に少ない，ライブラリとして動作する，など，設計思想が他と一線を画しています．</p>
+
+<p>mruby もまた，機器組み込み以外の分野で，一定の成功はしていると見てよいでしょう．
+mruby も他の Ruby 実装から見ればサブセットです．
+しかし，先行する Lua の VM 実装を研究し，他の Ruby 実装には無い特徴を有しています．</p>
+
+<h3>コードゴルフ的サブセットのリスク</h3>
+
+<p>サブセットで危険なパターンというのがあります．</p>
+
+<p>実装の一部を切り取ってきて，制約の多いアーキテクチャに移植する，というものです．</p>
+
+<p>「8bit の PIC や AVR に uITRON のサブセットを頑張って実装する」というのは典型例の一つです．</p>
+
+<p>アーキテクチャの制約のため，実装をサブセット化した，というものには，継続性に対するリスクがあります．
+「16bit の使えばいいじゃん．値段変わらんよ」で存在価値は容易に0になりますから．</p>
+
+<p>無論，全てのプロジェクトが失敗するとは限りません．</p>
+
+<p>成功した一例として uClinux が挙げられるでしょう．
+これは，MMU サポートのない CPU のために Linux のサブセットを作る，というプロジェクトでした．
+uClinux の場合は，MMU をサポートしない CPU は，かなり長い期間存在する，という見切りの旨さがありました．
+MMU が無いという前提を立てる一方で，メモリ容量やクロック数には制約がかかっていません．
+それらは，MMU をサポートしない CPU であっても，性能向上が見込めるからでしょう．
+そして，実際に，ハイエンドマイコンでは，そうなっています．</p>
+
+<p>今手元にあるチップのメモリやクロックに制約があるから，という理由でのサブセットは，徒労に終わります．
+(…って書くと呪いをかけているように思われるかもしれませんが．)</p>
+
+<h3>コードゴルフはあとからでもできる．芯がしっかりしていれば</h3>
+
+<p>mruby のコミットログを見た人からは，</p>
+
+<blockquote><p>そうは言っても，あなた，mruby から stdio.h サポートを外したり，さんざコードゴルフしてきたじゃないの</p></blockquote>
+
+<p>と言われるかもしれません．</p>
+
+<p>ええ，その通りです．
+そして，まだ，本家 mruby にも，その fork である monami-ya.mrb にも，コードゴルフの余地が残っています．</p>
+
+<p>しかし，それらは，特定のアーキテクチャで動かしたいからという動機から来るものではありません．
+(C99標準が定める)freestanding 環境での実行を確約するためのものであったり，UARTすら用意できないという
+機器組み込みシステムでは古今東西普遍的にあるシチュエーションへの対応だったりというものばかりです．</p>
+
+<p>コードゴルフをし易い &ldquo;芯&rdquo; を作っておくことは大事です．
+しかし，詰め込むことを先にするのは，リスクが高い．
+monami-ya.mrb での各種拡張を手掛ける際に，私は，そう考えて設計と実装を行いました．</p>
+
+<h2>コードゴルフには不思議な魔力はあるが</h2>
+
+<p>私も現役の組み込み屋ですから，「そうは言っても目の前の機器に組み込まないと成果にならないのよ」というお話は解ります．
+案件ベースでは，コードゴルフをせざるを得ないでしょう．</p>
+
+<p>そして，コードゴルフが持つ，得も知れぬ魔力が解らなくもないです．
+私もガラパゴニッポンの組み込み業界で育ちましたので，
+実装者として，純粋に，愉しい．不思議な魔力．</p>
+
+<p>しかし，イマイマを乗り切るための方便と，この先何年か使われることを前提とした提案がどうあるべきか，
+現在的実装がどうあるべきかというのは，分けて考える必要があるはずです．</p>
+
+<p>なので，(コードゴルフの成果物である)最小サイズの追求を，当面の monami-ya.mrb では行わないのです．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T13:21:58+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>, <a class='category' href='/blog/categories/monami-ya-dot-mrb/'>monami-ya.mrb</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/" title="Previous Post: なぜ monami-ya.mrb は RTOSとバインドするのか">&laquo; なぜ monami-ya.mrb は RTOSとバインドするのか</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <script data-gittip-username="monaka"
+        src="//gttp.co/v1.js"></script>
+</section>
+
+
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での static thread binding サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+邑中雅樹?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

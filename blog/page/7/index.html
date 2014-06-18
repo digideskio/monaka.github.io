@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ちょいと寄り道して，前回の補足． @monamour555 gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。&mdash; ぬん。 (@amasawa_seiji) March 19, 2014 鋭い．(汗 はい．-Wconversion ， &hellip;">
+  <meta name="description" content="前回 の続き． C言語のおさらい 繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい． にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある． ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/21/types-generated-by-compiler/">コンパイラが生成する型とAPI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-21T07:53:49+09:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/blog/2014/03/20/type-conversion-warning/">前回</a> の続き．</p>
+
+<h2>C言語のおさらい</h2>
+
+<p>繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい．</p>
+
+<p>にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/21/types-generated-by-compiler/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -224,70 +271,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-18T22:00:12+09:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Twitter から</h2>
-
-<blockquote class="twitter-tweet"><p>この辺のやりとり勉強になるぅ <a href="https://t.co/BQzNAjSoyP">https://t.co/BQzNAjSoyP</a></p>&mdash; MATSUMOTO, Ryosuke (@matsumotory) <a href="https://twitter.com/matsumotory/statuses/445772972775571456">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>というやりとりは，こちら．</p>
-
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> ええ，それはRuby世界からの見方ですね．C世界から見れば，const char * の長さが mrb_int になるのは危険です．SIZE_MAX と MRB_INT_MAX の大小関係は，C言語処理系に依りますから．(続</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/445771388297564160">March 18, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>連ツイなので，前後も読んで頂ければと．</p>
-
-<p>ちなみに，この後，Matz 氏がコミットを一部撤回し，結局のところ，API の分裂は避けられた．</p>
-
-<h2>やっちゃマズい fork</h2>
-
-<p>ソフトウェア開発の世界では，やってよい fork と，やっちゃマズい fork というのがある．
-やりかけておいてナンだが，API の fork は，やっちゃマズい系の最右翼だ．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/18/how-to-write-portable-api-introduction/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -329,6 +312,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
       </li>
     
@@ -350,10 +337,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a>
       </li>
     
   </ul>
