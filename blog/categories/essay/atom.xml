@@ -4,7 +4,7 @@
   <title><![CDATA[Category: essay | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/essay/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-18T14:38:47+09:00</updated>
+  <updated>2014-06-18T14:40:06+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -89,7 +89,7 @@ MMU が無いという前提を立てる一方で，メモリ容量やクロッ�
 それらは，MMU をサポートしない CPU であっても，性能向上が見込めるからでしょう．
 そして，実際に，ハイエンドマイコンでは，そうなっています．</p>
 
-<p>今手元にあるチップのメモリやクロックに制約があるから，という理由でのサブセットは，徒労に終わります．
+<p>今手元にあるチップのメモリやクロックに制約があるから，という理由でのサブセットは，徒労に終わります．中長期的に見て．
 (…って書くと呪いをかけているように思われるかもしれませんが．)</p>
 
 <h3>コードゴルフはあとからでもできる．芯がしっかりしていれば</h3>
