@@ -4,7 +4,7 @@
   <title><![CDATA[Category: essay | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/essay/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-18T14:44:34+09:00</updated>
+  <updated>2014-06-24T16:24:53+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
+    <updated>2014-06-24T15:05:33+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
+    <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
+
+<blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
+
+<p>はい．断片的にはtweetなどしていますし，<a href="https://bitbucket.org/monami_ya_mrb/sample-env-jsp-bfin">OSX 上でのビルド環境等も(今のところ消極的に)公開</a>しているのではありますが．</p>
+
+<p>ハードウェアがどんな感じなのかは，なかなか想像つかないという方も多いと思います．
+特に Ruby 系の方は，組み込みボードそのものに面識が無かったりするでしょうし．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/target-all.jpg" alt="ターゲットハードウェア" /></p>
+
+<p>写真を撮ったので，並べておきます．</p>
+
+<!-- more -->
+
+
+<h2>開発ホスト機</h2>
+
+<p>しょっぱなから写真を撮り忘れました．
+でもまあ機種名を挙げれば，想像つくかと思います．</p>
+
+<p>MacBook Pro 2.8 GHz Intel Core 2 Duo．
+すいぶんと古い箱です．
+メモリは8GB．HDDは500GB．</p>
+
+<p>この程度のスペックでも，monami-ya.mrb のビルドは，1分以内に終わります．</p>
+
+<p>正直言うと，もう少し良いのが欲しいですけれどね…GCCのビルドまで行う場合には…．
+(会社では，GCCのビルドは，クラウド上のビルドサーバを活用しています)</p>
+
+<h2>ターゲット</h2>
+
+<h3>CPU ボード + マザーボード</h3>
+
+<p>開発のメインとなるターゲットボードは， <a href="http://wlst.jp/ele/bf533cb/">BF533CB</a> です．
+Blackfin という DSP を積んでいます．メモリは RAM 16MB + 内蔵若干，永続ストレージは SPI Flash．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/bf533cb.jpg" alt="BF533CB" /></p>
+
+<p>DSP というと特殊なプロセッサという印象を持たれるかもしれません．
+char のビット幅が16だったり32だったりという変態，みたいな．</p>
+
+<p>しかし，Blackfin に関して言えば，普通の RISC プロセッサとして使えます．char のビット幅は 8 ですし．
+あまり知られてませんが，品番によっては Microsoft .NET-MF が動きます．uClinux も動きます．
+しかも 500MHz の高速動作です．</p>
+
+<p>問題は，情報が少ないことです．
+特に日本語の情報をwebで求めようとすると，片手で収まるくらいの開発者にしか当たりません．
+(いや，商社やメーカの中などに入れば，日本人の開発者も，もちろんそれなりにいらっしゃいます)</p>
+
+<p>CPUボードだけでも monami-ya.mrb は動作しますが，シリアルポートのコネクタが便利なので，マザーボードを併用しています．</p>
+
+<p>BF533CB は，シンプルでとてもよいボードなのですが，今後の量産計画は未定のようなのが難点です．
+近日中に，BF533CB から，<a href="http://www.kaneko-sys.co.jp/shop/00016.html">金子システム製の UCB-BF512</a>へ変更する予定でいます．</p>
+
+<h3>USB-serial アダプタ</h3>
+
+<p>最近の廉価帯ARMボードだと，USB-serialのアダプタをオンボードで積んでいる場合も多いですが，現在使っている BF533CB にはありませんので，外付けしています．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/usb-serial.jpg" alt="USB-serial" /></p>
+
+<p>シグナルが3.3Vレベルであれば，何を使っても良いのでしょうけれども，私は秋月電子通商の<a href="http://akizukidenshi.com/catalog/g/gK-01977/">FT232RL USBシリアル変換モジュール</a>を使っています．
+モジュールのみで900円と，微妙なお値段ではあります．
+しかし，UART は，Lチカが済んだあとから開発終了までデバッグ用として永く使うものですので，安定していることと，壊れても代替がすぐに手に入るほうがよいと思います．</p>
+
+<h3>JTAG アダプタ</h3>
+
+<p>UCB-BF512 は，出荷時点でブートローダとして u-boot が書き込まれていますし，BF533CB も一度 JTAG 経由で書き込めば，同様に u-boot が使えます．</p>
+
+<p>monami-ya.mrb は，uClinux と同様に u-boot 経由でブートできます．
+よって，JTAG デバッグアダプタは不要です．
+…と言えれば話は楽なのですが，GDB 無しでは PC 上の mruby 開発が難しいのと同様に，JTAG デバッガなしでの monami-ya.mrb の開発は困難を極めます．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/sashimi-knife.jpg" alt="刺身包丁" /></p>
+
+<p>私が使っているのは，<a href="http://www.amazon.co.jp/o/ASIN/B003MG4BH2/monamiya-22">PizzaFactory Tiny JTAG</a> です．
+つまるところ JTAG ですので，ARM用の JTAG アダプタや FT2232 が載ったモジュールを使うことはできるはずなのですが…．
+私自身が PizzaFactory Tiny JTAG の開発を行った時に，BF533 プロセッサで謎の相性問題を引き起こした経験があります．</p>
+
+<p>納期の無い趣味なら，相性問題でアタマを抱えるのも愉しみのうちでしょう．
+少しでもお仕事が絡んでいるのなら，人件費と比べて，サクッと買ったほうが安いです．</p>
+
+<h2></h2>
+
+<p>ざっとこんな感じです．
+(組み込み開発 == ロジアナやオシロといった計測器が積まれた机)，のような印象を持たれるかもしれませんが，実際のところ，RTOS や VM のコア部分での開発では，それらの計測器はあっても無駄です．プローブを挿す場所がありませんから．</p>
+
+<p>開発ホスト機を除くと，予算的には，1万5千円もあればお釣りが来るという感じでしょうか．
+「STM32F4-discovery は 2千円でお釣りが来るのに！」っていう気もしますが，スペックが違うので比べるのは野暮かなぁとも思います．
+STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないですし．</p>
+
+<p>取り留めもないですが，本稿は日記なので，纏めなくても良いですね．それでは．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
@@ -400,100 +500,6 @@ Android と iOS については，吸収するバッドノウハウがありま�
 
 <p>この話に限らず，地元で観光資料を作ろうとしているのだけれど…．
 という方のご相談にも乗れますので，ご縁がありましたらお声掛け下さい．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その2)]]></title>
-    <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding-2/"/>
-    <updated>2014-05-19T16:09:22+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding-2</id>
-    <content type="html"><![CDATA[<p><a href="/blog/2014/05/19/funding-for-funding/">前回</a>の続きです．</p>
-
-<!-- more -->
-
-
-<h2>オンラインのカード決済サービス，日本の状況</h2>
-
-<p>前回，米国での状況は説明しました．
-小規模法人や個人が，ネット通販のサイトを開いていることからお判り頂ける通り，
-オンラインのカード決済サービスは，いくつかあります．</p>
-
-<p>しかし，目標額達成後，速やか(数営業日以内)に代金を回収できるのは，今のところ，
-<a href="http://webpay.jp">WebPay</a> と <a href="https://fastpay.yahoo.co.jp/">Yahoo!ウォレットFastPay</a> の2社に限られます．とはいえ，今後，類似のサービスは，日本国内でも増えていくことでしょう．</p>
-
-<p>現存する両社のAPIは，かなり似通っています．
-(<a href="http://blog.webpay.co.jp/post/webpay%E3%81%A8yahoo%E3%82%A6%E3%82%A9%E3%83%AC%E3%83%83%E3%83%88fastpay%E3%81%AF%E7%AB%B6%E5%90%88%E3%81%A7%E3%81%99%EF%BC%81%E6%AD%93%E8%BF%8E%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%E5%BE%B9%E5%BA%95">WebPayの運営者ブログで示唆</a>されているとおり，FastPay が WebPay の互換を狙っているように見えます．)</p>
-
-<p>しかしながら，クラウドファンディングサイト構築のためのオープンソースが用いている <a href="https://www.balancedpayments.com/">Balanced Payment</a> や <a href="https://payments.amazon.com/home">Amazon Payments</a> とは，すくならず API が異なります．</p>
-
-<p>やや悲観的な状況です．
-しかし，逆説的にいうと，この部分を突破すれば，日本でもクラウドファンディングサイトの構築は圧倒的に容易になるということでもあります．</p>
-
-<h2>この問題の解決って，もしかして社会起業的．</h2>
-
-<p>例えば，地方自治体で，地元の産業活性化のために，クラウドファンディングを使いたいというような案件は，既にいくつかあります．最近だと<a href="http://www.city.yubari.lg.jp/contents/municipal/funding/">夕張市</a>や<a href="http://www.pref.hokkaido.lg.jp/kz/csk/crowdfundingsogyoumodel.htm">北海道</a>で見かけました．
-各地観光協会や商工会など含めれば，潜在需要は大きなものでしょう．
-それと，Fablab や発明クラブのような，民間団体にも需要はあるでしょう．</p>
-
-<p>しかし，私は，それらの大きな潜在需要に食い込もうという気は，今のところ，ありません．
-それは自分のビジネスではありません．</p>
-
-<p>私は，単に私のビジネスのスタートアップの問題を解決したいだけなのです．
-日本で使えるカード決済のモジュールを，既存のオープンソースに付け加えたい．</p>
-
-<p>しかし，その副産物には，社会起業的なインパクトが…そんな気がしているのですが，どうでしょうか．</p>
-
-<h2>問題: 日本人は，放っておいても作る人に寄付/投資をするか</h2>
-
-<p>という感じで，話が大きくなりました．巻き戻しまして…．</p>
-
-<p>私には，私が行おうとするビジネスに対して，一つだけ不安があります．
-それは，「日本人は，放っておいても作る人に寄付/投資をするか否か」という点です．</p>
-
-<p>また海外の比較になりますが，海外では，無料で入手できるオープンソース製品に対して，
-バグフィックスや機能拡張に対してお金を払える，または投資を募ることができるという
-サイトがいくつかあります．しかし，それらのサイトで，日本人らしきアカウントの姿は
-見かけません．</p>
-
-<p>言語の壁ということもあるかもしれませんが，もしや，</p>
-
-<blockquote><p>どうせ，作りたい奴は勝手に作るし，できあがった成果(回路図やソースコードなど)が無料でwebサイトに上がったら使わせてもらうわ</p></blockquote>
-
-<p>というメンタリティが主流だとすると，日本では，「電子工作好きのための小規模クラウドファンディング」は，成り立たないかもしれません．
-その辺りについて，読みきれずにいます．</p>
-
-<h2>お願い: テストマーケティングをさせてください</h2>
-
-<p>「長々文章を読ませておいて，さいご，これかよ…」ということで，すみません．</p>
-
-<ul>
-<li>私は，オープンソースのクラウドファンディングサイトを日本で使えるようにするための決済モジュールを，夏前を目処に，作ります．</li>
-<li>決済モジュールは WebPay に対応させます．FastPay は互換路線なので，追って使えるようになるはずです．</li>
-<li>サイト用のオープンソース製品として，<a href="https://github.com/crowdtilt/crowdtiltopen">CrowdtitltOpen</a> を使います．</li>
-<li>決済モジュールは，MIT License として公開します．改変も含めて自由にお使いいただけます．</li>
-<li>目標額に未達でも，おそらく作ります．作りたいので．ただもしかすると，少し馬力は下がります．</li>
-<li>目標額を超えたら，その分は，メッセージ和訳など，広く日本国内で使えるようにするために使います．</li>
-</ul>
-
-
-<p>ちなみに，作業は私が行う想定です．誰かに頼むにしても私が監修します．
-本件に関する私のスペックは，下記のとおりです．</p>
-
-<ul>
-<li>Lokitron が提供しているサイトを FastPay に対応させるという hack をしました．(未運用:デモサイトは上がっています．)</li>
-<li>Ruby on Rails のスキルは，そこそこ．</li>
-<li>Ruby のスキルは，そこそこ．</li>
-<li>mruby については，全網羅のスキル．</li>
-</ul>
-
-
-<p>本件のクラウドファンディングのサイトとして，オープンソース向けののクラウドファンディング機能がある <a href="https://www.bountysource.com/">Bountysource</a>を使います．
-国内のほうが心理的に安心かもしれないと思いつつ，このお話を国内の大手クラウドファンディングサイトに持ちかけるほど，私の心臓は強くはありませんでした．</p>
-
-<p><a href="https://www.bountysource.com/teams/crowdtiltopen-ja/fundraiser">ファンディングサイトへのリンクはこちら</a>です．</p>
-
-<p>極めて勝手なお願いですが，ご協力頂ければ幸いです．</p>
 ]]></content>
   </entry>
   

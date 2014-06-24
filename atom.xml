@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-18T14:44:34+09:00</updated>
+  <updated>2014-06-24T16:24:53+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
+    <updated>2014-06-24T15:05:33+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
+    <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
+
+<blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
+
+<p>はい．断片的にはtweetなどしていますし，<a href="https://bitbucket.org/monami_ya_mrb/sample-env-jsp-bfin">OSX 上でのビルド環境等も(今のところ消極的に)公開</a>しているのではありますが．</p>
+
+<p>ハードウェアがどんな感じなのかは，なかなか想像つかないという方も多いと思います．
+特に Ruby 系の方は，組み込みボードそのものに面識が無かったりするでしょうし．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/target-all.jpg" alt="ターゲットハードウェア" /></p>
+
+<p>写真を撮ったので，並べておきます．</p>
+
+<!-- more -->
+
+
+<h2>開発ホスト機</h2>
+
+<p>しょっぱなから写真を撮り忘れました．
+でもまあ機種名を挙げれば，想像つくかと思います．</p>
+
+<p>MacBook Pro 2.8 GHz Intel Core 2 Duo．
+すいぶんと古い箱です．
+メモリは8GB．HDDは500GB．</p>
+
+<p>この程度のスペックでも，monami-ya.mrb のビルドは，1分以内に終わります．</p>
+
+<p>正直言うと，もう少し良いのが欲しいですけれどね…GCCのビルドまで行う場合には…．
+(会社では，GCCのビルドは，クラウド上のビルドサーバを活用しています)</p>
+
+<h2>ターゲット</h2>
+
+<h3>CPU ボード + マザーボード</h3>
+
+<p>開発のメインとなるターゲットボードは， <a href="http://wlst.jp/ele/bf533cb/">BF533CB</a> です．
+Blackfin という DSP を積んでいます．メモリは RAM 16MB + 内蔵若干，永続ストレージは SPI Flash．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/bf533cb.jpg" alt="BF533CB" /></p>
+
+<p>DSP というと特殊なプロセッサという印象を持たれるかもしれません．
+char のビット幅が16だったり32だったりという変態，みたいな．</p>
+
+<p>しかし，Blackfin に関して言えば，普通の RISC プロセッサとして使えます．char のビット幅は 8 ですし．
+あまり知られてませんが，品番によっては Microsoft .NET-MF が動きます．uClinux も動きます．
+しかも 500MHz の高速動作です．</p>
+
+<p>問題は，情報が少ないことです．
+特に日本語の情報をwebで求めようとすると，片手で収まるくらいの開発者にしか当たりません．
+(いや，商社やメーカの中などに入れば，日本人の開発者も，もちろんそれなりにいらっしゃいます)</p>
+
+<p>CPUボードだけでも monami-ya.mrb は動作しますが，シリアルポートのコネクタが便利なので，マザーボードを併用しています．</p>
+
+<p>BF533CB は，シンプルでとてもよいボードなのですが，今後の量産計画は未定のようなのが難点です．
+近日中に，BF533CB から，<a href="http://www.kaneko-sys.co.jp/shop/00016.html">金子システム製の UCB-BF512</a>へ変更する予定でいます．</p>
+
+<h3>USB-serial アダプタ</h3>
+
+<p>最近の廉価帯ARMボードだと，USB-serialのアダプタをオンボードで積んでいる場合も多いですが，現在使っている BF533CB にはありませんので，外付けしています．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/usb-serial.jpg" alt="USB-serial" /></p>
+
+<p>シグナルが3.3Vレベルであれば，何を使っても良いのでしょうけれども，私は秋月電子通商の<a href="http://akizukidenshi.com/catalog/g/gK-01977/">FT232RL USBシリアル変換モジュール</a>を使っています．
+モジュールのみで900円と，微妙なお値段ではあります．
+しかし，UART は，Lチカが済んだあとから開発終了までデバッグ用として永く使うものですので，安定していることと，壊れても代替がすぐに手に入るほうがよいと思います．</p>
+
+<h3>JTAG アダプタ</h3>
+
+<p>UCB-BF512 は，出荷時点でブートローダとして u-boot が書き込まれていますし，BF533CB も一度 JTAG 経由で書き込めば，同様に u-boot が使えます．</p>
+
+<p>monami-ya.mrb は，uClinux と同様に u-boot 経由でブートできます．
+よって，JTAG デバッグアダプタは不要です．
+…と言えれば話は楽なのですが，GDB 無しでは PC 上の mruby 開発が難しいのと同様に，JTAG デバッガなしでの monami-ya.mrb の開発は困難を極めます．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/sashimi-knife.jpg" alt="刺身包丁" /></p>
+
+<p>私が使っているのは，<a href="http://www.amazon.co.jp/o/ASIN/B003MG4BH2/monamiya-22">PizzaFactory Tiny JTAG</a> です．
+つまるところ JTAG ですので，ARM用の JTAG アダプタや FT2232 が載ったモジュールを使うことはできるはずなのですが…．
+私自身が PizzaFactory Tiny JTAG の開発を行った時に，BF533 プロセッサで謎の相性問題を引き起こした経験があります．</p>
+
+<p>納期の無い趣味なら，相性問題でアタマを抱えるのも愉しみのうちでしょう．
+少しでもお仕事が絡んでいるのなら，人件費と比べて，サクッと買ったほうが安いです．</p>
+
+<h2></h2>
+
+<p>ざっとこんな感じです．
+(組み込み開発 == ロジアナやオシロといった計測器が積まれた机)，のような印象を持たれるかもしれませんが，実際のところ，RTOS や VM のコア部分での開発では，それらの計測器はあっても無駄です．プローブを挿す場所がありませんから．</p>
+
+<p>開発ホスト機を除くと，予算的には，1万5千円もあればお釣りが来るという感じでしょうか．
+「STM32F4-discovery は 2千円でお釣りが来るのに！」っていう気もしますが，スペックが違うので比べるのは野暮かなぁとも思います．
+STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないですし．</p>
+
+<p>取り留めもないですが，本稿は日記なので，纏めなくても良いですね．それでは．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
@@ -2657,194 +2757,6 @@ ISO Cの仕様を踏まえると，自明として適切な結果が浮かび上
 
 <p>とはいえ，mrb_int にしたくなる気持ちも解らなくもない．
 明日以降，その辺りの，わりと人情系というかピープルウェア的な話で，一連の話題を閉じたいと思っている．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[-Wconversion は，いかがでしょう?]]></title>
-    <link href="http://www.monaka.org/blog/2014/03/20/type-conversion-warning/"/>
-    <updated>2014-03-20T12:08:52+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/03/20/type-conversion-warning</id>
-    <content type="html"><![CDATA[<p>ちょいと寄り道して，<a href="http://www.monaka.org//blog/2014/03/19/implicit-type-conversion-in-c/">前回</a>の補足．</p>
-
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。</p>&mdash; ぬん。 (@amasawa_seiji) <a href="https://twitter.com/amasawa_seiji/statuses/446205477546762240">March 19, 2014</a></blockquote>
-
-
-<script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>鋭い．(汗</p>
-
-<p>はい．<code>-Wconversion</code> ，使えます．記憶が正しければ GCC 2.95.x から．
-ただ，検出が割と難しいようで，3.4系でパッチが出て，立ち消えになったり．
-当時の経緯は<a href="http://d.hatena.ne.jp/yupo5656/20040830/p2">このエントリが詳しい</a>です．</p>
-
-<p>また，GCC 4.3 以降では，挙動が微妙に変わったりしています．
-変更内容の詳細は，<a href="http://gcc.gnu.org/wiki/NewWconversion">GCC Wiki</a> を．</p>
-
-<p>GCC は，そんな事情なので，前回の記述</p>
-
-<blockquote><p>もしかしたら気の利いた処理系では警告を出してくれるかもしれないが．</p></blockquote>
-
-<p>は，完全に筆が滑っております．
-お詫びします…が，必ずしも訂正はしません．</p>
-
-<p>今回の後半は，その辺りについて．</p>
-
-<!-- more -->
-
-
-<h2>-Wconversion の頼りなさ</h2>
-
-<p>確かに -Wconversion オプションは，暗黙的なダウンキャストについて警告してくれる．
-なので，gcc/g++ を使ってコーディングする場合には，可能な限り付けておくべきだ．</p>
-
-<p>しかし，API 設計という今回の話題では，-Wconversion は必ずしも頼りにはならない．</p>
-
-<p>例示しよう．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int
-</span><span class='line'>main(void)
-</span><span class='line'>{
-</span><span class='line'>  int a = 65535;
-</span><span class='line'>  long b;
-</span><span class='line'>
-</span><span class='line'>  b = a;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これを手元の XCode の gcc (Apple LLVM version 5.1 (clang-503.0.38) (based on LLVM 3.4svn) Target: x86_64-apple-darwin13.1.0) でコンパイルする．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -Wconversion test.c
-</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
-
-
-<p>warning は出ない．</p>
-
-<p>Renesas製 H8/300 というマイコン向けのクロス gcc (gcc version 4.6.4 20130204 (prerelease) (GCC) )でコンパイルしてみる．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ /pizza/bin/h8300-pizzafactory-elf-gcc -Wconversion test.c 
-</span><span class='line'>test.c: In function 'main':
-</span><span class='line'>test.c:4:3: warning: conversion to 'int' alters 'long int' constant value [-Wconversion]
-</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
-
-
-<p>今度は warning が出る．</p>
-
-<p>この差異は，gcc のバージョン違いに因るものではない．</p>
-
-<p>前回，C言語仕様の整数型は，決っているようで何も決まっていないことに言及した．
-char も int も short も long も，それぞれどんな範囲の整数を保持できるかは，実行対象のCPUの特性に合わせて，処理系(コンパイラ)が勝手に決めて良いのだ．</p>
-
-<p>(…まあ完全にフリーダムかというとそうでもなくて，long 型より広い範囲の整数を格納できる short 型はダメとか，制約はある．
-商業誌掲載原稿なら，このへんの細かいことも書く．けれども，本稿は日記なので割愛．ご興味ある方はGoogle先生へ．)</p>
-
-<p>H8/300 という系列のCPUは int が 16ビットであるほうが都合が良いので，デフォルトではそのようになっている．つまり 32767 までしか格納できない変数に 65535 を代入しようとしている．
-結果，警告が出る．</p>
-
-<p>ちなみにH8/300 は動作クロック 25MHz という，今や貧弱なCPUだが，有志のご尽力により Linux が動く．
-Linux は，元が i386 アーキテクチャ向けだったこともあって， int が 32ビット以上あることを暗に期待しているフシがある．
-そんな理由…だけではないだろうが，int を 32 ビットとみなしてコンパイルするオプション <code>-mint32</code> が用意されている．これを使ってコンパイルしてみる．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ /pizza/bin/h8300-pizzafactory-elf-gcc -Wconversion -mint32 test.c 
-</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
-
-
-<p>XCode の環境と同じく，警告は出なくなる．
-暗黙のダウンキャストが起きなくなるのだから，当然ではある．</p>
-
-<h2>API 設計者は，-Wconversion には頼れない</h2>
-
-<p>つまり，-Wconversion は，<strong>今まさにコンパイルしようとしている環境において</strong>，暗黙のダウンキャストを検知する．
-<strong>他の処理系で何が起こるかは関知しない</strong> ．
-H8/300 の例から判るとおり，同じコンパイラの同じターゲットでも，ABI (アプリケーション・バイナリ・インタフェース)が違えば，検出したりしなかったりする．</p>
-
-<p>このような動作では，API の移植性を担保できない．</p>
-
-<p>アプリケーションの開発者にとっては，-Wconversion で少なからずのミスは見つかるかもしれない．
-ただし，C 言語 API の設計者は，特に移植性を問われる種類の API の設計者にとって，-Wconversion は，頼りない．</p>
-
-<p>もう少し踏み込んで言ってもよい，頼ってはいけない．</p>
-
-<p>蛇足だが，この点について，コンパイラの開発者を責めるのはお門違いだろうと，私は思う．
-責めるとしたら，整数型についてほぼフリーダムとした，最初期にC言語の仕様を決定した面々だろう．</p>
-
-<h2>API 設計者が取りうる態度は，2つある</h2>
-
-<p>よく言えばターゲットアーキテクチャに対して柔軟，悪く言えば何も決めてない優柔不断な，C言語の整数型．
-これに直面する際に， API 設計者が取りうるアプローチは 2つある．</p>
-
-<h3>完璧な移植性は諦める派</h3>
-
-<p>一つは，動作環境に期待する整数型を明示してしまうというアプローチ．</p>
-
-<blockquote><p>char は 8ビット符号付き・int は 32ビット・short は16ビット・long は32ビット・ポインタは32ビット．それ以外は認めない．以上</p></blockquote>
-
-<p>これは，20世紀のUnix世界ではしばしば見られる態度だった．
-C言語といえばUnix．そのUnix動作マシンが概ね備える整数型を前提にすれば，世の中のほとんどをカバーできるではないか，と．</p>
-
-<p>そのため，int やポインタが 16ビットであることが自然である MS-DOS の世界には移植できないソフトが山盛りになったりした．
-まあでも，MS-DOS なんて，俺らが使う Unix からみればオモチャだし，みたいな．</p>
-
-<h3>意地でも移植性を追い求める派</h3>
-
-<p>永らくC言語といえばUnixだったが，ゲーム機や組込みシステム開発に使われるようになるにつれ，話が若干違ってくる．</p>
-
-<blockquote><p>C99準拠って言っているのだから，それを達成するのがエンジニアとしての誠意ってモンだろう?
-DSPからスパコンまでで同じソースコードが動かなきゃ認めない．以上</p></blockquote>
-
-<p>冷蔵庫サイズのワークステーションよりも，ゲーム機やケータイのほうが出荷台数が多いのは，いくら世間に疎くても判る話だ．
-Unix も，ゲーム機やケータイの高機能化に助けられて，それらの中に入れるようにはなった．
-しかし，同時に組込みシステムの広がりも爆発的なものがある．
-いまやクルマはコンピュータなしには動かない．エンジンの環境性能を満たせない．
-ゲーム機本体がUnixでも，周辺機器を動かしているマイコンには Unix は入らない．</p>
-
-<p>このような，非Unixな世界では，整数型に前提を設けることなんてできない．
-移り変わりの早いマイコンの世界で，特定のアーキテクチャに依存するコードなんて，リスクが高すぎて書けない．
-ライブラリも同様に，アーキテクチャ独立が求められる．</p>
-
-<h2>C言語 API 設計者の異文化が交わる場所としてのmruby</h2>
-
-<p>実際には，このような2つの派閥の極端に立つ人は，まず居ないだろう．
-これがトレードオフの問題だということに気づけない人は，ソフト屋には向かない．
-だが，両極端の間のどこに重心を置くかというのは，人により，またはプロジェクトにより，分かれる．</p>
-
-<p>mruby というのは，立ち位置として面白いと，個人的には思っている．</p>
-
-<p>mruby が処理する Ruby 言語は，Unix 文化の代表的側面である Little Language がその根底にあるように思える．
-また，LAMP から Rails へという，Unix 系文化の進化に添って大きくなってきた．
-だから，その API 設計が，理屈は判っていながらも Unix 的な方向に時々流れるのは，不思議なことではない．
-私の好みはさておき．</p>
-
-<p>同時に，mruby は<em>組込み向け</em>言語処理系でもある．
-利用者の少なからずは，移植性が担保されていないなら魅力を感じない．
-API は，C99に準拠する限りのあらゆる処理系であっても耐えうる設計か．
-そのことを常に問われる分野の人も，コードを観ている．</p>
-
-<p>mrubyでのMatz氏のAPI変更に対して，私が文句を言っているときは，APIに対する2つの派閥を思い浮かべると，解りやすいかなと思う．</p>
-
-<p>a bit philosophical とか言われて，まあそうだよなと心の何処かで思いつつも，あるんだよ．広大な組込み世界には．びっくりするような構成のアーキテクチャってのが．</p>
-
-<h2></h2>
-
-<p>ちょいと脇道に逸れたけれど，@amasawa_seiji さんから mention 頂かなかったら書きそびれたはずの話題に言及できた．
-あと1回…2回…くらい? あんまり長くても飽きるので．私が．</p>
 ]]></content>
   </entry>
   

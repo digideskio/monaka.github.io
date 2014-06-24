@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>もなもなもなかのページ</title>
+  <title>Monami-ya.mrb の開発環境(2014年6月版) - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org//">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,15 +76,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a></h1>
+      <h1 class="entry-title">Monami-ya.mrb の開発環境(2014年6月版)</h1>
     
     
       <p class="meta">
@@ -107,7 +104,7 @@
   </header>
 
 
-  <div class="entry-content"><p>SNS の外でご意見頂きまして．</p>
+<div class="entry-content"><p>SNS の外でご意見頂きまして．</p>
 
 <blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
 
@@ -120,76 +117,96 @@
 
 <p>写真を撮ったので，並べておきます．</p>
 
+<!-- more -->
+
+
+<h2>開発ホスト機</h2>
+
+<p>しょっぱなから写真を撮り忘れました．
+でもまあ機種名を挙げれば，想像つくかと思います．</p>
+
+<p>MacBook Pro 2.8 GHz Intel Core 2 Duo．
+すいぶんと古い箱です．
+メモリは8GB．HDDは500GB．</p>
+
+<p>この程度のスペックでも，monami-ya.mrb のビルドは，1分以内に終わります．</p>
+
+<p>正直言うと，もう少し良いのが欲しいですけれどね…GCCのビルドまで行う場合には…．
+(会社では，GCCのビルドは，クラウド上のビルドサーバを活用しています)</p>
+
+<h2>ターゲット</h2>
+
+<h3>CPU ボード + マザーボード</h3>
+
+<p>開発のメインとなるターゲットボードは， <a href="http://wlst.jp/ele/bf533cb/">BF533CB</a> です．
+Blackfin という DSP を積んでいます．メモリは RAM 16MB + 内蔵若干，永続ストレージは SPI Flash．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/bf533cb.jpg" alt="BF533CB" /></p>
+
+<p>DSP というと特殊なプロセッサという印象を持たれるかもしれません．
+char のビット幅が16だったり32だったりという変態，みたいな．</p>
+
+<p>しかし，Blackfin に関して言えば，普通の RISC プロセッサとして使えます．char のビット幅は 8 ですし．
+あまり知られてませんが，品番によっては Microsoft .NET-MF が動きます．uClinux も動きます．
+しかも 500MHz の高速動作です．</p>
+
+<p>問題は，情報が少ないことです．
+特に日本語の情報をwebで求めようとすると，片手で収まるくらいの開発者にしか当たりません．
+(いや，商社やメーカの中などに入れば，日本人の開発者も，もちろんそれなりにいらっしゃいます)</p>
+
+<p>CPUボードだけでも monami-ya.mrb は動作しますが，シリアルポートのコネクタが便利なので，マザーボードを併用しています．</p>
+
+<p>BF533CB は，シンプルでとてもよいボードなのですが，今後の量産計画は未定のようなのが難点です．
+近日中に，BF533CB から，<a href="http://www.kaneko-sys.co.jp/shop/00016.html">金子システム製の UCB-BF512</a>へ変更する予定でいます．</p>
+
+<h3>USB-serial アダプタ</h3>
+
+<p>最近の廉価帯ARMボードだと，USB-serialのアダプタをオンボードで積んでいる場合も多いですが，現在使っている BF533CB にはありませんので，外付けしています．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/usb-serial.jpg" alt="USB-serial" /></p>
+
+<p>シグナルが3.3Vレベルであれば，何を使っても良いのでしょうけれども，私は秋月電子通商の<a href="http://akizukidenshi.com/catalog/g/gK-01977/">FT232RL USBシリアル変換モジュール</a>を使っています．
+モジュールのみで900円と，微妙なお値段ではあります．
+しかし，UART は，Lチカが済んだあとから開発終了までデバッグ用として永く使うものですので，安定していることと，壊れても代替がすぐに手に入るほうがよいと思います．</p>
+
+<h3>JTAG アダプタ</h3>
+
+<p>UCB-BF512 は，出荷時点でブートローダとして u-boot が書き込まれていますし，BF533CB も一度 JTAG 経由で書き込めば，同様に u-boot が使えます．</p>
+
+<p>monami-ya.mrb は，uClinux と同様に u-boot 経由でブートできます．
+よって，JTAG デバッグアダプタは不要です．
+…と言えれば話は楽なのですが，GDB 無しでは PC 上の mruby 開発が難しいのと同様に，JTAG デバッガなしでの monami-ya.mrb の開発は困難を極めます．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/sashimi-knife.jpg" alt="刺身包丁" /></p>
+
+<p>私が使っているのは，<a href="http://www.amazon.co.jp/o/ASIN/B003MG4BH2/monamiya-22">PizzaFactory Tiny JTAG</a> です．
+つまるところ JTAG ですので，ARM用の JTAG アダプタや FT2232 が載ったモジュールを使うことはできるはずなのですが…．
+私自身が PizzaFactory Tiny JTAG の開発を行った時に，BF533 プロセッサで謎の相性問題を引き起こした経験があります．</p>
+
+<p>納期の無い趣味なら，相性問題でアタマを抱えるのも愉しみのうちでしょう．
+少しでもお仕事が絡んでいるのなら，人件費と比べて，サクッと買ったほうが安いです．</p>
+
+<h2></h2>
+
+<p>ざっとこんな感じです．
+(組み込み開発 == ロジアナやオシロといった計測器が積まれた机)，のような印象を持たれるかもしれませんが，実際のところ，RTOS や VM のコア部分での開発では，それらの計測器はあっても無駄です．プローブを挿す場所がありませんから．</p>
+
+<p>開発ホスト機を除くと，予算的には，1万5千円もあればお釣りが来るという感じでしょうか．
+「STM32F4-discovery は 2千円でお釣りが来るのに！」っていう気もしますが，スペックが違うので比べるのは野暮かなぁとも思います．
+STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないですし．</p>
+
+<p>取り留めもないですが，本稿は日記なので，纏めなくても良いですね．それでは．</p>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
 
-<time datetime="2014-06-18T13:21:58+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
-
-<p>設計思想に関する話です．
-一つのシステムに対して，設計思想は幾通りもあるのが普通です．
-どの思想にも，一定の理があります．</p>
-
-<p>読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に，参考になればと思います．</p>
-
-<h2>サブセットは滅びの道?</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -201,55 +218,43 @@
   
 
 
-<time datetime="2014-06-17T13:19:03+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
-        
-      </p>
+<time datetime="2014-06-24T15:05:33+09:00" pubdate data-updated="true">Jun 24<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>, <a class='category' href='/blog/categories/monami-ya-dot-mrb/'>monami-ya.mrb</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
-
-  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/">さきほど</a>は，重くはならないよ，という，疑問への回答でした．</p>
-
-<p>加えて，RTOS とバインドする積極的な理由を述べておきます．</p>
-
-<p>理由はある程度の理詰めはあるものの，結局のところ「オレはこう思うんじゃい」という色彩が強く，別にそうしなくても軽量Rubyはベアメタルで動きます．
-時間と予算が潤沢にあるなら，ね．</p>
-
-<p>とはいえ現実は．</p>
-
-<p>別段のファンドが獲得できているわけでもなく，取れる時間も限られ，加えて</p>
-
-<blockquote><p>過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</p></blockquote>
-
-<p>という<a href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/">呪い</a>までかかった状態なので，素早くカタチにしないと，呪いが成就してしまうのでした．</p>
-
-<h2>大目標: ゆるふわ Ruby だけで，ガチ組み込み開発をしたい</h2>
-
-<p>すべては大目標の実現のためです．</p>
-
-<p>＼ゆるふわ Ruby だけで，ガチ組み込み開発をしたい／ that&rsquo;s all.</p>
-
-<h3>大目標(言い換え): ゆるふわでない Ruby で，ガチ組み込み開発をする気なんて無い</h3>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/" title="Previous Post: monami-ya.mrb が最小スペックを追求しない理由">&laquo; monami-ya.mrb が最小スペックを追求しない理由</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -314,7 +319,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/monaka">@monaka</a> on GitHub
@@ -354,6 +359,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
