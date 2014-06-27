@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-24T16:24:53+09:00</updated>
+  <updated>2014-06-27T11:29:54+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RaspberryPi の GPIO アダプタは，便利]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/"/>
+    <updated>2014-06-27T09:29:32+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-boards.jpg" alt="1列ピンのCPUボードたち" /></p>
+
+<p>ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています．</p>
+
+<p>作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/2row-boards.jpg" alt="2列ピンのCPUボードたち" /></p>
+
+<p>組み込み向けのCPUというのは，センサやらアクチュエータやらを操作することが多く，やたらとI/O端子がついています．
+それらを一列に配置すると，基板のサイズが大きくなってしまいます．</p>
+
+<p>そういう理由は解るのですが，一方で，試作する側としては2列では困る時があります．
+<strong>2列だとブレッドボードに刺せないのです．ショートします．</strong></p>
+
+<p>最初からきちんとしたベースボードの基板を起こしたり，ユニバーサル基板で頑張ればよいのではあります．
+しかし，ブレッドボードはお手軽です．一度楽を味わってしまうと，人間は後戻りできません．</p>
+
+<p>そんなわけで，ケーブルを自作したりするのですが，それもなかなか骨の折れる作業です．</p>
+
+<p>手抜きをして，接触が不安定になりがちなメスのジャンパワイヤーを使って，3D配線を行うという暴挙に出たりします．
+それはいけません．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/anti_pattern.jpg" alt="アンチパターン" /></p>
+
+<p>など考えながら，CPUボードを仕舞おうとして，私の会社で製造販売している製品が目に入りました．</p>
+
+<h2>RaspberryPi対応GPIO変換基板キット</h2>
+
+<!-- more -->
+
+
+<p>そのコストパフォーマンスの凄まじさに，一時代を築いた感もある Raspberry Pi ですが，お手軽電子工作のツールとして見た時に，一つだけ欠点があります．
+それは，GPIO の端子が，13x2列のピンヘッダであることです．</p>
+
+<p>これをケーブルで引き出しても，<strong>2列だとブレッドボードにさせないのです．ショートします．</strong></p>
+
+<p>…あれ?</p>
+
+<p>そのため，ブレッドボードに刺しやすくするような変換基板が売られています．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-connected.jpg" alt="RaspberryPi対応GPIO変換基板キット" /></p>
+
+<p>…あれ?</p>
+
+<p>これ， Raspberry Pi 以外の組み込み用CPUボードにも使えるのでは…?</p>
+
+<h2>やってみた</h2>
+
+<p>弊社ジャンク棚から，基板を2枚拾ってきました．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-boards.jpg" alt="基板2枚" /></p>
+
+<p>Amazon で販売中の，<a href="http://www.amazon.co.jp/o/ASIN/B00GN3YQK8/monamiya-22">RaspberryPi対応GPIO変換基板キット (ケーブル無し)</a>の基板です．
+製造過程で小キズがあったため，出荷から弾いたものです．</p>
+
+<p>本来，リボンケーブルで繋いで使います．例えばこんなふうに．</p>
+
+<p>ただ，このままの使用法だと，ケーブルコネクタの両脇に幅があるため，CPU基板のピンヘッダと干渉しそうです．
+なので，13x2列のピンフレームと置換します．</p>
+
+<p>そして，はんだ付けをします．
+今回の私の用途では，左右両方にコネクタが必要でしたので，片方の基板は裏返して鏡像なるようにしました．</p>
+
+<p>結果，こんな感じになります．
+専有面積は大きくなりますが，ベースボードの設計について，ある程度の目処が付くまでの試験的なものですので．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-connected.jpg" alt="1列化" /></p>
+
+<p>この方法で1列化できるのは，通常の方法(そうでない方法については後述)では連続した26ピンになります．
+多くの組み込み向けCPUボードは，それよりも遥かに多くのピン数があります．
+しかし，特定の機能に関するピンは，ある程度近い位置に配置されるでしょう．
+目的を絞って使う際には，便利に使えるのではと思います．
+接触が不安定になりがちなメスのジャンパワイヤーを使うよりも，安心できるのではないでしょうか．</p>
+
+<h2>余談: 最大30ピンまでOK</h2>
+
+<p>実は，この変換基板，30ピンまで対応できます．</p>
+
+<p>本稿を書く目的で，秋月まで行ったのですが，13x2列のピンフレームが品切れでした．
+(Raspberry Pi 人気のせいでしょうか．)
+仕方なく14x2列の品を買ってきたのですが…，</p>
+
+<p>基板に当ててみて，ひらめきました．</p>
+
+<p>基板には，LED点灯など，ちょっとした機能をブレッドボードなしで実装できるよう，ユニバーサル基板と同等の箇所を用意してあります．この部分を使うと，最大30ピンまで一列化ができます．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/30cols.jpg" alt="" />
+<img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/30cols-2.jpg" alt="" /></p>
+
+<p>今回，一列化を試みるきっかけとなった<a href="http://kaneko-sys.co.jp/shop/00016.html">UCB-BF512基板</a>は，15x2列のピンヘッダがついています．
+つまり，やろうと思えば，30の全ピンを一列化できるのでした．</p>
+
+<p>基板のアートワークをした私自身，想定外のことでした．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
@@ -492,344 +597,6 @@ mrb_state* mrb_open_sandbox_allocf(mrb_allocf, uintptr_t ud, unsigned int sandbo
 
 <p>どの sandbox を指定したかは，mrb_state に保持されます．
 そのため，mrb_state を破棄する際には，単に mrb_close() を呼び出してください．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[EC2でXenのmini-osを動かす手順]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image/"/>
-    <updated>2014-02-04T10:26:39+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/04/how-to-build-ebs-image</id>
-    <content type="html"><![CDATA[<h1>余談</h1>
-
-<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
-ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
-
-<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
-でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
-資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
-思案の最中．
-うだつが上がらんと，ほんと，なんにもできないねぇ．
-やだやだ．</p>
-
-<p>閑話休題．</p>
-
-<h1>まくら</h1>
-
-<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
-Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
-私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
-よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
-
-<p>手順は本家ヘルプページに割と細かく説明されている．
-解説ブログも，ググれば山盛り．
-さすがは，みんな大好きAWS．</p>
-
-<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
-
-<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
-
-<!-- more -->
-
-
-<h1>作業</h1>
-
-<h2>概要</h2>
-
-<p>独自のカーネルをEC2上で動作させるためのイメージ(以下，オレオレイメージ)は，EBS のスナップショットから作るようになっている．
-Xen ではおなじみの PV-GRUB が，オレオレイメージ中にある boot/grub/menu.lst を読み，
-kernel (本稿の場合は mini-os)をロードしブートする．
-手元環境でEBSを作ってアップロードすることもできるのかもしれないが(知らない)，ここでは EC2 上で t1.micro を立ち上げて作業する．
-一連の作業時間は，1時間もかからない．t1.micro なら10円にも満たないような額だろう．</p>
-
-<p>本稿では，ビルドは手元で行うことを想定している．ビルド環境さえもEC2上に立てるということも，もちろんできる．
-その際の作業の読み替え箇所は，いちいち言及するまでも無いだろう．</p>
-
-<h2>手順0: ~/.aws/config</h2>
-
-<p>こんな感じ．</p>
-
-<p><code>
-[default]
-aws_access_key_id=ないしょ
-aws_secret_access_key=ないしょ
-region=ap-northeast-1
-output=text
-</code></p>
-
-<p>region が違うと，下記例示の image-id やらなにやら変更が要るかもしれない．</p>
-
-<h2>手順1: EBSボリュームへのアクセスを行う EC2 インスタンスの生成</h2>
-
-<p>EC2のインスタンスを立ち上げる．</p>
-
-<p><code>
-$ aws ec2 run-instances --image-id ami-dcfa4edd --instance-type t1.micro --security-group-ids quick-start-1 --key-name monaka
-</code></p>
-
-<p>&mdash;security-groups-ids や &mdash;key-name は，ご自分の環境に合わせて．
-&mdash;image-id も，好みの環境があるなら，それで．
-でも，本稿の例だと複雑なことはしないので，amiの選択に凝るのは時間の無駄かも．</p>
-
-<p>結果はこんな感じ．</p>
-
-<p><code>
-578606849602    r-351e1831
-GROUPS  sg-e242dbe3 quick-start-1
-INSTANCES   0   i386    None    False   xen ami-dcfa4edd    i-a3bec9a4  t1.micro    aki-ec5df7ed    monaka  2014-02-01T11:04:33.000Z    None    None    /dev/sda1   ebs None    paravirtual
-MONITORING  disabled
-PLACEMENT   ap-northeast-1b None    default
-SECURITYGROUPS  sg-e242dbe3 quick-start-1
-STATE   0   pending
-STATEREASON pending pending
-</code></p>
-
-<h2>手順2: 諸々のファイルを入れるEBSボリュームの生成</h2>
-
-<p><code>
-$ aws ec2 create-volume --size 1 --availability-zone ap-northeast-1b
-</code>
-mini-os のサイズは1MB以下なのだが，EBSボリュームの最低サイズは1GB．無駄だがやむなし．</p>
-
-<p>結果はこんな感じ．</p>
-
-<p><code>
-ap-northeast-1b 2014-02-01T10:46:19.012Z    1   None    creating    vol-1cbb4b16    standard
-</code></p>
-
-<h2>手順3: EBSボリュームのEC2インスタンスへのアタッチ</h2>
-
-<p><code>
-Monacintosh:~ monaka$ aws ec2 attach-volume --volume-id vol-1cbb4b16 --instance-id i-a3bec9a4 --device /dev/sdh1
-</code>
-vol-1cbb4b16 は，手順2の結果で得られたもの．i-a3bec9a4 は，手順1の結果で得られたもの．</p>
-
-<p>結果はこんな感じ．</p>
-
-<p><code>
-2014-02-01T11:05:25.613Z    /dev/sdh1   i-a3bec9a4  attaching   vol-1cbb4b16
-</code></p>
-
-<h2>手順4: 作業用 EC2 インスタンスへの ssh ログイン</h2>
-
-<p>手順1で，インスタンスを立ち上げた直後は，サーバのFQDNが判らない．
-そろそろインスタンスのプロビジョニングも終わっているはずなので，確認．</p>
-
-<p><code>
-$ aws ec2 describe-instances --instance-ids i-a3bec9a4
-</code></p>
-
-<p>結果はこんな感じ</p>
-
-<p><code>
-RESERVATIONS    578606849602    r-351e1831
-GROUPS  sg-e242dbe3 quick-start-1
-INSTANCES   0   i386    None    False   xen ami-dcfa4edd    i-a3bec9a4  t1.micro    aki-ec5df7ed    monaka  2014-02-01T11:04:33.000Z    ip-10-132-154-11.ap-northeast-1.compute.internal    10.132.154.11   ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com   54.199.18.76    /dev/sda1   ebs None    paravirtual
-BLOCKDEVICEMAPPINGS /dev/sda1
-EBS 2014-02-01T11:04:36.000Z    True    attached    vol-69bc4c63
-MONITORING  disabled
-PLACEMENT   ap-northeast-1b None    default
-SECURITYGROUPS  sg-e242dbe3 quick-start-1
-STATE   16  running
-</code>
-compute.amazonaws.com で終わっているのが，外向きのFQDN．
-今回の場合は，ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com
-なので，おもむろに ssh．</p>
-
-<p>Amazon Linux の場合は，ログインユーザは ec2-user となる．</p>
-
-<p><code>
-$ ssh ec2-user@ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com
-</code></p>
-
-<p>サーバの公開鍵を受け入れるかどうかなど聞かれる．
-結果は，こんな感じ．</p>
-
-<p>```
-The authenticity of host &lsquo;ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com (54.199.18.76)&rsquo; can&rsquo;t be established.
-RSA key fingerprint is e8:10:70:59:ce:4b:7b:59:97:92:35:d8:35:a7:3a:92.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added &lsquo;ec2-54-199-18-76.ap-northeast-1.compute.amazonaws.com,54.199.18.76&rsquo; (RSA) to the list of known hosts.</p>
-
-<pre><code>   __|  __|_  )
-   _|  (     /   Amazon Linux AMI
-  ___|\___|___|
-</code></pre>
-
-<p>See /usr/share/doc/system-release/ for latest release notes.
-No packages needed for security; 170 packages available
-Amazon Linux version 2013.09 is available.
-[ec2-user@ip-10-132-154-11 ~]$
-```</p>
-
-<h2>手順5: EBSボリュームのマウント</h2>
-
-<p>手順3では，EBSボリュームはアタッチしかしていない．
-ここでファイルシステムを作成して，マウントする．</p>
-
-<p>ファイルシステムの生成は，こんな感じ．</p>
-
-<p><code>
-[ec2-user@ip-10-132-154-11 ~]$ sudo mkfs.ext2 /dev/sdh1
-</code></p>
-
-<p>結果は，こんな感じ．</p>
-
-<p>```
-mke2fs 1.41.12 (17-May-2010)
-Filesystem label=
-OS type: Linux
-Block size=4096 (log=2)
-Fragment size=4096 (log=2)
-Stride=0 blocks, Stripe width=0 blocks
-65536 inodes, 262144 blocks
-13107 blocks (5.00%) reserved for the super user
-First data block=0
-Maximum filesystem blocks=268435456
-8 block groups
-32768 blocks per group, 32768 fragments per group
-8192 inodes per group
-Superblock backups stored on blocks:</p>
-
-<pre><code>32768, 98304, 163840, 229376
-</code></pre>
-
-<p>Writing inode tables: done                          <br/>
-Writing superblocks and filesystem accounting information: done</p>
-
-<p>This filesystem will be automatically checked every 24 mounts or
-180 days, whichever comes first.  Use tune2fs -c or -i to override.
-```</p>
-
-<p>ファイルシステムはできたので，早速マウント．</p>
-
-<p><code>
-[ec2-user@ip-10-132-154-11 ~]$ sudo mount /dev/sdh1 /mnt
-</code></p>
-
-<p>特にメッセージの出力など無く，コマンドプロンプトに戻ってくる．</p>
-
-<h2>手順6: menu.lst の生成</h2>
-
-<p>PV-GRUB が読む menu.lst を，EBSボリューム(の中にあるファイルシステム)に置く．
-エディタ使ってもいいけれど，この程度なら猫で十分．</p>
-
-<p>```
-[root@ip-10-132-154-11 ec2-user]# sudo -s
-[root@ip-10-132-154-11 ec2-user]# cat > /mnt/boot/grub/menu.lst
-default 0</p>
-
-<p>title MiniOS test</p>
-
-<pre><code>    root (hd0)
-    kernel /mini-os
-</code></pre>
-
-<p>[root@ip-10-132-154-11 ec2-user]# exit
-```</p>
-
-<p>sudo -s を使ったので，最後には exit で，ec2-user に戻しておいた．</p>
-
-<h2>手順7: mini-os のコピー</h2>
-
-<p>何らかの方法で行う．
-ふつうは scp を使うと思う．
-そして，EC2 インスタンス上の /mnt/mini-os に配置する．
-ここでmenu.lst の記述に引っ張られて，うっかり，/mini-os に置いたりとかしないように．</p>
-
-<h2>手順8: スナップショットの生成</h2>
-
-<p>手順7までで，EC2インスタンスは用済みとなる．
-だから，stop-insrance なり terminate-instance なりで落としてもよい．
-けれども，最初の動作確認ができるまでは，立ち上げっぱなしのほうがよいかもしれない．
-EC2の課金は1時間単位だけれども，1時間以内にn回立ち上げ直すと，n時間分の料金になる．</p>
-
-<p>EC2のインスタンスにアタッチしたままでも，スナップショットは取れる．
-そうでないと，スナップショットの意味が無い．</p>
-
-<p>操作は，こんな感じ．</p>
-
-<p><code>
-$ aws ec2 create-snapshot --volume-id vol-1cbb4b16
-</code></p>
-
-<p><code>
-結果は，こんな感じ．
-None    578606849602    None    snap-940d6c7a   2014-02-01T11:24:16.000Z    pending vol-1cbb4b16    1
-</code></p>
-
-<h2>手順9: スナップショットからオレオレイメージの生成</h2>
-
-<p>いよいよ佳境．スナップショットからオレオレイメージを生成する．
-正直言うと，よく調べがついていないのだけれど，イメージの概要を示すjsonファイルが必要らしい．
-短いものなので，これもテキストエディタを持ち出すまでもないはず．</p>
-
-<p>```
-$ cat > blockdevice.json
-[</p>
-
-<pre><code>    {"DeviceName":"/dev/xvda","Ebs":{"VolumeType":"standard","DeleteOnTermination":true,"VolumeSize":1,"SnapshotId":"snap-940d6c7a"}}
-</code></pre>
-
-<p>]
-```</p>
-
-<p>VolumeSize は，最初に 1GB で作ったから．SnapshotId は，手順8の出力と合わせる．</p>
-
-<p>そして，イメージの登録を行う．</p>
-
-<p><code>
-$ aws ec2 register-image --root-device-name /dev/xvda --name "Mini-os test" --block-device-mappings file://blockdevice.json --architecture x86_64
-</code></p>
-
-<p>結果は，こんな感じ．
-<code>
-ami-ef650eee
-</code></p>
-
-<h2>手順10: オレオレイメージの起動</h2>
-
-<p>そして感動のフィナーレ．オレオレイメージの起動．</p>
-
-<p><code>
-$ aws ec2 run-instances --image-id ami-ef650eee --instance-type t1.micro --security-group-ids quick-start-1 --key-name monaka
-</code></p>
-
-<p>結果は，こんな感じ</p>
-
-<p><code>
-578606849602    r-f17d65f5
-GROUPS  sg-e242dbe3 quick-start-1
-INSTANCES   0   x86_64  None    False   xen ami-ef650eee    i-b38630b4  t1.micro    monaka  2014-02-01T11:46:28.000Z    None    None    /dev/xvda   ebs None    paravirtual
-MONITORING  disabled
-PLACEMENT   ap-northeast-1b None    default
-SECURITYGROUPS  sg-e242dbe3 quick-start-1
-STATE   0   pending
-STATEREASON pending pending
-</code></p>
-
-<p>これだけだと，本当に立ち上がったのか判らない．</p>
-
-<p>ログの取得は，こんな感じで行う．</p>
-
-<p><code>
-$ aws ec2 get-console-output --instance-id i-b38630b4
-</code></p>
-
-<p>i-b38630b4 は，オレオレイメージの run-instance の結果から引っ張ってくる．</p>
-
-<p>mini-os 自身は小さいものの，mini-os の実行環境のプロビジョニングには，そこそこの時間がかかる．
-遅い時は5分以上かかるので，気長に待つ．
-どうせ1時間までは同じ時間だから．</p>
-
-<h1>雑感</h1>
-
-<p>EC2 == クラウド == インフラ屋さんやWeb屋さん</p>
-
-<p>という第一印象を持つかもしれないが，stubdom は，newlibだのlwIPだの使っていて，技術要素としては，むしろ組込み屋の定番ライブラリで成り立っている．</p>
-
-<p>2000年ごろには，IOKit を用いてオレオレOSを作るのが流行ったが，同様に，オレオレクラウドOSを作るのが地味に流行るかもしれない．
-情報量が少なくて，とっかかりは辛いが，#kernelvm の常連発表者のレベルであれば，たぶん半日のハッカソンで，何らか創り出せるだろう．そんな気がする．</p>
 ]]></content>
   </entry>
   

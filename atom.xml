@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2014-06-24T16:24:53+09:00</updated>
+  <updated>2014-06-27T11:29:54+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RaspberryPi の GPIO アダプタは，便利]]></title>
+    <link href="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/"/>
+    <updated>2014-06-27T09:29:32+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/1row-boards.jpg" alt="1列ピンのCPUボードたち" /></p>
+
+<p>ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています．</p>
+
+<p>作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/2row-boards.jpg" alt="2列ピンのCPUボードたち" /></p>
+
+<p>組み込み向けのCPUというのは，センサやらアクチュエータやらを操作することが多く，やたらとI/O端子がついています．
+それらを一列に配置すると，基板のサイズが大きくなってしまいます．</p>
+
+<p>そういう理由は解るのですが，一方で，試作する側としては2列では困る時があります．
+<strong>2列だとブレッドボードに刺せないのです．ショートします．</strong></p>
+
+<p>最初からきちんとしたベースボードの基板を起こしたり，ユニバーサル基板で頑張ればよいのではあります．
+しかし，ブレッドボードはお手軽です．一度楽を味わってしまうと，人間は後戻りできません．</p>
+
+<p>そんなわけで，ケーブルを自作したりするのですが，それもなかなか骨の折れる作業です．</p>
+
+<p>手抜きをして，接触が不安定になりがちなメスのジャンパワイヤーを使って，3D配線を行うという暴挙に出たりします．
+それはいけません．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/anti_pattern.jpg" alt="アンチパターン" /></p>
+
+<p>など考えながら，CPUボードを仕舞おうとして，私の会社で製造販売している製品が目に入りました．</p>
+
+<h2>RaspberryPi対応GPIO変換基板キット</h2>
+
+<!-- more -->
+
+
+<p>そのコストパフォーマンスの凄まじさに，一時代を築いた感もある Raspberry Pi ですが，お手軽電子工作のツールとして見た時に，一つだけ欠点があります．
+それは，GPIO の端子が，13x2列のピンヘッダであることです．</p>
+
+<p>これをケーブルで引き出しても，<strong>2列だとブレッドボードにさせないのです．ショートします．</strong></p>
+
+<p>…あれ?</p>
+
+<p>そのため，ブレッドボードに刺しやすくするような変換基板が売られています．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-connected.jpg" alt="RaspberryPi対応GPIO変換基板キット" /></p>
+
+<p>…あれ?</p>
+
+<p>これ， Raspberry Pi 以外の組み込み用CPUボードにも使えるのでは…?</p>
+
+<h2>やってみた</h2>
+
+<p>弊社ジャンク棚から，基板を2枚拾ってきました．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-boards.jpg" alt="基板2枚" /></p>
+
+<p>Amazon で販売中の，<a href="http://www.amazon.co.jp/o/ASIN/B00GN3YQK8/monamiya-22">RaspberryPi対応GPIO変換基板キット (ケーブル無し)</a>の基板です．
+製造過程で小キズがあったため，出荷から弾いたものです．</p>
+
+<p>本来，リボンケーブルで繋いで使います．例えばこんなふうに．</p>
+
+<p>ただ，このままの使用法だと，ケーブルコネクタの両脇に幅があるため，CPU基板のピンヘッダと干渉しそうです．
+なので，13x2列のピンフレームと置換します．</p>
+
+<p>そして，はんだ付けをします．
+今回の私の用途では，左右両方にコネクタが必要でしたので，片方の基板は裏返して鏡像なるようにしました．</p>
+
+<p>結果，こんな感じになります．
+専有面積は大きくなりますが，ベースボードの設計について，ある程度の目処が付くまでの試験的なものですので．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/1row-connected.jpg" alt="1列化" /></p>
+
+<p>この方法で1列化できるのは，通常の方法(そうでない方法については後述)では連続した26ピンになります．
+多くの組み込み向けCPUボードは，それよりも遥かに多くのピン数があります．
+しかし，特定の機能に関するピンは，ある程度近い位置に配置されるでしょう．
+目的を絞って使う際には，便利に使えるのではと思います．
+接触が不安定になりがちなメスのジャンパワイヤーを使うよりも，安心できるのではないでしょうか．</p>
+
+<h2>余談: 最大30ピンまでOK</h2>
+
+<p>実は，この変換基板，30ピンまで対応できます．</p>
+
+<p>本稿を書く目的で，秋月まで行ったのですが，13x2列のピンフレームが品切れでした．
+(Raspberry Pi 人気のせいでしょうか．)
+仕方なく14x2列の品を買ってきたのですが…，</p>
+
+<p>基板に当ててみて，ひらめきました．</p>
+
+<p>基板には，LED点灯など，ちょっとした機能をブレッドボードなしで実装できるよう，ユニバーサル基板と同等の箇所を用意してあります．この部分を使うと，最大30ピンまで一列化ができます．</p>
+
+<p><img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/30cols.jpg" alt="" />
+<img src="http://www.monaka.org//blog/2014/06/27/an-application-rpi-gpio-adapter/30cols-2.jpg" alt="" /></p>
+
+<p>今回，一列化を試みるきっかけとなった<a href="http://kaneko-sys.co.jp/shop/00016.html">UCB-BF512基板</a>は，15x2列のピンヘッダがついています．
+つまり，やろうと思えば，30の全ピンを一列化できるのでした．</p>
+
+<p>基板のアートワークをした私自身，想定外のことでした．</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
@@ -2581,182 +2686,6 @@ Cのほうが得意な人．C++のほうが得意な人．運用系への適用�
 C言語を覚えたけれども，その先の学習で伸び悩んでいるという向きにとって，mruby はなかなかよい教材だろうと思う．</p>
 
 <p>最近，涼風 ( @suzukaze_jp )氏が，<a href="http://mruby-master-changes.hatenablog.com/">mruby masterの変更履歴を定期的にまとめている</a>ようなので，気が向いたらご参考に．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[コンパイラが生成する型とAPI]]></title>
-    <link href="http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler/"/>
-    <updated>2014-03-21T07:53:49+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/03/21/types-generated-by-compiler</id>
-    <content type="html"><![CDATA[<p><a href="http://www.monaka.org//blog/2014/03/20/type-conversion-warning/">前回</a> の続き．</p>
-
-<h2>C言語のおさらい</h2>
-
-<p>繰り返しすぎてそろそろクドいかもしれないが，C言語は，いろいろとフリーダムすぎて扱いづらい．</p>
-
-<p>にも関わらず，UnixというOSの記述言語を超えて広く使われた理由の一つに，ポインタを用いた自由なメモリアクセスがある．</p>
-
-<!-- more -->
-
-
-<p>OSやハードウェアの制約がなければ，プログラム自身を含む，全てのメモリは参照可能で，書き込みもできる．
-ポインタは，加減算によってアドレスを変更できる．ポインタ同士の加減算も可能だ．</p>
-
-<p>自らが管理する変数を，ポインタを用いて，書き換えることもできる．
-そのような操作を支援するために，特定の変数が専有しているメモリサイズを取得することが可能だ．…など書くと無駄にややこしいが，要するに sizeof 演算子がある．</p>
-
-<p>sizeof は sizeof(foo) など括弧を添える書き方が一般的なので，ときどき関数やマクロと誤解されるが，<strong>演算子</strong> である．本稿では，この事実が大きな意味を持つ．</p>
-
-<h2>sizeof によって得られる値は?</h2>
-
-<p>sizeof の演算結果は，正整数となることは確実だ．マイナスのサイズなんてありえない．
-さて，では，unsigned int が適切だろうか? それとも unsigned long?</p>
-
-<p>ここで，C言語の整数型のフリーダムっぷりが仇となる．
-まず，unsigned long が扱える範囲が処理系定義だ．
-加えて，仮想記憶などの技術で，またはムーアの法則に沿って，実装可能なメモリの量は爆発的に増えた．
-そのため sizeof の結果が unsigned long の上限を超える可能性が出てきた．</p>
-
-<p>たとえば，unsigned long がUnix系の慣習に沿って32ビットだとしたら，4GB以上のメモリを占める配列の sizeof の結果は格納できない．
-本稿読者には言うまでもないが，4GB以上のRAMを持つ機器は，いまや珍しくない．</p>
-
-<p>このような問題への対処として，sizeof の結果を保存するための型を，C言語仕様は導入した．
-それが，size_t である．</p>
-
-<p>size_t は，多くの場合，符号なし整数型の typedef となる．
-しかしどの型の typedef なのかは，処理系次第である．
-動作するCPUが扱えるメモリサイズによって，処理系の作者が決める．</p>
-
-<p>たとえば，メモリアドレスの上限が65535なのに 32ビット分を割り当てても無駄だろう．
-16ビットのメモリ空間なら，uint16_t 相当になる可能性はある．同様に 32ビットなら uint32_t 相当だろうし，もし 24ビットのメモリ空間なら uint24_t になるかもしれない．でも24ビットの型を作るのは面倒だからuint32_t相当にしました，という実装もあるかもしれない．</p>
-
-<p>こんな按配なので，C言語を用いるプログラマは，size_t の最大値を決め打ちしたコーディングをしてはいけない．
-そのコーディングの典型が，(値チェックを伴わない)size_t 以外の整数型変数への代入である．</p>
-
-<p>これは好みの問題ではない．
-仕様から容易に導き出される，事実だ．</p>
-
-<p>蛇足になるが，このように演算結果により処理系が生み出す型は，ptrdiff_t など他にもある．
-移植性を保ったAPIを考える際には，これらの型についても十分に理解しておく必要がある．</p>
-
-<h2>いつになく噛み付いた理由</h2>
-
-<p>ここまでくると，<a href="https://github.com/mruby/mruby/commit/048bca43c9438b1245fec92d8f05ca0cc0b929d2">mruby の API 変更を意図した Matz 氏のコミット</a>について，私が噛み付いた理由が見えてくるだろう．</p>
-
-<p>mruby の mrb_int 型は，実際は符号付き整数型の typedef だ．
-しかも，mruby の実行環境に合わせて，ビット幅は変えてもよい造りになっている．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* 参考: include/mruby/value.h から引用 */
-</span><span class='line'>
-</span><span class='line'>#if defined(MRB_INT64)
-</span><span class='line'># ifdef MRB_NAN_BOXING
-</span><span class='line'>#  error Cannot use NaN boxing when mrb_int is 64bit
-</span><span class='line'># else
-</span><span class='line'>   typedef int64_t mrb_int;
-</span><span class='line'>#  define MRB_INT_BIT 64
-</span><span class='line'>#  define MRB_INT_MIN INT64_MIN
-</span><span class='line'>#  define MRB_INT_MAX INT64_MAX
-</span><span class='line'>#  define PRIdMRB_INT PRId64
-</span><span class='line'>#  define PRIiMRB_INT PRIi64
-</span><span class='line'>#  define PRIoMRB_INT PRIo64
-</span><span class='line'>#  define PRIxMRB_INT PRIx64
-</span><span class='line'>#  define PRIXMRB_INT PRIX64
-</span><span class='line'># endif
-</span><span class='line'>#elif defined(MRB_INT16)
-</span><span class='line'>  typedef int16_t mrb_int;
-</span><span class='line'># define MRB_INT_BIT 16
-</span><span class='line'># define MRB_INT_MIN INT16_MIN
-</span><span class='line'># define MRB_INT_MAX INT16_MAX
-</span><span class='line'>#else
-</span><span class='line'>  typedef int32_t mrb_int;
-</span><span class='line'># define MRB_INT_BIT 32
-</span><span class='line'># define MRB_INT_MIN INT32_MIN
-</span><span class='line'># define MRB_INT_MAX INT32_MAX
-</span><span class='line'># define PRIdMRB_INT PRId32
-</span><span class='line'># define PRIiMRB_INT PRIi32
-</span><span class='line'># define PRIoMRB_INT PRIo32
-</span><span class='line'># define PRIxMRB_INT PRIx32
-</span><span class='line'># define PRIXMRB_INT PRIX32
-</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
-
-
-<p>一方，size_t は，符号なし整数型の typedef だ．
-しかも，ビット幅は判らない．</p>
-
-<p>これらを，API 関数呼び出しという，値チェックを伴わない(実質的な)代入を行った時，何が起こるか．</p>
-
-<p><a href="http://www.monaka.org//blog/2014/03/19/implicit-type-conversion-in-c/">先日</a>とりあげた，暗黙的なダウンキャストが，起こる．
-特定環境のみ，かつ特定のアプリケーションのみで．</p>
-
-<p>「概ね大丈夫だが，たまに致命的に動かない．」
-こういう挙動は，ライブラリとしては，忌み嫌われる最悪のパターンである．</p>
-
-<h2>strlen は問題ではない．</h2>
-
-<p><a href="https://github.com/mruby/mruby/commit/180b3d5678d613b79593ef202089e93abb4eacfc">この問題に対し Matz 氏が一部を revert した際のコミットメッセージ</a>は下記のとおりだ．</p>
-
-<blockquote><p>change mrb_int to size_t that would take strlen()</p></blockquote>
-
-<p>コミットメッセージなんて，ちゃっちゃっと済ますものなので，筆が滑ることはよくある．
-Matz 氏は実は理解しておられるだろうが，そうでない人もいるだろうから，書いておく．</p>
-
-<p>strlen() の返値も，size_t ではある．
-しかし，別に strlen() はどうでもよい．
-なぜならば，strlen() は関数だから．
-mrb_int を返す strlen() の代替を作るのは，難しい作業ではない．</p>
-
-<p>しかし，sizeof は演算子である．
-Cにはそもそも演算子オーバーロードの機能が無いし，C++ でさえオーバーロードできない．
-だから，sizeof 演算子の結果の型を size_t 以外にすることは，不可能である．</p>
-
-<p>そして，mruby の文字列系・シンボル系の長さには sizeof 演算子が使われる可能性が極めて高い．
-なにしろ，mruby の API 自身に， sizeof を内包するものもあるのだから．</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define mrb_strlen_lit(lit) (sizeof(lit "") - 1)</span></code></pre></td></tr></table></div></figure>
-
-
-<h2></h2>
-
-<p>というわけで，C言語仕様の視点から，なぜ私が一連のAPI変更に異議を立てたのかということを纏めた．
-本件は，好みの問題ではない．
-ISO Cの仕様を踏まえると，自明として適切な結果が浮かび上がる．</p>
-
-<p>とはいえ，mrb_int にしたくなる気持ちも解らなくもない．
-明日以降，その辺りの，わりと人情系というかピープルウェア的な話で，一連の話題を閉じたいと思っている．</p>
 ]]></content>
   </entry>
   

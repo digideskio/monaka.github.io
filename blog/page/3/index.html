@@ -9,8 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="たぶん会社の公式サイトに乗るべき情報のような気もしますが．
-まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます． mruby の機器組み込み向け fork である monami-ya.mrb に，mrbgems の sandbox &hellip;">
+  <meta name="description" content="先ほどの続き． sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．&mdash; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が Sandbox サポートを追加する理由</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-15T09:58:37+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
+
+<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/477722322862759938">June 14, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>など言って，実装理由を詳説しないのは，ちょっとイケ好かないかなということで．</p>
+
+<p>本題に入るには，OS が提供する thread の使い方について，寄り道をする必要があります．</p>
+
+<p>注: 本稿は，mruby の内部構造，特に，mrb_state と mrbgems の関係を理解していることを前提にしています．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -192,51 +244,6 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/24/why-i-create-rails-app/">機器組み込み屋がRailsアプリを出した理由</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-24T14:57:08+09:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>会社名義で出したサービスの裏話．</p>
-
-<p>機能としては，ソフト屋さんから別段の注目を浴びるほどのものでもなく．
-プレスリリース等派手なことはしませんでしたが．
-<a href="http://www.monami-ya.jp/blog/2014/05/24/movsign-map-redirect-beta/">合同会社もなみ屋の名義で，Webアプリをリリース</a>しました．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/24/why-i-create-rails-app/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -278,6 +285,10 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
       </li>
     
@@ -299,10 +310,6 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
     
       <li class="post">
         <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
       </li>
     
   </ul>

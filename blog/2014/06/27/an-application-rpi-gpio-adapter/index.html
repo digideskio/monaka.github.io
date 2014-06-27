@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RaspberryPi の GPIO アダプタは，便利 - もなもなもなかのページ</title>
+  <meta name="author" content="Masaki "monaka" Muranaka">
+
+  
+  <meta name="description" content="背景 Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが． ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています． 作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ． &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/monaka/atom.xml" rel="alternate" title="もなもなもなかのページ" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46473703-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/monaka/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.monaka.org/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            もなもなもなかのページ
+        </span>
+       
+           <span class="blue_dark">
+             後悔^H^H公開日記
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RaspberryPi の GPIO アダプタは，便利</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T09:29:32+09:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p>Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-boards.jpg" alt="1列ピンのCPUボードたち" /></p>
+
+<p>ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています．</p>
+
+<p>作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/2row-boards.jpg" alt="2列ピンのCPUボードたち" /></p>
+
+<p>組み込み向けのCPUというのは，センサやらアクチュエータやらを操作することが多く，やたらとI/O端子がついています．
+それらを一列に配置すると，基板のサイズが大きくなってしまいます．</p>
+
+<p>そういう理由は解るのですが，一方で，試作する側としては2列では困る時があります．
+<strong>2列だとブレッドボードに刺せないのです．ショートします．</strong></p>
+
+<p>最初からきちんとしたベースボードの基板を起こしたり，ユニバーサル基板で頑張ればよいのではあります．
+しかし，ブレッドボードはお手軽です．一度楽を味わってしまうと，人間は後戻りできません．</p>
+
+<p>そんなわけで，ケーブルを自作したりするのですが，それもなかなか骨の折れる作業です．</p>
+
+<p>手抜きをして，接触が不安定になりがちなメスのジャンパワイヤーを使って，3D配線を行うという暴挙に出たりします．
+それはいけません．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/anti_pattern.jpg" alt="アンチパターン" /></p>
+
+<p>など考えながら，CPUボードを仕舞おうとして，私の会社で製造販売している製品が目に入りました．</p>
+
+<h2>RaspberryPi対応GPIO変換基板キット</h2>
+
+<!-- more -->
+
+
+<p>そのコストパフォーマンスの凄まじさに，一時代を築いた感もある Raspberry Pi ですが，お手軽電子工作のツールとして見た時に，一つだけ欠点があります．
+それは，GPIO の端子が，13x2列のピンヘッダであることです．</p>
+
+<p>これをケーブルで引き出しても，<strong>2列だとブレッドボードにさせないのです．ショートします．</strong></p>
+
+<p>…あれ?</p>
+
+<p>そのため，ブレッドボードに刺しやすくするような変換基板が売られています．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-connected.jpg" alt="RaspberryPi対応GPIO変換基板キット" /></p>
+
+<p>…あれ?</p>
+
+<p>これ， Raspberry Pi 以外の組み込み用CPUボードにも使えるのでは…?</p>
+
+<h2>やってみた</h2>
+
+<p>弊社ジャンク棚から，基板を2枚拾ってきました．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/rpi-gpio-boards.jpg" alt="基板2枚" /></p>
+
+<p>Amazon で販売中の，<a href="http://www.amazon.co.jp/o/ASIN/B00GN3YQK8/monamiya-22">RaspberryPi対応GPIO変換基板キット (ケーブル無し)</a>の基板です．
+製造過程で小キズがあったため，出荷から弾いたものです．</p>
+
+<p>本来，リボンケーブルで繋いで使います．例えばこんなふうに．</p>
+
+<p>ただ，このままの使用法だと，ケーブルコネクタの両脇に幅があるため，CPU基板のピンヘッダと干渉しそうです．
+なので，13x2列のピンフレームと置換します．</p>
+
+<p>そして，はんだ付けをします．
+今回の私の用途では，左右両方にコネクタが必要でしたので，片方の基板は裏返して鏡像なるようにしました．</p>
+
+<p>結果，こんな感じになります．
+専有面積は大きくなりますが，ベースボードの設計について，ある程度の目処が付くまでの試験的なものですので．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-connected.jpg" alt="1列化" /></p>
+
+<p>この方法で1列化できるのは，通常の方法(そうでない方法については後述)では連続した26ピンになります．
+多くの組み込み向けCPUボードは，それよりも遥かに多くのピン数があります．
+しかし，特定の機能に関するピンは，ある程度近い位置に配置されるでしょう．
+目的を絞って使う際には，便利に使えるのではと思います．
+接触が不安定になりがちなメスのジャンパワイヤーを使うよりも，安心できるのではないでしょうか．</p>
+
+<h2>余談: 最大30ピンまでOK</h2>
+
+<p>実は，この変換基板，30ピンまで対応できます．</p>
+
+<p>本稿を書く目的で，秋月まで行ったのですが，13x2列のピンフレームが品切れでした．
+(Raspberry Pi 人気のせいでしょうか．)
+仕方なく14x2列の品を買ってきたのですが…，</p>
+
+<p>基板に当ててみて，ひらめきました．</p>
+
+<p>基板には，LED点灯など，ちょっとした機能をブレッドボードなしで実装できるよう，ユニバーサル基板と同等の箇所を用意してあります．この部分を使うと，最大30ピンまで一列化ができます．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/30cols.jpg" alt="" />
+<img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/30cols-2.jpg" alt="" /></p>
+
+<p>今回，一列化を試みるきっかけとなった<a href="http://kaneko-sys.co.jp/shop/00016.html">UCB-BF512基板</a>は，15x2列のピンヘッダがついています．
+つまり，やろうと思えば，30の全ピンを一列化できるのでした．</p>
+
+<p>基板のアートワークをした私自身，想定外のことでした．</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T09:29:32+09:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/" title="Previous Post: Monami-ya.mrb の開発環境(2014年6月版)">&laquo; Monami-ya.mrb の開発環境(2014年6月版)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <script data-gittip-username="monaka"
+        src="//gttp.co/v1.js"></script>
+</section>
+
+
+<section>
+	<span>
+		<img src="http://www.gravatar.com/avatar/fe7ca03b3cc3b6dfc44cb4565f259cc5" alt="Gravatar of Masaki "monaka" Muranaka " title="Gravatar of Masaki "monaka" Muranaka" />
+	</span>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+
+  <a class="twitter-timeline" href="https://twitter.com/monamour555" data-widget-id="368658968769359873" width="auto" height="400" data-chrome="noheader nofooter noscrollbar transparent" lang="ja">@monamour555 からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  
+    <a href="http://twitter.com/monamour555" class="twitter-follow-button" data-show-count="true">Follow @monamour555</a>
+  
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での static thread binding サポート</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/monaka">@monaka</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'monaka',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+邑中雅樹?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Masaki "monaka" Muranaka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

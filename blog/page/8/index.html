@@ -9,25 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="前口上の，つづき． C言語の整数型に潜む悪夢 まずは，よく知られているところから． 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt; int
-main(void)
-{ int &hellip;">
+  <meta name="description" content="ちょいと寄り道して，前回の補足． @monamour555 gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。&mdash; ぬん。 (@amasawa_seiji) March 19, 2014 鋭い．(汗 はい．-Wconversion ， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +78,71 @@ main(void)
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/20/type-conversion-warning/">-Wconversion は，いかがでしょう?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-20T12:08:52+09:00" pubdate data-updated="true">Mar 20<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ちょいと寄り道して，<a href="/blog/2014/03/19/implicit-type-conversion-in-c/">前回</a>の補足．</p>
+
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> gccのversionは何をお使いですか？4.3以降だと-Wconversionとか使えませんかね。。</p>&mdash; ぬん。 (@amasawa_seiji) <a href="https://twitter.com/amasawa_seiji/statuses/446205477546762240">March 19, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>鋭い．(汗</p>
+
+<p>はい．<code>-Wconversion</code> ，使えます．記憶が正しければ GCC 2.95.x から．
+ただ，検出が割と難しいようで，3.4系でパッチが出て，立ち消えになったり．
+当時の経緯は<a href="http://d.hatena.ne.jp/yupo5656/20040830/p2">このエントリが詳しい</a>です．</p>
+
+<p>また，GCC 4.3 以降では，挙動が微妙に変わったりしています．
+変更内容の詳細は，<a href="http://gcc.gnu.org/wiki/NewWconversion">GCC Wiki</a> を．</p>
+
+<p>GCC は，そんな事情なので，前回の記述</p>
+
+<blockquote><p>もしかしたら気の利いた処理系では警告を出してくれるかもしれないが．</p></blockquote>
+
+<p>は，完全に筆が滑っております．
+お詫びします…が，必ずしも訂正はしません．</p>
+
+<p>今回の後半は，その辺りについて．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/20/type-conversion-warning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -241,49 +288,6 @@ main(void)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/17/no-one-can-take-his-place/">君の代わりはいない．ぼくの代わりもいない．</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-17T15:35:11+09:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>食材の買い出しのため，八百屋に行った．
-タラの芽が並んでいた．
-そうか，そういう季節か．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/17/no-one-can-take-his-place/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -325,6 +329,10 @@ main(void)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
       </li>
     
@@ -346,10 +354,6 @@ main(void)
     
       <li class="post">
         <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">monami-ya.mrb が sandbox サポートを追加する理由</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">monami-ya.mrb での sandbox サポート</a>
       </li>
     
   </ul>
