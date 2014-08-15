@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: c | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org//blog/categories/c/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org//"/>
-  <updated>2014-08-12T21:36:51+09:00</updated>
-  <id>http://www.monaka.org//</id>
+  <link href="http://www.monaka.org/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org/"/>
+  <updated>2014-08-15T15:13:58+09:00</updated>
+  <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[C言語における暗黙の型変換とAPI設計]]></title>
-    <link href="http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c/"/>
+    <link href="http://www.monaka.orgblog/2014/03/19/implicit-type-conversion-in-c/"/>
     <updated>2014-03-19T14:06:12+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/03/19/implicit-type-conversion-in-c</id>
+    <id>http://www.monaka.orgblog/2014/03/19/implicit-type-conversion-in-c</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
 
 <h2>C言語の整数型に潜む悪夢</h2>
@@ -145,9 +145,9 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
   
   <entry>
     <title type="html"><![CDATA[C言語APIの作り方 - 前口上]]></title>
-    <link href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/"/>
+    <link href="http://www.monaka.orgblog/2014/03/18/how-to-write-portable-api-introduction/"/>
     <updated>2014-03-18T22:00:12+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction</id>
+    <id>http://www.monaka.orgblog/2014/03/18/how-to-write-portable-api-introduction</id>
     <content type="html"><![CDATA[<h2>Twitter から</h2>
 
 <p><a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a>">https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a></a></p>

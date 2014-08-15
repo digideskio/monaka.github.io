@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: dirty-hack | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org//blog/categories/dirty-hack/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org//"/>
-  <updated>2014-08-12T21:36:51+09:00</updated>
-  <id>http://www.monaka.org//</id>
+  <link href="http://www.monaka.org/blog/categories/dirty-hack/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org/"/>
+  <updated>2014-08-15T15:13:58+09:00</updated>
+  <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[よくわからない最適化，つづき]]></title>
-    <link href="http://www.monaka.org/blog/2013/05/04/dirty-optimize/"/>
+    <link href="http://www.monaka.orgblog/2013/05/04/dirty-optimize/"/>
     <updated>2013-05-04T09:10:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/05/04/dirty-optimize</id>
+    <id>http://www.monaka.orgblog/2013/05/04/dirty-optimize</id>
     <content type="html"><![CDATA[<p><em>当ブログの読者層には居なさそうな，将来，ソフトウェアエンジニアを志している方々に向けて．</em></p>
 
 <p>昨日のエントリに関連して，ネタ元のshi3z氏と若干のやりとりがあったので，<a href="http://togetter.com/li/497402">togetter に纏めておきました</a>．</p>
@@ -54,9 +54,9 @@
   
   <entry>
     <title type="html"><![CDATA[よくわからない最適化]]></title>
-    <link href="http://www.monaka.org/blog/2013/05/03/optimizer-in-c/"/>
+    <link href="http://www.monaka.orgblog/2013/05/03/optimizer-in-c/"/>
     <updated>2013-05-03T10:05:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2013/05/03/optimizer-in-c</id>
+    <id>http://www.monaka.orgblog/2013/05/03/optimizer-in-c</id>
     <content type="html"><![CDATA[<p>(2013-05-03 21:57 JST : ソースコードの誤記修正)</p>
 
 <h2>話のマクラ</h2>

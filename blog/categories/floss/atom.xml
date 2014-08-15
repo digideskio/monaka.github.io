@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: FLOSS | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org//blog/categories/floss/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org//"/>
-  <updated>2014-08-12T21:36:51+09:00</updated>
-  <id>http://www.monaka.org//</id>
+  <link href="http://www.monaka.org/blog/categories/floss/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org/"/>
+  <updated>2014-08-15T15:13:58+09:00</updated>
+  <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[便利な世の中になったのに]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/"/>
+    <link href="http://www.monaka.orgblog/2014/02/15/does-it-become-easier/"/>
     <updated>2014-02-15T00:00:00+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/15/does-it-become-easier</id>
+    <id>http://www.monaka.orgblog/2014/02/15/does-it-become-easier</id>
     <content type="html"><![CDATA[<p>特定の話題にインスパイヤされ，いくつか似た話題で連投した．
 けれども，これで一旦打ち止め．
 本稿は，アッサリと進め，終わる．
@@ -112,9 +112,9 @@
   
   <entry>
     <title type="html"><![CDATA[howto と way]]></title>
-    <link href="http://www.monaka.org/blog/2014/02/14/way-and-howto/"/>
+    <link href="http://www.monaka.orgblog/2014/02/14/way-and-howto/"/>
     <updated>2014-02-14T21:49:23+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/02/14/way-and-howto</id>
+    <id>http://www.monaka.orgblog/2014/02/14/way-and-howto</id>
     <content type="html"><![CDATA[<h2>一言で纏めると</h2>
 
 <p><a href="https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a>">https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a></a></p>

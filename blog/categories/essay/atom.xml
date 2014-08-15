@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: essay | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org//blog/categories/essay/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org//"/>
-  <updated>2014-08-12T21:36:51+09:00</updated>
-  <id>http://www.monaka.org//</id>
+  <link href="http://www.monaka.org/blog/categories/essay/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org/"/>
+  <updated>2014-08-15T15:13:58+09:00</updated>
+  <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[とある自殺報道について]]></title>
-    <link href="http://www.monaka.org/blog/2014/08/12/jisatsu/"/>
+    <link href="http://www.monaka.orgblog/2014/08/12/jisatsu/"/>
     <updated>2014-08-12T21:14:21+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/08/12/jisatsu</id>
+    <id>http://www.monaka.orgblog/2014/08/12/jisatsu</id>
     <content type="html"><![CDATA[<p>とある事件により，自殺した研究者について．そしてその行為を否定する，特定マスコミ関係者について．</p>
 
 <!-- more -->
@@ -46,9 +46,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
-    <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
+    <link href="http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
     <updated>2014-06-24T15:05:33+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
+    <id>http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
 <blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
@@ -146,9 +146,9 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
-    <link href="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
+    <link href="http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
     <updated>2014-06-18T13:21:58+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
+    <id>http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
     <content type="html"><![CDATA[<p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
 
 <p>設計思想に関する話です．
@@ -260,9 +260,9 @@ monami-ya.mrb での各種拡張を手掛ける際に，私は，そう考えて
   
   <entry>
     <title type="html"><![CDATA[RTOS は monami-ya.mrb を遅くするか?]]></title>
-    <link href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/"/>
+    <link href="http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p/"/>
     <updated>2014-06-17T11:01:52+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p</id>
+    <id>http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p</id>
     <content type="html"><![CDATA[<p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
 
@@ -366,9 +366,9 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
   
   <entry>
     <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
-    <link href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/"/>
+    <link href="http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly/"/>
     <updated>2014-05-31T18:52:30+09:00</updated>
-    <id>http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly</id>
+    <id>http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly</id>
     <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
 
 <p><a href="https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a>">https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a></a></p>
