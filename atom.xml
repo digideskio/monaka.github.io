@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org/atom.xml" rel="self"/>
   <link href="http://www.monaka.org/"/>
-  <updated>2014-08-15T15:13:58+09:00</updated>
+  <updated>2015-01-26T14:39:36+09:00</updated>
   <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -626,7 +626,7 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
 <!-- more -->
 
 
-<blockquote class="twitter-tweet"><p>って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/478026904457326592">June 15, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p>って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/478026904457326592">June 15, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -918,7 +918,7 @@ mruby と Arduino的なライブラリの組み合わせについては，<a hre
     <id>http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
 
-<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/477722322862759938">June 14, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -1227,7 +1227,13 @@ mrb_state で使用するものとして初期化されます．</p>
     <id>http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly</id>
     <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
 
-<p><a href="https://twitter.com/yukihiro_matz/status/472033974219325440""><a href="https://twitter.com/yukihiro_matz/status/472033974219325440">https://twitter.com/yukihiro_matz/status/472033974219325440</a>&#8221;</a></p>
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/472033974219325440">May 29, 2014</a></blockquote>
+
+
+<script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
 
 <!--
 https://twitter.com/yukihiro_matz/status/472033974219325440
@@ -2101,7 +2107,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>既にざっくりと tweet しています．</p>
 
-<blockquote class="twitter-tweet"><p>ハイリスクな経営だったというのは，全くその通りで，そこはまったくもって自覚的だった．&#10;ニッポンの組込みシステムというガチガチの保守層にOSSをぶつける，という発想からして，ハイリスクだったわけだから．&#10;皿回しをしない人は，皿を割らない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/453856186874351616">April 9, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p>ハイリスクな経営だったというのは，全くその通りで，そこはまったくもって自覚的だった．&#10;ニッポンの組込みシステムというガチガチの保守層にOSSをぶつける，という発想からして，ハイリスクだったわけだから．&#10;皿回しをしない人は，皿を割らない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453856186874351616">April 9, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2182,7 +2188,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 <!-- more -->
 
 
-<blockquote class="twitter-tweet"><p>サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/statuses/453515308435652608">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p>サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453515308435652608">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2190,7 +2196,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <blockquote><p>サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p></blockquote>
 
-<blockquote class="twitter-tweet"><p>別に怒っちゃいないのだがぬ．&#10;ポイントは，研究開発に必要な人件費が，そいつが社長という理由で0円になる根拠．&#10;加えて，申請時の見積には，社長の人件費も計上するし経産省も見て採択を決めるわけ．なのに後出しで社長の人件費は0円です，っていうのがフェアか． <a href="https://twitter.com/h_kenken">@h_kenken</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/statuses/453522491638439936">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p>別に怒っちゃいないのだがぬ．&#10;ポイントは，研究開発に必要な人件費が，そいつが社長という理由で0円になる根拠．&#10;加えて，申請時の見積には，社長の人件費も計上するし経産省も見て採択を決めるわけ．なのに後出しで社長の人件費は0円です，っていうのがフェアか． <a href="https://twitter.com/h_kenken">@h_kenken</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453522491638439936">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2198,7 +2204,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>別に怒ってないです．まあ，ネットではよくある誤読です．活字には感情が出てこないですからね．</p>
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 企業の社長が研究するから金出してくださいっていのもどうかなと思いまして。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/statuses/453537535856087041">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 企業の社長が研究するから金出してくださいっていのもどうかなと思いまして。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453537535856087041">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2208,7 +2214,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>ん? なんか変なこと言い出して…ますね…．</p>
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 社長さん(経営者)は投資する側じゃないんですか？</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/statuses/453539545221312512">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 社長さん(経営者)は投資する側じゃないんですか？</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453539545221312512">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
