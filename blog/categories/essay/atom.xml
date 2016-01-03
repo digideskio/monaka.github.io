@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: essay | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/essay/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/essay/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)]]></title>
-    <link href="http://www.monaka.orgblog/2016/01/03/mismatch-1/"/>
+    <link href="http://www.monaka.org/blog/2016/01/03/mismatch-1/"/>
     <updated>2016-01-03T05:39:17+00:00</updated>
-    <id>http://www.monaka.orgblog/2016/01/03/mismatch-1</id>
+    <id>http://www.monaka.org/blog/2016/01/03/mismatch-1</id>
     <content type="html"><![CDATA[<h1>書く気になった背景</h1>
 
 <p>私は、プログラマだ。なんだかんだで職歴は20年を超えた。
@@ -92,9 +92,9 @@
   
   <entry>
     <title type="html"><![CDATA[謹賀新年]]></title>
-    <link href="http://www.monaka.orgblog/2016/01/01/newyear/"/>
+    <link href="http://www.monaka.org/blog/2016/01/01/newyear/"/>
     <updated>2016-01-01T00:00:00+00:00</updated>
-    <id>http://www.monaka.orgblog/2016/01/01/newyear</id>
+    <id>http://www.monaka.org/blog/2016/01/01/newyear</id>
     <content type="html"><![CDATA[<p>Twitter にかまけている間に1年半も放置していたのですねぇ．
 何か書こう．あとで．</p>
 ]]></content>
@@ -102,9 +102,9 @@
   
   <entry>
     <title type="html"><![CDATA[とある自殺報道について]]></title>
-    <link href="http://www.monaka.orgblog/2014/08/12/jisatsu/"/>
+    <link href="http://www.monaka.org/blog/2014/08/12/jisatsu/"/>
     <updated>2014-08-12T12:14:21+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/08/12/jisatsu</id>
+    <id>http://www.monaka.org/blog/2014/08/12/jisatsu</id>
     <content type="html"><![CDATA[<p>とある事件により，自殺した研究者について．そしてその行為を否定する，特定マスコミ関係者について．</p>
 
 <!-- more -->
@@ -133,9 +133,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
+    <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
     <updated>2014-06-24T06:05:33+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
+    <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
 <blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
@@ -233,9 +233,9 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
+    <link href="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
     <updated>2014-06-18T04:21:58+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
+    <id>http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
     <content type="html"><![CDATA[<p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
 
 <p>設計思想に関する話です．

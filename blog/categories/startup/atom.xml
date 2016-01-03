@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: startup | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/startup/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/startup/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Keep good company]]></title>
-    <link href="http://www.monaka.orgblog/2014/02/03/keep-good-company/"/>
+    <link href="http://www.monaka.org/blog/2014/02/03/keep-good-company/"/>
     <updated>2014-02-03T06:30:22+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/02/03/keep-good-company</id>
+    <id>http://www.monaka.org/blog/2014/02/03/keep-good-company</id>
     <content type="html"><![CDATA[<p>起業したいという方と話をしていると，必ず出るのが，雇用に関する話．</p>
 
 <p>曰く，「起業をしたいのに，社員候補が居ない．」

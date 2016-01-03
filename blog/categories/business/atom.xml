@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: business | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/business/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/business/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その2)]]></title>
-    <link href="http://www.monaka.orgblog/2014/05/19/funding-for-funding-2/"/>
+    <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding-2/"/>
     <updated>2014-05-19T07:09:22+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/05/19/funding-for-funding-2</id>
+    <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding-2</id>
     <content type="html"><![CDATA[<p><a href="/blog/2014/05/19/funding-for-funding/">前回</a>の続きです．</p>
 
 <!-- more -->
@@ -109,9 +109,9 @@
   
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その1)]]></title>
-    <link href="http://www.monaka.orgblog/2014/05/19/funding-for-funding/"/>
+    <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding/"/>
     <updated>2014-05-19T05:43:18+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/05/19/funding-for-funding</id>
+    <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding</id>
     <content type="html"><![CDATA[<p><strong>社会起業を行おう，という結論に達しました．</strong></p>
 
 <p>いや，いまさら，意識高い大学生のようなことを思い立ったわけではありません．

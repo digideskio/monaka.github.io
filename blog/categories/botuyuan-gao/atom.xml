@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ボツ原稿 | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/botuyuan-gao/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/botuyuan-gao/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ハッシュ関数をなんちゃってで理解する]]></title>
-    <link href="http://www.monaka.orgblog/2013/08/17/what-is-hash/"/>
+    <link href="http://www.monaka.org/blog/2013/08/17/what-is-hash/"/>
     <updated>2013-08-17T15:11:00+00:00</updated>
-    <id>http://www.monaka.orgblog/2013/08/17/what-is-hash</id>
+    <id>http://www.monaka.org/blog/2013/08/17/what-is-hash</id>
     <content type="html"><![CDATA[<p>某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました．</p>
 
 <p>担当編集の方々や読者からの反応は悪くは無かったと自負はしているのですが，もっと大枠のところで色々と思うところありまして．主に私の側の問題です．</p>

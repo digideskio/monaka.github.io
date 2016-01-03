@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: oss | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/oss/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/oss/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
-    <link href="http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly/"/>
+    <link href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/"/>
     <updated>2014-05-31T09:52:30+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly</id>
+    <id>http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly</id>
     <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
 
 <p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/monamour555">@monamour555</a> まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/472033974219325440">May 29, 2014</a></blockquote>

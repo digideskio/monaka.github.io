@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: monami-ya.mrb | もなもなもなかのページ]]></title>
-  <link href="http://www.monaka.org/blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
-  <link href="http://www.monaka.org/"/>
-  <updated>2016-01-03T06:20:41+00:00</updated>
-  <id>http://www.monaka.org/</id>
+  <link href="http://www.monaka.org//blog/categories/monami-ya-dot-mrb/atom.xml" rel="self"/>
+  <link href="http://www.monaka.org//"/>
+  <updated>2016-01-03T06:26:46+00:00</updated>
+  <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
+    <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
     <updated>2014-06-24T06:05:33+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
+    <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
 <blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
@@ -115,9 +115,9 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
+    <link href="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
     <updated>2014-06-18T04:21:58+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
+    <id>http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
     <content type="html"><![CDATA[<p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
 
 <p>設計思想に関する話です．
@@ -229,9 +229,9 @@ monami-ya.mrb での各種拡張を手掛ける際に，私は，そう考えて
   
   <entry>
     <title type="html"><![CDATA[RTOS は monami-ya.mrb を遅くするか?]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p/"/>
+    <link href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/"/>
     <updated>2014-06-17T02:01:52+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p</id>
+    <id>http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p</id>
     <content type="html"><![CDATA[<p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
 
@@ -335,9 +335,9 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
     <updated>2014-06-15T00:58:37+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
 
 <p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
@@ -461,9 +461,9 @@ MB 級の RAM がオンチップになるのは時間の問題なのになぁ…
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/14/monami-ya-dot-mrb-sandbox-support/"/>
+    <link href="http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support/"/>
     <updated>2014-06-14T23:45:14+00:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/14/monami-ya-dot-mrb-sandbox-support</id>
+    <id>http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support</id>
     <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
 まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
