@@ -9,8 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="さきほどは，重くはならないよ，という，疑問への回答でした． 加えて，RTOS とバインドする積極的な理由を述べておきます． 理由はある程度の理詰めはあるものの，結局のところ「オレはこう思うんじゃい」という色彩が強く，別にそうしなくても軽量Rubyはベアメタルで動きます．
-時間と予算が潤沢にあるなら &hellip;">
+  <meta name="description" content="本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています． 設計思想に関する話です．
+一つのシステムに対して，設計思想は幾通りもあるのが普通です．
+どの思想にも，一定の理があります． 読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T04:21:58+00:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
+
+<p>設計思想に関する話です．
+一つのシステムに対して，設計思想は幾通りもあるのが普通です．
+どの思想にも，一定の理があります．</p>
+
+<p>読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に，参考になればと思います．</p>
+
+<h2>サブセットは滅びの道?</h2>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -197,64 +247,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での Static Thread Binding サポート</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-16T02:15:55+00:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
-
-<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
-
-<p>当日記でも，<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
-
-<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
-つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
-
-<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
-
-<p>みたいなことを仰る方も，世間には稀にいます．
-それは概ね誤解です．
-その辺りの話は，別の機会に取り扱いましょう．</p>
-
-<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
-
-<h2>目指せ，ゆるふわ組み込みライフ</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -296,6 +288,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/03/mismatch-2/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (2)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/03/mismatch-1/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)</a>
       </li>
     
@@ -317,10 +313,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
       </li>
     
   </ul>
