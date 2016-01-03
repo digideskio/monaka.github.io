@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="SNS の外でご意見頂きまして． Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない はい．断片的にはtweetなどしていますし，OSX 上でのビルド環境等も(今のところ消極的に)公開しているのではありますが． &hellip;">
+  <meta name="description" content="背景 Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが． ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています． 作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T00:29:32+00:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-boards.jpg" alt="1列ピンのCPUボードたち" /></p>
+
+<p>ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています．</p>
+
+<p>作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/2row-boards.jpg" alt="2列ピンのCPUボードたち" /></p>
+
+<p>組み込み向けのCPUというのは，センサやらアクチュエータやらを操作することが多く，やたらとI/O端子がついています．
+それらを一列に配置すると，基板のサイズが大きくなってしまいます．</p>
+
+<p>そういう理由は解るのですが，一方で，試作する側としては2列では困る時があります．
+<strong>2列だとブレッドボードに刺せないのです．ショートします．</strong></p>
+
+<p>最初からきちんとしたベースボードの基板を起こしたり，ユニバーサル基板で頑張ればよいのではあります．
+しかし，ブレッドボードはお手軽です．一度楽を味わってしまうと，人間は後戻りできません．</p>
+
+<p>そんなわけで，ケーブルを自作したりするのですが，それもなかなか骨の折れる作業です．</p>
+
+<p>手抜きをして，接触が不安定になりがちなメスのジャンパワイヤーを使って，3D配線を行うという暴挙に出たりします．
+それはいけません．</p>
+
+<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/anti_pattern.jpg" alt="アンチパターン" /></p>
+
+<p>など考えながら，CPUボードを仕舞おうとして，私の会社で製造販売している製品が目に入りました．</p>
+
+<h2>RaspberryPi対応GPIO変換基板キット</h2>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -180,68 +251,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-17T04:19:03+00:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/">さきほど</a>は，重くはならないよ，という，疑問への回答でした．</p>
-
-<p>加えて，RTOS とバインドする積極的な理由を述べておきます．</p>
-
-<p>理由はある程度の理詰めはあるものの，結局のところ「オレはこう思うんじゃい」という色彩が強く，別にそうしなくても軽量Rubyはベアメタルで動きます．
-時間と予算が潤沢にあるなら，ね．</p>
-
-<p>とはいえ現実は．</p>
-
-<p>別段のファンドが獲得できているわけでもなく，取れる時間も限られ，加えて</p>
-
-<blockquote><p>過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</p></blockquote>
-
-<p>という<a href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/">呪い</a>までかかった状態なので，素早くカタチにしないと，呪いが成就してしまうのでした．</p>
-
-<h2>大目標: ゆるふわ Ruby だけで，ガチ組み込み開発をしたい</h2>
-
-<p>すべては大目標の実現のためです．</p>
-
-<p>＼ゆるふわ Ruby だけで，ガチ組み込み開発をしたい／ that&rsquo;s all.</p>
-
-<h3>大目標(言い換え): ゆるふわでない Ruby で，ガチ組み込み開発をする気なんて無い</h3>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -283,6 +292,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/03/mismatch-1/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/01/newyear/">謹賀新年</a>
       </li>
     
@@ -304,10 +317,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
       </li>
     
   </ul>

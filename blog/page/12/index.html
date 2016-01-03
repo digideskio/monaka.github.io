@@ -9,9 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="起業したいという方と話をしていると，必ず出るのが，雇用に関する話． 曰く，「起業をしたいのに，社員候補が居ない．」
-経営と雇用を混同している起業志望者の．典型だ． 別のパターンもある．
-同年代で先に起業した人たちの「社員の定着が悪い」とぼやくのを聞き，起業前から心配している． &hellip;">
+  <meta name="description" content="余談 最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている． 一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/04/how-to-build-ebs-image/">EC2でXenのmini-osを動かす手順</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T01:26:39+00:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>余談</h1>
+
+<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
+
+<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
+資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
+思案の最中．
+うだつが上がらんと，ほんと，なんにもできないねぇ．
+やだやだ．</p>
+
+<p>閑話休題．</p>
+
+<h1>まくら</h1>
+
+<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
+Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
+私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
+よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
+
+<p>手順は本家ヘルプページに割と細かく説明されている．
+解説ブログも，ググれば山盛り．
+さすがは，みんな大好きAWS．</p>
+
+<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
+
+<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/04/how-to-build-ebs-image/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -195,57 +263,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/31/memorandom-about-mruby/">今日現在のmrubyについて雑想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-31T01:28:44+00:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
-なんでこのタイミングなのかに，あまり深い意味はない．
-一つのきっかけとして，イベントはある．
-mruby を話題の中心に据えたイベントが，<a href="http://www.digitalfukuoka.jp/events/30?locale=ja">今日の午後開催される</a>．
-私も聴講者として参加する予定だ．
-参加した後だと，その感想と混じる．
-なんとなく私見の純度が下がるかな，とか．</p>
-
-<p>私は，何を書いても，誰かや何かをdisっているように受け取られがちだ．
-けれども，本稿もdisりの意図は全くない．
-徒然なるままに．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/31/memorandom-about-mruby/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -287,6 +304,10 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/03/mismatch-1/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/01/newyear/">謹賀新年</a>
       </li>
     
@@ -308,10 +329,6 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
     
       <li class="post">
         <a href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">なぜ monami-ya.mrb は RTOSとバインドするのか</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
       </li>
     
   </ul>

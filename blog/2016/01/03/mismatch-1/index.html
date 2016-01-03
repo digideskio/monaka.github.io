@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: programming - もなもなもなかのページ</title>
+  <title>なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1) - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Category: programming">
+  <meta name="description" content="書く気になった背景 私は、プログラマだ。なんだかんだで職歴は20年を超えた。
+同時に、かつて10年ほど小さなソフトハウスを経営していたし、今も代表1名の法人を持っている。 そんな経歴により、プログラマ諸氏からは概ねプログラマとして接していただき、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.orgblog/categories/programming/">
+  <link rel="canonical" href="http://www.monaka.orgblog/2016/01/03/mismatch-1/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,49 +78,154 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Programming</h1>
+    
+      <h1 class="entry-title">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-03T05:39:17+00:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2016</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h1>書く気になった背景</h1>
 
-  
-  <h2>2014</h2>
+<p>私は、プログラマだ。なんだかんだで職歴は20年を超えた。
+同時に、かつて10年ほど小さなソフトハウスを経営していたし、今も代表1名の法人を持っている。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/03/19/implicit-type-conversion-in-c/">C言語における暗黙の型変換とAPI設計</a></h1>
-<time datetime="2014-03-19T05:06:12+00:00" pubdate><span class='month'>Mar</span> <span class='day'>19</span> <span class='year'>2014</span></time>
+<p>そんな経歴により、プログラマ諸氏からは概ねプログラマとして接していただき、経営者諸氏からは稀に経営者としての意見を求められる時がある。
+2つの異なる立場についてほぼ同時並行で見聞きする機会に恵まれるのは、おそらく珍しいことだろう。
+そんな経験の中で思ったことを、書き散らしておく。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/programming/'>programming</a></span>
-</footer>
+<p>もちろん、守秘義務や職業倫理というものもあり，複数の事案をミックスし曖昧にしてある。
+特定の企業についての邪推は無用。ひとつよしなに。</p>
+
+<h1>中堅IT業界における、人材受給のミスマッチ</h1>
+
+<p>広くIT業界は、長きに渡って、「人手不足!」と叫んでいる。
+そして「&#8221;使えない人&#8221;ばかり面接に来る」というボヤキが続く。
+つまり、&#8221;デキる&#8221;&ldquo;人財&#8221;が来ない、または定着しない。そういうことらしい。</p>
+
+<p>このボヤキは、スタートアップでも聞かれる。しかし私見では、圧倒的に、受託中心からの転換を狙っている中堅 IT 企業で多い。</p>
+
+<p>考えると、もったいない話である。
+スタートアップは成功すればリターンは大きいがリスクも大きいとされる。
+ある期間を生き残ってそこそこの規模まで成功した会社なら、財務的なリスクは小さい。
+&ldquo;人財&#8221;が定着すればその会社は大きく伸びるだろう。
+&#8220;デキる&rdquo;&ldquo;人財&#8221;も、むしろ&#8221;デキる&#8221;からこそ、その辺りのソロバン勘定はできるだろう。</p>
+
+<p>しかし、現実にはボヤキは消える気配がないどころか、大きくなる一方であるように思える。
+日本人にありがちな謙遜のようにも見えない。なぜだろうか。</p>
+
+<p>私には、2つの要因が思い浮かぶ。うち2つはすでに広く指摘されていて経営層にも周知の事項だ。
+残りの1つは、ソフトウェアエンジニア界隈では形式化されつつある暗黙知だ。
+しかし、経営層界隈、特に中堅IT界隈においての知見共有は、あんまりされていない気がしている。</p>
+
+<h2>「中堅IT企業」のオレオレ定義</h2>
+
+<p>定義を曖昧にすると例外事例が無駄に多くなるはずなので、ここで「中堅IT企業」についてスコープを絞っておきたい。
+ここでは、概ね下記のような条件を設定する。</p>
+
+<ul>
+<li>ここ数年で業績を伸ばしている。</li>
+<li>顧客とは、開発受託の関係から投資やジョイントベンチャなど協業を行う方向で変化している。</li>
+<li>法が定める中小企業からは、もはや脱している。</li>
+</ul>
 
 
-</article>
+<p>社員数で言うと300〜500人、年商で50億くらい。社歴は概ね20年以上。</p>
 
+<p>この規模の会社は、全ソフトウェア業界のうちで、相対的に好調である。
+このことは定性的・定量的の両面で示すことができる。</p>
 
+<p>定量的には、ソフトウェア業界の懐事情は、経済産業省が行っている特定サービス産業実態調査によって調査されている。
+<a href="http://www.meti.go.jp/statistics/tyo/tokusabizi/result-2/h26.html">最新データ</a>でも、他の規模が軒並みスコアを落とす中、この規模は相対的に好調であることがわかっている。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/03/18/how-to-write-portable-api-introduction/">C言語APIの作り方 - 前口上</a></h1>
-<time datetime="2014-03-18T13:00:12+00:00" pubdate><span class='month'>Mar</span> <span class='day'>18</span> <span class='year'>2014</span></time>
+<p>定性的にもこの規模は活発と言える。
+環境性能や自動運転車をキーワードにして、自動車車載ソフトウェアの世界では国際競争が激しくなってきている。
+そのような先端の話題に関連して業界系マスコミを賑わすのも、概ねこの「中堅IT企業」規模の独立系ベンダである。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/mruby/'>mruby</a>, <a class='category' href='/blog/categories/programming/'>programming</a></span>
-</footer>
+<h1>To be continued</h1>
 
+<p>活発で景気も良い。
+本稿では具体例を示さないが，日本のソフトウェアの品質は諸外国に比べて悪いわけでもないということも、定量データとして知られている。
+なのになぜ中堅IT企業で人材不足なのだろうか。</p>
 
-</article>
+<p>問題意識の提示と定義だけで長文になってしまった。</p>
 
+<p>続く。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Masaki "monaka" Muranaka</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-03T05:39:17+00:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.orgblog/2016/01/03/mismatch-1/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.orgblog/2016/01/03/mismatch-1/" data-via="monamour555" data-counturl="http://www.monaka.orgblog/2016/01/03/mismatch-1/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/01/newyear/" title="Previous Post: 謹賀新年">&laquo; 謹賀新年</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
