@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org/atom.xml" rel="self"/>
   <link href="http://www.monaka.org/"/>
-  <updated>2015-01-26T14:43:17+09:00</updated>
+  <updated>2016-01-03T06:16:41+00:00</updated>
   <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -14,9 +14,19 @@
 
   
   <entry>
+    <title type="html"><![CDATA[謹賀新年]]></title>
+    <link href="http://www.monaka.orgblog/2016/01/01/newyear/"/>
+    <updated>2016-01-01T00:00:00+00:00</updated>
+    <id>http://www.monaka.orgblog/2016/01/01/newyear</id>
+    <content type="html"><![CDATA[<p>Twitter にかまけている間に1年半も放置していたのですねぇ．
+何か書こう．あとで．</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[とある自殺報道について]]></title>
     <link href="http://www.monaka.orgblog/2014/08/12/jisatsu/"/>
-    <updated>2014-08-12T21:14:21+09:00</updated>
+    <updated>2014-08-12T12:14:21+00:00</updated>
     <id>http://www.monaka.orgblog/2014/08/12/jisatsu</id>
     <content type="html"><![CDATA[<p>とある事件により，自殺した研究者について．そしてその行為を否定する，特定マスコミ関係者について．</p>
 
@@ -47,7 +57,7 @@
   <entry>
     <title type="html"><![CDATA[RaspberryPi の GPIO アダプタは，便利]]></title>
     <link href="http://www.monaka.orgblog/2014/06/27/an-application-rpi-gpio-adapter/"/>
-    <updated>2014-06-27T09:29:32+09:00</updated>
+    <updated>2014-06-27T00:29:32+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/27/an-application-rpi-gpio-adapter</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -152,7 +162,7 @@
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
     <link href="http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
-    <updated>2014-06-24T15:05:33+09:00</updated>
+    <updated>2014-06-24T06:05:33+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
@@ -252,7 +262,7 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
     <link href="http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
-    <updated>2014-06-18T13:21:58+09:00</updated>
+    <updated>2014-06-18T04:21:58+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
     <content type="html"><![CDATA[<p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
 
@@ -366,7 +376,7 @@ monami-ya.mrb での各種拡張を手掛ける際に，私は，そう考えて
   <entry>
     <title type="html"><![CDATA[なぜ monami-ya.mrb は RTOSとバインドするのか]]></title>
     <link href="http://www.monaka.orgblog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/"/>
-    <updated>2014-06-17T13:19:03+09:00</updated>
+    <updated>2014-06-17T04:19:03+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/">さきほど</a>は，重くはならないよ，という，疑問への回答でした．</p>
 
@@ -496,7 +506,7 @@ RTOSと比べて自前で書いたほうが十分に高信頼であれば，書�
   <entry>
     <title type="html"><![CDATA[RTOS は monami-ya.mrb を遅くするか?]]></title>
     <link href="http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p/"/>
-    <updated>2014-06-17T11:01:52+09:00</updated>
+    <updated>2014-06-17T02:01:52+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/17/rtos-makes-mruby-slow-p</id>
     <content type="html"><![CDATA[<p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
@@ -602,7 +612,7 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での static thread binding サポート]]></title>
     <link href="http://www.monaka.orgblog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/"/>
-    <updated>2014-06-16T11:15:55+09:00</updated>
+    <updated>2014-06-16T02:15:55+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/16/monami-ya-dot-mrb-static-thread-binding</id>
     <content type="html"><![CDATA[<blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
 
@@ -626,7 +636,7 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
 <!-- more -->
 
 
-<blockquote class="twitter-tweet"><p>って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/478026904457326592">June 15, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">って思っていたのに，とんでもねぇ修羅の道だったという．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/478026904457326592">June 15, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -914,11 +924,11 @@ mruby と Arduino的なライブラリの組み合わせについては，<a hre
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
     <link href="http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
-    <updated>2014-06-15T09:58:37+09:00</updated>
+    <updated>2014-06-15T00:58:37+00:00</updated>
     <id>http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
 
-<blockquote class="twitter-tweet"><p>sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -1042,9 +1052,9 @@ MB 級の RAM がオンチップになるのは時間の問題なのになぁ…
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
-    <link href="http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support/"/>
-    <updated>2014-06-15T08:45:14+09:00</updated>
-    <id>http://www.monaka.orgblog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
+    <link href="http://www.monaka.orgblog/2014/06/14/monami-ya-dot-mrb-sandbox-support/"/>
+    <updated>2014-06-14T23:45:14+00:00</updated>
+    <id>http://www.monaka.orgblog/2014/06/14/monami-ya-dot-mrb-sandbox-support</id>
     <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
 まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
@@ -1223,11 +1233,11 @@ mrb_state で使用するものとして初期化されます．</p>
   <entry>
     <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
     <link href="http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly/"/>
-    <updated>2014-05-31T18:52:30+09:00</updated>
+    <updated>2014-05-31T09:52:30+00:00</updated>
     <id>http://www.monaka.orgblog/2014/05/31/fork-will-dead-itself-exactly</id>
     <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/472033974219325440">May 29, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/monamour555">@monamour555</a> まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/472033974219325440">May 29, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -1304,7 +1314,7 @@ mruby のコア開発者なら，当たり前の知識ですよね．アテク�
   <entry>
     <title type="html"><![CDATA[機器組み込み屋がRailsアプリを出した理由]]></title>
     <link href="http://www.monaka.orgblog/2014/05/24/why-i-create-rails-app/"/>
-    <updated>2014-05-24T14:57:08+09:00</updated>
+    <updated>2014-05-24T05:57:08+00:00</updated>
     <id>http://www.monaka.orgblog/2014/05/24/why-i-create-rails-app</id>
     <content type="html"><![CDATA[<p>会社名義で出したサービスの裏話．</p>
 
@@ -1399,7 +1409,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その2)]]></title>
     <link href="http://www.monaka.orgblog/2014/05/19/funding-for-funding-2/"/>
-    <updated>2014-05-19T16:09:22+09:00</updated>
+    <updated>2014-05-19T07:09:22+00:00</updated>
     <id>http://www.monaka.orgblog/2014/05/19/funding-for-funding-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/05/19/funding-for-funding/">前回</a>の続きです．</p>
 
@@ -1493,7 +1503,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その1)]]></title>
     <link href="http://www.monaka.orgblog/2014/05/19/funding-for-funding/"/>
-    <updated>2014-05-19T14:43:18+09:00</updated>
+    <updated>2014-05-19T05:43:18+00:00</updated>
     <id>http://www.monaka.orgblog/2014/05/19/funding-for-funding</id>
     <content type="html"><![CDATA[<p><strong>社会起業を行おう，という結論に達しました．</strong></p>
 
@@ -1569,7 +1579,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ピザ屋がお酒も始めました]]></title>
     <link href="http://www.monaka.orgblog/2014/04/30/pizzafactory-meets-brew/"/>
-    <updated>2014-04-30T16:56:48+09:00</updated>
+    <updated>2014-04-30T07:56:48+00:00</updated>
     <id>http://www.monaka.orgblog/2014/04/30/pizzafactory-meets-brew</id>
     <content type="html"><![CDATA[<p>たまには技術の話．
 PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので．</p>
@@ -1704,7 +1714,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   <entry>
     <title type="html"><![CDATA[失敗分析: 債務のこと]]></title>
     <link href="http://www.monaka.orgblog/2014/04/20/postmortem-3/"/>
-    <updated>2014-04-20T23:59:59+09:00</updated>
+    <updated>2014-04-20T14:59:59+00:00</updated>
     <id>http://www.monaka.orgblog/2014/04/20/postmortem-3</id>
     <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
 という前口上は<a href="http://www.monaka.org/blog/2014/04/11/postmortem-1/">毎度のこと</a>なので省略です．</p>
@@ -1842,7 +1852,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   <entry>
     <title type="html"><![CDATA[無責任な倫理観は，'無責任な'人を殺すかもしれない]]></title>
     <link href="http://www.monaka.orgblog/2014/04/20/you-may-kill-someone/"/>
-    <updated>2014-04-20T17:10:00+09:00</updated>
+    <updated>2014-04-20T08:10:00+00:00</updated>
     <id>http://www.monaka.orgblog/2014/04/20/you-may-kill-someone</id>
     <content type="html"><![CDATA[<p>今回の日記，書くべきかどうかものすごく悩みました．
 自己擁護とギリギリの話なので．</p>
@@ -1944,7 +1954,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   <entry>
     <title type="html"><![CDATA[失敗分析:経理のこと]]></title>
     <link href="http://www.monaka.orgblog/2014/04/12/postmortem-2/"/>
-    <updated>2014-04-12T21:21:37+09:00</updated>
+    <updated>2014-04-12T12:21:37+00:00</updated>
     <id>http://www.monaka.orgblog/2014/04/12/postmortem-2</id>
     <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
 という前口上は<a href="http://www.monaka.org/blog/2014/04/11/postmortem-1/">前回と同じ</a>なので省略です．</p>
@@ -2048,7 +2058,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   <entry>
     <title type="html"><![CDATA[失敗分析:リスクのこと]]></title>
     <link href="http://www.monaka.orgblog/2014/04/11/postmortem-1/"/>
-    <updated>2014-04-11T23:02:30+09:00</updated>
+    <updated>2014-04-11T14:02:30+00:00</updated>
     <id>http://www.monaka.orgblog/2014/04/11/postmortem-1</id>
     <content type="html"><![CDATA[<p><strong>2014-04-12 リンクの追加や，ちょっとした補足</strong></p>
 
@@ -2107,7 +2117,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>既にざっくりと tweet しています．</p>
 
-<blockquote class="twitter-tweet"><p>ハイリスクな経営だったというのは，全くその通りで，そこはまったくもって自覚的だった．&#10;ニッポンの組込みシステムというガチガチの保守層にOSSをぶつける，という発想からして，ハイリスクだったわけだから．&#10;皿回しをしない人は，皿を割らない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453856186874351616">April 9, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ハイリスクな経営だったというのは，全くその通りで，そこはまったくもって自覚的だった．&#10;ニッポンの組込みシステムというガチガチの保守層にOSSをぶつける，という発想からして，ハイリスクだったわけだから．&#10;皿回しをしない人は，皿を割らない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453856186874351616">April 9, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2160,9 +2170,9 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   
   <entry>
     <title type="html"><![CDATA[社長と投資家の役割，その理解なく明日は来ない]]></title>
-    <link href="http://www.monaka.orgblog/2014/04/09/startup-and-angel/"/>
-    <updated>2014-04-09T00:30:00+09:00</updated>
-    <id>http://www.monaka.orgblog/2014/04/09/startup-and-angel</id>
+    <link href="http://www.monaka.orgblog/2014/04/08/startup-and-angel/"/>
+    <updated>2014-04-08T15:30:00+00:00</updated>
+    <id>http://www.monaka.orgblog/2014/04/08/startup-and-angel</id>
     <content type="html"><![CDATA[<p>昨日のエントリの反響は大きく，色々な意見がありました．
 多くは暖かいご支援で涙が出てきました．</p>
 
@@ -2188,7 +2198,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 <!-- more -->
 
 
-<blockquote class="twitter-tweet"><p>サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453515308435652608">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453515308435652608">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2196,7 +2206,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <blockquote><p>サポイン事業って研究開発に金出すっていってくれてるんじゃないの？なんで社長の経費が0円で怒ってるのかよくわからないんだよなぁ。</p></blockquote>
 
-<blockquote class="twitter-tweet"><p>別に怒っちゃいないのだがぬ．&#10;ポイントは，研究開発に必要な人件費が，そいつが社長という理由で0円になる根拠．&#10;加えて，申請時の見積には，社長の人件費も計上するし経産省も見て採択を決めるわけ．なのに後出しで社長の人件費は0円です，っていうのがフェアか． <a href="https://twitter.com/h_kenken">@h_kenken</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453522491638439936">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">別に怒っちゃいないのだがぬ．&#10;ポイントは，研究開発に必要な人件費が，そいつが社長という理由で0円になる根拠．&#10;加えて，申請時の見積には，社長の人件費も計上するし経産省も見て採択を決めるわけ．なのに後出しで社長の人件費は0円です，っていうのがフェアか． <a href="https://twitter.com/h_kenken">@h_kenken</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/453522491638439936">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2204,7 +2214,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>別に怒ってないです．まあ，ネットではよくある誤読です．活字には感情が出てこないですからね．</p>
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 企業の社長が研究するから金出してくださいっていのもどうかなと思いまして。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453537535856087041">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/monamour555">@monamour555</a> 企業の社長が研究するから金出してくださいっていのもどうかなと思いまして。</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453537535856087041">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2214,7 +2224,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>ん? なんか変なこと言い出して…ますね…．</p>
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/monamour555">@monamour555</a> 社長さん(経営者)は投資する側じゃないんですか？</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453539545221312512">April 8, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/monamour555">@monamour555</a> 社長さん(経営者)は投資する側じゃないんですか？</p>&mdash; hashimoto kenichi (@h_kenken) <a href="https://twitter.com/h_kenken/status/453539545221312512">April 8, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -2300,130 +2310,6 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 
 <p>怒っているわけではないのです．
 悲嘆に暮れているのですよ．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[経済産業省に引導を渡された私，やっと，経済的な死亡宣告が出ました．]]></title>
-    <link href="http://www.monaka.orgblog/2014/04/07/i-am-finally-restart-from-bung/"/>
-    <updated>2014-04-07T22:22:47+09:00</updated>
-    <id>http://www.monaka.orgblog/2014/04/07/i-am-finally-restart-from-bung</id>
-    <content type="html"><![CDATA[<p>一般的には，黙り通す人のほうが大多数な話ですが．
-業界のディープな方々は「どうなっちゃったの? 顛末がよく分からん」って永く思っていらっしゃるでしょうし，珍しい名字ですし，検索エンジンは非情ですので早晩，私の名前は出てきます．
-官報の破産情報だけ転載し続けているwebサイトとか，ありますからね．</p>
-
-<p>なので，言っちゃいます．
-わたくし，やっと破産手続き，開始しました．</p>
-
-<!-- more -->
-
-
-<ul>
-<li>平成26年(フ)第2841号</li>
-<li>平成26年(フ)第2842号</li>
-<li>平成26年(フ)第2843号</li>
-</ul>
-
-
-<p>なんで3つあるかというと，私の分．私が代表だった会社2つ分，合計3つだからです．
-ややこしいです．
-「東京地方裁判所民事第20部」でさえも，封書で誤記して，二重線訂正で送ってきましたから．</p>
-
-<h2>原因</h2>
-
-<p>まあいろいろあるのですけれど．
-致命傷となったものを下記列挙しますが，結局は，私が，経営者として未熟だったということに尽きます．
-〇〇が悪かったとは言っても，決断しハンコを押したのは，私ですから．</p>
-
-<h3>税理士への丸投げ</h3>
-
-<p>担当税理士が酷かったのを私が見抜けなかった，っていうのは，じわじわと効いてきました．
-破産管財人さんに言われて気づいたのですが，固定資産の償却が一切行われていないとか，</p>
-
-<p>回収済みの売掛金が数年に渡って残ったままだったとか．
-これは知った私も唖然としましたが，それ以上にメインバンクが激怒しました．</p>
-
-<p>そういえば，税務調査が入った時も，なんもしてくれなかったなぁ．
-国税官の早とちりで，会社としては無実だったので，私が全面的に闘いましたが．</p>
-
-<p>日々の記帳は会社(というか私)がやっていたので，両成敗の話なのですが．
-月々数万円を払って，結局何も見てもらえていなかったという．</p>
-
-<p>もとをたとれば，社員の友達が税理士事務所に勤めている，という縁故での契約だったのでした．
-そういう契約は，とても良い結果がでるか，酷いことになるか，両極端ですね．</p>
-
-<h3>サポイン事業</h3>
-
-<p>急速に資金繰りが悪くなった直接の原因は，経済産業省の「戦略的基盤技術高度化支援事業」，いわゆるサポイン事業の採択でした．</p>
-
-<p>私が代表を務めていた零細企業である，もなみソフトウェアは，典型的な，技術指向の会社でした．
-代表者である私は，会社での仕事のほぼ全ては技術者としての実務でしたし，取締役(合資会社ですから正確には有限責任社員)にもエンジニアがいます．
-会社組織なので，分担はしますが，会社の顔になるような技術の多くで，私がプロジェクトリーダとして動いていました．</p>
-
-<p>サポイン事業の申請内容には，Eclipse が技術要素として入っていました．これは，私が，というよりも申請者の中で私だけが技術内容を十分に内容を理解していました．
-当然のことながら，私はサポイン事業に100%コミットする予定で，申請書もそのようにかきました．</p>
-
-<p>しかしながら，経済産業省は，採択が決定し，その契約説明会の段になって，以下のように知らせてきました．</p>
-
-<blockquote><p>企業代表者の作業については，時間単価は 0 円とする．
-取締役級の作業者については，時間単価を減ずる．</p></blockquote>
-
-<p>どうやら，私の会社が採択される前年に，社長の単価を不当に釣り上げた事例があったようです．
-あとから事情通から聞きました．
-社長の報酬は，税法による縛りはあるものの，社長が勝手に決められますから．</p>
-
-<p>もなみソフトウェアとしては，盛大な，とばっちりを受ける格好になりました．</p>
-
-<p>説明会の席上で，机を蹴飛ばして出て行けばよかったのにと，他人には言われますし，私も今は思います．
-「事業は1年あるから，その間に別の案件を取れば帳尻あうかな．それに製品化を急げば…」など思ったのが甘かったのでした．
-アドバイザに，名だたる大手セミコンダクタ数社や自動車系企業が名を連ねていて，降りるとは言い出せなかったという，心の弱さもありました．</p>
-
-<p>結局のところ，全責任は私にあります．
-とはいえ，契約の直前になって，いきなり単価を0にしてくれといいだすというのは，社会通念上，ありえない話です．</p>
-
-<p>サポイン以前も，そんなに経営的に安定しているわけでもない会社でしたが，
-技術指向の零細である，もなみソフトウェアにトドメを刺したのは，経済産業省の事業の制度設計でした．</p>
-
-<p>経済産業省としては，社長が技術者でもあるような会社は，消えてしまえばよいと思っているのでしょうね．
-そりゃベンチャーが育たないわけですわ．</p>
-
-<h3>弁護士介入から遅れた理由</h3>
-
-<p>2012年に弁護士介入で，今になって手続き開始です．随分と間があります．</p>
-
-<p>その理由も，一つはサポイン事業です．
-サポイン事業は，お金が出る期間と，事業計画の期間にズレがあります．
-事業計画の期間が終わるまで，会社を潰せなかったというのが理由の一つです．</p>
-
-<p>あともう一つは，会社を潰す，つまり破産するにもお金がいるということです．
-少しの余力も残さず破綻したので，破産管財人に支払う予納金も用意できない
-というところまで追い詰められました．
-個人なら法テラスに頼ることもできますが，法人にはそのような支援はありません．
-この点も，今振り返れば，うまくできた気もします．
-経験値は積めましたが，もう2度と使うことは無いので，まさにトリビア，ムダ知識です．</p>
-
-<h2>この先，どうするの?</h2>
-
-<p>すでに，合同会社もなみ屋という会社を作って，今までと似たような技術分野で仕事をしています．</p>
-
-<p>1年半くらい前から，自分が作った会社の葬式の準備をしながら，新しく自分で作った会社を産み育てるという，相反する2つの作業を並行していた形になります．
-片方だけでも精神的につらい作業なので，自己が崩壊するのではと思う時もありましたが，やっと人並みの追い詰められ方になりそうです．</p>
-
-<p>ブラックリスト入りですから，強制的に無借金経営をすることになります．
-クレジットカードも作れないのでカード決済が多いIT業界では自営は無理かな，と思っていたのですが，VISAデビなど上手く使うとそれなりになんとかなるということも判りました．
-売上も社員も0からのスタートですが，肝心要の知財は残りました．</p>
-
-<p>技術分野がオープンソース・ソフトウェアだったというのは不幸中の幸いでした．
-プロプライエタリ・ソフトウェアであれば，それは会社の資産であり，継続することは不可能でした．
-オープンソースの耐リスク性を，身を持って知りました．
-そもそも会社を潰すなよ，という話ではあるのですが．</p>
-
-<p>技術がダメで潰れたとしたら，たぶん足を洗って何か別の仕事に就いたかもしれません．
-経営者としてはダメだったので，経営から足を洗うべきか真剣に考えました．
-しかし，私が持っている技術を活かせそうな経営者が，周りにいませんでした．
-無借金経営という枷がかけられている状態なら，以前のような過ちは起こしようがないかなと，自分に言い聞かせることにしました．</p>
-
-<p>経営者としては控えめにコツコツと，技術者としては以前と同様に荒ぶって，日々を過ごせればと思っています．</p>
 ]]></content>
   </entry>
   

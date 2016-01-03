@@ -9,7 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某誌の連載は「とりあえず様子見で3回くらいやってみましょうか」で始めて，今月発売の号で3回掲載になりましたので，終わりました． 担当編集の方々や読者からの反応は悪くは無かったと自負はしているのですが，もっと大枠のところで色々と思うところありまして．主に私の側の問題です． 計算機科学(工学)周りでは &hellip;">
+  <meta name="description" content="なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな，ということで解いてみた． お題 引用する． 標準出力に
+Hello World
+と出力するプログラムを作成して下さい。 ただし、数値、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +86,68 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/09/19/restricted-words/">Restricted Words</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-19T13:57:00+00:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://codeiq.jp/ace/cielavenir/q431">なんとなく気が向いた，というか，この手のプログラミングパズルにしては対応言語が多く，C言語もOKというのは珍しいな</a>，ということで解いてみた．</p>
+
+<h1>お題</h1>
+
+<p>引用する．</p>
+
+<blockquote><p>標準出力に
+Hello World
+と出力するプログラムを作成して下さい。</p>
+
+<p>ただし、数値、文字及び文字列リテラルを解答に含めることはできません。
+Perlのqqやqw、Rubyの%Q、%q、%wなども避けたほうが評価が高くなります。
+言語仕様をフル活用して下さい！</p></blockquote>
+
+<h1>解法の定石</h1>
+
+<p>定石は，数値を得て，その文字コードに変換する．
+ASCIIコードでなくEBCDICな処理系だったらどうするの? みたいなツッコミは，とりあえず採点環境が OSX だということで無視できる．</p>
+
+<p>この方針だと，1 をどのようにして得るかというのが鍵になる．
+出題者の意図は，この定石通りだった．
+回答者に送られた解説も引用可とのことなので，出題者の解説から引用する．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/19/restricted-words/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/17/what-is-hash/">ハッシュ関数をなんちゃってで理解する</a></h1>
     
     
@@ -100,7 +164,7 @@
   
 
 
-<time datetime="2013-08-17T15:11:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
+<time datetime="2013-08-17T15:11:00+00:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
         
       </p>
     
@@ -153,7 +217,7 @@
   
 
 
-<time datetime="2013-06-01T07:17:00+09:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
+<time datetime="2013-06-01T07:17:00+00:00" pubdate data-updated="true">Jun 1<span>st</span>, 2013</time>
         
       </p>
     
@@ -200,47 +264,6 @@ Android は，当然ながら，画面を押さえていますので，衝突し
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/14/onebox-tools/">OneBox リリースしました．</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-14T16:41:00+09:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ざっくりいうと，non-rooted な Android 端末で，コマンドラインツールを使える幸せな環境を得る方法，です．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/14/onebox-tools/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -282,6 +305,10 @@ Android は，当然ながら，画面を押さえていますので，衝突し
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/01/newyear/">謹賀新年</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/12/jisatsu/">とある自殺報道について</a>
       </li>
     
@@ -303,10 +330,6 @@ Android は，当然ながら，画面を押さえていますので，衝突し
     
       <li class="post">
         <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での static thread binding サポート</a>
       </li>
     
   </ul>
@@ -359,7 +382,7 @@ Android は，当然ながら，画面を押さえていますので，衝突し
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Masaki "monaka" Muranaka -
+  Copyright &copy; 2016 - Masaki "monaka" Muranaka -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

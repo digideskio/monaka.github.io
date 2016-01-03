@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xen | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org/blog/categories/xen/atom.xml" rel="self"/>
   <link href="http://www.monaka.org/"/>
-  <updated>2015-01-26T14:43:17+09:00</updated>
+  <updated>2016-01-03T06:16:41+00:00</updated>
   <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[EC2でXenのmini-osを動かす手順]]></title>
     <link href="http://www.monaka.orgblog/2014/02/04/how-to-build-ebs-image/"/>
-    <updated>2014-02-04T10:26:39+09:00</updated>
+    <updated>2014-02-04T01:26:39+00:00</updated>
     <id>http://www.monaka.orgblog/2014/02/04/how-to-build-ebs-image</id>
     <content type="html"><![CDATA[<h1>余談</h1>
 

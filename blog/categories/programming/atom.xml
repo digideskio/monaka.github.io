@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.monaka.org/"/>
-  <updated>2015-01-26T14:43:17+09:00</updated>
+  <updated>2016-01-03T06:16:41+00:00</updated>
   <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[C言語における暗黙の型変換とAPI設計]]></title>
     <link href="http://www.monaka.orgblog/2014/03/19/implicit-type-conversion-in-c/"/>
-    <updated>2014-03-19T14:06:12+09:00</updated>
+    <updated>2014-03-19T05:06:12+00:00</updated>
     <id>http://www.monaka.orgblog/2014/03/19/implicit-type-conversion-in-c</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/03/18/how-to-write-portable-api-introduction/">前口上</a>の，つづき．</p>
 
@@ -146,15 +146,17 @@ Matz 氏と私が，mruby の API についてどのように考えたのか．
   <entry>
     <title type="html"><![CDATA[C言語APIの作り方 - 前口上]]></title>
     <link href="http://www.monaka.orgblog/2014/03/18/how-to-write-portable-api-introduction/"/>
-    <updated>2014-03-18T22:00:12+09:00</updated>
+    <updated>2014-03-18T13:00:12+00:00</updated>
     <id>http://www.monaka.orgblog/2014/03/18/how-to-write-portable-api-introduction</id>
     <content type="html"><![CDATA[<h2>Twitter から</h2>
 
-<p><a href="https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a>">https://twitter.com/matsumotory/status/445772972775571456">https://twitter.com/matsumotory/status/445772972775571456</a></a></p>
+<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">この辺のやりとり勉強になるぅ <a href="https://t.co/BQzNAjSoyP">https://t.co/BQzNAjSoyP</a></p>&mdash; MATSUMOTO, Ryosuke (@matsumotory) <a href="https://twitter.com/matsumotory/status/445772972775571456">March 18, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 
 <p>というやりとりは，こちら．</p>
 
-<p><a href="https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a>">https://twitter.com/monamour555/status/445771388297564160">https://twitter.com/monamour555/status/445771388297564160</a></a></p>
+<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a> ええ，それはRuby世界からの見方ですね．C世界から見れば，const char * の長さが mrb_int になるのは危険です．SIZE_MAX と MRB_INT_MAX の大小関係は，C言語処理系に依りますから．(続</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/445771388297564160">March 18, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 
 <p>連ツイなので，前後も読んで頂ければと．</p>
 

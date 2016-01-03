@@ -9,9 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています． 設計思想に関する話です．
-一つのシステムに対して，設計思想は幾通りもあるのが普通です．
-どの思想にも，一定の理があります． 読者が何かの拍子に，軽量Ruby系実装を選ぶことになった際に &hellip;">
+  <meta name="description" content="SNS の外でご意見頂きまして． Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない はい．断片的にはtweetなどしていますし，OSX 上でのビルド環境等も(今のところ消極的に)公開しているのではありますが． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +84,58 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-24T06:05:33+00:00" pubdate data-updated="true">Jun 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>SNS の外でご意見頂きまして．</p>
+
+<blockquote><p>Monami-ya.mrb って，twitter 辺りでは目にするけれど，どんな環境で作っているのか判らない</p></blockquote>
+
+<p>はい．断片的にはtweetなどしていますし，<a href="https://bitbucket.org/monami_ya_mrb/sample-env-jsp-bfin">OSX 上でのビルド環境等も(今のところ消極的に)公開</a>しているのではありますが．</p>
+
+<p>ハードウェアがどんな感じなのかは，なかなか想像つかないという方も多いと思います．
+特に Ruby 系の方は，組み込みボードそのものに面識が無かったりするでしょうし．</p>
+
+<p><img src="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/target-all.jpg" alt="ターゲットハードウェア" /></p>
+
+<p>写真を撮ったので，並べておきます．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/">monami-ya.mrb が最小スペックを追求しない理由</a></h1>
     
     
@@ -102,7 +152,7 @@
   
 
 
-<time datetime="2014-06-18T13:21:58+09:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+<time datetime="2014-06-18T04:21:58+00:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
         
       </p>
     
@@ -151,7 +201,7 @@
   
 
 
-<time datetime="2014-06-17T13:19:03+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
+<time datetime="2014-06-17T04:19:03+00:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
         
       </p>
     
@@ -186,61 +236,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-17T11:01:52+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>とある，案件契約ではない非公式なやりとりから．
-個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
-
-<blockquote><p>mruby 自身もC言語に比べて処理に時間がかかるところに，RTOSが入るとさらに遅くなったりしないのか少し心配です．</p></blockquote>
-
-<p>個人が特定されるどころか，同じような直感を持たれる方，案外多いのではないかなと思います．
-機器組み込み業界で働いておられるエンジニアの中にもいらっしゃるのではないかな，とも．</p>
-
-<p>端的に言うと，RTOS が入ると遅くなるというのは，概ね誤解です．
-いやもちろん RTOS がゼロオーバヘッドだと言っているわけではありません．</p>
-
-<p>いまや<a href="http://www.monami-ya.jp/product/monami-ya.mrb/about/index.html">会社の製品の機能として提供されている部分</a>なので，本来なら会社の公式ページに書くべきところですが，そうすると定量計測してホワイトペーパーにしないと格好がつきません．
-そこまで喫緊の話でもない(非公式なやりとりですし)ので，こちらに書いておきます．</p>
-
-<h2>RTOS とは何か?</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">Read on &rarr;</a>
     </footer>
   
 
@@ -288,6 +283,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/01/newyear/">謹賀新年</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/12/jisatsu/">とある自殺報道について</a>
       </li>
     
@@ -309,10 +308,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/17/rtos-makes-mruby-slow-p/">RTOS は monami-ya.mrb を遅くするか?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での static thread binding サポート</a>
       </li>
     
   </ul>
@@ -365,7 +360,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Masaki "monaka" Muranaka -
+  Copyright &copy; 2016 - Masaki "monaka" Muranaka -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

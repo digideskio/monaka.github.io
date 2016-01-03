@@ -4,7 +4,7 @@
   <title><![CDATA[Category: FLOSS | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org/blog/categories/floss/atom.xml" rel="self"/>
   <link href="http://www.monaka.org/"/>
-  <updated>2015-01-26T14:43:17+09:00</updated>
+  <updated>2016-01-03T06:16:41+00:00</updated>
   <id>http://www.monaka.org/</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[便利な世の中になったのに]]></title>
-    <link href="http://www.monaka.orgblog/2014/02/15/does-it-become-easier/"/>
-    <updated>2014-02-15T00:00:00+09:00</updated>
-    <id>http://www.monaka.orgblog/2014/02/15/does-it-become-easier</id>
+    <link href="http://www.monaka.orgblog/2014/02/14/does-it-become-easier/"/>
+    <updated>2014-02-14T15:00:00+00:00</updated>
+    <id>http://www.monaka.orgblog/2014/02/14/does-it-become-easier</id>
     <content type="html"><![CDATA[<p>特定の話題にインスパイヤされ，いくつか似た話題で連投した．
 けれども，これで一旦打ち止め．
 本稿は，アッサリと進め，終わる．
@@ -113,11 +113,12 @@
   <entry>
     <title type="html"><![CDATA[howto と way]]></title>
     <link href="http://www.monaka.orgblog/2014/02/14/way-and-howto/"/>
-    <updated>2014-02-14T21:49:23+09:00</updated>
+    <updated>2014-02-14T12:49:23+00:00</updated>
     <id>http://www.monaka.orgblog/2014/02/14/way-and-howto</id>
     <content type="html"><![CDATA[<h2>一言で纏めると</h2>
 
-<p><a href="https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a>">https://twitter.com/monamour555/status/433831823135621120">https://twitter.com/monamour555/status/433831823135621120</a></a></p>
+<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">一時期流行った，〇〇やらない人のtweetと〇〇やる人のtweetみたいな話だもんなぁ．「OSSやりたいです」は一生やらない．「パッチ投げました」でしか前には進めない．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/433831823135621120">February 13, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 
 <p>みたいなエントリは，地べた這いつくばっている私みたいな雑魚が書くのはいいけれど，
 OSSコミュニティの後進育成とか考えているひとは思案のしどころですよね，てな話．</p>
