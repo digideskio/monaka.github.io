@@ -9,9 +9,8 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="Twitter にかまけている間に1年半も放置していたのですねぇ．
-何か書こう．あとで．
-">
+  <meta name="description" content="書く気になった背景 私は、プログラマだ。なんだかんだで職歴は20年を超えた。
+同時に、かつて10年ほど小さなソフトハウスを経営していたし、今も代表1名の法人を持っている。 そんな経歴により、プログラマ諸氏からは概ねプログラマとして接していただき、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +85,59 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/01/03/mismatch-1/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-03T14:39:17+09:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>書く気になった背景</h1>
+
+<p>私は、プログラマだ。なんだかんだで職歴は20年を超えた。
+同時に、かつて10年ほど小さなソフトハウスを経営していたし、今も代表1名の法人を持っている。</p>
+
+<p>そんな経歴により、プログラマ諸氏からは概ねプログラマとして接していただき、経営者諸氏からは稀に経営者としての意見を求められる時がある。
+2つの異なる立場についてほぼ同時並行で見聞きする機会に恵まれるのは、おそらく珍しいことだろう。
+そんな経験の中で思ったことを、書き散らしておく。</p>
+
+<p>もちろん、守秘義務や職業倫理というものもあり，複数の事案をミックスし曖昧にしてある。
+特定の企業についての邪推は無用。ひとつよしなに。</p>
+
+<h1>中堅IT業界における、人材受給のミスマッチ</h1>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/03/mismatch-1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/01/newyear/">謹賀新年</a></h1>
     
     
@@ -102,7 +154,7 @@
   
 
 
-<time datetime="2016-01-01T00:00:00+00:00" pubdate data-updated="true">Jan 1<span>st</span>, 2016</time>
+<time datetime="2016-01-01T09:00:00+09:00" pubdate data-updated="true">Jan 1<span>st</span>, 2016</time>
         
       </p>
     
@@ -139,7 +191,7 @@
   
 
 
-<time datetime="2014-08-12T12:14:21+00:00" pubdate data-updated="true">Aug 12<span>th</span>, 2014</time>
+<time datetime="2014-08-12T21:14:21+09:00" pubdate data-updated="true">Aug 12<span>th</span>, 2014</time>
         
       </p>
     
@@ -153,77 +205,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/08/12/jisatsu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-27T00:29:32+00:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p>Arduino を始めとする，省ピンのマイコンを使っている方にはピンと来ない話かもしれませんが．</p>
-
-<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/1row-boards.jpg" alt="1列ピンのCPUボードたち" /></p>
-
-<p>ある程度のピン数を持つ，機器組み込み向けのCPUボードには，ベースボードの接続用に，2列のヘッダピンを使っています．</p>
-
-<p>作業机にあった，CPUボードを幾つか見繕ってきました．こんな感じ．</p>
-
-<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/2row-boards.jpg" alt="2列ピンのCPUボードたち" /></p>
-
-<p>組み込み向けのCPUというのは，センサやらアクチュエータやらを操作することが多く，やたらとI/O端子がついています．
-それらを一列に配置すると，基板のサイズが大きくなってしまいます．</p>
-
-<p>そういう理由は解るのですが，一方で，試作する側としては2列では困る時があります．
-<strong>2列だとブレッドボードに刺せないのです．ショートします．</strong></p>
-
-<p>最初からきちんとしたベースボードの基板を起こしたり，ユニバーサル基板で頑張ればよいのではあります．
-しかし，ブレッドボードはお手軽です．一度楽を味わってしまうと，人間は後戻りできません．</p>
-
-<p>そんなわけで，ケーブルを自作したりするのですが，それもなかなか骨の折れる作業です．</p>
-
-<p>手抜きをして，接触が不安定になりがちなメスのジャンパワイヤーを使って，3D配線を行うという暴挙に出たりします．
-それはいけません．</p>
-
-<p><img src="/blog/2014/06/27/an-application-rpi-gpio-adapter/anti_pattern.jpg" alt="アンチパターン" /></p>
-
-<p>など考えながら，CPUボードを仕舞おうとして，私の会社で製造販売している製品が目に入りました．</p>
-
-<h2>RaspberryPi対応GPIO変換基板キット</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">Read on &rarr;</a>
     </footer>
   
 
@@ -271,6 +252,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/16/cellphone-to-automotive-relay/">ガラケー。のち、車載システム</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/03/mismatch-3/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (3)</a>
       </li>
     
@@ -292,10 +277,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
       </li>
     
   </ul>

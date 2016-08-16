@@ -9,9 +9,9 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="起業したいという方と話をしていると，必ず出るのが，雇用に関する話． 曰く，「起業をしたいのに，社員候補が居ない．」
-経営と雇用を混同している起業志望者の．典型だ． 別のパターンもある．
-同年代で先に起業した人たちの「社員の定着が悪い」とぼやくのを聞き，起業前から心配している． &hellip;">
+  <meta name="description" content="余談 最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている． 一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない． &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,74 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/02/04/how-to-build-ebs-image/">EC2でXenのmini-osを動かす手順</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-04T10:26:39+09:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>余談</h1>
+
+<p>最近，mruby を動作させる超軽量クラウドOSなんてのを，なんちゃってで作っている．
+ざっくりとした経過は，先週末くらいからtwitterで呟いている．</p>
+
+<p>一応，会社を持っているので，そちらで展開することは不可能ではなさげではある．
+でも開発資金もないし市場も立ち上がっている風でもない．ネタ系で済ましておいたほうが，傷を負わなくて済むような気もする．
+資金力が十分にあるならば，大学に持ちかけて共同研究でも始めちゃうようなネタという気もするのだが．
+思案の最中．
+うだつが上がらんと，ほんと，なんにもできないねぇ．
+やだやだ．</p>
+
+<p>閑話休題．</p>
+
+<h1>まくら</h1>
+
+<p>そのOSは，Xen の mini-os (厳密にいうと stubdom)をベースにしているので，Amazon EC2 でも動作する．
+Amazon が提供していないカーネルを独自に EC2 で動作させるためには，どうやら EBS ボリュームを作らねばならないらしい．
+私は，AWS の単なるユーザで，細かいところはあまり詳しくない．
+よって，EBS ボリューム以外での起動方法もあるのかもしれないが…．</p>
+
+<p>手順は本家ヘルプページに割と細かく説明されている．
+解説ブログも，ググれば山盛り．
+さすがは，みんな大好きAWS．</p>
+
+<p>だがしかし，最近になって，AWS は，管理ツールを AWS-CLI というものに統合しようとしている一方，本家ヘルプページは，AWS-CLI への対応が十分にできていない．</p>
+
+<p>そこで，本稿では，AWS-CLI で mini-os をブートさせるための手順を記す．</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/04/how-to-build-ebs-image/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/02/03/keep-good-company/">Keep Good Company</a></h1>
     
     
@@ -102,7 +170,7 @@
   
 
 
-<time datetime="2014-02-03T06:30:22+00:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
+<time datetime="2014-02-03T15:30:22+09:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2014</time>
         
       </p>
     
@@ -142,7 +210,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/31/my-fault/">参加しないと見せないよ．を作った罪</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/01/my-fault/">参加しないと見せないよ．を作った罪</a></h1>
     
     
       <p class="meta">
@@ -158,7 +226,7 @@
   
 
 
-<time datetime="2014-01-31T23:28:21+00:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
+<time datetime="2014-02-01T08:28:21+09:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
         
       </p>
     
@@ -167,7 +235,7 @@
 
   <div class="entry-content"><p>140字以内で纏めると，こういうこと．</p>
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」&#10;あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/429207095041224704">January 31, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">「Q. 決定プロセスを何かで公開してほしい」「A. 軽量Rubyフォーラムに加入すると参加する事ができる。」<br>あかん，TOPPERSが抱える数少ないデスパターンを，完全踏襲しとる．w <a href="http://t.co/bVOtyNMrs9">http://t.co/bVOtyNMrs9</a></p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/429207095041224704">January 31, 2014</a></blockquote>
 
 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -188,58 +256,7 @@
   
   
     <footer>
-      <a rel="full-article" href="/blog/2014/01/31/my-fault/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/31/memorandom-about-mruby/">今日現在のmrubyについて雑想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-31T01:28:44+00:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>なんとなく，今日現在の mruby について，私自身が薄ぼんやりと考えていることを書いておく．
-なんでこのタイミングなのかに，あまり深い意味はない．
-一つのきっかけとして，イベントはある．
-mruby を話題の中心に据えたイベントが，<a href="http://www.digitalfukuoka.jp/events/30?locale=ja">今日の午後開催される</a>．
-私も聴講者として参加する予定だ．
-参加した後だと，その感想と混じる．
-なんとなく私見の純度が下がるかな，とか．</p>
-
-<p>私は，何を書いても，誰かや何かをdisっているように受け取られがちだ．
-けれども，本稿もdisりの意図は全くない．
-徒然なるままに．</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/31/memorandom-about-mruby/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/02/01/my-fault/">Read on &rarr;</a>
     </footer>
   
 
@@ -287,6 +304,10 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/16/cellphone-to-automotive-relay/">ガラケー。のち、車載システム</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/03/mismatch-3/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (3)</a>
       </li>
     
@@ -308,10 +329,6 @@ mruby を話題の中心に据えたイベントが，<a href="http://www.digita
     
       <li class="post">
         <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
       </li>
     
   </ul>

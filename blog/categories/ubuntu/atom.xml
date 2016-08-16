@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2016-01-03T08:34:45+00:00</updated>
+  <updated>2016-08-16T11:24:53+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -16,14 +16,13 @@
   <entry>
     <title type="html"><![CDATA[Launchpad PPA 登録の罠]]></title>
     <link href="http://www.monaka.org/blog/2013/05/05/launchpad-ppa/"/>
-    <updated>2013-05-05T13:08:00+00:00</updated>
+    <updated>2013-05-05T13:08:00+09:00</updated>
     <id>http://www.monaka.org/blog/2013/05/05/launchpad-ppa</id>
     <content type="html"><![CDATA[<p>Ubuntu にオレオレパッケージを追加する PPA．
 発想は素晴らしいのですがが，そのホスティングをしている Launchpad の UI のおかげで悩みまくりました．
 断続的ではありますが，カレンダー上は数ヶ月に渡り悩んだ感じです．</p>
 
-<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Launchpadへ投げたPPAのソースコードがAcceptされた後は，一気に視界が開けるんだな．&#10;たぶん大半は取っ掛かりも掴めないまま脱落し，視界が開けた人は，喉もの過ぎれば，ってやつでブログに残さない．&#10;…私もたぶんブログに残さない．(汗</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/330681120582688768">May 4, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p><a href="https://twitter.com/monamour555/status/330681120582688768">https://twitter.com/monamour555/status/330681120582688768</a>">https://twitter.com/monamour555/status/330681120582688768">https://twitter.com/monamour555/status/330681120582688768</a></a></p>
 
 <p>とは書いたものの，それではあんまりなので，視界が開ける直前にどんなミスをしたのかを書いておきます．</p>
 

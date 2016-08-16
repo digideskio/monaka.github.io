@@ -5,13 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>パスワードもユーザ名も正しいはずなのに，の巻 - もなもなもなかのページ</title>
+  <title>便利な世の中になったのに - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="ことの起こり AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
-難しい話ではない． だけど繋がらない． あれれ? だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
-IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
+  <meta name="description" content="特定の話題にインスパイヤされ，いくつか似た話題で連投した．
+けれども，これで一旦打ち止め．
+本稿は，アッサリと進め，終わる．
+オレオレ定義を始めると，長くなるし焦点はボケるし，ロクなことがない． 本稿の契機(元ネタ)は「未来のいつか/hyoshiokの日記」の「まつもとゆきひろのコピーは作れるのか &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +21,7 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org/blog/2014/01/14/cant-login-to-gmail-from-commandline/">
+  <link rel="canonical" href="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +84,7 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
   <header>
     
-      <h1 class="entry-title">パスワードもユーザ名も正しいはずなのに，の巻</h1>
+      <h1 class="entry-title">便利な世の中になったのに</h1>
     
     
       <p class="meta">
@@ -99,109 +100,102 @@ IMAP は有効にしたし，2段階認証はやっていないし． &hellip;">
   
 
 
-<time datetime="2014-01-14T16:33:07+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+<time datetime="2014-02-15T00:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h1>ことの起こり</h1>
+<div class="entry-content"><p>特定の話題にインスパイヤされ，いくつか似た話題で連投した．
+けれども，これで一旦打ち止め．
+本稿は，アッサリと進め，終わる．
+オレオレ定義を始めると，長くなるし焦点はボケるし，ロクなことがない．</p>
 
-<p>AWS EC2上に，OTRS をインストールし，　Gmail からのメールをポーリングで読むように設定した．
-難しい話ではない．</p>
+<p>本稿の契機(元ネタ)は「<a href="http://d.hatena.ne.jp/hyoshiok/">未来のいつか/hyoshiokの日記</a>」の「<a href="http://d.hatena.ne.jp/hyoshiok/20140212/p1">まつもとゆきひろのコピーは作れるのか。</a>」および，その反響 tweet から．</p>
 
-<p>だけど繋がらない． あれれ?</p>
+<p>元ネタ曰く，</p>
 
-<p>だって，先日の日記エントリの通り，Ruby では問題なくできたぜ?
-IMAP は有効にしたし，2段階認証はやっていないし．</p>
-
-<h1>Perl 書いた IMAP クライアントで試してみる．</h1>
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。だけど、クラウドのサービスを使えば、それは1年に短縮できるとまつもとさんは言う。mrubyも成功したので、自分の方法論をまねすれば誰でもできるのになんで後進がいないのだろうか？と彼は問う。</p></blockquote>
 
 <!-- more -->
 
 
-<p>仕方がないな．
-OTRS は (Ruby ではなく) Perl で大半が書かれている．
-それと似たような記述でログインをテストしてみる．
-こんな感じ．</p>
+<h2>1日なのか，20年+1日なのか</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>use strict;
-</span><span class='line'>use warnings;
-</span><span class='line'>use Net::IMAP::Simple;
-</span><span class='line'>
-</span><span class='line'>use IO::Socket::SSL;
-</span><span class='line'>
-</span><span class='line'># Create the object
-</span><span class='line'>my $imap = Net::IMAP::Simple-&gt;new('imap.gmail.com', use_ssl =&gt; 1, port =&gt; 993) ||
-</span><span class='line'>  die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
-</span><span class='line'>
-</span><span class='line'># Log on
-</span><span class='line'>if (!$imap-&gt;login('___________@gmail.com','_p_a_s_s_w_o_r_d_', debug =&gt; 1)) {
-</span><span class='line'>  print STDERR "Login failed: " . $imap-&gt;errstr . "\n";
-</span><span class='line'>  exit(64);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<p>ここで唐突に，話題を移す．</p>
 
+<p>Ruby のような，世界の誰もが使うような素晴らしいソフトウェアの話 <strong>ではない</strong> ．
+世界の片隅ニッポンのとある休日に起きた，一人ハッカソンのお話．</p>
 
-<p>実行…あれれ?</p>
+<p>経緯の詳細は <a href="http://togetter.com/li/505758">togetter に纏まっている</a>．
+リンク先を読む必要は無い．
+「iPhone では存在するアプリが，Android には無い」という tweet を見て，うだつのあがらないAndroid好きエンジニアが立ち上があった，という．そこら辺に転がっているような話だ．
+で，結局，8時間かそこらで実働モックアップはできあがった．</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ubuntu@ip-10-0-0-208:~$ perl test.pl
-</span><span class='line'>Login failed: [ALERT] Please log in via your web browser: http://support.google.com/mail/accounts/bin/answer.py?answer=78754 (Failure)</span></code></pre></td></tr></table></div></figure>
+<p>そのときのtweetで印象的だったものがあった．
+検索したけれど，出てこなかったので趣旨だけ要約する．</p>
 
+<blockquote><p>これって，1日仕事だけれど，25年+1日だよね．</p></blockquote>
 
-<p>んんん?</p>
+<p>そう．確かにAndroid版アプリは1日だけれども，そもそも25年前に宇宙研でパルサートラッキングに関わっていなければNMEAって何??? みたいな話だし，同時期からJavaに触れていたのは強みだし，震災がなければGPS連動アプリを作る経験も無かったし．
+8時間の背後には，亀みたいなノロマな伸びだったかも知れないが，25年がある．</p>
 
-<p>ブラウザでアクセスせよ，とな．
-でも，この動作環境，Ubuntu Server で，デスクトップ環境入ってないよ．もちろんブラウザも．</p>
+<p>その25年を隠して，1日で作れたぞ，と言ったとしたら，ちょっとした詐欺だ．</p>
 
-<p>手元のブラウザで事態を把握してみようと試みたところ，どうやらイカガワシイと思われるアクセスを遮断しているようだ．
-<img src="/blog/2014/01/15/screen-shot-2014-01-15.png" alt="赤い画面でお怒りのGmail様" /></p>
+<p>オッサンになると，ときどき，こういう小さな詐欺を働く．
+悪意は無いんだ．許しておくれ．</p>
 
-<h1>socksサーバを立ってて逃げ道を作る．</h1>
+<h2>10年なのか，10+1年なのか</h2>
 
-<p>w3m など，文字ターミナル向けブラウザを使ってアクセスすれば良いのかもしれない．
-でも，たぶん，Googleのことだから，JavaScriptとか入っていていろいろ面倒なことになりそうだ．</p>
+<p>話を元に戻そう．</p>
 
-<p>なので，ssh についている socks サーバ機能を用いる．
-手元の端末から，次のようにして，1080 版をsocksの口にする．</p>
+<blockquote><p>Rubyが世界中で使われるようになるまで10年かかった。</p></blockquote>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh -D1080 server.example.com</span></code></pre></td></tr></table></div></figure>
+<p>(中略)</p>
 
+<blockquote><p>それは1年に短縮できる</p></blockquote>
 
-<p>server.example.com は，実際には，EC2のインスタンス．
-ここで指定した1080番ポートはlocalhostのもの．だから，EC2側のincomingはsshのポート，TCP 22番だけ開いていればよい．</p>
+<p>(中略)</p>
 
-<p>そして，手元のブラウザのproxy設定．localhost:1080 で socks を経由するよう設定する．</p>
+<blockquote><p>mrubyも成功した</p></blockquote>
 
-<p>ここまでで下ごしらえは完了．
-手元のブラウザから，Gmail へアクセスする．
-あとは…なりゆきでアクセスすれば，お怒りが解けた…はず．
-(2月に入ってからこの稿を書き上げているので，記憶が既に曖昧…)</p>
+<p>(mruby が成功したかどうかの断定には，若干の猶予が欲しい気もするが)概ね事実だと思う．
+1年に短縮できる．それは私も思う．10年前を知っているから．
+そして実際にmrubyの発展は1年だ．</p>
 
-<h1>まとめっぽい何か</h1>
+<p>全てが便利になった．</p>
 
-<p>ssh の -D オプションは，ヘッドレスサーバを管理している時に割と便利なので，覚えておくと何かと役に立つ．</p>
+<p>若い人に共感を得てもらうのは難しいけれど，便利になったのだよ．本当に．あらゆるものが．</p>
 
-<p>こういう対策をGmail側がしなきゃいけないくらい，botからの不正アクセスが多いってことなのだろうなぁ…．
-面倒だ，と不満を漏らしてはいけないのだろう．</p>
+<h2>さてはて</h2>
+
+<p>私の場合，25年+1日について指摘してくれた若者に対して，アタマを掻いた．
+そして少しだけ開き直った．その25年分こそがオッサンの強みだと．</p>
+
+<h2>スタートラインは，どこ?</h2>
+
+<p>同じスタートラインに立っていないのに，お前ら恵まれているのについてこない，っていうのはフェアじゃあない．
+私は，そう思う．</p>
+
+<p><em>1年でできたの? 10+1年なの?</em></p>
+
+<p>フェアでないものに，若い才能は集まらない．
+私の知る限りでは．</p>
+
+<p>しかし，言うまでもなく，私は，グローバルソフトウェアなんて縁遠い．
+せいぜい，世界中で演奏されているであろう楽器群に搭載されているRTOSと，
+輸出も視野にあるらしい宇宙機に組み込まれているはずのブートローダモニタくらいが，私の設計物だ．
+それらの製品は全体として素晴らしいが，私の意識からは，縁遠い．
+世界に対し，OSという，高々部品でしかないものを提供したに過ぎない．
+組込み屋の世界のソフトは，どのように評価されたとしても，高々部品だ．</p>
+
+<p>なので，グローバルソフトウェアの文脈では，違う意識が通用するのかもしれない．</p>
+
+<h2>なんにせよ</h2>
+
+<p>成功する若者を増やそうという試みそのものには，賛成ではある．
+成功した人たちに，ぜひ頑張っていただきたい．心から．</p>
 </div>
 
 
@@ -224,16 +218,22 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
   
 
 
-<time datetime="2014-01-14T16:33:07+00:00" pubdate data-updated="true">Jan 14<span>th</span>, 2014</time>
+<time datetime="2014-02-15T00:00:00+09:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/floss/'>FLOSS</a>, <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/01/14/cant-login-to-gmail-from-commandline/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/01/14/cant-login-to-gmail-from-commandline/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/01/14/cant-login-to-gmail-from-commandline/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2014/02/15/does-it-become-easier/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -246,10 +246,10 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/14/gmail-imap-sync-with-ruby/" title="Previous Post: Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法">&laquo; Ruby を使ってGmailの内容を別のアカウントのGmailへ移す方法</a>
+        <a class="basic-alignment left" href="/blog/2014/02/14/way-and-howto/" title="Previous Post: howto と way">&laquo; howto と way</a>
       
       
-        <a class="basic-alignment right" href="/blog/2014/01/28/best-way-to-employ-on-startup-stage/" title="Next Post: スタートアップで優秀な技術者を探す方法">スタートアップで優秀な技術者を探す方法 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/02/16/media-literacy-saves-you/" title="Next Post: メディア・リテラシと，生存">メディア・リテラシと，生存 &raquo;</a>
       
     </p>
   </footer>
@@ -288,6 +288,10 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/16/cellphone-to-automotive-relay/">ガラケー。のち、車載システム</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/03/mismatch-3/">なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (3)</a>
       </li>
     
@@ -309,10 +313,6 @@ OTRS は (Ruby ではなく) Perl で大半が書かれている．
     
       <li class="post">
         <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/">Monami-ya.mrb の開発環境(2014年6月版)</a>
       </li>
     
   </ul>

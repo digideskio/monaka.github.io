@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2016-01-03T08:34:45+00:00</updated>
+  <updated>2016-08-16T11:24:53+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[RaspberryPi の GPIO アダプタは，便利]]></title>
     <link href="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/"/>
-    <updated>2014-06-27T00:29:32+00:00</updated>
+    <updated>2014-06-27T09:29:32+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -121,7 +121,7 @@
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
     <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
-    <updated>2014-06-24T06:05:33+00:00</updated>
+    <updated>2014-06-24T15:05:33+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
@@ -221,7 +221,7 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   <entry>
     <title type="html"><![CDATA[RTOS は monami-ya.mrb を遅くするか?]]></title>
     <link href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/"/>
-    <updated>2014-06-17T02:01:52+00:00</updated>
+    <updated>2014-06-17T11:01:52+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p</id>
     <content type="html"><![CDATA[<p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
@@ -327,12 +327,11 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
     <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
-    <updated>2014-06-15T00:58:37+00:00</updated>
+    <updated>2014-06-15T09:58:37+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
 
-<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p><a href="https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a>">https://twitter.com/monamour555/status/477722322862759938">https://twitter.com/monamour555/status/477722322862759938</a></a></p>
 
 <p>など言って，実装理由を詳説しないのは，ちょっとイケ好かないかなということで．</p>
 
@@ -452,9 +451,9 @@ MB 級の RAM がオンチップになるのは時間の問題なのになぁ…
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
-    <link href="http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support/"/>
-    <updated>2014-06-14T23:45:14+00:00</updated>
-    <id>http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support</id>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/"/>
+    <updated>2014-06-15T08:45:14+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
     <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
 まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 

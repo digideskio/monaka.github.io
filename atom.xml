@@ -4,7 +4,7 @@
   <title><![CDATA[もなもなもなかのページ]]></title>
   <link href="http://www.monaka.org//atom.xml" rel="self"/>
   <link href="http://www.monaka.org//"/>
-  <updated>2016-01-03T08:34:45+00:00</updated>
+  <updated>2016-08-16T11:24:53+09:00</updated>
   <id>http://www.monaka.org//</id>
   <author>
     <name><![CDATA[Masaki "monaka" Muranaka]]></name>
@@ -14,9 +14,72 @@
 
   
   <entry>
+    <title type="html"><![CDATA[ガラケー。のち、車載システム]]></title>
+    <link href="http://www.monaka.org/blog/2016/08/16/cellphone-to-automotive-relay/"/>
+    <updated>2016-08-16T11:00:00+09:00</updated>
+    <id>http://www.monaka.org/blog/2016/08/16/cellphone-to-automotive-relay</id>
+    <content type="html"><![CDATA[<p>ずいぶんと昔のこと。
+2年間、いや、もう少し長いかもしれない。特定派遣認可の技術系の会社に在籍したことがある。
+国立系研究所の技能補佐という微妙な職歴を捨て、どこかに派遣でもされてリセットしようと思っていたのだが、なぜか面接で社長に気に入られたらしい。
+とある地方の県庁所在地での支店の立ち上げ、携帯電話キャリアとのコラボ企画、技術営業・技術経営のイロハとなるような経験を積ませてもらった。</p>
+
+<p>そんな己のキャリアとは全く無関係に、ちょうどその頃、携帯電話業界では変革が起きていた。
+i-mode の登場だった。</p>
+
+<!-- more -->
+
+
+<p>それ以前の端末に比べると、i-mode 対応端末のソフトウェア規模は格段に大きい。
+そして、(新しいものだから当然なのだが)流用できる過去資産も、ほとんど無い。
+いきおい、人足不足になる。</p>
+
+<p>最初は</p>
+
+<blockquote><p>C言語ができるエンジニアが欲しい。Hello world が作れる程度でも欲しい。現場で教えるから。</p></blockquote>
+
+<p>そのうち</p>
+
+<blockquote><p>日本語がわかってキーボードが打てるなら、それでもいいや。あと残業が平気な人</p></blockquote>
+
+<p>開発規模が膨大になったとはいえ、その時点では、今から考えればヒヨコ並みの小ささではある。
+とにかく人手。人手が揃えばなんとかなる。</p>
+
+<p>派遣系および偽装請負系、特に地方のソフトウェア会社クラスタにとっては、特需的だった。
+まだ日本の家電系メーカは資金に余裕があったし。
+地方の銀行が潰れたりして、組み込みシステム以外のプログラマが若干あまり気味だったりもしていたし。</p>
+
+<p>エンジニアの給与は、時給だけで言うなら昔も今も割と良い。
+いろいろな背景の人が面接にやってくる。
+エンジニアとしての適性に疑問符が付く場合でも、採用になったりもしていた。
+とにかく人を集めてくるだけでお金がまわっていく。そこにはソフトウェア工学なんてものは無かった。</p>
+
+<p>「人を集めて放り込むだけ。ちょろい仕事でみんなハッピー、イイねイイね!」などと思ったりもした。
+…坊やだったからさ。</p>
+
+<p>あれから 20年弱。
+日本の携帯電話業界がどうなったかは、業界に身を置かなくても、専業主婦でも高校生でも伝え聞いているだろう。</p>
+
+<p>ガラケーの進化に伴うソフトウェア規模の爆発、開発者たちのデスマーチ。
+そして、iOS と Android という、きちんとしたソフトウェア・プラットフォームによる、ガラケーの殲滅。</p>
+
+<p>今は、後悔している。
+当時、何ができたということも無いし、あれで確かに経済は回り幸せを掴んだ人も居たのだけれども。</p>
+
+<p>そして。</p>
+
+<p>同じような構図が、また日本のソフトウェア業界で起ころうとしているように思えている。</p>
+
+<p>今回は、車載ソフトウェアという分野で。</p>
+
+<p>繰り返されることの善し悪しは、正直、よくわからない。
+ただ、言える。繰り返されそうだということだけは。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (3)]]></title>
     <link href="http://www.monaka.org/blog/2016/01/03/mismatch-3/"/>
-    <updated>2016-01-03T06:36:08+00:00</updated>
+    <updated>2016-01-03T15:36:08+09:00</updated>
     <id>http://www.monaka.org/blog/2016/01/03/mismatch-3</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2016/01/03/mismatch-1/">(1)</a> <a href="http://www.monaka.org/blog/2016/01/03/mismatch-2/">(2)</a></p>
 
@@ -98,7 +161,7 @@
   <entry>
     <title type="html"><![CDATA[なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (2)]]></title>
     <link href="http://www.monaka.org/blog/2016/01/03/mismatch-2/"/>
-    <updated>2016-01-03T06:35:57+00:00</updated>
+    <updated>2016-01-03T15:35:57+09:00</updated>
     <id>http://www.monaka.org/blog/2016/01/03/mismatch-2</id>
     <content type="html"><![CDATA[<p>なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか。
 <a href="http://www.monaka.org/blog/2016/01/03/mismatch-1/">さきほど</a>は、本稿における「中堅IT企業」を定義し、その企業群が少なくとも統計資料やマスコミ発表資料では活発で伸びていることを紹介した。
@@ -212,7 +275,7 @@ DBサーバを立て、Micro PaaS を立て、Excelデータベースは速成�
   <entry>
     <title type="html"><![CDATA[なぜ日本の「中堅IT企業」は優秀なプログラマを囲いきれないのか (1)]]></title>
     <link href="http://www.monaka.org/blog/2016/01/03/mismatch-1/"/>
-    <updated>2016-01-03T05:39:17+00:00</updated>
+    <updated>2016-01-03T14:39:17+09:00</updated>
     <id>http://www.monaka.org/blog/2016/01/03/mismatch-1</id>
     <content type="html"><![CDATA[<h1>書く気になった背景</h1>
 
@@ -289,7 +352,7 @@ DBサーバを立て、Micro PaaS を立て、Excelデータベースは速成�
   <entry>
     <title type="html"><![CDATA[謹賀新年]]></title>
     <link href="http://www.monaka.org/blog/2016/01/01/newyear/"/>
-    <updated>2016-01-01T00:00:00+00:00</updated>
+    <updated>2016-01-01T09:00:00+09:00</updated>
     <id>http://www.monaka.org/blog/2016/01/01/newyear</id>
     <content type="html"><![CDATA[<p>Twitter にかまけている間に1年半も放置していたのですねぇ．
 何か書こう．あとで．</p>
@@ -299,7 +362,7 @@ DBサーバを立て、Micro PaaS を立て、Excelデータベースは速成�
   <entry>
     <title type="html"><![CDATA[とある自殺報道について]]></title>
     <link href="http://www.monaka.org/blog/2014/08/12/jisatsu/"/>
-    <updated>2014-08-12T12:14:21+00:00</updated>
+    <updated>2014-08-12T21:14:21+09:00</updated>
     <id>http://www.monaka.org/blog/2014/08/12/jisatsu</id>
     <content type="html"><![CDATA[<p>とある事件により，自殺した研究者について．そしてその行為を否定する，特定マスコミ関係者について．</p>
 
@@ -330,7 +393,7 @@ DBサーバを立て、Micro PaaS を立て、Excelデータベースは速成�
   <entry>
     <title type="html"><![CDATA[RaspberryPi の GPIO アダプタは，便利]]></title>
     <link href="http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter/"/>
-    <updated>2014-06-27T00:29:32+00:00</updated>
+    <updated>2014-06-27T09:29:32+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/27/an-application-rpi-gpio-adapter</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -435,7 +498,7 @@ DBサーバを立て、Micro PaaS を立て、Excelデータベースは速成�
   <entry>
     <title type="html"><![CDATA[Monami-ya.mrb の開発環境(2014年6月版)]]></title>
     <link href="http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb/"/>
-    <updated>2014-06-24T06:05:33+00:00</updated>
+    <updated>2014-06-24T15:05:33+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/24/my-env-for-developing-monami-ya-dot-mrb</id>
     <content type="html"><![CDATA[<p>SNS の外でご意見頂きまして．</p>
 
@@ -535,7 +598,7 @@ STM32F4-discoverty は .NET-MF は走りますが，uClinux が走らないで�
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が最小スペックを追求しない理由]]></title>
     <link href="http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size/"/>
-    <updated>2014-06-18T04:21:58+00:00</updated>
+    <updated>2014-06-18T13:21:58+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/18/why-monami-ya-dot-mrb-dont-pursure-minimum-size</id>
     <content type="html"><![CDATA[<p>本稿は，軽量Rubyを軸にしたソリューションのアーキテクトとして，私はこう考えました，ということを述べています．</p>
 
@@ -649,7 +712,7 @@ monami-ya.mrb での各種拡張を手掛ける際に，私は，そう考えて
   <entry>
     <title type="html"><![CDATA[なぜ monami-ya.mrb は RTOSとバインドするのか]]></title>
     <link href="http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos/"/>
-    <updated>2014-06-17T04:19:03+00:00</updated>
+    <updated>2014-06-17T13:19:03+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/17/why-monami-ya-dot-mrb-loves-rtos</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/">さきほど</a>は，重くはならないよ，という，疑問への回答でした．</p>
 
@@ -779,7 +842,7 @@ RTOSと比べて自前で書いたほうが十分に高信頼であれば，書�
   <entry>
     <title type="html"><![CDATA[RTOS は monami-ya.mrb を遅くするか?]]></title>
     <link href="http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p/"/>
-    <updated>2014-06-17T02:01:52+00:00</updated>
+    <updated>2014-06-17T11:01:52+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/17/rtos-makes-mruby-slow-p</id>
     <content type="html"><![CDATA[<p>とある，案件契約ではない非公式なやりとりから．
 個人が特定されるような内容ではないので，これくらいなら許され…ますよね．</p>
@@ -885,7 +948,7 @@ CPUが持つ計算資源の全てを，特定の処理に割り当てられる�
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での static thread binding サポート]]></title>
     <link href="http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/"/>
-    <updated>2014-06-16T02:15:55+00:00</updated>
+    <updated>2014-06-16T11:15:55+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding</id>
     <content type="html"><![CDATA[<blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
 
@@ -1197,11 +1260,11 @@ mruby と Arduino的なライブラリの組み合わせについては，<a hre
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb が sandbox サポートを追加する理由]]></title>
     <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/"/>
-    <updated>2014-06-15T00:58:37+00:00</updated>
+    <updated>2014-06-15T09:58:37+09:00</updated>
     <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">先ほど</a>の続き．</p>
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．&#10;mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．<br>mruby のコアを弄るような方々は，知識としては心得ているはず，だが．</p>&mdash; もなか (@monamour555) <a href="https://twitter.com/monamour555/status/477722322862759938">June 14, 2014</a></blockquote>
 
 
 <script async src="http://www.monaka.org///platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -1325,9 +1388,9 @@ MB 級の RAM がオンチップになるのは時間の問題なのになぁ…
   
   <entry>
     <title type="html"><![CDATA[monami-ya.mrb での sandbox サポート]]></title>
-    <link href="http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support/"/>
-    <updated>2014-06-14T23:45:14+00:00</updated>
-    <id>http://www.monaka.org/blog/2014/06/14/monami-ya-dot-mrb-sandbox-support</id>
+    <link href="http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/"/>
+    <updated>2014-06-15T08:45:14+09:00</updated>
+    <id>http://www.monaka.org/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support</id>
     <content type="html"><![CDATA[<p>たぶん会社の公式サイトに乗るべき情報のような気もしますが．
 まだ master ブランチどころか develop ブランチにも入っていないので，メモとして，こちらに書いておきます．</p>
 
@@ -1506,7 +1569,7 @@ mrb_state で使用するものとして初期化されます．</p>
   <entry>
     <title type="html"><![CDATA[過去の事例だとこの手のOSSは長期的には失われる結果になりそうです]]></title>
     <link href="http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly/"/>
-    <updated>2014-05-31T09:52:30+00:00</updated>
+    <updated>2014-05-31T18:52:30+09:00</updated>
     <id>http://www.monaka.org/blog/2014/05/31/fork-will-dead-itself-exactly</id>
     <content type="html"><![CDATA[<p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
 
@@ -1587,7 +1650,7 @@ mruby のコア開発者なら，当たり前の知識ですよね．アテク�
   <entry>
     <title type="html"><![CDATA[機器組み込み屋がRailsアプリを出した理由]]></title>
     <link href="http://www.monaka.org/blog/2014/05/24/why-i-create-rails-app/"/>
-    <updated>2014-05-24T05:57:08+00:00</updated>
+    <updated>2014-05-24T14:57:08+09:00</updated>
     <id>http://www.monaka.org/blog/2014/05/24/why-i-create-rails-app</id>
     <content type="html"><![CDATA[<p>会社名義で出したサービスの裏話．</p>
 
@@ -1682,7 +1745,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その2)]]></title>
     <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding-2/"/>
-    <updated>2014-05-19T07:09:22+00:00</updated>
+    <updated>2014-05-19T16:09:22+09:00</updated>
     <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.monaka.org//blog/2014/05/19/funding-for-funding/">前回</a>の続きです．</p>
 
@@ -1776,7 +1839,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ファンディングのためのファンディング，始めます．(その1)]]></title>
     <link href="http://www.monaka.org/blog/2014/05/19/funding-for-funding/"/>
-    <updated>2014-05-19T05:43:18+00:00</updated>
+    <updated>2014-05-19T14:43:18+09:00</updated>
     <id>http://www.monaka.org/blog/2014/05/19/funding-for-funding</id>
     <content type="html"><![CDATA[<p><strong>社会起業を行おう，という結論に達しました．</strong></p>
 
@@ -1852,7 +1915,7 @@ Android と iOS については，吸収するバッドノウハウがありま�
   <entry>
     <title type="html"><![CDATA[ピザ屋がお酒も始めました]]></title>
     <link href="http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew/"/>
-    <updated>2014-04-30T07:56:48+00:00</updated>
+    <updated>2014-04-30T16:56:48+09:00</updated>
     <id>http://www.monaka.org/blog/2014/04/30/pizzafactory-meets-brew</id>
     <content type="html"><![CDATA[<p>たまには技術の話．
 PizzaFactory の話は pizzafactory.jp に書くべきなのだけれども，諸般(外部)の事情で正式リリースとは言えないので．</p>
@@ -1987,7 +2050,7 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
   <entry>
     <title type="html"><![CDATA[失敗分析: 債務のこと]]></title>
     <link href="http://www.monaka.org/blog/2014/04/20/postmortem-3/"/>
-    <updated>2014-04-20T14:59:59+00:00</updated>
+    <updated>2014-04-20T23:59:59+09:00</updated>
     <id>http://www.monaka.org/blog/2014/04/20/postmortem-3</id>
     <content type="html"><![CDATA[<p>破産という不幸ネタであんまり引っ張るのは，なんか下品だなぁと思いつつ．
 という前口上は<a href="http://www.monaka.org//blog/2014/04/11/postmortem-1/">毎度のこと</a>なので省略です．</p>
@@ -2119,108 +2182,6 @@ Homebrew には，bottle と呼ばれる，バイナリパッケージによる�
 しかし私は，この辺りで，今も悔やむミスをいくつかしています．</p>
 
 <p>長くなりましたので，その辺りは，次回以降に．</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[無責任な倫理観は，'無責任な'人を殺すかもしれない]]></title>
-    <link href="http://www.monaka.org/blog/2014/04/20/you-may-kill-someone/"/>
-    <updated>2014-04-20T08:10:00+00:00</updated>
-    <id>http://www.monaka.org/blog/2014/04/20/you-may-kill-someone</id>
-    <content type="html"><![CDATA[<p>今回の日記，書くべきかどうかものすごく悩みました．
-自己擁護とギリギリの話なので．</p>
-
-<p>「当事者であるオマエが言うな」という反応は，折込み済みとして，書き始めます．</p>
-
-<h2>Twitterで頂いた反応(mention)と私の感想</h2>
-
-<blockquote><p>破産後に社会からどんな制裁を受けると予想しているのか…とか、債権者に対する申し訳ないという気持ちが全く無いのか…とか</p></blockquote>
-
-<p>この方，既に当該 tweet を消しておられるようなので，お名前は伏せます．
-軽くググッたところ，粘着荒らし系で単独スレが立つくらいの方なので，言いたいことと tweet とに乖離があるのかもしれません．</p>
-
-<p>私は，鈍感力はあるほうです．
-また，破綻してから2年近く経っていますから，いろいろとココロの整理がついています．</p>
-
-<p>そんな私の，読後の第一印象は，「あんた，ヘタすると，人殺すよ．もしかすると，あんた自身も」です．</p>
-
-<h2>倒産社長の心理</h2>
-
-<p>「社長」と一口に言っても，個体差がものすごくあります．
-また「倒産」と一口にいっても，その理由は様々です．</p>
-
-<!-- more -->
-
-
-<p>とはいえ，日本人で普通に公教育を受けて何らかの理由で起業して雇用して，というパターンの社長が，資金繰りに行き詰まって負債を抱えて倒産する．
-こういう筋書きに直面した瞬間の反応には，それほどバリエーションは無いだろうと思います．</p>
-
-<p>私が事務所を畳んだ直後は，かなり凹みました．
-心理的に凹むだけでなく，いろいろ身体症状が出てきます．
-へんな空咳がでる(たぶん逆流性食道炎になっている)とか，身体が強張るとか，不眠とか寝過ぎとか．
-ふと我に返ると，ネガティブな独り言をブツブツ言っていて，自分に驚く，とか．</p>
-
-<p>妻子が居なかったら，自死していてもおかしくないかもしれません．</p>
-
-<h2>倒産したらどうなるのか，という不安</h2>
-
-<p>倒産件数は，近年減少傾向があるとはいえ，年1万件を超えます．
-その中で7割以上が，破産です．
-日本の中小企業の場合，会社の破産は代表の破産なので，同じくらいの社長が破産していることになります．
-しかし，倒産したらどうなるのか，破産したらどうなるのか，は，あまり情報共有されません．</p>
-
-<p>情報が伏せられている世界に突入するのは，かなりの心理ストレスです．
-「破産後に社会からどんな制裁を受けるのか…」を考えて，答えが出ず，しかし選択をすることになります．</p>
-
-<p>心理ストレスがかかっている状態で，医者に行けば鬱病の診断書が出かねない状態で，
-「破産後に社会からどんな制裁を受けるのか…」と不安で煽る．
-これは，一番まずい対応です．
-死にかねません．</p>
-
-<h2>倫理観を問う無責任</h2>
-
-<p>色々なタイプの社長は居ると思いますが，概ね3年を超えて事業が続く会社というのは，取引している顧客や金融機関から信用を得ています．
-少なくとも，会社が傾くまでは信用を得ていたはずです．
-倫理観の無い会社は，反社会的勢力は別として，長く持ちません．
-逆説的に，潰れる会社の社長も商売に関する倫理観は，普通に持っています．</p>
-
-<p>それでも会社は潰れます．
-社長にとって，倒産というのは，自分が持っている倫理観を，実力では達成できなかったことを意味します．
-正しい倫理観を持っていればいるほど，その挫折感は大きくなるはずです．</p>
-
-<p>そこに「債権者に対する申し訳ないという気持ちが全く無いのか…」と畳み込むのは，その人に自殺教唆をするようなものです．</p>
-
-<h2>そういうことにしたい，という心理</h2>
-
-<p>…と，ここまで自己擁護とスレスレの話でした．
-ここから先が，割と本題．</p>
-
-<p>今回の日記の元になった tweet で，本当に怖いなと思ったことがあります．</p>
-
-<p>件の彼としばらくtweetのやり取りをして，徐々に枠組みが見えてきたのですが．
-彼は，私が無責任で「何の罪の意識もなく」破産し，「免責のあと5年でまた借金ができる」と思うくらい無知で，どうしようもない人だ．と，必死に思いたがっている…のでは? と．
-(や，一般論として，私が無知でどうしようもないというのは否定しませんが．それはさておき．)</p>
-
-<p>様々な情報を総合すると，発言者は，私と同様に小規模な会社をやっていて，どうやら同様に妻子がいるようです．</p>
-
-<p>&ldquo;転んだ奴は馬鹿で無能だ．その点，オレは大丈夫．奴とは違う．&rdquo;
-…なるほどそういうことにしたいのですね．と考えると，彼のtweetの一つ一つについて，割とすんなり合点がいきます．
-(残念ながら彼はtweetのほとんどを削除しています．)</p>
-
-<p>彼の中の私は，今このエントリを書いている私ではありません．
-なので，どういうことにしておいて貰っても，私には実害は無いのですが．</p>
-
-<p>ただ，彼の考えは，彼が万一の不可抗力で会社を畳まざるをえないような事態になった時，彼自身を追い詰めてしまい得ます．</p>
-
-<p>彼がどうなっても，これまた私には実害はないのですが．</p>
-
-<p>ただまあ彼にせよ誰にせよ，自死を考えるにまで追い詰められる，なんていうリスクは現代法治国家では気軽く負わせるべきではないと思うのです．
-私の倫理観として．</p>
-
-<h2></h2>
-
-<p>「じゃああなたは，破産に際して，どういうふうに己の倫理観と折り合いつけたのよ．」という点については，たぶんそのうち書きます．
-(<em>追記</em>: <a href="http://www.monaka.org//blog/2014/04/20/postmortem-3/">書きました</a> )</p>
 ]]></content>
   </entry>
   
