@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>動くのこれ? - もなもなもなかのページ</title>
+  <title>SIerさんたちは真っ当な商いをなさっている - もなもなもなかのページ</title>
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー? で，startup.s を見てみた． .text .extern main .extern _sdata_loadaddr .extern _sp_base # Top of Stack .long &hellip;">
+  <meta name="description" content="SIer さんの経営層を叩く記事は、読んでいて痛快だ。
+どうにか売上を立てている人たちの苦心を否定し、無責任な立場から叩く。これ以上の貴族的娯楽はない。 無料で読める娯楽で下衆なバカ笑いしたあと、私は、真顔になる。(めんどくさいヤツだよ) 経営者にとって何よりも優先されるべきことは、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.monaka.org/blog/2012/05/22/work_p/">
+  <link rel="canonical" href="http://www.monaka.org/blog/2016/08/16/is-mon-month-sier-bad-p/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">動くのこれ?</h1>
+      <h1 class="entry-title">SIerさんたちは真っ当な商いをなさっている</h1>
     
     
       <p class="meta">
@@ -98,43 +98,42 @@
   
 
 
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+<time datetime="2016-08-16T12:00:00+09:00" pubdate data-updated="true">Aug 16<span>th</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>某出版社から，サンプルプログラムとしてもらったARM用のプログラムが動かない．
-んー? んー?</p>
+<div class="entry-content"><p><a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20130315/463805/?TOC=1&amp;ST=system">SIer さんの経営層を叩く記事</a>は、読んでいて痛快だ。
+どうにか売上を立てている人たちの苦心を否定し、無責任な立場から叩く。これ以上の貴族的娯楽はない。</p>
 
-<p>で，startup.s を見てみた．</p>
+<p>無料で読める娯楽で下衆なバカ笑いしたあと、私は、真顔になる。(めんどくさいヤツだよ)</p>
 
-<pre><code>.text
+<p>経営者にとって何よりも優先されるべきことは、会社を潰さないこと。
+その次に、従業員に前月締めの給与を、遅配なく渡すこと。</p>
 
-    .extern     main
-    .extern     _sdata_loadaddr
-    .extern     _sp_base
+<p>国境や税関の向こうで、どんなビジネスの変革が起きているのかなんて、実はどうでもいい。
+もしかしたら、その変革が会社を潰すのかもしれないけれども。それは今日や明日の話ではない。</p>
 
-    #  Top of Stack
-    .long _sp_base 
-    # Reset Handler
-    .long _startup+1
-    .org 0x0C
+<!-- more -->
 
- .org 0xEC
-    .global _startup
- _startup:
-        LDR     r1, =_sdata_loadaddr
-        LDR     r2, =_sdata
-        LDR     r3, =_edata
-</code></pre>
 
-<p>&hellip;(ﾟдﾟlll) ベクタどこよ…</p>
+<p>…。</p>
 
-<h2>あ，動くのか．</h2>
+<p>ああ、そう言いつつも私自身は、日本型の SIer ビジネスに与する気はない。夢見がちな経営の末に一回会社を潰したうえでもなお。</p>
 
-<p>これ Cortex-M3系だものね…．</p>
+<p>みずほ銀が何度もしくじり、<a href="http://www.monaka.org/blog/2016/08/16/cellphone-to-automotive-relay/">ケータイが潰えたのと同様に、車載の取り組みも人件費が垂れ流されるだけの徒労に終わるだろうと思ってもいる</a>。美味しいところは欧州がかっさらっていくだろう。
+そして中長期的に、日本のソフトウェア業界は、(かつて見下していた)中国か韓国あたりの技術指導を受けながら、下請けで細々と生きながらえていくのだろうとも予測している。日本のソフトウェア技術者の年収、今でも下請け並みに安いのでね。中国企業以下。</p>
+
+<p>さりとて。
+(少なくとも大手の) SIer さんたちは、遅配なく給与を払っているんだよね。決算賞与を出せたところもあるかもしれない。</p>
+
+<p>ならば。正義は、そっちだ。SIer さんたちが、正義。</p>
+
+<p>翻って、SIer さんたちを揶揄したくなっている人たちのなかで、彼らを超える売上高なり利益率を挙げられていない人たち(私もだ)ってのは、正義じゃないんですよ。喩えるなら、海賊とか山賊。
+賊は、賊らしく闘っていかないと。
+経営もしていないような記者の&#8221;正論&#8221;を賛同リツイートして溜飲を下げているのは、賊らしくないと思うんですよ。</p>
 </div>
 
 
@@ -157,16 +156,22 @@
   
 
 
-<time datetime="2012-05-22T22:08:00+09:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+<time datetime="2016-08-16T12:00:00+09:00" pubdate data-updated="true">Aug 16<span>th</span>, 2016</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/essay/'>essay</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2012/05/22/work_p/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://www.monaka.org/blog/2016/08/16/is-mon-month-sier-bad-p/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2012/05/22/work_p/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2012/05/22/work_p/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.monaka.org/blog/2016/08/16/is-mon-month-sier-bad-p/" data-via="monamour555" data-counturl="http://www.monaka.org/blog/2016/08/16/is-mon-month-sier-bad-p/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -179,10 +184,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/25/l-06c/" title="Previous Post: L-06C rooted">&laquo; L-06C rooted</a>
+        <a class="basic-alignment left" href="/blog/2016/08/16/cellphone-to-automotive-relay/" title="Previous Post: ガラケー。のち、車載システム">&laquo; ガラケー。のち、車載システム</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/19/mbp-batt/" title="Next Post: MacBookPro のバッテリー交換">MacBookPro のバッテリー交換 &raquo;</a>
       
     </p>
   </footer>

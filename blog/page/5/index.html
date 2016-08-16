@@ -9,7 +9,7 @@
   <meta name="author" content="Masaki "monaka" Muranaka">
 
   
-  <meta name="description" content="先ほどの続き． sandbox の需要を理解するには，前提として，Webサーバと RTOS とで，スレッドの使われた方が違う，ということを，知識ではなく，腹に落としていないといけない．世界観の問題．mruby のコアを弄るような方々は，知識としては心得ているはず，だが．&mdash; もなか (@ &hellip;">
+  <meta name="description" content="注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました． 昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました． 当日記でも，実装と背景について取り上げました． その際，sandbox &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">monami-ya.mrb での Static Thread Binding サポート</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-16T11:15:55+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>注: 2014-06-17 00:30:00JST バグフィックスがあったので，コードの引用を修正し，体裁も整えました．</p></blockquote>
+
+<p>昨日で，monami-ya.mrb への sandbox サポートについて，峠を超えました．</p>
+
+<p>当日記でも，<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support/">実装</a>と<a href="/blog/2014/06/15/monami-ya-dot-mrb-sandbox-support-2/">背景</a>について取り上げました．</p>
+
+<p>その際，sandbox が必要な理由の説明で，スレッドの使い方について説明しました．
+つまり，monami-ya.mrb は，下位層にスレッドライブラリ(RTOS含む)の存在を暗黙的に期待しています．</p>
+
+<blockquote><p>RTOS 含めると，動作が重くなるんじゃないの?</p></blockquote>
+
+<p>みたいなことを仰る方も，世間には稀にいます．
+それは概ね誤解です．
+その辺りの話は，別の機会に取り扱いましょう．</p>
+
+<p>注: 本稿は，mruby のビルドシステムと，uITRON4.0 仕様でのアプリケーション記述についての知識があることを前提として書かれています．</p>
+
+<h2>目指せ，ゆるふわ組み込みライフ</h2>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/16/monami-ya-dot-mrb-static-thread-binding/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -182,74 +240,6 @@ master ブランチに入るまでに，API 等の変更があるかもしれま
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/31/fork-will-dead-itself-exactly/">過去の事例だとこの手のOSSは長期的には失われる結果になりそうです</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-31T18:52:30+09:00" pubdate data-updated="true">May 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>おお，さすが OSS 世界の長老．キレの良い予言でございます．</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/monamour555">@monamour555</a> まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/472033974219325440">May 29, 2014</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<!--
-https://twitter.com/yukihiro_matz/status/472033974219325440
-@monamour555 まあ、どうforkするかはご自由で私から強制することはできませんが、過去の事例だとこの手のforkしたOSSは長期的には失われる結果になりそうです。
--->
-
-
-<p>全く御意でございます．低頭拝聴です．</p>
-
-<p>賤民である私も，OSS という言葉が無かったころ，Ruby が世に放流された頃には，この世界を見ていた気も無くもないですが．
-きっと気のせいですね．
-uClinux, Xen, Android で kernel の fork が起こったのは，失われる運命だったのですね．だめだ fork はダメだ．失われる！だめだ！</p>
-
-<h2>やっぱ fork はダメだ失われる！</h2>
-
-<p>あーやっぱり，私が書いたコードなんて，消えちゃうよなー．すべからく，そういう人生だったしなー．何しろ長老がそう言っているもんなー．
-って陰惨に思いながら，残りのコードを書いていたのですが．</p>
-
-<p>…あれ?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/31/fork-will-dead-itself-exactly/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -291,6 +281,10 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/08/16/is-mon-month-sier-bad-p/">SIerさんたちは真っ当な商いをなさっている</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/08/16/cellphone-to-automotive-relay/">ガラケー。のち、車載システム</a>
       </li>
     
@@ -312,10 +306,6 @@ uClinux, Xen, Android で kernel の fork が起こったのは，失われる�
     
       <li class="post">
         <a href="/blog/2014/08/12/jisatsu/">とある自殺報道について</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/27/an-application-rpi-gpio-adapter/">RaspberryPi の GPIO アダプタは，便利</a>
       </li>
     
   </ul>
